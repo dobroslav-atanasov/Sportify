@@ -15,4 +15,9 @@
     <Folder Include="Areas\Identity\Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Sportify.Data.Models\Sportify.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\Sportify.Data\Sportify.Data.csproj" />
+  </ItemGroup>
+
 </Project>

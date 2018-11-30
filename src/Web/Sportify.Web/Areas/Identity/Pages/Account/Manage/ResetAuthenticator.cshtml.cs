@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Sportify.Web.Areas.Identity.Data;
 
 namespace Sportify.Web.Areas.Identity.Pages.Account.Manage
 {
+    using Data.Models;
+
     public class ResetAuthenticatorModel : PageModel
     {
         UserManager<User> _userManager;

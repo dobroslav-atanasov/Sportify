@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Sportify.Web.Areas.Identity.Data;
 
 namespace Sportify.Web.Areas.Identity.Pages.Account
 {
+    using Data.Models;
+
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {

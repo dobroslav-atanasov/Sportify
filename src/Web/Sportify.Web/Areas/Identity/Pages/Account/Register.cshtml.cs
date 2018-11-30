@@ -9,10 +9,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Sportify.Web.Areas.Identity.Data;
 
 namespace Sportify.Web.Areas.Identity.Pages.Account
 {
+    using Data.Models;
+
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
