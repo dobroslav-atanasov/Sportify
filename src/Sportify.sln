@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{F8FF4B4A-1554-4AE8-83EB-C942630F3BB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportify.Web", "Web\Sportify.Web\Sportify.Web.csproj", "{90144355-A70A-435D-93E3-D945E3A75AF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90144355-A70A-435D-93E3-D945E3A75AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90144355-A70A-435D-93E3-D945E3A75AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90144355-A70A-435D-93E3-D945E3A75AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90144355-A70A-435D-93E3-D945E3A75AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{90144355-A70A-435D-93E3-D945E3A75AF7} = {F8FF4B4A-1554-4AE8-83EB-C942630F3BB9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8B2E608-4FF4-457D-B828-4ADEDF86EAFE}
+	EndGlobalSection
+EndGlobal
