@@ -1,10 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sportify.Data.Models
+﻿namespace Sportify.Data.Models
 {
-    class Country
+    using System.Collections.Generic;
+    using Common;
+
+    public class Country : BaseModel<int>
     {
+        public Country()
+        {
+            this.Towns = new List<Town>();
+            this.Users = new List<User>();
+        }
+
+        public string Name { get; set; }
+
+        public string CountryCode { get; set; }
+
+        public int LandArea { get; set; }
+
+        public int Population { get; set; }
+
+        public ICollection<Town> Towns { get; set; }
+
+        public ICollection<User> Users { get; set; }
     }
 }
