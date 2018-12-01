@@ -10,5 +10,11 @@
             : base(options)
         {
         }
+
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Town> Towns { get; set; }
+
+        public DbSet<Venue> Venues { get; set; }
     }
 }
