@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class Venue
+    public class Organization
     {
-        public Venue()
+        public Organization()
         {
             this.Events = new List<Event>();
         }
@@ -13,12 +13,8 @@
 
         public string Name { get; set; }
 
-        public int Capacity { get; set; }
-
-        public string ImageVenueUrl { get; set; }
-
-        public int TownId { get; set; }
-        public Town Town { get; set; }
+        public int PresidentId { get; set; }
+        public User President { get; set; }
 
         public ICollection<Event> Events { get; set; }
     }

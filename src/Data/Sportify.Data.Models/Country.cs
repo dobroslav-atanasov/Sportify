@@ -1,9 +1,8 @@
 ﻿namespace Sportify.Data.Models
 {
     using System.Collections.Generic;
-    using Common;
 
-    public class Country : BaseModel<int>
+    public class Country
     {
         public Country()
         {
@@ -11,13 +10,11 @@
             this.Users = new List<User>();
         }
 
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string CountryCode { get; set; }
-
-        public int LandArea { get; set; }
-
-        public int Population { get; set; }
 
         public ICollection<Town> Towns { get; set; }
 
