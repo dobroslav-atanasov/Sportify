@@ -9,8 +9,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Sportify.Data.Common\Sportify.Data.Common.csproj" />
-  </ItemGroup>
-
 </Project>
