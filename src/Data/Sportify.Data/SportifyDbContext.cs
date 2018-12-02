@@ -13,8 +13,18 @@
 
         public DbSet<Country> Countries { get; set; }
 
-        public DbSet<Town> Towns { get; set; }
+        public DbSet<Discipline> Disciplines { get; set; }
 
+        public DbSet<Event> Events { get; set; }
+
+        public DbSet<Organization> Organizations { get; set; }
+
+        public DbSet<Participant> Participants { get; set; }
+
+        public DbSet<Sport> Sports { get; set; }
+        
+        public DbSet<Town> Towns { get; set; }
+        
         public DbSet<Venue> Venues { get; set; }
     }
 }
