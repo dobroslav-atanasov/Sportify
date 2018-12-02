@@ -30,7 +30,7 @@
             });
 
             services.AddDbContext<SportifyDbContext>(options =>
-                options.UseSqlServer(this.Configuration.GetConnectionString("SportifyDbContextConnection")));
+                options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<SportifyDbContext>();
