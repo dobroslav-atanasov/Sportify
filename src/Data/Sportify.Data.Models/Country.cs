@@ -14,7 +14,11 @@
 
         public string Name { get; set; }
 
-        public string CountryCode { get; set; }
+        public int Population { get; set; }
+
+        public int LandArea { get; set; }
+
+        public int Density { get; set; }
 
         public ICollection<Town> Towns { get; set; }
 
