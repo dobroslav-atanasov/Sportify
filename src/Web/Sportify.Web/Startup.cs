@@ -1,8 +1,10 @@
 ﻿namespace Sportify.Web
 {
     using System;
+    using AutoMapper;
     using Data;
     using Data.Models;
+    using global::AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -39,6 +41,11 @@
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<SportifyDbContext>();
+
+            // Configure AutoMapper
+            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new AutoMapperProfile()));
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             //services.AddDefaultIdentity<User>()
             //    .AddEntityFrameworkStores<SportifyDbContext>();
