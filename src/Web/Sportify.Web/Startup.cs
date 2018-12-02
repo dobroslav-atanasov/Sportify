@@ -50,7 +50,12 @@
             //services.AddDefaultIdentity<User>()
             //    .AddEntityFrameworkStores<SportifyDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            // Configure AutoValidationAntiforgeryToken
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+
+                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
