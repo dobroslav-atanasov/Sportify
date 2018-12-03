@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 namespace Sportify.Web.Areas.Identity.Pages.Account
 {
     using Data.Models;
+    using Sportify.Data;
+    using Sportify.Services.Interfaces;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -21,17 +23,20 @@ namespace Sportify.Web.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ICountriesService countriesService;
 
         public RegisterModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ICountriesService countriesService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            this.countriesService = countriesService;
         }
 
         [BindProperty]
@@ -47,7 +52,7 @@ namespace Sportify.Web.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -56,11 +61,16 @@ namespace Sportify.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Country")]
+            public int CountryId { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
+            this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -68,7 +78,9 @@ namespace Sportify.Web.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
+                var countryId = this.countriesService.GetCountryById(Input.CountryId).Id;
+
+                var user = new User { UserName = Input.Email, Email = Input.Email, CountryId = countryId };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -83,6 +95,8 @@ namespace Sportify.Web.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

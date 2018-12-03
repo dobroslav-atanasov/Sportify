@@ -1,11 +1,10 @@
 ﻿@page
+@using Sportify.Data.ViewModels.Countries
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
 }
-
 <h2>@ViewData["Title"]</h2>
-
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -27,11 +26,21 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Input.CountryId"></label>
+                <select asp-for="Input.CountryId" class="form-control">
+                    <option selected>Choose Country</option>
+                    @foreach (var name in this.ViewData["Countries"] as IEnumerable<CountrySelectViewModel>)
+                    {
+                        <option value="@name.Id">@name.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.CountryId" class="text-danger"></span>
+            </div>
             <button type="submit" class="btn btn-default">Register</button>
         </form>
     </div>
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
