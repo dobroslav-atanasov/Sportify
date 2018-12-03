@@ -32,7 +32,7 @@
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             
-            // Configuration of DbContext
+            // Configure DbContext
             services.AddDbContext<SportifyDbContext>(options =>
                 options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
