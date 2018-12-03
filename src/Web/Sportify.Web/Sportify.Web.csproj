@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Areas\SuperAdmin\Controllers\" />
+    <Folder Include="Areas\SuperAdmin\Views\" />
   </ItemGroup>
 
   <ItemGroup>

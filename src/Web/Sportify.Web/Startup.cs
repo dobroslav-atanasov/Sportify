@@ -17,6 +17,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Middlewares.Extensions;
+    using Models.Users;
     using Services;
     using Services.Interfaces;
 
@@ -51,7 +52,9 @@
                 .AddEntityFrameworkStores<SportifyDbContext>();
             
             // Configure AutoMapper
-            AutoMapperConfiguration.RegisterMappings(typeof(CountrySelectViewModel).Assembly);
+            AutoMapperConfiguration.RegisterMappings(
+                typeof(CountrySelectViewModel).Assembly,
+                typeof(RegisterViewModel).Assembly);
 
             // Change password requirements
             services.Configure<IdentityOptions>(options =>
