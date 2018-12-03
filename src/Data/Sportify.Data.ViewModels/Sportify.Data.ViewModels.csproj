@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\Sportify.AutoMapping\Sportify.AutoMapping.csproj" />
+    <ProjectReference Include="..\Sportify.Data.Models\Sportify.Data.Models.csproj" />
+  </ItemGroup>
+
+</Project>
