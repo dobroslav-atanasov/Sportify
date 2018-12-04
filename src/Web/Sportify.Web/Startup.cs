@@ -1,12 +1,9 @@
 ﻿namespace Sportify.Web
 {
     using System;
-    using System.Reflection;
     using AutoMapper;
-    using AutoMapping;
     using Data;
     using Data.Models;
-    using Data.ViewModels.Countries;
     using global::AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -17,7 +14,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Middlewares.Extensions;
-    using Models.Users;
     using Services;
     using Services.Interfaces;
 
@@ -50,11 +46,11 @@
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<SportifyDbContext>();
-            
+
             // Configure AutoMapper
-            AutoMapperConfiguration.RegisterMappings(
-                typeof(CountrySelectViewModel).Assembly,
-                typeof(RegisterViewModel).Assembly);
+            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             // Change password requirements
             services.Configure<IdentityOptions>(options =>
@@ -103,7 +99,7 @@
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "areaRoute",
+                    name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(

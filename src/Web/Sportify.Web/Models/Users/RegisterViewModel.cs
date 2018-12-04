@@ -43,8 +43,6 @@
         [Display(Name = "Birth Date")]
         public DateTime BirthDate { get; set; }
 
-        [Required]
-        [Display(Name = "Country")]
-        public int CountryId { get; set; }
+        [Required] [Display(Name = "Country")] public int CountryId { get; set; }
     }
 }

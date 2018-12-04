@@ -1,4 +1,6 @@
-﻿@model Sportify.Web.Models.Users.RegisterViewModel
+﻿@using Sportify.Data.ViewModels.Countries
+
+@model Sportify.Web.Models.Users.RegisterViewModel
 
 @{
     ViewData["Title"] = "Register";
@@ -48,7 +50,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="CountryId" class="control-label"></label>
-                <input asp-for="CountryId" class="form-control" />
+                <select asp-for="CountryId" class="form-control">
+                    <option selected>Select Country</option>
+                    @foreach (var name in this.ViewData["Countries"] as IEnumerable<CountrySelectViewModel>)
+                    {
+                        <option value="@name.Id">@name.Name</option>
+                    }
+                </select>
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
             <div class="form-group">
