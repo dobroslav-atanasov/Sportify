@@ -8,6 +8,7 @@
     <ProjectReference Include="..\..\Data\Sportify.Data.Models\Sportify.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\Sportify.Data.ViewModels\Sportify.Data.ViewModels.csproj" />
     <ProjectReference Include="..\..\Data\Sportify.Data\Sportify.Data.csproj" />
+    <ProjectReference Include="..\Sportify.AutoMapper\Sportify.AutoMapper.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,19 +2,21 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using AutoMapping;
     using Data;
     using Data.Models;
     using Data.ViewModels.Countries;
+    using global::AutoMapper;
     using Interfaces;
 
     public class CountriesService : ICountriesService
     {
         private readonly SportifyDbContext context;
+        private readonly IMapper mapper;
 
-        public CountriesService(SportifyDbContext context)
+        public CountriesService(SportifyDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public Country GetCountryById(int id)
@@ -39,10 +41,11 @@
         {
             var countries = this.context
                 .Countries
-                .OrderBy(x => x.Name)
-                .To<CountrySelectViewModel>();
+                .OrderBy(x => x.Name);
 
-            return countries;
+            var countriesModel = this.mapper.Map<IOrderedQueryable<Country>, IEnumerable<CountrySelectViewModel>>(countries);
+
+            return countriesModel;
         }
     }
 }
