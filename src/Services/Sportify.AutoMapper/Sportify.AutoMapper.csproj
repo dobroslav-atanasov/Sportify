@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Sportify.Data.ViewModels\Sportify.Data.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Data\Sportify.Data\Sportify.Data.csproj" />
+  </ItemGroup>
+
+</Project>
