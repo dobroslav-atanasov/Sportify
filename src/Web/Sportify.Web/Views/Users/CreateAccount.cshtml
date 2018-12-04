@@ -1,17 +1,17 @@
 ﻿@using Sportify.Data.ViewModels.Countries
 
-@model Sportify.Web.Models.Users.RegisterViewModel
+@model Sportify.Data.ViewModels.Users.CreateAccountViewModel
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "CreateAccount";
 }
 
-<h2 class="text-center">Register</h2>
+<h2 class="text-center">Create Account</h2>
 
 <hr />
 <div class="row">
     <div class="col-md-4 col-md-offset-4 text-center">
-        <form asp-action="Register" method="post">
+        <form asp-action="CreateAccount" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
@@ -60,7 +60,7 @@
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-warning" />
+                <input type="submit" value="Create Account" class="btn btn-warning" />
             </div>
         </form>
     </div>
@@ -69,3 +69,7 @@
 <div class="text-center">
     <a asp-controller="Home" asp-action="Index">Back to home</a>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
