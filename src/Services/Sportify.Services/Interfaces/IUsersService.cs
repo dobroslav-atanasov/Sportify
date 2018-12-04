@@ -7,8 +7,8 @@
     {
         Task<bool> CreateAccountAsync(CreateAccountViewModel model);
 
-        bool Login(string username, string password, bool rememberMe);
+        bool SignIn(SignInViewModel model);
 
-        void Logout();
+        void SignOut();
     }
 }

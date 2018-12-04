@@ -41,14 +41,16 @@
             return result.Succeeded;
         }
 
-        public bool Login(string username, string password, bool rememberMe)
+        public bool SignIn(SignInViewModel model)
         {
-            throw new System.NotImplementedException();
+            var result = this.signInManager.PasswordSignInAsync(model.Username, model.Password, true, true).Result;
+
+            return result.Succeeded;
         }
 
-        public void Logout()
+        public void SignOut()
         {
-            throw new System.NotImplementedException();
+            this.signInManager.SignOutAsync().Wait();
         }
     }
 }
