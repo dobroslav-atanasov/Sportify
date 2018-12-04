@@ -1,11 +1,17 @@
 ﻿<footer>
-    <div class="text-center">
-        <a asp-controller="Home" asp-action="Index">
-            <img src="images/Sportify-Image.png" alt="SPORTify Logo" title="SPORTify Logo" width="100"/>
-        </a>
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <a asp-controller="Home" asp-action="Index" style="color: white">About Us</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <a asp-controller="Home" asp-action="Index" style="font-size: 30px; color: white">SPORTify</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <a asp-controller="Home" asp-action="Index" style="color: white">Contact Us</a>
+        </div>
     </div>
     <br/>
     <div class="text-center">
-        <p>&copy; Copyright @DateTime.UtcNow.Year - SportSPORTifyify</p>
+        <p>&copy; Copyright @DateTime.UtcNow.Year - SPORTify</p>
     </div>
 </footer>
