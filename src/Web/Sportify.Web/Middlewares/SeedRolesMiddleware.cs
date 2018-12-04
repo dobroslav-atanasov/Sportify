@@ -32,8 +32,8 @@
 
         private async Task SeedRoles(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            await roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
-            await roleManager.CreateAsync(new IdentityRole("Admin"));
+            await roleManager.CreateAsync(new IdentityRole("Administrator"));
+            await roleManager.CreateAsync(new IdentityRole("Editor"));
             await roleManager.CreateAsync(new IdentityRole("User"));
         }
     }
