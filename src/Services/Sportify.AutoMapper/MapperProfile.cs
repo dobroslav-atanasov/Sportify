@@ -12,6 +12,10 @@
             this.CreateMap<Country, CountrySelectViewModel>().ReverseMap();
 
             this.CreateMap<User, CreateAccountViewModel>().ReverseMap();
+
+            this.CreateMap<SignInViewModel, User>()
+                .ForMember(u => u.UserName, svm => svm.MapFrom(x => x.Username))
+                .ReverseMap();
         }
     }
 }
