@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\Sportify.AutoMapping\Sportify.AutoMapping.csproj" />
+    <ProjectReference Include="..\..\Common\Sportify.Constants\Sportify.Constants.csproj" />
     <ProjectReference Include="..\Sportify.Data.Models\Sportify.Data.Models.csproj" />
   </ItemGroup>
 
