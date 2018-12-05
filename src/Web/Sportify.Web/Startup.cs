@@ -41,6 +41,7 @@
             // Configure Services
             services.AddTransient<ICountriesService, CountriesService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ITownsService, TownsService>();
 
             // Configure Identity
             services.AddIdentity<User, IdentityRole>()
