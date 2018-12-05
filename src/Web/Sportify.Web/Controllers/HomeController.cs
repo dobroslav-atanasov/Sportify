@@ -6,6 +6,11 @@
     {
         public IActionResult Index()
         {
+            if (this.User.IsInRole("Administrator"))
+            {
+                return this.RedirectToAction("Index", "Home", new {area = "Administrator"});
+            }
+
             return this.View();
         }
     }
