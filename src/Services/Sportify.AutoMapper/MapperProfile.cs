@@ -2,6 +2,7 @@
 {
     using Data.Models;
     using Data.ViewModels.Countries;
+    using Data.ViewModels.Towns;
     using Data.ViewModels.Users;
     using global::AutoMapper;
 
@@ -16,6 +17,8 @@
             this.CreateMap<SignInViewModel, User>()
                 .ForMember(u => u.UserName, svm => svm.MapFrom(x => x.Username))
                 .ReverseMap();
+
+            this.CreateMap<Town, AddTownViewModel>().ReverseMap();
         }
     }
 }
