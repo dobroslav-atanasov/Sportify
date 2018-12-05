@@ -9,5 +9,7 @@
         public const string PasswordLengthErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
 
         public const string ConfirmPasswordErrorMessage = "The password and confirmation password do not match.";
+        
+        public const string TownInvalidSymbolsErrorMessage = "Town name contains invalid symbols!";
     }
 }
