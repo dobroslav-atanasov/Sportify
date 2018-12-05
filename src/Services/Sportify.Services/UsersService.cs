@@ -1,7 +1,7 @@
 ﻿namespace Sportify.Services
 {
     using System.Threading.Tasks;
-    using Data;
+    using System.Linq;
     using Data.Models;
     using Data.ViewModels.Users;
     using global::AutoMapper;
@@ -33,10 +33,18 @@
 
             if (result.Succeeded)
             {
-                await this.userManager.AddToRoleAsync(user, "User");
+                if (this.userManager.Users.Count() == 1)
+                {
+                    await this.userManager.AddToRoleAsync(user, "Administrator");
+                }
+                else
+                {
+                    await this.userManager.AddToRoleAsync(user, "User");
+                }
 
                 this.signInManager.SignInAsync(user, false).Wait();
             }
+
 
             return result.Succeeded;
         }
