@@ -36,7 +36,8 @@
             
             // Configure DbContext
             services.AddDbContext<SportifyDbContext>(options =>
-                options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseLazyLoadingProxies()
+                    .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
             // Configure Services
             services.AddTransient<ICountriesService, CountriesService>();
