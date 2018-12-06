@@ -19,6 +19,10 @@
                 .ReverseMap();
 
             this.CreateMap<Town, AddTownViewModel>().ReverseMap();
+
+            this.CreateMap<Town, TownViewModel>()
+                .ForMember(tvm => tvm.CountryName, t => t.MapFrom(x => x.Country.Name))
+                .ReverseMap();
         }
     }
 }
