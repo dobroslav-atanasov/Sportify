@@ -32,7 +32,6 @@
         {
             var towns = this.context
                 .Towns
-                .Include(t => t.Country)
                 .AsQueryable();
 
             var townViewModels = this.mapper.Map<IQueryable<Town>, IEnumerable<TownViewModel>>(towns);
@@ -44,7 +43,6 @@
         {
             var town = this.context
                 .Towns
-                .Include(t => t.Country)
                 .FirstOrDefault(t => t.Id == id);
 
             var townViewModel = this.mapper.Map<TownViewModel>(town);
@@ -56,7 +54,6 @@
         {
             var town = this.context
                 .Towns
-                .Include(t => t.Country)
                 .FirstOrDefault(t => t.Id == model.Id);
 
             if (town != null)
