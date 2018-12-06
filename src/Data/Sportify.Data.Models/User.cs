@@ -21,10 +21,10 @@
         public string PhotoUrl { get; set; }
 
         public int CountryId { get; set; }
-        public Country Country { get; set; }
+        public virtual Country Country { get; set; }
 
-        public ICollection<Organization> Organizations { get; set; }
+        public virtual ICollection<Organization> Organizations { get; set; }
 
-        public ICollection<Participant> Participants { get; set; }
+        public virtual ICollection<Participant> Participants { get; set; }
     }
 }

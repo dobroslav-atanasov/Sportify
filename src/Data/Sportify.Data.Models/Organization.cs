@@ -14,8 +14,8 @@
         public string Name { get; set; }
 
         public int PresidentId { get; set; }
-        public User President { get; set; }
+        public virtual User President { get; set; }
 
-        public ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

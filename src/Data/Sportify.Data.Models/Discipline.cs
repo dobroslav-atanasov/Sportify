@@ -16,8 +16,8 @@
         public string Description { get; set; }
 
         public int SportId { get; set; }
-        public Sport Sport { get; set; }
+        public virtual Sport Sport { get; set; }
 
-        public ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

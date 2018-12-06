@@ -18,8 +18,8 @@
         public string ImageVenueUrl { get; set; }
 
         public int TownId { get; set; }
-        public Town Town { get; set; }
+        public virtual Town Town { get; set; }
 
-        public ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

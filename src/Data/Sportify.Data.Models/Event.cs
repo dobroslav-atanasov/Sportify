@@ -17,16 +17,16 @@
         public DateTime Date { get; set; }
 
         public int OrganizationId { get; set; }
-        public Organization Organization { get; set; }
+        public virtual Organization Organization { get; set; }
 
         public int DisciplineId { get; set; }
-        public Discipline Discipline { get; set; }
+        public virtual Discipline Discipline { get; set; }
 
         public int VenueId { get; set; }
-        public Venue Venue { get; set; }
+        public virtual Venue Venue { get; set; }
 
         public int NumberOfParticipants { get; set; }
 
-        public ICollection<Participant> Participants { get; set; }
+        public virtual ICollection<Participant> Participants { get; set; }
     }
 }

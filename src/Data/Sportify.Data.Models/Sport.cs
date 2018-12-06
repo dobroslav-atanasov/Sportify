@@ -17,6 +17,6 @@
 
         public string ImageSportUrl { get; set; }
 
-        public ICollection<Discipline> Disciplines { get; set; }
+        public virtual ICollection<Discipline> Disciplines { get; set; }
     }
 }

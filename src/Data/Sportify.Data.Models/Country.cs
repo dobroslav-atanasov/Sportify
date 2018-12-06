@@ -16,8 +16,8 @@
 
         public string CountryCode { get; set; }
 
-        public ICollection<Town> Towns { get; set; }
+        public virtual ICollection<Town> Towns { get; set; }
 
-        public ICollection<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
