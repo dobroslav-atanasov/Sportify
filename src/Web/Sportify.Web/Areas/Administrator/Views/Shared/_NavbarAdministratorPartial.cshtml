@@ -10,7 +10,7 @@
             <a asp-area="Administrator" asp-controller="Home" asp-action="Index">Home</a>
         </li>
         <li>
-            <a asp-area="Administrator" asp-controller="Towns" asp-action="Add">Add Town</a>
+            <a asp-area="Administrator" asp-controller="Towns" asp-action="AllTowns">Towns</a>
         </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -18,7 +18,7 @@
             <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello Administrator - @UserManager.GetUserName(User)!</a>
         </li>
         <li>
-            <a asp-controller="Users" asp-action="SignOut">Sign Out</a>
+            <a asp-area="Administrator" asp-controller="Home" asp-action="SignOut">Sign Out</a>
         </li>
     </ul>
 </div>
