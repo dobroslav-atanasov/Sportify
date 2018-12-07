@@ -8,7 +8,7 @@
         {
             if (this.User.IsInRole("Administrator"))
             {
-                return this.RedirectToAction("Index", "Home", new {area = "Administrator"});
+                return this.RedirectToAction("Index", "HomeAdmin", new {area = "Administrator"});
             }
 
             return this.View();

@@ -1,5 +1,4 @@
 @using Microsoft.AspNetCore.Identity
-@using Sportify.Data.Models
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -7,7 +6,7 @@
 <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
         <li>
-            <a asp-area="Administrator" asp-controller="Home" asp-action="Index">Home</a>
+            <a asp-area="Administrator" asp-controller="HomeAdmin" asp-action="Index">Home</a>
         </li>
         <li>
             <a asp-area="Administrator" asp-controller="Towns" asp-action="AllTowns">Towns</a>
@@ -18,32 +17,7 @@
             <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello Administrator - @UserManager.GetUserName(User)!</a>
         </li>
         <li>
-            <a asp-area="Administrator" asp-controller="Home" asp-action="SignOut">Sign Out</a>
+            <a asp-area="Administrator" asp-controller="HomeAdmin" asp-action="SignOut">Sign Out</a>
         </li>
     </ul>
 </div>
-
-
-
-
-
-@*@if (SignInManager.IsSignedIn(User))
-{
-    <form asp-controller="Users" asp-action="SignOut" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello Administrator - @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <a asp-controller="Users" asp-action="SignOut">Sign Out</a>
-            </li>
-        </ul>
-    </form>
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-controller="Users" asp-action="CreateAccount">Create Account</a></li>
-        <li><a asp-controller="Users" asp-action="SignIn">Sign In</a></li>
-    </ul>
-}*@

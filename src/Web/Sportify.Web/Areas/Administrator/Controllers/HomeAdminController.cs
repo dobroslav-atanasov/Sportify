@@ -5,11 +5,11 @@
     using Services.Interfaces;
 
     [Area("Administrator")]
-    public class HomeController : Controller
+    public class HomeAdminController : Controller
     {
         private readonly IUsersService usersService;
 
-        public HomeController(IUsersService usersService)
+        public HomeAdminController(IUsersService usersService)
         {
             this.usersService = usersService;
         }
