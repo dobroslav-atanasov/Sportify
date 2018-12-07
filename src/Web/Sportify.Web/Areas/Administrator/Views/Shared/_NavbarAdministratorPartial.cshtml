@@ -4,20 +4,20 @@
 @inject UserManager<User> UserManager
 
 <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-        <li>
-            <a asp-area="Administrator" asp-controller="HomeAdmin" asp-action="Index">Home</a>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Administrator" asp-controller="HomeAdmin" asp-action="Index">Home</a>
         </li>
         <li>
-            <a asp-area="Administrator" asp-controller="Towns" asp-action="AllTowns">Towns</a>
+            <a class="nav-link" asp-area="Administrator" asp-controller="TownsAdmin" asp-action="AllTowns">Towns</a>
         </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello Administrator - @UserManager.GetUserName(User)!</a>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
         </li>
-        <li>
-            <a asp-area="Administrator" asp-controller="HomeAdmin" asp-action="SignOut">Sign Out</a>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Administrator" asp-controller="HomeAdmin" asp-action="SignOut">Sign Out</a>
         </li>
     </ul>
 </div>

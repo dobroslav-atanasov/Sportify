@@ -5,12 +5,12 @@
     using Services.Interfaces;
 
     [Area("Administrator")]
-    public class TownsController : Controller
+    public class TownsAdminController : Controller
     {
         private readonly ICountriesService countriesService;
         private readonly ITownsService townsService;
 
-        public TownsController(ICountriesService countriesService, ITownsService townsService)
+        public TownsAdminController(ICountriesService countriesService, ITownsService townsService)
         {
             this.countriesService = countriesService;
             this.townsService = townsService;
@@ -35,7 +35,7 @@
 
             this.townsService.AddTown(model);
 
-            return this.RedirectToAction("AllTowns", "Towns", new {area = "Administrator"});
+            return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
         }
 
         public IActionResult Delete(int id)
@@ -50,7 +50,7 @@
             var isDelete = this.townsService.IsDeleteTown(model);
             if (!isDelete) return this.View(model);
 
-            return this.RedirectToAction("AllTowns", "Towns", new {area = "Administrator"});
+            return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
         }
 
         public IActionResult Edit(int id)

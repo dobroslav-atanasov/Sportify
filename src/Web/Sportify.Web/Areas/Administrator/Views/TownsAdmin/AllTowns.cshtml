@@ -7,7 +7,7 @@
 <h2>AllTowns</h2>
 
 <p>
-    <a asp-area="Administrator" asp-controller="Towns" asp-action="Add">Add New Town</a>
+    <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Add">Add New Town</a>
 </p>
 <table class="table table-hover">
     <thead>
@@ -32,9 +32,9 @@
                     @Html.DisplayFor(modelItem => item.CountryName)
                 </td>
                 <td>
-                    <a asp-area="Administrator" asp-controller="Towns" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                    <a asp-area="Administrator" asp-controller="Towns" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Details</a>
-                    <a asp-area="Administrator" asp-controller="Towns" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Details</a>
+                    <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

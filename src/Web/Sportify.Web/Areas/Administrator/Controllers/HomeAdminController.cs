@@ -24,7 +24,7 @@
         public IActionResult SignOut()
         {
             this.usersService.SignOut();
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }
