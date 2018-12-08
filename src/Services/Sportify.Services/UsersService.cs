@@ -33,7 +33,7 @@
 
             var user = this.mapper.Map<User>(model);
 
-            var result = this.userManager.CreateAsync(user, model.Password).Result;
+            var result = this.userManager.CreateAsync(user, model.Password).GetAwaiter().GetResult();
 
             if (result.Succeeded)
             {
@@ -55,7 +55,7 @@
 
         public bool SignIn(SignInViewModel model)
         {
-            var result = this.signInManager.PasswordSignInAsync(model.Username, model.Password, true, true).Result;
+            var result = this.signInManager.PasswordSignInAsync(model.Username, model.Password, true, true).GetAwaiter().GetResult();
 
             return result.Succeeded;
         }
