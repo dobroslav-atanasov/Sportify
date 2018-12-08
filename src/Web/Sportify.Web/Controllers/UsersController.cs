@@ -1,5 +1,6 @@
 ﻿namespace Sportify.Web.Controllers
 {
+    using Constants;
     using Data.ViewModels.Users;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,9 @@
 
             if (!isRegister)
             {
-                return this.View();
+                this.ViewData["Error"] = Constants.UsernameAlreadyExists;
+                this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+                return this.View(model);
             }
 
             return this.RedirectToAction("Index", "Home");
@@ -58,7 +61,9 @@
 
             if (!isLogin)
             {
-                return this.View();
+                this.ViewData["Error"] = Constants.UsernameOrPasswordAreInvalid;
+                this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+                return this.View(model);
             }
 
             return this.RedirectToAction("Index", "Home");
