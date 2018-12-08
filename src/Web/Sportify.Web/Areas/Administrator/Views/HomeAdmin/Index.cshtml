@@ -14,18 +14,21 @@
 
 <div class="row">
     <div class="col-md-3">
+        <a asp-area="Administrator" asp-controller="UsersAdmin" asp-action="AllUsers">
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
             <div class="card-body">
-                <h1 class="card-title text-center">Users</h1>
+                <h1 class="card-title text-center"><i class="fas fa-users"></i> Users</h1>
             </div>
         </div>
+        </a>
     </div>
     <div class="col-md-3">
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-            <div class="card-body">
-                <h1 class="card-title text-center">Towns</h1>
+        <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="AllTowns">
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                    <h1 class="card-title text-center"><i class="fas fa-building"></i> Towns</h1>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
-
