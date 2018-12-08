@@ -43,6 +43,7 @@
             services.AddTransient<ICountriesService, CountriesService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ITownsService, TownsService>();
+            services.AddTransient<ISportsService, SportsService>();
 
             // Configure Identity
             services.AddIdentity<User, IdentityRole>()

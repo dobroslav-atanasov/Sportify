@@ -1,37 +1,31 @@
 ﻿@using X.PagedList
 @using X.PagedList.Mvc.Common
 @using X.PagedList.Mvc.Core
-@model IEnumerable<Sportify.Data.ViewModels.Towns.TownViewModel>
+@model IEnumerable<Sportify.Data.ViewModels.Sports.SportViewModel>
 
 @{
-    ViewData["Title"] = "AllTowns";
+    ViewData["Title"] = "AllSports";
 }
 
-<h2>AllTowns</h2>
+<h2>AllSports</h2>
 
 <p>
-    <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Add">Create New</a>
+    <a asp-area="Administrator" asp-controller="SportsAdmin" asp-action="Add">Create New</a>
 </p>
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryName)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -40,23 +34,16 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CountryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountryName)
-            </td>
-            <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
-    }
+}
     </tbody>
 </table>
-
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllTowns", new { page = page }), 
+    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllSports", new { page = page }), 
         new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,

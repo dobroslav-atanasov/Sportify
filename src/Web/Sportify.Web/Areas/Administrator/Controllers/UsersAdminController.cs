@@ -18,12 +18,12 @@
         [Authorize(Roles = "Administrator")]
         public IActionResult AllUsers(int? page)
         {
-            var usersViewModel = this.usersService.GetAllUsers();
+            var users = this.usersService.GetAllUsers();
 
             var pageNumber = page ?? 1;
-            var itemsOnPage = usersViewModel.ToPagedList(pageNumber, 2);
+            var usersOnPage = users.ToPagedList(pageNumber, 10);
 
-            return this.View(itemsOnPage);
+            return this.View(usersOnPage);
         }
     }
 }

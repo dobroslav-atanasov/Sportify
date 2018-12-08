@@ -1,8 +1,10 @@
 ﻿namespace Sportify.Web.Areas.Administrator.Controllers
 {
     using Data.ViewModels.Towns;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
+    using X.PagedList;
 
     [Area("Administrator")]
     public class TownsAdminController : Controller
@@ -16,10 +18,15 @@
             this.townsService = townsService;
         }
 
-        public IActionResult AllTowns()
+        [Authorize(Roles = "Administrator")]
+        public IActionResult AllTowns(int? page)
         {
             var towns = this.townsService.GetAllTowns();
-            return this.View(towns);
+
+            var pageNumber = page ?? 1;
+            var townsOnPage = towns.ToPagedList(pageNumber, 10);
+
+            return this.View(townsOnPage);
         }
 
         public IActionResult Add()
