@@ -2,6 +2,7 @@
 {
     using Data.Models;
     using Data.ViewModels.Countries;
+    using Data.ViewModels.Sports;
     using Data.ViewModels.Towns;
     using Data.ViewModels.Users;
     using global::AutoMapper;
@@ -28,6 +29,8 @@
                 .ForMember(uvm => uvm.Id, u => u.MapFrom(x => x.Id))
                 .ForMember(uvm => uvm.Username, u => u.MapFrom(x => x.UserName))
                 .ReverseMap();
+
+            this.CreateMap<Sport, SportViewModel>().ReverseMap();
         }
     }
 }
