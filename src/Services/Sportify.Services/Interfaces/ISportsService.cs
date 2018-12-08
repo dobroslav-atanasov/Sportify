@@ -6,5 +6,7 @@
     public interface ISportsService
     {
         IEnumerable<SportViewModel> GetAllSports();
+
+        void Add(AddSportViewModel model);
     }
 }

@@ -31,6 +31,8 @@
                 .ReverseMap();
 
             this.CreateMap<Sport, SportViewModel>().ReverseMap();
+
+            this.CreateMap<Sport, AddSportViewModel>().ReverseMap();
         }
     }
 }
