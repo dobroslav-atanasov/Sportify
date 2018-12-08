@@ -38,7 +38,10 @@
         [HttpPost]
         public IActionResult Add(AddTownViewModel model)
         {
-            if (!this.ModelState.IsValid) return this.View(model);
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
 
             this.townsService.AddTown(model);
 
@@ -55,7 +58,10 @@
         public IActionResult Delete(TownViewModel model)
         {
             var isDelete = this.townsService.IsDeleteTown(model);
-            if (!isDelete) return this.View(model);
+            if (!isDelete)
+            {
+                return this.View(model);
+            }
 
             return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
         }
