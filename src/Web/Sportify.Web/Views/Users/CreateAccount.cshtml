@@ -8,6 +8,12 @@
 
 <h2 class="text-center">Create Account</h2>
 
+@if (this.ViewData.ContainsKey("Error"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+        <strong>@this.ViewData["Error"]</strong>
+    </div>
+}
 <hr />
 <div class="row">
     <div class="col-md-4 col-md-offset-4 text-center">

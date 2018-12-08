@@ -6,6 +6,12 @@
 
 <h2>SignIn</h2>
 
+@if (this.ViewData.ContainsKey("Error"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+        <strong>@this.ViewData["Error"]</strong>
+    </div>
+}
 <h4>SignInViewModel</h4>
 <hr />
 <div class="row">
