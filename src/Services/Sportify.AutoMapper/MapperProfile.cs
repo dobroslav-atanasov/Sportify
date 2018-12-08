@@ -23,6 +23,11 @@
             this.CreateMap<Town, TownViewModel>()
                 .ForMember(tvm => tvm.CountryName, t => t.MapFrom(x => x.Country.Name))
                 .ReverseMap();
+
+            this.CreateMap<User, UserAdminViewModel>()
+                .ForMember(uvm => uvm.Id, u => u.MapFrom(x => x.Id))
+                .ForMember(uvm => uvm.Username, u => u.MapFrom(x => x.UserName))
+                .ReverseMap();
         }
     }
 }
