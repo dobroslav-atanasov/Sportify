@@ -1,5 +1,7 @@
 ﻿namespace Sportify.Constants
 {
+    using System;
+
     public class Constants
     {
         public const string UsernameLengthErrorMessage = "The {0} must be at least {1} characters long!";
@@ -9,11 +11,15 @@
         public const string PasswordLengthErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
 
         public const string ConfirmPasswordErrorMessage = "The password and confirmation password do not match.";
-        
+
         public const string TownInvalidSymbolsErrorMessage = "Town name contains invalid symbols!";
 
         public const string SportNameLengthErrorMessage = "The {0} must be at least {1} characters long!";
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
+
+        public const string UsernameAlreadyExists = "Username already exists! Please try with another one.";
+
+        public const string UsernameOrPasswordAreInvalid = "Username or password are invalid!";
     }
 }
