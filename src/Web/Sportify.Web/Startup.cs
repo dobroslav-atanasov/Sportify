@@ -44,6 +44,7 @@
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ITownsService, TownsService>();
             services.AddTransient<ISportsService, SportsService>();
+            services.AddTransient<IDisciplinesService, DisciplinesService>();
 
             // Configure Identity
             services.AddIdentity<User, IdentityRole>()
