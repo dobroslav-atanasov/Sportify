@@ -1,7 +1,9 @@
 ﻿namespace Sportify.Services
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Linq;
+    using Data;
     using Data.Models;
     using Data.ViewModels.Users;
     using global::AutoMapper;
@@ -14,13 +16,15 @@
         private readonly UserManager<User> userManager;
         private readonly ICountriesService countriesService;
         private readonly IMapper mapper;
+        private readonly SportifyDbContext context;
 
-        public UsersService(SignInManager<User> signInManager, UserManager<User> userManager, ICountriesService countriesService, IMapper mapper)
+        public UsersService(SignInManager<User> signInManager, UserManager<User> userManager, ICountriesService countriesService, IMapper mapper, SportifyDbContext context)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.countriesService = countriesService;
             this.mapper = mapper;
+            this.context = context;
         }
 
         public async Task<bool> CreateAccountAsync(CreateAccountViewModel model)
@@ -59,6 +63,18 @@
         public void SignOut()
         {
             this.signInManager.SignOutAsync().Wait();
+        }
+
+        public IEnumerable<UserAdminViewModel> GetAllUsers()
+        {
+            var users = this.context
+                .Users
+                .OrderBy(x => x.UserName)
+                .AsQueryable();
+
+            var usersAdminViewModel = this.mapper.Map<IQueryable<User>, IEnumerable<UserAdminViewModel>>(users);
+
+            return usersAdminViewModel;
         }
     }
 }

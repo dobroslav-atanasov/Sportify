@@ -1,5 +1,6 @@
 ﻿namespace Sportify.Services.Interfaces
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Data.ViewModels.Users;
 
@@ -10,5 +11,7 @@
         bool SignIn(SignInViewModel model);
 
         void SignOut();
+
+        IEnumerable<UserAdminViewModel> GetAllUsers();
     }
 }
