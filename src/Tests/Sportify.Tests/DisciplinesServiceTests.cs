@@ -4,6 +4,7 @@
     using AutoMapper;
     using Data;
     using Data.Models;
+    using Data.ViewModels.Disciplines;
     using global::AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Services;
@@ -30,6 +31,25 @@
 
             var count = service.GetAllDisciplines().Count();
             Assert.Equal(2, count);
+        }
+
+        [Fact]
+        public void AddSportShouldReturnsCorrectCountUsingDbContext()
+        {
+            var options = new DbContextOptionsBuilder<SportifyDbContext>()
+                .UseInMemoryDatabase("Sportify_Database_Disciplines_2")
+                .Options;
+
+            var context = new SportifyDbContext(options);
+            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
+            var mapper = mapperConfig.CreateMapper();
+
+            var service = new DisciplinesService(context, mapper);
+            service.AddDiscipline(new AddDisciplineViewModel());
+
+            var count = context.Disciplines.Count();
+
+            Assert.Equal(1, count);
         }
     }
 }
