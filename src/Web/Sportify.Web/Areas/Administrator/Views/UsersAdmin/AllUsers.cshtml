@@ -5,53 +5,49 @@
 @model IEnumerable<Sportify.Data.ViewModels.Users.UserAdminViewModel>
 
 @{
-    ViewData["Title"] = "AllUsers";
+    ViewData["Title"] = "Users";
 }
 
-<h2>AllUsers</h2>
+<br />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<h1 class="text-center">Users</h1>
+
+<br />
+
+<table class="table mx-auto table-hover">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.Username)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th></th>
+            <th class="text-center">
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.Username)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <td class="text-center">
+                    @Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |
+                    @Html.ActionLink("Delete", "Delete", new {/* id=item.PrimaryKey */})
                 </td>
             </tr>
         }
     </tbody>
 </table>
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllUsers", new { page = page }), 
+    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllUsers", new { page = page }),
     new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,

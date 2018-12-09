@@ -4,59 +4,57 @@
 @model IEnumerable<Sportify.Data.ViewModels.Towns.TownViewModel>
 
 @{
-    ViewData["Title"] = "AllTowns";
+    ViewData["Title"] = "Towns";
 }
 
-<h2>AllTowns</h2>
+<br />
 
-<p>
-    <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Add">Create New</a>
+<h1 class="text-center">Towns</h1>
+
+<br />
+
+<p class="text-center">
+    <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Add" class="btn btn-primary btn-lg">Add Town</a>
 </p>
+
+<br />
+
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryName)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.CountryName)
+            </th>
+            <th class="text-center">
+                Actions
+            </th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountryName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.CountryName)
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllTowns", new { page = page }), 
+    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllTowns", new { page = page }),
         new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,
