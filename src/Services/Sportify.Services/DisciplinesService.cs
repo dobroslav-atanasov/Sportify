@@ -31,5 +31,13 @@
 
             return disciplinesViewModel;
         }
+
+        public void AddDiscipline(AddDisciplineViewModel model)
+        {
+            var discipline = this.mapper.Map<Discipline>(model);
+
+            this.context.Disciplines.Add(discipline);
+            this.context.SaveChanges();
+        }
     }
 }

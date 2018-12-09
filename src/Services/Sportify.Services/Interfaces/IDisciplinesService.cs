@@ -6,5 +6,7 @@
     public interface IDisciplinesService
     {
         IEnumerable<DisciplineViewModel> GetAllDisciplines();
+
+        void AddDiscipline(AddDisciplineViewModel model);
     }
 }

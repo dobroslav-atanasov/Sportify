@@ -32,6 +32,7 @@
         {
             var towns = this.context
                 .Towns
+                .OrderBy(t => t.Name)
                 .AsQueryable();
 
             var townViewModels = this.mapper.Map<IQueryable<Town>, IEnumerable<TownViewModel>>(towns);
