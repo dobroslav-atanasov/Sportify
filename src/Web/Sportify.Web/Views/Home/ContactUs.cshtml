@@ -1,0 +1,53 @@
+﻿@model Sportify.Data.ViewModels.Messages.AddMessageViewModel
+
+@{
+    ViewData["Title"] = "Contact us";
+}
+
+<br />
+
+<h1 class="text-center">ContactUs</h1>
+
+<br />
+@if (this.ViewData.ContainsKey("Error"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+        <strong>@this.ViewData["Error"]</strong>
+    </div>
+}
+@if (this.ViewData.ContainsKey("Message"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
+        <strong>@this.ViewData["Message"]</strong>
+    </div>
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Home" asp-action="ContactUs" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send Message" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
