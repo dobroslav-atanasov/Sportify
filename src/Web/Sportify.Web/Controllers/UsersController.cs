@@ -85,9 +85,8 @@
             return this.View(model);
         }
 
-
-        [Authorize]
         [HttpPost]
+        [Authorize]
         public IActionResult Profile(ProfileUserViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -109,6 +108,31 @@
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
+        }
+
+        [Authorize]
+        public IActionResult ChangePassword()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var currentUsername = this.User.Identity.Name;
+            var isChangePassword = this.usersService.ChangePassword(currentUsername, model);
+            if (isChangePassword)
+            {
+                this.ViewData["Message"] = Constants.PasswordWasChangedSuccessfully;
+                return this.RedirectToAction("Profile", "Users");
+            }
+            return this.View();
         }
     }
 }
