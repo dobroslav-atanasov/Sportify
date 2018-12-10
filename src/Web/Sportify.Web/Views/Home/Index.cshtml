@@ -1,9 +1,33 @@
-﻿@{
+﻿@using Sportify.Data.ViewModels.Countries
+@{
     ViewData["Title"] = "Home";
 }
-<br />
+
+@*<br />
+
 <div class="jumbotron">
     <h1 class="display-1 text-center">Welcome to SPORTify!</h1>
-</div>
+</div>*@
 
 <img src="/images/sss960.jpg" class="img-fluid" alt="Responsive image">
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Add" class="form-inline" method="post">
+            <div class="form-group">
+                <label class="control-label"></label>
+                <select class="form-control">
+                    <option selected>Select Country</option>
+                    @foreach (var name in this.ViewData["Countries"] as IEnumerable<CountrySelectViewModel>)
+                    {
+                        <option value="@name.Id">@name.Name</option>
+                    }
+                </select>
+                <span class="text-danger"></span>
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
