@@ -3,6 +3,7 @@
     using Data.Models;
     using Data.ViewModels.Countries;
     using Data.ViewModels.Disciplines;
+    using Data.ViewModels.Messages;
     using Data.ViewModels.Sports;
     using Data.ViewModels.Towns;
     using Data.ViewModels.Users;
@@ -38,6 +39,8 @@
             this.CreateMap<Discipline, DisciplineViewModel>().ReverseMap();
 
             this.CreateMap<Discipline, AddDisciplineViewModel>().ReverseMap();
+
+            this.CreateMap<Message, AddMessageViewModel>().ReverseMap();
         }
     }
 }
