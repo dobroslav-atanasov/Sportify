@@ -1,0 +1,82 @@
+﻿@using Sportify.Data.ViewModels.Countries
+@model Sportify.Data.ViewModels.Users.ProfileUserViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h2>Profile</h2>
+
+@if (this.ViewData.ContainsKey("Error"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+        <strong>@this.ViewData["Error"]</strong>
+    </div>
+}
+@if (this.ViewData.ContainsKey("Message"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
+        <strong>@this.ViewData["Message"]</strong>
+    </div>
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Users" asp-action="Profile" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryId" class="control-label"></label>
+                <select asp-for="CountryId" class="form-control">
+                    <option selected>Select Country</option>
+                    @foreach (var name in this.ViewData["Countries"] as IEnumerable<CountrySelectViewModel>)
+                    {
+                        <option value="@name.Id">@name.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update Profile" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

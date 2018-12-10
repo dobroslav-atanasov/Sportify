@@ -3,17 +3,11 @@
     ViewData["Title"] = "Home";
 }
 
-@*<br />
-
-<div class="jumbotron">
-    <h1 class="display-1 text-center">Welcome to SPORTify!</h1>
-</div>*@
-
 <img src="/images/sss960.jpg" class="img-fluid" alt="Responsive image">
 
 <div class="row">
     <div class="col-md-4 offset-4">
-        <form asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Add" class="form-inline" method="post">
+        <form asp-controller="TownsAdmin" asp-action="Add" class="form-inline" method="post">
             <div class="form-group">
                 <label class="control-label"></label>
                 <select class="form-control">

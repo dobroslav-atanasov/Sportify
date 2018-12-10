@@ -75,5 +75,40 @@
             this.usersService.SignOut();
             return this.RedirectToAction("Index", "Home");
         }
+
+        [Authorize]
+        public IActionResult Profile()
+        {
+            var currentUsername = this.User.Identity.Name;
+            var model = this.usersService.GetCurrentUser(currentUsername);
+            this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+            return this.View(model);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Profile(ProfileUserViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+                return this.View(model);
+            }
+
+            var isUpdated = this.usersService.UpdateProfile(model);
+            if (isUpdated)
+            {
+                this.ViewData["Message"] = Constants.ProfileUpdated;
+                this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+                return this.View(model);
+            }
+            else
+            {
+                this.ViewData["Error"] = Constants.UsernameAlreadyExists;
+                this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+                return this.View(model);
+            }
+        }
     }
 }
