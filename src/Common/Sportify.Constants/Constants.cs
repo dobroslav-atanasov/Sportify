@@ -25,5 +25,7 @@
         public const string UserDoesNotExist = "User does not exist!";
 
         public const string MessageIsSentSuccessfully = "Message is sent successfully!";
+
+        public const string ProfileUpdated = "Your profile has been updated!";
     }
 }
