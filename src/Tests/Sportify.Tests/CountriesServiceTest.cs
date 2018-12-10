@@ -11,7 +11,7 @@
     public class CountriesServiceTest
     {
         [Fact]
-        public void GetCountryByIdShouldReturnsCorrectCountry()
+        public void GetCountryByIdShouldReturnCorrectCountry()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase(databaseName: "Sportify_Database_1")
@@ -34,7 +34,7 @@
         }
 
         [Fact]
-        public void GetCountryByIdShouldReturnsNull()
+        public void GetCountryByIdShouldReturnNull()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase(databaseName: "Sportify_Database_1")
@@ -49,7 +49,7 @@
         }
 
         [Fact]
-        public void GetCountryByNameShouldReturnsCorrectCountry()
+        public void GetCountryByNameShouldReturnCorrectCountry()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase(databaseName: "Sportify_Database_1")
@@ -71,7 +71,7 @@
         }
 
         [Fact]
-        public void GetCountryByNameShouldReturnsNull()
+        public void GetCountryByNameShouldReturnNull()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase(databaseName: "Sportify_Database_1")
@@ -86,7 +86,7 @@
         }
 
         [Fact]
-        public void GetAllCountryNamesShouldReturnsCorrectCountUsingDbContext()
+        public void GetAllCountryNamesShouldReturnCorrectCountUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase(databaseName: "Sportify_Database_2")

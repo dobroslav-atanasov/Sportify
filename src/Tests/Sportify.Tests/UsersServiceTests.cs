@@ -12,7 +12,7 @@
     public class UsersServiceTests
     {
         [Fact]
-        public void GetAllUserssShouldReturnsCorrectCountUsingDbContext()
+        public void GetAllUsersShouldReturnCorrectCountUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase("Sportify_Database_Users_1")

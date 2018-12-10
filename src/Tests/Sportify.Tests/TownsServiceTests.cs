@@ -12,7 +12,7 @@
     public class TownsServiceTests
     {
         [Fact]
-        public void AddTownShouldReturnsCorrectCountUsingDbContext()
+        public void AddTownShouldReturnsorrectCountUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase("Sportify_Database_Towns")
@@ -31,7 +31,7 @@
         }
 
         [Fact]
-        public void GetAllTownsShouldReturnsCorrectCountUsingDbContext()
+        public void GetAllTownsShouldReturnCorrectCountUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase("Sportify_Database_Towns_3")
@@ -52,7 +52,7 @@
         }
 
         [Fact]
-        public void GetTownByIdShouldReturnsCorrectTowns()
+        public void GetTownByIdShouldReturnCorrectTowns()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase(databaseName: "Sportify_Database_Towns_4")

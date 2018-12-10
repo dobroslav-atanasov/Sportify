@@ -13,7 +13,7 @@
     public class DisciplinesServiceTests
     {
         [Fact]
-        public void GetAllUserssShouldReturnsCorrectCountUsingDbContext()
+        public void GetAllUsersShouldReturnCorrectCountUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase("Sportify_Database_Disciplines_1")
@@ -34,7 +34,7 @@
         }
 
         [Fact]
-        public void AddSportShouldReturnsCorrectCountUsingDbContext()
+        public void AddSportShouldReturnCorrectCountUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
                 .UseInMemoryDatabase("Sportify_Database_Disciplines_2")
