@@ -21,5 +21,9 @@
         public const string UsernameAlreadyExists = "Username already exists! Please try with another one.";
 
         public const string UsernameOrPasswordAreInvalid = "Username or password are invalid!";
+
+        public const string UserDoesNotExist = "User does not exist!";
+
+        public const string MessageIsSentSuccessfully = "Message is sent successfully!";
     }
 }
