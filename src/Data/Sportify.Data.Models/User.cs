@@ -10,6 +10,7 @@
         {
             this.Organizations = new List<Organization>();
             this.Participants = new List<Participant>();
+            this.Messages = new List<Message>();
         }
 
         public string FirstName { get; set; }
@@ -26,5 +27,7 @@
         public virtual ICollection<Organization> Organizations { get; set; }
 
         public virtual ICollection<Participant> Participants { get; set; }
+
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }
