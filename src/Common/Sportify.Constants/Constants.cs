@@ -27,5 +27,7 @@
         public const string MessageIsSentSuccessfully = "Message is sent successfully!";
 
         public const string ProfileUpdated = "Your profile has been updated!";
+
+        public const string PasswordWasChangedSuccessfully = "Password was changed successfully!";
     }
 }
