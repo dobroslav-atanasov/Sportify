@@ -17,6 +17,8 @@
 
         public DbSet<Event> Events { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         public DbSet<Organization> Organizations { get; set; }
 
         public DbSet<Participant> Participants { get; set; }
