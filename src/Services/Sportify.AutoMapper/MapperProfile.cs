@@ -41,6 +41,10 @@
             this.CreateMap<Discipline, AddDisciplineViewModel>().ReverseMap();
 
             this.CreateMap<Message, AddMessageViewModel>().ReverseMap();
+
+            this.CreateMap<ProfileUserViewModel, User>()
+                .ForMember(u => u.UserName, pvm => pvm.MapFrom(x => x.Username))
+                .ReverseMap();
         }
     }
 }

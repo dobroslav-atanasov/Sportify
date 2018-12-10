@@ -13,5 +13,11 @@
         void SignOut();
 
         IEnumerable<UserAdminViewModel> GetAllUsers();
+
+        ProfileUserViewModel GetCurrentUser(string username);
+
+        bool UpdateProfile(ProfileUserViewModel model);
+
+        bool IsUsernameExist(string username);
     }
 }

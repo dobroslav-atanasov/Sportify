@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Linq;
+    using System.Security.Claims;
     using Data;
     using Data.Models;
     using Data.ViewModels.Users;
@@ -75,6 +76,44 @@
             var usersAdminViewModel = this.mapper.Map<IQueryable<User>, IEnumerable<UserAdminViewModel>>(users);
 
             return usersAdminViewModel;
+        }
+
+        public ProfileUserViewModel GetCurrentUser(string username)
+        {
+            var user = this.userManager.FindByNameAsync(username).GetAwaiter().GetResult();
+            var model = this.mapper.Map<ProfileUserViewModel>(user);
+
+            return model;
+        }
+
+        public bool UpdateProfile(ProfileUserViewModel model)
+        {
+            var user = this.userManager.FindByNameAsync(model.Username).GetAwaiter().GetResult();
+
+            if (this.IsUsernameExist(model.Username))
+            {
+                return false;
+            }
+
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+            user.BirthDate = model.BirthDate;
+            user.CountryId = model.CountryId;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+
+            var isUpdatedUser = this.userManager.UpdateAsync(user).GetAwaiter().GetResult();
+            if (!isUpdatedUser.Succeeded)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool IsUsernameExist(string username)
+        {
+            return this.context.Users.Any(u => u.UserName == username);
         }
     }
 }
