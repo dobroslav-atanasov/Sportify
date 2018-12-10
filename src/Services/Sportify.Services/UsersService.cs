@@ -115,5 +115,18 @@
         {
             return this.context.Users.Any(u => u.UserName == username);
         }
+
+        public bool ChangePassword(string username, ChangePasswordViewModel model)
+        {
+            var user = this.userManager.FindByNameAsync(username).GetAwaiter().GetResult();
+            var result = this.userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).GetAwaiter().GetResult();
+
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
