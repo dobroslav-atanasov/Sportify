@@ -1,5 +1,7 @@
 ﻿namespace Sportify.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using Data;
     using Data.Models;
     using Data.ViewModels.Messages;
@@ -19,7 +21,7 @@
             this.userManager = userManager;
             this.mapper = mapper;
         }
-        
+
         public bool IsSendMessage(AddMessageViewModel model)
         {
             var user = this.userManager.FindByNameAsync(model.Username).GetAwaiter().GetResult();
@@ -35,6 +37,17 @@
             this.context.SaveChanges();
 
             return true;
+        }
+
+        public IEnumerable<MessageViewModel> GetAllMessages()
+        {
+            var messages = this.context
+                .Messages
+                .OrderBy(m => m.PublishedOn)
+                .AsQueryable();
+
+            var messagesViewModel = this.mapper.Map<IQueryable<Message>, IEnumerable<MessageViewModel>>(messages);
+            return messagesViewModel;
         }
     }
 }

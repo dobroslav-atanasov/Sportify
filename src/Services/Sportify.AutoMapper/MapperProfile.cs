@@ -45,6 +45,11 @@
             this.CreateMap<ProfileUserViewModel, User>()
                 .ForMember(u => u.UserName, pvm => pvm.MapFrom(x => x.Username))
                 .ReverseMap();
+
+            this.CreateMap<Message, MessageViewModel>()
+                .ForMember(mvm => mvm.Username, m => m.MapFrom(x => x.User.UserName))
+                .ForMember(mvm => mvm.PublishedOn, m => m.MapFrom(x => x.PublishedOn.ToString("dd-MM-yyyy")))
+                .ReverseMap();
         }
     }
 }
