@@ -30,7 +30,8 @@
         [Authorize(Roles = "Administrator")]
         public IActionResult ChangeRole(UserIdViewModel model)
         {
-            return this.View();
+            this.usersService.ChangeRole(model);
+            return this.RedirectToAction("AllMessages", "MessagesAdmin", new {area = "Administrator"});
         }
     }
 }
