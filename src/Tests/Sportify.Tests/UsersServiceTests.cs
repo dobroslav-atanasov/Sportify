@@ -31,5 +31,41 @@
             var count = service.GetAllUsers().Count();
             Assert.Equal(2, count);
         }
+
+        [Fact]
+        public void IsUsernameExistShouldReturnTrueUsingDbContext()
+        {
+            var options = new DbContextOptionsBuilder<SportifyDbContext>()
+                .UseInMemoryDatabase("Sportify_Database_Users_2")
+                .Options;
+
+            var context = new SportifyDbContext(options);
+
+            context.Add(new User { UserName = "Peter"});
+            context.SaveChanges();
+
+            var service = new UsersService(null, null, null, null, context);
+
+            var result = service.IsUsernameExist("Peter");
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void IsUsernameExistShouldReturnFalseUsingDbContext()
+        {
+            var options = new DbContextOptionsBuilder<SportifyDbContext>()
+                .UseInMemoryDatabase("Sportify_Database_Users_3")
+                .Options;
+
+            var context = new SportifyDbContext(options);
+
+            context.Add(new User { UserName = "Peter" });
+            context.SaveChanges();
+
+            var service = new UsersService(null, null, null, null, context);
+
+            var result = service.IsUsernameExist("George");
+            Assert.False(result);
+        }
     }
 }
