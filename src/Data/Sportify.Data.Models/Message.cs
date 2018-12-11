@@ -1,4 +1,6 @@
-﻿namespace Sportify.Data.Models
+﻿using System;
+
+namespace Sportify.Data.Models
 {
     public class Message
     {
@@ -8,5 +10,7 @@
         public virtual User User { get; set; }
 
         public string Content { get; set; }
+
+        public DateTime PublishedOn { get; set; } = DateTime.UtcNow;
     }
 }
