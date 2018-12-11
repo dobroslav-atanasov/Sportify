@@ -29,5 +29,7 @@
         public const string ProfileUpdated = "Your profile has been updated!";
 
         public const string PasswordWasChangedSuccessfully = "Password was changed successfully!";
+
+        public const string PasswordWasNotChanged = "Password was not changed!";
     }
 }
