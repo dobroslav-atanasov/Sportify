@@ -2,8 +2,9 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList
 @using X.PagedList.Mvc.Common
+@using Sportify.Data.ViewModels.Messages
 
-@model IEnumerable<Sportify.Data.ViewModels.Messages.MessageViewModel>
+@model Sportify.Data.ViewModels.Users.UserIdViewModel
 
 @inject UserManager<User> UserManager
 
@@ -20,13 +21,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Username)
+                Username
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Content)
+                Content
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PublishedOn)
+                PublishedOn
             </th>
             <th>
                 Role
@@ -34,7 +35,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in this.ViewData["Messages"] as IEnumerable<MessageViewModel>)
         {
             <tr>
                 <td>
@@ -50,14 +51,14 @@
                     @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), "User"))
                     {
                         <form asp-area="Administrator" asp-controller="UsersAdmin" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
-                            <input type="hidden" asp-for="@item.UserId" value="@item.UserId" />
+                            <input type="hidden" asp-for="UserId" value="@item.UserId" />
                             <button type="submit" class="btn btn-primary" value="User">User</button>
                         </form>
                     }
                     else
                     {
                         <form asp-area="Administrator" asp-controller="UsersAdmin" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
-                            <input type="hidden" asp-for="@item.UserId" value="@item.UserId" />
+                            <input type="hidden" asp-for="UserId" value="@item.UserId" />
                             <button type="submit" class="btn btn-primary" value="Editor">Editor</button>
                         </form>
                     }
@@ -67,7 +68,7 @@
     </tbody>
 </table>
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllUsers", new { page = page }),
+    @Html.PagedListPager((IPagedList)this.ViewData["Messages"], page => Url.Action("AllUsers", new { page = page }),
     new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,

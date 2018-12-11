@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using Sportify.Data.ViewModels.Messages;
+    using Sportify.Data.ViewModels.Users;
     using X.PagedList;
 
     [Area("Administrator")]
@@ -28,9 +28,8 @@
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult ChangeRole(MessageViewModel model)
+        public IActionResult ChangeRole(UserIdViewModel model)
         {
-            var asd = 1;
             return this.View();
         }
     }

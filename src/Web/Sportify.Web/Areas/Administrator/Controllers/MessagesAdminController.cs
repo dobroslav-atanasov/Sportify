@@ -23,7 +23,8 @@ namespace Sportify.Web.Areas.Administrator.Controllers
             var pageNumber = page ?? 1;
             var usersOnPage = users.ToPagedList(pageNumber, 10);
 
-            return this.View(usersOnPage);
+            this.ViewData["Messages"] = usersOnPage;
+            return this.View();
         }
     }
 }
