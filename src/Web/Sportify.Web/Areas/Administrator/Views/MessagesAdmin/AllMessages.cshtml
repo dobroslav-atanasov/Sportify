@@ -1,8 +1,11 @@
-﻿@using X.PagedList.Mvc.Core
+﻿@using Microsoft.AspNetCore.Identity
+@using X.PagedList.Mvc.Core
 @using X.PagedList
 @using X.PagedList.Mvc.Common
 
 @model IEnumerable<Sportify.Data.ViewModels.Messages.MessageViewModel>
+
+@inject UserManager<User> UserManager
 
 @{
     ViewData["Title"] = "AllMessages";
@@ -25,7 +28,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PublishedOn)
             </th>
-            <th></th>
+            <th>
+                Role
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -42,7 +47,20 @@
                     @Html.DisplayFor(modelItem => item.PublishedOn)
                 </td>
                 <td>
-                    @Html.ActionLink("Change User Role", "Edit", new { /* id=item.PrimaryKey */ })
+                    @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), "User"))
+                    {
+                        <form asp-area="Administrator" asp-controller="UsersAdmin" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                            <input type="hidden" asp-for="@item.UserId" value="@item.UserId" />
+                            <button type="submit" class="btn btn-primary" value="User">User</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-area="Administrator" asp-controller="UsersAdmin" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                            <input type="hidden" asp-for="@item.UserId" value="@item.UserId" />
+                            <button type="submit" class="btn btn-primary" value="Editor">Editor</button>
+                        </form>
+                    }
                 </td>
             </tr>
         }
