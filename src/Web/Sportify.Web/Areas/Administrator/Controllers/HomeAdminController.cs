@@ -19,12 +19,5 @@
         {
             return this.View();
         }
-
-        [Authorize(Roles = "Administrator")]
-        public IActionResult SignOut()
-        {
-            this.usersService.SignOut();
-            return this.RedirectToAction("Index", "Home", new { area = "" });
-        }
     }
 }
