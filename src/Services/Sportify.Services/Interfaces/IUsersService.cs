@@ -16,7 +16,7 @@
 
         ProfileUserViewModel GetCurrentUser(string username);
 
-        bool UpdateProfile(ProfileUserViewModel model);
+        bool UpdateProfile(string username, ProfileUserViewModel model);
 
         bool IsUsernameExist(string username);
 

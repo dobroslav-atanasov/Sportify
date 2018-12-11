@@ -86,9 +86,9 @@
             return model;
         }
 
-        public bool UpdateProfile(ProfileUserViewModel model)
+        public bool UpdateProfile(string username, ProfileUserViewModel model)
         {
-            var user = this.userManager.FindByNameAsync(model.Username).GetAwaiter().GetResult();
+            var user = this.userManager.FindByNameAsync(username).GetAwaiter().GetResult();
 
             if (this.IsUsernameExist(model.Username))
             {
