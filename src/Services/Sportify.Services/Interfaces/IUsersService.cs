@@ -21,5 +21,7 @@
         bool IsUsernameExist(string username);
 
         bool ChangePassword(string username, ChangePasswordViewModel model);
+
+        void ChangeRole(UserIdViewModel model);
     }
 }

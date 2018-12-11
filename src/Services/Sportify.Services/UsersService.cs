@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Linq;
+    using Constants;
     using Data;
     using Data.Models;
     using Data.ViewModels.Users;
@@ -119,6 +120,28 @@
             }
 
             return true;
+        }
+
+        public void ChangeRole(UserIdViewModel model)
+        {
+            var user = this.UserManager.Users.FirstOrDefault(u => u.Id == model.UserId);
+
+            var role = this.UserManager.GetRolesAsync(user).GetAwaiter().GetResult();
+
+            if (role[0] == Constants.UserRole)
+            {
+                var userRole = this.Context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
+                this.Context.UserRoles.Remove(userRole);
+
+                this.UserManager.AddToRoleAsync(user, Constants.EditorRole).GetAwaiter().GetResult();
+            }
+            else if (role[0] == Constants.EditorRole)
+            {
+                var userRole = this.Context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
+                this.Context.UserRoles.Remove(userRole);
+
+                this.UserManager.AddToRoleAsync(user, Constants.UserRole).GetAwaiter().GetResult();
+            }
         }
     }
 }
