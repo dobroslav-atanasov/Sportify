@@ -31,5 +31,9 @@
         public const string PasswordWasChangedSuccessfully = "Password was changed successfully!";
 
         public const string PasswordWasNotChanged = "Password was not changed!";
+
+        public const string UserRole = "User";
+
+        public const string EditorRole = "Editor";
     }
 }
