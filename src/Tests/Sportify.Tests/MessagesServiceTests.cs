@@ -25,7 +25,7 @@
         public void IsSendMessageShouldReturnTrueUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Contacts_1")
+                .UseInMemoryDatabase("Sportify_Database_Messages_1")
                 .Options;
 
             var context = new SportifyDbContext(options);
@@ -45,7 +45,7 @@
         public void IsSendMessageShouldReturnFalseUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Contacts_2")
+                .UseInMemoryDatabase("Sportify_Database_Messages_2")
                 .Options;
 
             var context = new SportifyDbContext(options);
@@ -56,6 +56,27 @@
             var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Pesho" });
 
             Assert.False(isSendMessage);
+        }
+
+        [Fact]
+        public void GetAllMessagesShouldReturnCorrectCountUsingDbContext()
+        {
+            var options = new DbContextOptionsBuilder<SportifyDbContext>()
+                .UseInMemoryDatabase("Sportify_Database_Messages_3")
+                .Options;
+
+            var context = new SportifyDbContext(options);
+            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
+            var mapper = mapperConfig.CreateMapper();
+
+            context.Add(new Message());
+            context.Add(new Message());
+            context.SaveChanges();
+
+            var service = new MessagesService(context, null, mapper);
+
+            var count = service.GetAllMessages().Count();
+            Assert.Equal(2, count);
         }
     }
 }
