@@ -27,7 +27,7 @@
             });
             context.SaveChanges();
 
-            var service = new CountriesService(context, null);
+            var service = new CountriesService(context, null, null, null);
 
             var country = service.GetCountryById(2);
             Assert.NotNull(country);
@@ -42,7 +42,7 @@
 
             var context = new SportifyDbContext(options);
             
-            var service = new CountriesService(context, null);
+            var service = new CountriesService(context, null, null, null);
 
             var country = service.GetCountryById(3);
             Assert.Null(country);
@@ -64,7 +64,7 @@
             });
             context.SaveChanges();
 
-            var service = new CountriesService(context, null);
+            var service = new CountriesService(context, null, null, null);
 
             var country = service.GetCountryByName("Bulgaria");
             Assert.NotNull(country);
@@ -79,7 +79,7 @@
 
             var context = new SportifyDbContext(options);
 
-            var service = new CountriesService(context, null);
+            var service = new CountriesService(context, null, null, null);
 
             var country = service.GetCountryByName("Serbia");
             Assert.Null(country);
@@ -100,7 +100,7 @@
             context.Add(new Country());
             context.SaveChanges();
 
-            var service = new CountriesService(context, mapper);
+            var service = new CountriesService(context, null, null, null);
 
             var count = service.GetAllCountryNames().Count();
             Assert.Equal(2, count);

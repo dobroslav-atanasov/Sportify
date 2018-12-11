@@ -26,7 +26,7 @@
             context.Add(new User());
             context.SaveChanges();
 
-            var service = new UsersService(null, null, null, mapper, context);
+            var service = new UsersService(context, mapper, null, null, null);
 
             var count = service.GetAllUsers().Count();
             Assert.Equal(2, count);
@@ -44,7 +44,7 @@
             context.Add(new User { UserName = "Peter"});
             context.SaveChanges();
 
-            var service = new UsersService(null, null, null, null, context);
+            var service = new UsersService(context, null, null, null, null);
 
             var result = service.IsUsernameExist("Peter");
             Assert.True(result);
@@ -62,7 +62,7 @@
             context.Add(new User { UserName = "Peter" });
             context.SaveChanges();
 
-            var service = new UsersService(null, null, null, null, context);
+            var service = new UsersService(context, null, null, null, null);
 
             var result = service.IsUsernameExist("George");
             Assert.False(result);

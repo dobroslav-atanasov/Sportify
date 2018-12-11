@@ -35,7 +35,7 @@
             context.Users.Add(new User {UserName = "Gosho"});
             context.SaveChanges();
 
-            var service = new MessagesService(context, new FakeUserManager(), mapper);
+            var service = new MessagesService(context, mapper, null, null);
             var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Gosho", Content = "Text"});
             
             Assert.True(isSendMessage);
@@ -52,7 +52,7 @@
             var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
             var mapper = mapperConfig.CreateMapper();
 
-            var service = new MessagesService(context, new FakeUserManager(), mapper);
+            var service = new MessagesService(context, mapper, null, null);
             var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Pesho" });
 
             Assert.False(isSendMessage);
@@ -73,7 +73,7 @@
             context.Add(new Message());
             context.SaveChanges();
 
-            var service = new MessagesService(context, null, mapper);
+            var service = new MessagesService(context, mapper, null, null);
 
             var count = service.GetAllMessages().Count();
             Assert.Equal(2, count);

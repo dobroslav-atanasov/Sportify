@@ -22,7 +22,7 @@
             var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
             var mapper = mapperConfig.CreateMapper();
 
-            var service = new TownsService(context, mapper);
+            var service = new TownsService(context, mapper, null, null);
             service.AddTown(new AddTownViewModel());
 
             var count = context.Towns.Count();
@@ -45,7 +45,7 @@
             context.Add(new Town());
             context.SaveChanges();
 
-            var service = new TownsService(context, mapper);
+            var service = new TownsService(context, mapper, null, null);
 
             var count = service.GetAllTowns().Count();
             Assert.Equal(2, count);
@@ -69,7 +69,7 @@
             });
             context.SaveChanges();
 
-            var service = new TownsService(context, mapper);
+            var service = new TownsService(context, mapper, null, null);
 
             var country = service.GetTownById(1);
             Assert.NotNull(country);
@@ -93,7 +93,7 @@
             });
             context.SaveChanges();
 
-            var service = new TownsService(context, mapper);
+            var service = new TownsService(context, mapper, null, null);
             var isDeleteTown = service.IsDeleteTown(new TownViewModel { Id = 1 });
 
             Assert.True(isDeleteTown);
@@ -117,7 +117,7 @@
             });
             context.SaveChanges();
 
-            var service = new TownsService(context, mapper);
+            var service = new TownsService(context, mapper, null, null);
             var isDeleteTown = service.IsDeleteTown(new TownViewModel { Id = 1 });
 
             Assert.False(isDeleteTown);

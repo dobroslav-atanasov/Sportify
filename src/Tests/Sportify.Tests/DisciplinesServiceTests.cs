@@ -27,7 +27,7 @@
             context.Add(new Discipline());
             context.SaveChanges();
 
-            var service = new DisciplinesService(context, mapper);
+            var service = new DisciplinesService(context, mapper, null, null);
 
             var count = service.GetAllDisciplines().Count();
             Assert.Equal(2, count);
@@ -44,7 +44,7 @@
             var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
             var mapper = mapperConfig.CreateMapper();
 
-            var service = new DisciplinesService(context, mapper);
+            var service = new DisciplinesService(context, mapper, null, null);
             service.AddDiscipline(new AddDisciplineViewModel());
 
             var count = context.Disciplines.Count();

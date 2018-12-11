@@ -27,7 +27,7 @@
             context.Add(new Sport());
             context.SaveChanges();
 
-            var service = new SportsService(context, mapper);
+            var service = new SportsService(context, mapper, null, null);
 
             var count = service.GetAllSports().Count();
             Assert.Equal(2, count);
@@ -44,7 +44,7 @@
             var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
             var mapper = mapperConfig.CreateMapper();
 
-            var service = new SportsService(context, mapper);
+            var service = new SportsService(context, mapper, null, null);
             service.Add(new AddSportViewModel());
 
             var count = context.Sports.Count();
