@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Linq;
-    using System.Security.Claims;
     using Data;
     using Data.Models;
     using Data.ViewModels.Users;
@@ -11,43 +10,36 @@
     using Interfaces;
     using Microsoft.AspNetCore.Identity;
 
-    public class UsersService : IUsersService
+    public class UsersService : BaseService, IUsersService
     {
-        private readonly SignInManager<User> signInManager;
-        private readonly UserManager<User> userManager;
         private readonly ICountriesService countriesService;
-        private readonly IMapper mapper;
-        private readonly SportifyDbContext context;
 
-        public UsersService(SignInManager<User> signInManager, UserManager<User> userManager, ICountriesService countriesService, IMapper mapper, SportifyDbContext context)
+        public UsersService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ICountriesService countriesService)
+            : base(context, mapper, userManager, signInManager)
         {
-            this.signInManager = signInManager;
-            this.userManager = userManager;
             this.countriesService = countriesService;
-            this.mapper = mapper;
-            this.context = context;
         }
 
         public async Task<bool> CreateAccountAsync(CreateAccountViewModel model)
         {
             var country = this.countriesService.GetCountryById(model.CountryId);
 
-            var user = this.mapper.Map<User>(model);
+            var user = this.Mapper.Map<User>(model);
 
-            var result = this.userManager.CreateAsync(user, model.Password).GetAwaiter().GetResult();
+            var result = this.UserManager.CreateAsync(user, model.Password).GetAwaiter().GetResult();
 
             if (result.Succeeded)
             {
-                if (this.userManager.Users.Count() == 1)
+                if (this.UserManager.Users.Count() == 1)
                 {
-                    await this.userManager.AddToRoleAsync(user, "Administrator");
+                    await this.UserManager.AddToRoleAsync(user, "Administrator");
                 }
                 else
                 {
-                    await this.userManager.AddToRoleAsync(user, "User");
+                    await this.UserManager.AddToRoleAsync(user, "User");
                 }
 
-                this.signInManager.SignInAsync(user, false).Wait();
+                this.SignInManager.SignInAsync(user, false).Wait();
             }
 
 
@@ -56,39 +48,39 @@
 
         public bool SignIn(SignInViewModel model)
         {
-            var result = this.signInManager.PasswordSignInAsync(model.Username, model.Password, true, true).GetAwaiter().GetResult();
+            var result = this.SignInManager.PasswordSignInAsync(model.Username, model.Password, true, true).GetAwaiter().GetResult();
 
             return result.Succeeded;
         }
 
         public void SignOut()
         {
-            this.signInManager.SignOutAsync().Wait();
+            this.SignInManager.SignOutAsync().Wait();
         }
 
         public IEnumerable<UserAdminViewModel> GetAllUsers()
         {
-            var users = this.context
+            var users = this.Context
                 .Users
                 .OrderBy(x => x.UserName)
                 .AsQueryable();
 
-            var usersAdminViewModel = this.mapper.Map<IQueryable<User>, IEnumerable<UserAdminViewModel>>(users);
+            var usersAdminViewModel = this.Mapper.Map<IQueryable<User>, IEnumerable<UserAdminViewModel>>(users);
 
             return usersAdminViewModel;
         }
 
         public ProfileUserViewModel GetCurrentUser(string username)
         {
-            var user = this.userManager.FindByNameAsync(username).GetAwaiter().GetResult();
-            var model = this.mapper.Map<ProfileUserViewModel>(user);
+            var user = this.UserManager.FindByNameAsync(username).GetAwaiter().GetResult();
+            var model = this.Mapper.Map<ProfileUserViewModel>(user);
 
             return model;
         }
 
         public bool UpdateProfile(string username, ProfileUserViewModel model)
         {
-            var user = this.userManager.FindByNameAsync(username).GetAwaiter().GetResult();
+            var user = this.UserManager.FindByNameAsync(username).GetAwaiter().GetResult();
 
             if (this.IsUsernameExist(model.Username))
             {
@@ -102,7 +94,7 @@
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
 
-            var isUpdatedUser = this.userManager.UpdateAsync(user).GetAwaiter().GetResult();
+            var isUpdatedUser = this.UserManager.UpdateAsync(user).GetAwaiter().GetResult();
             if (!isUpdatedUser.Succeeded)
             {
                 return false;
@@ -113,13 +105,13 @@
 
         public bool IsUsernameExist(string username)
         {
-            return this.context.Users.Any(u => u.UserName == username);
+            return this.Context.Users.Any(u => u.UserName == username);
         }
 
         public bool ChangePassword(string username, ChangePasswordViewModel model)
         {
-            var user = this.userManager.FindByNameAsync(username).GetAwaiter().GetResult();
-            var result = this.userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).GetAwaiter().GetResult();
+            var user = this.UserManager.FindByNameAsync(username).GetAwaiter().GetResult();
+            var result = this.UserManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).GetAwaiter().GetResult();
 
             if (!result.Succeeded)
             {

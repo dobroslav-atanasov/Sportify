@@ -7,36 +7,33 @@
     using Data.ViewModels.Sports;
     using global::AutoMapper;
     using Interfaces;
+    using Microsoft.AspNetCore.Identity;
 
-    public class SportsService : ISportsService
+    public class SportsService : BaseService, ISportsService
     {
-        private readonly SportifyDbContext context;
-        private readonly IMapper mapper;
-
-        public SportsService(SportifyDbContext context, IMapper mapper)
+        public SportsService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+            : base(context, mapper, userManager, signInManager)
         {
-            this.context = context;
-            this.mapper = mapper;
         }
 
         public IEnumerable<SportViewModel> GetAllSports()
         {
-            var sports = this.context
+            var sports = this.Context
                 .Sports
                 .OrderBy(s => s.Name)
                 .AsQueryable();
 
-            var sportsViewModel = this.mapper.Map<IQueryable<Sport>, IEnumerable<SportViewModel>>(sports);
+            var sportsViewModel = this.Mapper.Map<IQueryable<Sport>, IEnumerable<SportViewModel>>(sports);
 
             return sportsViewModel;
         }
 
         public void Add(AddSportViewModel model)
         {
-            var sport = this.mapper.Map<Sport>(model);
+            var sport = this.Mapper.Map<Sport>(model);
 
-            this.context.Sports.Add(sport);
-            this.context.SaveChanges();
+            this.Context.Sports.Add(sport);
+            this.Context.SaveChanges();
         }
     }
 }

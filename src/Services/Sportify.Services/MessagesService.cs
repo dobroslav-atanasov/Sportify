@@ -9,44 +9,38 @@
     using Interfaces;
     using Microsoft.AspNetCore.Identity;
 
-    public class MessagesService : IMessagesService
+    public class MessagesService : BaseService, IMessagesService
     {
-        private readonly SportifyDbContext context;
-        private readonly UserManager<User> userManager;
-        private readonly IMapper mapper;
-
-        public MessagesService(SportifyDbContext context, UserManager<User> userManager, IMapper mapper)
+        public MessagesService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+            : base(context, mapper, userManager, signInManager)
         {
-            this.context = context;
-            this.userManager = userManager;
-            this.mapper = mapper;
         }
 
         public bool IsSendMessage(AddMessageViewModel model)
         {
-            var user = this.userManager.FindByNameAsync(model.Username).GetAwaiter().GetResult();
+            var user = this.UserManager.FindByNameAsync(model.Username).GetAwaiter().GetResult();
             if (user == null)
             {
                 return false;
             }
 
-            var message = this.mapper.Map<Message>(model);
+            var message = this.Mapper.Map<Message>(model);
             message.UserId = user.Id;
 
-            this.context.Messages.Add(message);
-            this.context.SaveChanges();
+            this.Context.Messages.Add(message);
+            this.Context.SaveChanges();
 
             return true;
         }
 
         public IEnumerable<MessageViewModel> GetAllMessages()
         {
-            var messages = this.context
+            var messages = this.Context
                 .Messages
                 .OrderBy(m => m.PublishedOn)
                 .AsQueryable();
 
-            var messagesViewModel = this.mapper.Map<IQueryable<Message>, IEnumerable<MessageViewModel>>(messages);
+            var messagesViewModel = this.Mapper.Map<IQueryable<Message>, IEnumerable<MessageViewModel>>(messages);
             return messagesViewModel;
         }
     }

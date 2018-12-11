@@ -7,61 +7,57 @@
     using Data.ViewModels.Towns;
     using global::AutoMapper;
     using Interfaces;
-    using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity;
 
-    public class TownsService : ITownsService
+    public class TownsService : BaseService, ITownsService
     {
-        private readonly SportifyDbContext context;
-        private readonly IMapper mapper;
-
-        public TownsService(SportifyDbContext context, IMapper mapper)
+        public TownsService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+            : base(context, mapper, userManager, signInManager)
         {
-            this.context = context;
-            this.mapper = mapper;
         }
 
         public void AddTown(AddTownViewModel model)
         {
-            var town = this.mapper.Map<Town>(model);
+            var town = this.Mapper.Map<Town>(model);
 
-            this.context.Towns.Add(town);
-            this.context.SaveChanges();
+            this.Context.Towns.Add(town);
+            this.Context.SaveChanges();
         }
 
         public IEnumerable<TownViewModel> GetAllTowns()
         {
-            var towns = this.context
+            var towns = this.Context
                 .Towns
                 .OrderBy(t => t.Name)
                 .AsQueryable();
 
-            var townViewModels = this.mapper.Map<IQueryable<Town>, IEnumerable<TownViewModel>>(towns);
+            var townViewModels = this.Mapper.Map<IQueryable<Town>, IEnumerable<TownViewModel>>(towns);
 
             return townViewModels;
         }
 
         public TownViewModel GetTownById(int id)
         {
-            var town = this.context
+            var town = this.Context
                 .Towns
                 .FirstOrDefault(t => t.Id == id);
 
-            var townViewModel = this.mapper.Map<TownViewModel>(town);
+            var townViewModel = this.Mapper.Map<TownViewModel>(town);
 
             return townViewModel;
         }
 
         public bool IsDeleteTown(TownViewModel model)
         {
-            var town = this.context
+            var town = this.Context
                 .Towns
                 .FirstOrDefault(t => t.Id == model.Id);
 
             if (town != null)
             {
-                this.context.Towns.Remove(town);
+                this.Context.Towns.Remove(town);
 
-                this.context.SaveChanges();
+                this.Context.SaveChanges();
 
                 return true;
             }

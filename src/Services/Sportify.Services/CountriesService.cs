@@ -7,21 +7,18 @@
     using Data.ViewModels.Countries;
     using global::AutoMapper;
     using Interfaces;
+    using Microsoft.AspNetCore.Identity;
 
-    public class CountriesService : ICountriesService
+    public class CountriesService : BaseService, ICountriesService
     {
-        private readonly SportifyDbContext context;
-        private readonly IMapper mapper;
-
-        public CountriesService(SportifyDbContext context, IMapper mapper)
+        public CountriesService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+            : base(context, mapper, userManager, signInManager)
         {
-            this.context = context;
-            this.mapper = mapper;
         }
 
         public Country GetCountryById(int id)
         {
-            var country = this.context
+            var country = this.Context
                 .Countries
                 .FirstOrDefault(x => x.Id == id);
 
@@ -30,7 +27,7 @@
 
         public Country GetCountryByName(string name)
         {
-            var country = this.context
+            var country = this.Context
                 .Countries
                 .FirstOrDefault(x => x.Name == name);
 
@@ -39,11 +36,11 @@
 
         public IEnumerable<CountrySelectViewModel> GetAllCountryNames()
         {
-            var countries = this.context
+            var countries = this.Context
                 .Countries
                 .OrderBy(x => x.Name);
 
-            var countriesModel = this.mapper.Map<IOrderedQueryable<Country>, IEnumerable<CountrySelectViewModel>>(countries);
+            var countriesModel = this.Mapper.Map<IOrderedQueryable<Country>, IEnumerable<CountrySelectViewModel>>(countries);
 
             return countriesModel;
         }
