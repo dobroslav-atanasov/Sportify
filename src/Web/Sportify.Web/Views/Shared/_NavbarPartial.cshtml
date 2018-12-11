@@ -13,14 +13,22 @@
 
     @if (SignInManager.IsSignedIn(User))
     {
-        <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Users" asp-action="Profile"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Users" asp-action="SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>
-            </li>
-        </ul>
+        if (this.User.IsInRole("Administrator"))
+        {
+            <partial name="_NavbarAdministratorPartial" />
+        }
+        else
+        {
+            <ul class="nav navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Users" asp-action="Profile"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Users" asp-action="SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>
+                </li>
+            </ul>
+        }
     }
     else
     {

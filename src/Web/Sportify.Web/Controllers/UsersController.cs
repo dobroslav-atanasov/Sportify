@@ -89,13 +89,14 @@
         [Authorize]
         public IActionResult Profile(ProfileUserViewModel model)
         {
+            var currentUsername = this.User.Identity.Name;
             if (!this.ModelState.IsValid)
             {
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
 
-            var isUpdated = this.usersService.UpdateProfile(model);
+            var isUpdated = this.usersService.UpdateProfile(currentUsername, model);
             if (isUpdated)
             {
                 this.ViewData["Message"] = Constants.ProfileUpdated;
@@ -130,9 +131,13 @@
             if (isChangePassword)
             {
                 this.ViewData["Message"] = Constants.PasswordWasChangedSuccessfully;
-                return this.RedirectToAction("Profile", "Users");
+                return this.View();
             }
-            return this.View();
+            else
+            {
+                this.ViewData["Error"] = Constants.PasswordWasNotChanged;
+                return this.View(model);
+            }
         }
     }
 }
