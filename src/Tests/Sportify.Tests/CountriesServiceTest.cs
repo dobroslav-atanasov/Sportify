@@ -1,11 +1,12 @@
-﻿namespace Sportify.Services.Tests
+﻿namespace Sportify.Tests
 {
+    using System.Linq;
     using AutoMapper;
     using Data;
     using Data.Models;
     using global::AutoMapper;
     using Microsoft.EntityFrameworkCore;
-    using System.Linq;
+    using Services;
     using Xunit;
 
     public class CountriesServiceTest
@@ -37,7 +38,7 @@
         public void GetCountryByIdShouldReturnNull()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_1")
+                .UseInMemoryDatabase(databaseName: "Sportify_Database_6")
                 .Options;
 
             var context = new SportifyDbContext(options);

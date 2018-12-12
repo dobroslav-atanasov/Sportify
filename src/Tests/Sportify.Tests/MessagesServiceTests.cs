@@ -1,24 +1,16 @@
-﻿namespace Sportify.Services.Tests
+﻿namespace Sportify.Tests
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using AutoMapper;
     using Data;
     using Data.Models;
     using Data.ViewModels.Messages;
-    using Data.ViewModels.Towns;
     using global::AutoMapper;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Options;
-    using Moq;
     using Services;
     using Xunit;
 
-    public class MessagesServiceTests
+    public class MessagesServiceTest
     {
         [Fact]
         public void IsSendMessageShouldReturnTrueUsingDbContext()
@@ -31,12 +23,12 @@
             var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
             var mapper = mapperConfig.CreateMapper();
 
-            context.Users.Add(new User {UserName = "Gosho"});
+            context.Users.Add(new User { UserName = "Gosho" });
             context.SaveChanges();
 
             var service = new MessagesService(context, mapper, null, null);
-            var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Gosho", Content = "Text"});
-            
+            var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Gosho", Content = "Text" });
+
             Assert.True(isSendMessage);
         }
 

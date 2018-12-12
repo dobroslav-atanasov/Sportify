@@ -1,4 +1,4 @@
-﻿namespace Sportify.Services.Tests
+﻿namespace Sportify.Tests
 {
     using System.Linq;
     using AutoMapper;

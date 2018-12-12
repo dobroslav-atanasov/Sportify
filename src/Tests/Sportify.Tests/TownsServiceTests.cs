@@ -1,4 +1,4 @@
-﻿namespace Sportify.Services.Tests
+﻿namespace Sportify.Tests
 {
     using System.Linq;
     using AutoMapper;
@@ -7,6 +7,7 @@
     using Data.ViewModels.Towns;
     using global::AutoMapper;
     using Microsoft.EntityFrameworkCore;
+    using Services;
     using Xunit;
 
     public class TownsServiceTests

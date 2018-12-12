@@ -1,14 +1,15 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Sportify.AutoMapper;
-using Sportify.Data;
-using Sportify.Data.ViewModels.Venues;
-using Sportify.Services;
-using System.Linq;
-using Xunit;
-
-namespace Sportify.Services.Tests
+﻿namespace Sportify.Tests
 {
+    using System.Linq;
+    using AutoMapper;
+    using Data;
+    using Data.Models;
+    using Data.ViewModels.Venues;
+    using global::AutoMapper;
+    using Microsoft.EntityFrameworkCore;
+    using Services;
+    using Xunit;
+
     public class VenuesServiceTests
     {
         [Fact]
@@ -28,6 +29,27 @@ namespace Sportify.Services.Tests
             var count = context.Venues.Count();
 
             Assert.Equal(1, count);
+        }
+
+        [Fact]
+        public void GetAllVenuesShouldReturnCorrectCountUsingDbContext()
+        {
+            var options = new DbContextOptionsBuilder<SportifyDbContext>()
+                .UseInMemoryDatabase("Sportify_Database_Venues_2")
+                .Options;
+
+            var context = new SportifyDbContext(options);
+            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
+            var mapper = mapperConfig.CreateMapper();
+
+            context.Venues.Add(new Venue());
+            context.Venues.Add(new Venue());
+            context.SaveChanges();
+
+            var service = new VenuesService(context, mapper, null, null);
+
+            var count = service.GetAllVenues().Count();
+            Assert.Equal(2, count);
         }
     }
 }
