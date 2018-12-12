@@ -1,0 +1,48 @@
+﻿@model Sportify.Data.ViewModels.Venues.AddVenueViewModel
+
+@{
+    ViewData["Title"] = "AddVenue";
+}
+
+<h2>AddVenue</h2>
+
+<h4>AddVenueViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddVenue">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageVenueUrl" class="control-label"></label>
+                <input asp-for="ImageVenueUrl" class="form-control" />
+                <span asp-validation-for="ImageVenueUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TownId" class="control-label"></label>
+                <input asp-for="TownId" class="form-control" />
+                <span asp-validation-for="TownId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
