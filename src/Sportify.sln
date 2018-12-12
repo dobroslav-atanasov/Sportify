@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{66A0EE07
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportify.Tests", "Tests\Sportify.Tests\Sportify.Tests.csproj", "{CDC49E56-72F9-4BDE-8474-1A531D6C200F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{FE64F95E-81DE-495E-8EE8-FB3B07B3B378}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{FE64F95E-81DE-495E-8EE8-FB3B07B3B378}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
