@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Venues" asp-action="AllVenues"><i class="fas fa-landmark"></i> Venues</a>
+    </li>
+</ul>
+<ul class="nav navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Profile"><i class="fas fa-user-edit"></i> Editor - @UserManager.GetUserName(User)!</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Users" asp-action="SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>
+    </li>
+</ul>

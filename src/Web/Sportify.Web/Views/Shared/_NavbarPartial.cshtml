@@ -17,10 +17,13 @@
         {
             <partial name="_NavbarAdministratorPartial" />
         }
+        else if (this.User.IsInRole("Editor"))
+        {
+            <partial name="_NavbarEditorPartial"/>
+        }
         else
         {
             <ul class="nav navbar-nav ml-auto">
-
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Users" asp-action="Profile"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)!</a>
                 </li>
