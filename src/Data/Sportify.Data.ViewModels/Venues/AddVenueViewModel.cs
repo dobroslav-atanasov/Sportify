@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Sportify.Data.ViewModels.Venues
+﻿namespace Sportify.Data.ViewModels.Venues
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class AddVenueViewModel
     {
         [Required]
@@ -10,7 +10,12 @@ namespace Sportify.Data.ViewModels.Venues
         public string Name { get; set; }
 
         [Required]
-        [Range(1, int.MaxValue)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required]
+        [Range(1, 100000)]
         [Display(Name = "Capacity")]
         public int Capacity { get; set; }
 
@@ -19,8 +24,7 @@ namespace Sportify.Data.ViewModels.Venues
         [Display(Name = "Image Venue")]
         public string ImageVenueUrl { get; set; }
 
-        [Required]
-        [Display(Name = "Town")]
+        [Required] [Display(Name = "Town")]
         public int TownId { get; set; }
     }
 }
