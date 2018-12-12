@@ -1,4 +1,4 @@
-﻿namespace Sportify.Tests
+﻿namespace Sportify.Services.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,6 @@
     using Data.Models;
     using Data.ViewModels.Messages;
     using Data.ViewModels.Towns;
-    using FakeManagers;
     using global::AutoMapper;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;

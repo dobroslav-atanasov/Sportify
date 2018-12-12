@@ -89,7 +89,7 @@
         public void GetAllCountryNamesShouldReturnCorrectCountUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_2")
+                .UseInMemoryDatabase(databaseName: "Sportify_Database_5")
                 .Options;
 
             var context = new SportifyDbContext(options);
@@ -100,7 +100,7 @@
             context.Add(new Country());
             context.SaveChanges();
 
-            var service = new CountriesService(context, null, null, null);
+            var service = new CountriesService(context, mapper, null, null);
 
             var count = service.GetAllCountryNames().Count();
             Assert.Equal(2, count);

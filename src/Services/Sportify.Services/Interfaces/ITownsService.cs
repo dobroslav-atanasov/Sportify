@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Data.ViewModels.Towns;
+    using Sportify.Data.Models;
 
     public interface ITownsService
     {
