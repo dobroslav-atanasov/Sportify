@@ -1,5 +1,6 @@
 ﻿namespace Sportify.Web.Areas.Administrator.Controllers
 {
+    using Constants;
     using Data.ViewModels.Disciplines;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@
             this.sportsService = sportsService;
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult AllDisciplines(int? page)
         {
             var disciplines = this.disciplinesService.GetAllDisciplines();
@@ -29,14 +30,16 @@
             return this.View(disciplinesOnPage);
         }
 
-        [Authorize(Roles = "Administrator")]
+
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Add()
         {
             this.ViewData["Sports"] = this.sportsService.GetAllSports();
             return this.View();
         }
 
-        [Authorize(Roles = "Administrator")]
+
+        [Authorize(Roles = Constants.AdministratorRole)]
         [HttpPost]
         public IActionResult Add(AddDisciplineViewModel model)
         {
