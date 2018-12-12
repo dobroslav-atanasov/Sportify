@@ -32,6 +32,8 @@
 
         public const string PasswordWasNotChanged = "Password was not changed!";
 
+        public const string AdministratorRole = "Administrator";
+
         public const string UserRole = "User";
 
         public const string EditorRole = "Editor";
