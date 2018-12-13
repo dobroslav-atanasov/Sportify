@@ -9,7 +9,7 @@
     using Data.ViewModels.Users;
     using Data.ViewModels.Venues;
     using global::AutoMapper;
-
+    using Sportify.Data.ViewModels.Organizations;
 
     public class MapperProfile : Profile
     {
@@ -31,6 +31,9 @@
                 .ForMember(mvm => mvm.PublishedOn, m => m.MapFrom(x => x.PublishedOn.ToString("dd-MM-yyyy")))
                 .ForMember(mvm => mvm.UserId, m => m.MapFrom(x => x.User.Id))
                 .ReverseMap();
+
+            // Organizations
+            this.CreateMap<Organization, CreateOrganizationViewModel>().ReverseMap();
 
             // Sports
             this.CreateMap<Sport, SportViewModel>().ReverseMap();
