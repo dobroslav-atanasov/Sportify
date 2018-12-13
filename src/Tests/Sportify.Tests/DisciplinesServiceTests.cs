@@ -7,49 +7,43 @@
     using Data.ViewModels.Disciplines;
     using global::AutoMapper;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
     using Services;
     using Xunit;
 
-    public class DisciplinesServiceTests
+    public class DisciplinesServiceTests : BaseServiceTests
     {
         [Fact]
-        public void GetAllUsersShouldReturnCorrectCountUsingDbContext()
+        public void GetGetAllDisciplines_ShouldReturnCorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Disciplines_1")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new DisciplinesService(context, this.Mapper, null, null);
+            context.Add(new Discipline());
             context.Add(new Discipline());
             context.Add(new Discipline());
             context.SaveChanges();
 
-            var service = new DisciplinesService(context, mapper, null, null);
+            // Act
+            var result = service.GetAllDisciplines().Count();
 
-            var count = service.GetAllDisciplines().Count();
-            Assert.Equal(2, count);
+            // Assert
+            Assert.Equal(3, result);
         }
 
         [Fact]
-        public void AddSportShouldReturnCorrectCountUsingDbContext()
+        public void AddDisciplineShould_ReturnCorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Disciplines_2")
-                .Options;
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new DisciplinesService(context, this.Mapper, null, null);
 
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
-            var service = new DisciplinesService(context, mapper, null, null);
+            // Act
             service.AddDiscipline(new AddDisciplineViewModel());
+            var result = context.Disciplines.Count();
 
-            var count = context.Disciplines.Count();
-
-            Assert.Equal(1, count);
+            // Assert
+            Assert.Equal(1, result);
         }
     }
 }

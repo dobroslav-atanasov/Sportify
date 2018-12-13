@@ -7,49 +7,42 @@
     using Data.ViewModels.Sports;
     using global::AutoMapper;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
     using Services;
     using Xunit;
 
-    public class SportsServiceTests
+    public class SportsServiceTests : BaseServiceTests
     {
         [Fact]
-        public void GetAllUsersShouldReturnCorrectCountUsingDbContext()
+        public void GetAllSports_ShouldReturnCorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Sports_1")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new SportsService(context, this.Mapper, null, null);
             context.Add(new Sport());
             context.Add(new Sport());
             context.SaveChanges();
 
-            var service = new SportsService(context, mapper, null, null);
+            // Act
+            var result = service.GetAllSports().Count();
 
-            var count = service.GetAllSports().Count();
-            Assert.Equal(2, count);
+            // Assert
+            Assert.Equal(2, result);
         }
 
         [Fact]
-        public void AddSportShouldReturnCorrectCountUsingDbContext()
+        public void AddSportShould_ReturnCorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Sports_2")
-                .Options;
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new SportsService(context, this.Mapper, null, null);
 
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
-            var service = new SportsService(context, mapper, null, null);
+            // Act
             service.Add(new AddSportViewModel());
+            var result = context.Sports.Count();
 
-            var count = context.Sports.Count();
-
-            Assert.Equal(1, count);
+            // Assert
+            Assert.Equal(1, result);
         }
     }
 }

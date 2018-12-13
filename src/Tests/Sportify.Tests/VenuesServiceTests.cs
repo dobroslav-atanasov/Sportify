@@ -7,49 +7,43 @@
     using Data.ViewModels.Venues;
     using global::AutoMapper;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
     using Services;
+    using Sportify.Data.ViewModels.Disciplines;
     using Xunit;
 
-    public class VenuesServiceTests
+    public class VenuesServiceTests : BaseServiceTests
     {
         [Fact]
-        public void AddVenueShouldReturnsorrectCountUsingDbContext()
+        public void AddVenue_ShouldReturnsorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Venues_1")
-                .Options;
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new VenuesService(context, this.Mapper, null, null);
 
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
-            var service = new VenuesService(context, mapper, null, null);
+            // Act
             service.AddVenue(new AddVenueViewModel());
+            var result = context.Venues.Count();
 
-            var count = context.Venues.Count();
-
-            Assert.Equal(1, count);
+            // Assert
+            Assert.Equal(1, result);
         }
 
         [Fact]
-        public void GetAllVenuesShouldReturnCorrectCountUsingDbContext()
+        public void GetAllVenues_ShouldReturnCorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Venues_2")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
-            context.Venues.Add(new Venue());
-            context.Venues.Add(new Venue());
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new VenuesService(context, this.Mapper, null, null);
+            context.Add(new Venue());
+            context.Add(new Venue());
             context.SaveChanges();
 
-            var service = new VenuesService(context, mapper, null, null);
+            // Act
+            var result = service.GetAllVenues().Count();
 
-            var count = service.GetAllVenues().Count();
-            Assert.Equal(2, count);
+            // Assert
+            Assert.Equal(2, result);
         }
     }
 }

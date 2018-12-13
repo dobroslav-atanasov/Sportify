@@ -7,121 +7,91 @@
     using Data.ViewModels.Towns;
     using global::AutoMapper;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
     using Services;
     using Xunit;
 
-    public class TownsServiceTests
+    public class TownsServiceTests : BaseServiceTests
     {
         [Fact]
-        public void AddTownShouldReturnsorrectCountUsingDbContext()
+        public void AddTownShould_ReturnsorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Towns")
-                .Options;
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new TownsService(context, this.Mapper, null, null);
 
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
-            var service = new TownsService(context, mapper, null, null);
+            // Act
             service.AddTown(new AddTownViewModel());
+            var result = context.Towns.Count();
 
-            var count = context.Towns.Count();
-
-            Assert.Equal(1, count);
+            // Assert
+            Assert.Equal(1, result);
         }
 
         [Fact]
-        public void GetAllTownsShouldReturnCorrectCountUsingDbContext()
+        public void GetAllTowns_ShouldReturnCorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Towns_3")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new TownsService(context, this.Mapper, null, null);
+            context.Add(new Town());
             context.Add(new Town());
             context.Add(new Town());
             context.SaveChanges();
 
-            var service = new TownsService(context, mapper, null, null);
+            // Act
+            var result = service.GetAllTowns().Count();
 
-            var count = service.GetAllTowns().Count();
-            Assert.Equal(2, count);
+            // Assert
+            Assert.Equal(3, result);
         }
 
         [Fact]
-        public void GetTownByIdShouldReturnCorrectTowns()
+        public void GetTownById_ShouldReturnCorrectTown()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_Towns_4")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
-            context.Add(new Town
-            {
-                Id = 1,
-                Name = "Sofia"
-            });
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new TownsService(context, this.Mapper, null, null);
+            context.Add(new Town { Name = "Sofia" });
             context.SaveChanges();
 
-            var service = new TownsService(context, mapper, null, null);
+            // Act
+            var town = service.GetTownById(1);
 
-            var country = service.GetTownById(1);
-            Assert.NotNull(country);
+            // Assert
+            Assert.NotNull(town);
         }
 
         [Fact]
-        public void IsDeleteTownShouldDeleteTown()
+        public void IsDeleteTown_ShouldDeleteTown()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_Towns_5")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
-            context.Add(new Town
-            {
-                Id = 1,
-                Name = "Sofia"
-            });
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new TownsService(context, this.Mapper, null, null);
+            context.Add(new Town { Name = "Sofia" });
             context.SaveChanges();
 
-            var service = new TownsService(context, mapper, null, null);
-            var isDeleteTown = service.IsDeleteTown(new TownViewModel { Id = 1 });
+            // Act
+            var result = service.IsDeleteTown(new TownViewModel { Id = 1});
 
-            Assert.True(isDeleteTown);
+            // Assert
+            Assert.True(result);
         }
 
         [Fact]
-        public void IsDeleteTownShouldNotDeleteTown()
+        public void IsDeleteTown_ShouldNotDeleteTown()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_Towns_6")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
-            context.Add(new Town
-            {
-                Id = 2,
-                Name = "Sofia"
-            });
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new TownsService(context, this.Mapper, null, null);
+            context.Add(new Town { Name = "Sofia" });
             context.SaveChanges();
 
-            var service = new TownsService(context, mapper, null, null);
-            var isDeleteTown = service.IsDeleteTown(new TownViewModel { Id = 1 });
+            // Act
+            var result = service.IsDeleteTown(new TownViewModel { Id = 2 });
 
-            Assert.False(isDeleteTown);
+            // Assert
+            Assert.False(result);
         }
     }
 }

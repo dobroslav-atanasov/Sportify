@@ -1,73 +1,73 @@
 ﻿namespace Sportify.Tests
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using AutoMapper;
     using Data;
     using Data.Models;
     using Data.ViewModels.Messages;
     using global::AutoMapper;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Moq;
     using Services;
+    using Sportify.Tests.FakeManagers;
     using Xunit;
 
-    public class MessagesServiceTest
+    public class MessagesServiceTest : BaseServiceTests
     {
         [Fact]
-        public void IsSendMessageShouldReturnTrueUsingDbContext()
+        public void IsSendMessage_ShouldReturnTrue()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Messages_1")
-                .Options;
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            var result = userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new MessagesService(context, this.Mapper, userManager, null);
 
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
+            // Act
+            var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "George", Content = "Text" });
 
-            context.Users.Add(new User { UserName = "Gosho" });
-            context.SaveChanges();
-
-            var service = new MessagesService(context, mapper, null, null);
-            var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Gosho", Content = "Text" });
-
+            // Assert
             Assert.True(isSendMessage);
         }
 
         [Fact]
-        public void IsSendMessageShouldReturnFalseUsingDbContext()
+        public void IsSendMessage_ShouldReturnFalse()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Messages_2")
-                .Options;
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            var result = userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new MessagesService(context, this.Mapper, userManager, null);
 
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
+            // Act
+            var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Peter", Content = "Text" });
 
-            var service = new MessagesService(context, mapper, null, null);
-            var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Pesho" });
-
+            // Assert
             Assert.False(isSendMessage);
         }
 
         [Fact]
-        public void GetAllMessagesShouldReturnCorrectCountUsingDbContext()
+        public void GetAllMessages_ShouldReturnCorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase("Sportify_Database_Messages_3")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new MessagesService(context, this.Mapper, null, null);
+                                 
             context.Add(new Message());
             context.Add(new Message());
             context.SaveChanges();
 
-            var service = new MessagesService(context, mapper, null, null);
+            // Act
+            var result = service.GetAllMessages().Count();
 
-            var count = service.GetAllMessages().Count();
-            Assert.Equal(2, count);
+            // Assert
+            Assert.Equal(2, result);
         }
     }
 }

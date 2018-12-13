@@ -5,106 +5,92 @@
     using Data;
     using Data.Models;
     using global::AutoMapper;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
     using Services;
     using Xunit;
 
-    public class CountriesServiceTest
+    public class CountriesServiceTest : BaseServiceTests
     {
         [Fact]
-        public void GetCountryByIdShouldReturnCorrectCountry()
+        public void GetCountryById_ShouldReturnCorrectCountry()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_1")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-
-            context.Add(new Country
-            {
-                Id = 2,
-                Name = "Bulgaria",
-                CountryCode = "BUL"
-            });
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new CountriesService(context, this.Mapper, null, null);
+            context.Add(new Country());
             context.SaveChanges();
 
-            var service = new CountriesService(context, null, null, null);
+            // Act
+            var country = service.GetCountryById(1);
 
-            var country = service.GetCountryById(2);
+            // Assert
             Assert.NotNull(country);
         }
 
         [Fact]
-        public void GetCountryByIdShouldReturnNull()
+        public void GetCountryById_ShouldReturnNull()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_6")
-                .Options;
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new CountriesService(context, this.Mapper, null, null);
 
-            var context = new SportifyDbContext(options);
-            
-            var service = new CountriesService(context, null, null, null);
+            // Act
+            var country = service.GetCountryById(1);
 
-            var country = service.GetCountryById(3);
+            // Assert
             Assert.Null(country);
         }
 
         [Fact]
-        public void GetCountryByNameShouldReturnCorrectCountry()
+        public void GetCountryByName_ShouldReturnCorrectCountry()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_1")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-
-            context.Add(new Country
-            {
-                Name = "Bulgaria",
-                CountryCode = "BUL"
-            });
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new CountriesService(context, this.Mapper, null, null);
+            context.Add(new Country { Name = "Bulgaria" });
             context.SaveChanges();
 
-            var service = new CountriesService(context, null, null, null);
-
+            // Act
             var country = service.GetCountryByName("Bulgaria");
+
+            // Assert
             Assert.NotNull(country);
         }
 
         [Fact]
-        public void GetCountryByNameShouldReturnNull()
+        public void GetCountryByName_ShouldReturnNull()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_1")
-                .Options;
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new CountriesService(context, this.Mapper, null, null);
+            context.Add(new Country { Name = "Bulgaria" });
+            context.SaveChanges();
 
-            var context = new SportifyDbContext(options);
-
-            var service = new CountriesService(context, null, null, null);
-
+            // Act
             var country = service.GetCountryByName("Serbia");
+
+            // Assert
             Assert.Null(country);
         }
 
         [Fact]
-        public void GetAllCountryNamesShouldReturnCorrectCountUsingDbContext()
+        public void GetAllCountryNames_ShouldReturnCorrectCount()
         {
-            var options = new DbContextOptionsBuilder<SportifyDbContext>()
-                .UseInMemoryDatabase(databaseName: "Sportify_Database_5")
-                .Options;
-
-            var context = new SportifyDbContext(options);
-            var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
-            var mapper = mapperConfig.CreateMapper();
-
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new CountriesService(context, this.Mapper, null, null);
+            context.Add(new Country());
             context.Add(new Country());
             context.Add(new Country());
             context.SaveChanges();
 
-            var service = new CountriesService(context, mapper, null, null);
+            // Act
+            var result = service.GetAllCountryNames().Count();
 
-            var count = service.GetAllCountryNames().Count();
-            Assert.Equal(2, count);
+            // Assert
+            Assert.Equal(3, result);
         }
     }
 }
