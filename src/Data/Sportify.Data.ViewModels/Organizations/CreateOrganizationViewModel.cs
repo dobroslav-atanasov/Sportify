@@ -6,7 +6,7 @@ namespace Sportify.Data.ViewModels.Organizations
     {
         [Required]
         [DataType(DataType.Text)]
-        [MinLength(3, ErrorMessage = Constants.Constants.OrganizationNameLengthErrorMessage)]
+        [MinLength(Constants.Constants.MinOrganizationNameLength, ErrorMessage = Constants.Constants.OrganizationNameLengthErrorMessage)]
         [RegularExpression("[a-zA-z0-9-.*/_\\s]+", ErrorMessage = Constants.Constants.OrganizationNameInvalidSymbolsErrorMessage)]
         [Display(Name = "Name")]
         public string Name { get; set; }

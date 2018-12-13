@@ -4,6 +4,16 @@
 
     public class Constants
     {
+        public const int MinUsernameLength = 3;
+
+        public const int MinOrganizationNameLength = 3;
+
+        public const int MinSportNameLength = 3;
+
+        public const int MinPasswordLength = 4;
+
+        public const int MaxPasswordLength = 10;
+
         public const string UsernameLengthErrorMessage = "The {0} must be at least {1} characters long!";
 
         public const string UsernameInvalidSymbolsErrorMessage = "Username contains invalid symbols!";

@@ -11,7 +11,7 @@
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(10, ErrorMessage = Constants.PasswordLengthErrorMessage, MinimumLength = 4)]
+        [StringLength(Constants.MaxPasswordLength, ErrorMessage = Constants.PasswordLengthErrorMessage, MinimumLength = Constants.MaxPasswordLength)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }

@@ -70,10 +70,7 @@
                 options.Password.RequiredLength = 4;
                 options.Password.RequiredUniqueChars = 0;
             });
-
-            //services.AddDefaultIdentity<User>()
-            //    .AddEntityFrameworkStores<SportifyDbContext>();
-
+            
             // Configure AutoValidationAntiforgeryToken
             services.AddMvc(options =>
                 {

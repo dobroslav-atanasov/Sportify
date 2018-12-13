@@ -15,7 +15,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using Moq;
     using Services;
-    using Sportify.Tests.FakeManagers;
     using Xunit;
 
     public class MessagesServiceTest : BaseServiceTests

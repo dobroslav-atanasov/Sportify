@@ -8,7 +8,7 @@
     {
         [Required]
         [DataType(DataType.Text)]
-        [MinLength(3, ErrorMessage = Constants.UsernameLengthErrorMessage)]
+        [MinLength(Constants.MinUsernameLength, ErrorMessage = Constants.UsernameLengthErrorMessage)]
         [RegularExpression("[a-zA-z0-9-.*/_]+", ErrorMessage = Constants.UsernameInvalidSymbolsErrorMessage)]
         [Display(Name = "Username")]
         public string Username { get; set; }
@@ -19,7 +19,7 @@
         public string Email { get; set; }
 
         [Required]
-        [StringLength(10, ErrorMessage = Constants.PasswordLengthErrorMessage, MinimumLength = 4)]
+        [StringLength(Constants.MaxPasswordLength, ErrorMessage = Constants.PasswordLengthErrorMessage, MinimumLength = Constants.MinPasswordLength)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

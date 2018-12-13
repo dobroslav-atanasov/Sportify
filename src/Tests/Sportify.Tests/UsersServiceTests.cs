@@ -22,9 +22,9 @@
         public void CreateAccount_ShouldReturnCorrectResult()
         {
             // Arrange
-            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
-            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
-            var signInManager = this.ServiceProvider.GetRequiredService<SignInManager<User>>();
+            var context = this.ServiceProvider.GetService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetService<UserManager<User>>();
+            var signInManager = this.ServiceProvider.GetService<SignInManager<User>>();
             var countriesService = new CountriesService(context, this.Mapper, userManager, signInManager);
             var service = new UsersService(context, this.Mapper, userManager, signInManager, countriesService);
 
