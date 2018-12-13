@@ -217,15 +217,15 @@ namespace Sportify.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("Name");
 
-                    b.Property<int>("PresidentId");
-
-                    b.Property<string>("PresidentId1");
+                    b.Property<string>("PresidentId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PresidentId1");
+                    b.HasIndex("PresidentId");
 
                     b.ToTable("Organizations");
                 });
@@ -238,9 +238,7 @@ namespace Sportify.Data.Migrations
 
                     b.Property<int>("EventId");
 
-                    b.Property<int>("UserId");
-
-                    b.Property<string>("UserId1");
+                    b.Property<string>("UserId");
 
                     b.Property<DateTime>("UserResult");
 
@@ -248,7 +246,7 @@ namespace Sportify.Data.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Participants");
                 });
@@ -455,7 +453,7 @@ namespace Sportify.Data.Migrations
                 {
                     b.HasOne("Sportify.Data.Models.User", "President")
                         .WithMany("Organizations")
-                        .HasForeignKey("PresidentId1");
+                        .HasForeignKey("PresidentId");
                 });
 
             modelBuilder.Entity("Sportify.Data.Models.Participant", b =>
@@ -467,7 +465,7 @@ namespace Sportify.Data.Migrations
 
                     b.HasOne("Sportify.Data.Models.User", "User")
                         .WithMany("Participants")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Sportify.Data.Models.Town", b =>
