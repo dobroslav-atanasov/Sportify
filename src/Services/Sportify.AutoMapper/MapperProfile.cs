@@ -4,12 +4,12 @@
     using Data.ViewModels.Countries;
     using Data.ViewModels.Disciplines;
     using Data.ViewModels.Messages;
+    using Data.ViewModels.Organizations;
     using Data.ViewModels.Sports;
     using Data.ViewModels.Towns;
     using Data.ViewModels.Users;
     using Data.ViewModels.Venues;
     using global::AutoMapper;
-    using Sportify.Data.ViewModels.Organizations;
 
     public class MapperProfile : Profile
     {
@@ -34,6 +34,10 @@
 
             // Organizations
             this.CreateMap<Organization, CreateOrganizationViewModel>().ReverseMap();
+
+            this.CreateMap<Organization, OrganizationViewModel>()
+                .ForMember(ovm => ovm.President, o => o.MapFrom(x => x.President.UserName))
+                .ReverseMap();
 
             // Sports
             this.CreateMap<Sport, SportViewModel>().ReverseMap();
