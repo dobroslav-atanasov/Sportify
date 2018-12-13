@@ -40,7 +40,7 @@
                     await this.UserManager.AddToRoleAsync(user, "User");
                 }
 
-                this.SignInManager.SignInAsync(user, false).Wait();
+                this.SignInManager.SignInAsync(user, false).GetAwaiter().GetResult();
             }
 
 

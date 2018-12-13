@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Sportify.AutoMapper;
 using Sportify.Data;
 using Sportify.Data.Models;
+using Sportify.Services;
+using Sportify.Services.Interfaces;
 using System;
 
 namespace Sportify.Tests
@@ -23,7 +25,8 @@ namespace Sportify.Tests
             services.AddDbContext<SportifyDbContext>(b => b.UseInMemoryDatabase("SportifyDbContext").UseInternalServiceProvider(efServiceProvider));
 
             services.AddIdentity<User, IdentityRole>()
-                    .AddEntityFrameworkStores<SportifyDbContext>();
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<SportifyDbContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -34,6 +37,15 @@ namespace Sportify.Tests
                 options.Password.RequiredLength = 4;
                 options.Password.RequiredUniqueChars = 0;
             });
+
+            services.AddTransient<ICountriesService, CountriesService>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ITownsService, TownsService>();
+            services.AddTransient<ISportsService, SportsService>();
+            services.AddTransient<IDisciplinesService, DisciplinesService>();
+            services.AddTransient<IMessagesService, MessagesService>();
+            services.AddTransient<IVenuesService, VenuesService>();
+            services.AddTransient<IOrganizationsService, OrganizationsService>();
 
             var context = new DefaultHttpContext();
             services.AddSingleton<IHttpContextAccessor>(
