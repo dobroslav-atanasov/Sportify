@@ -5,6 +5,6 @@ namespace Sportify.Services.Interfaces
 {
     public interface IOrganizationsService
     {
-        void Create(CreateOrganizationViewModel model, User user);
+        void Create(CreateOrganizationViewModel model, string username);
     }
 }

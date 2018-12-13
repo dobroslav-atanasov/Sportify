@@ -14,8 +14,10 @@ namespace Sportify.Services
         {
         }
 
-        public void Create(CreateOrganizationViewModel model, User user)
+        public void Create(CreateOrganizationViewModel model, string username)
         {
+            var user = this.UserManager.FindByNameAsync(username).GetAwaiter().GetResult();
+
             var organization = this.Mapper.Map<Organization>(model);
             organization.President = user;
 
