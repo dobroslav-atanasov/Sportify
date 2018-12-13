@@ -1,9 +1,8 @@
 ﻿namespace Sportify.Constants
 {
-    using System;
-
     public class Constants
     {
+        // number constants
         public const int MinUsernameLength = 3;
 
         public const int MinOrganizationNameLength = 3;
@@ -14,6 +13,11 @@
 
         public const int MaxPasswordLength = 10;
 
+        public const int MinNumberOfParticipants = 5;
+
+        public const int MaxNumberOfParticipants = 100;
+
+        // string constants
         public const string UsernameLengthErrorMessage = "The {0} must be at least {1} characters long!";
 
         public const string UsernameInvalidSymbolsErrorMessage = "Username contains invalid symbols!";
@@ -53,5 +57,7 @@
         public const string OrganizationNameInvalidSymbolsErrorMessage = "Organization name contains invalid symbols!";
 
         public const string OrganizationDescriptionInvalidSymbolsErrorMessage = "Organization description contains invalid symbols!";
+
+        public const string EventNameInvalidSymbolsErrorMessage = "Event name contains invalid symbols!";
     }
 }
