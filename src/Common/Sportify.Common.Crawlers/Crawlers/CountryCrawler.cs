@@ -76,9 +76,8 @@
                 }
 
                 context.Countries.Add(country);
+                context.SaveChanges();
             }
-
-            context.SaveChanges();
         }
 
         //private void ExtractAllCountriesInfo(string nodeOuterHtml, SportifyDbContext context)
