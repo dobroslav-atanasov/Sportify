@@ -10,12 +10,10 @@
     public class OrganizationsController : Controller
     {
         private readonly IOrganizationsService organizationsService;
-        private readonly UserManager<User> userManager;
 
-        public OrganizationsController(IOrganizationsService organizationsService, UserManager<User> userManager)
+        public OrganizationsController(IOrganizationsService organizationsService)
         {
             this.organizationsService = organizationsService;
-            this.userManager = userManager;
         }
 
         [Authorize(Roles = Constants.Constants.EditorRole)]
@@ -33,8 +31,7 @@
                 return this.View(model);
             }
 
-            var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
-            this.organizationsService.Create(model, user);
+            this.organizationsService.Create(model, this.User.Identity.Name);
             return this.RedirectToAction("Index", "Home");
         }
     }
