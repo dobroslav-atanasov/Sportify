@@ -47,6 +47,7 @@
             services.AddTransient<IDisciplinesService, DisciplinesService>();
             services.AddTransient<IMessagesService, MessagesService>();
             services.AddTransient<IVenuesService, VenuesService>();
+            services.AddTransient<IOrganizationsService, OrganizationsService>();
 
             // Configure Identity
             services.AddIdentity<User, IdentityRole>()
