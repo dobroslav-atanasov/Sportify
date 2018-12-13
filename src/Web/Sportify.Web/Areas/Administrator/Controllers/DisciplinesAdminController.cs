@@ -20,7 +20,7 @@
         }
 
         [Authorize(Roles = Constants.AdministratorRole)]
-        public IActionResult AllDisciplines(int? page)
+        public IActionResult All(int? page)
         {
             var disciplines = this.disciplinesService.GetAllDisciplines();
 
@@ -51,7 +51,7 @@
 
             this.disciplinesService.AddDiscipline(model);
 
-            return this.RedirectToAction("AllDisciplines", "DisciplinesAdmin", new { area = "Administrator" });
+            return this.RedirectToAction("All", "DisciplinesAdmin", new { area = "Administrator" });
         }
     }
 }

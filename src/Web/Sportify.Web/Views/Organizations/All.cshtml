@@ -1,25 +1,22 @@
 ﻿@using X.PagedList
 @using X.PagedList.Mvc.Common
 @using X.PagedList.Mvc.Core
-@model IEnumerable<Sportify.Data.ViewModels.Disciplines.DisciplineViewModel>
+@model IEnumerable<Sportify.Data.ViewModels.Organizations.OrganizationViewModel>
 
 @{
-    ViewData["Title"] = "AllDisciplines";
+    ViewData["Title"] = "All";
 }
 
-<h2>AllDisciplines</h2>
+<h2>All</h2>
 
-<p>
-    <a asp-area="Administrator" asp-controller="DisciplinesAdmin" asp-action="Add">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.President)
             </th>
             <th></th>
         </tr>
@@ -28,10 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.President)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -42,8 +39,9 @@
 }
     </tbody>
 </table>
+
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllDisciplines", new { page = page }),
+    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("All", new { page = page }),
         new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,

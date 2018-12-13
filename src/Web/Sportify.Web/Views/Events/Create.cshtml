@@ -1,0 +1,79 @@
+﻿@using Sportify.Data.ViewModels.Disciplines
+@using Sportify.Data.ViewModels.Organizations
+@using Sportify.Data.ViewModels.Venues
+@model Sportify.Data.ViewModels.Events.CreateEventViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create Event</h2>
+
+<h4>CreateEventViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Events" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EventName" class="control-label"></label>
+                <input asp-for="EventName" class="form-control" />
+                <span asp-validation-for="EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrganizationId" class="control-label"></label>
+                <select asp-for="OrganizationId" class="form-control">
+                    <option selected>Select Organization</option>
+                    @foreach (var organization in this.ViewData["Organizations"] as IEnumerable<OrganizationViewModel>)
+                    {
+                        <option value="@organization.Id">@organization.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="OrganizationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisciplineId" class="control-label"></label>
+                <select asp-for="OrganizationId" class="form-control">
+                    <option selected>Select Discipline</option>
+                    @foreach (var discipline in this.ViewData["Disciplines"] as IEnumerable<DisciplineViewModel>)
+                    {
+                        <option value="@discipline.Id">@discipline.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="DisciplineId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VenueId" class="control-label"></label>
+                <select asp-for="VenueId" class="form-control">
+                    <option selected>Select Venue</option>
+                    @foreach (var venue in this.ViewData["Venues"] as IEnumerable<VenueViewModel>)
+                    {
+                        <option value="@venue.Id">@venue.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="VenueId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfParticipants" class="control-label"></label>
+                <input asp-for="NumberOfParticipants" class="form-control" />
+                <span asp-validation-for="NumberOfParticipants" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

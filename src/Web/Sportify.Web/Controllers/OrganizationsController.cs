@@ -1,11 +1,11 @@
 ﻿namespace Sportify.Web.Controllers
 {
+    using Data.ViewModels.Organizations;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Sportify.Data.Models;
-    using Sportify.Data.ViewModels.Organizations;
-    using Sportify.Services.Interfaces;
+    using Services.Interfaces;
+    using Constants;
+    using X.PagedList;
 
     public class OrganizationsController : Controller
     {
@@ -16,14 +16,14 @@
             this.organizationsService = organizationsService;
         }
 
-        [Authorize(Roles = Constants.Constants.EditorRole)]
+        [Authorize(Roles = Constants.EditorRole)]
         public IActionResult Create()
         {
             return this.View();
         }
 
         [HttpPost]
-        [Authorize(Roles = Constants.Constants.EditorRole)]
+        [Authorize(Roles = Constants.EditorRole)]
         public IActionResult Create(CreateOrganizationViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -33,6 +33,17 @@
 
             this.organizationsService.Create(model, this.User.Identity.Name);
             return this.RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public IActionResult All(int? page)
+        {
+            var organizations = this.organizationsService.GetAllOrganizations();
+
+            var pageNumber = page ?? 1;
+            var organizationsOnPage = organizations.ToPagedList(pageNumber, 10);
+
+            return this.View(organizationsOnPage);
         }
     }
 }
