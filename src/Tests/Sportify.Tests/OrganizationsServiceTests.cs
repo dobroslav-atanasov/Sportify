@@ -27,5 +27,23 @@ namespace Sportify.Tests
             // Assert
             Assert.Equal(1, result);
         }
+
+        [Fact]
+        public void GetAllOrganizations_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new OrganizationsService(context, this.Mapper, null, null);
+            context.Organizations.Add(new Organization());
+            context.Organizations.Add(new Organization());
+            context.Organizations.Add(new Organization());
+            context.SaveChanges();
+
+            // Act
+            var result = service.GetAllOrganizations().Count();
+
+            // Assert
+            Assert.Equal(3, result);
+        }
     }
 }
