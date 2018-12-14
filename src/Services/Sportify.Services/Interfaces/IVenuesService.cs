@@ -2,12 +2,13 @@
 
 namespace Sportify.Services.Interfaces
 {
+    using Sportify.Data.Models;
     using System.Collections.Generic;
 
     public interface IVenuesService
     {
         IEnumerable<VenueViewModel> GetAllVenues();
 
-        void AddVenue(AddVenueViewModel model);
+        Venue AddVenue(AddVenueViewModel model);
     }
 }

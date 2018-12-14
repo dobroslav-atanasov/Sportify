@@ -27,12 +27,14 @@
             return venuesViewModel;
         }
 
-        public void AddVenue(AddVenueViewModel model)
+        public Venue AddVenue(AddVenueViewModel model)
         {
             var venue = this.Mapper.Map<Venue>(model);
 
             this.Context.Venues.Add(venue);
             this.Context.SaveChanges();
+
+            return venue;
         }
     }
 }

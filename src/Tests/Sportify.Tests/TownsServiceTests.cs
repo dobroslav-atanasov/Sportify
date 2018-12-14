@@ -14,18 +14,29 @@
     public class TownsServiceTests : BaseServiceTests
     {
         [Fact]
-        public void AddTownShould_ReturnsorrectCount()
+        public void AddTownShould_ReturnCorrectTown()
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
             var service = new TownsService(context, this.Mapper, null, null);
 
             // Act
-            service.AddTown(new AddTownViewModel());
-            var result = context.Towns.Count();
+            var town = service.AddTown(new AddTownViewModel
+            {
+                Name = "Sofia",
+                CountryId = 1
+            });
+
+            // Expected Town
+            var expectedTown = new Town
+            {
+                Id = 1,
+                Name = "Sofia",
+                CountryId = 1
+            };
 
             // Assert
-            Assert.Equal(1, result);
+            Assert.True(town.Equals(expectedTown));
         }
 
         [Fact]

@@ -16,12 +16,14 @@
         {
         }
 
-        public void AddTown(AddTownViewModel model)
+        public Town AddTown(AddTownViewModel model)
         {
             var town = this.Mapper.Map<Town>(model);
 
             this.Context.Towns.Add(town);
             this.Context.SaveChanges();
+
+            return town;
         }
 
         public IEnumerable<TownViewModel> GetAllTowns()

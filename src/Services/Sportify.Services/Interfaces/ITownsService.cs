@@ -6,7 +6,7 @@
 
     public interface ITownsService
     {
-        void AddTown(AddTownViewModel model);
+        Town AddTown(AddTownViewModel model);
 
         IEnumerable<TownViewModel> GetAllTowns();
 

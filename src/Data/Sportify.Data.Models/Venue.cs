@@ -1,8 +1,9 @@
 ﻿namespace Sportify.Data.Models
 {
+    using System;
     using System.Collections.Generic;
 
-    public class Venue
+    public class Venue : IEquatable<Venue>
     {
         public Venue()
         {
@@ -23,5 +24,15 @@
         public virtual Town Town { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
+
+        public bool Equals(Venue other)
+        {
+            return this.Id == other.Id
+                && this.Name == other.Name
+                && this.Address == other.Address
+                && this.Capacity == other.Capacity
+                && this.ImageVenueUrl == other.ImageVenueUrl
+                && this.TownId == other.TownId;
+        }
     }
 }

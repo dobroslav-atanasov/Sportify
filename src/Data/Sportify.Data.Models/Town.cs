@@ -1,8 +1,9 @@
 ﻿namespace Sportify.Data.Models
 {
+    using System;
     using System.Collections.Generic;
 
-    public class Town
+    public class Town : IEquatable<Town>
     {
         public Town()
         {
@@ -17,5 +18,12 @@
         public virtual Country Country { get; set; }
 
         public virtual ICollection<Venue> Venues { get; set; }
+
+        public bool Equals(Town other)
+        {
+            return this.Id == other.Id
+                && this.Name == other.Name
+                && this.CountryId == other.CountryId;
+        }
     }
 }

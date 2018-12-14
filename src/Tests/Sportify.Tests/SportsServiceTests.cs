@@ -31,7 +31,7 @@
         }
 
         [Fact]
-        public void AddSportShould_ReturnCorrectCount()
+        public void AddSportShould_ReturnCorrectSport()
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
