@@ -5,16 +5,30 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
+    using System.Threading.Tasks;
+    using global::AutoMapper;
+    using Sportify.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using System.Linq;
+    using Sportify.Data;
 
     public class UsersController : Controller
     {
+        private readonly SportifyDbContext context;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
         private readonly ICountriesService countriesService;
         private readonly IUsersService usersService;
+        private readonly IMapper mapper;
 
-        public UsersController(ICountriesService countriesService, IUsersService usersService)
+        public UsersController(SportifyDbContext context, UserManager<User> userManager, SignInManager<User> signInManager, ICountriesService countriesService, IUsersService usersService, IMapper mapper)
         {
+            this.context = context;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
             this.countriesService = countriesService;
             this.usersService = usersService;
+            this.mapper = mapper;
         }
 
         public IActionResult CreateAccount()
@@ -24,7 +38,7 @@
         }
 
         [HttpPost]
-        public IActionResult CreateAccount(CreateAccountViewModel model)
+        public async Task<IActionResult> CreateAccount(CreateAccountViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -32,9 +46,24 @@
                 return this.View(model);
             }
 
-            var isRegister = this.usersService.CreateAccountAsync(model).GetAwaiter().GetResult();
+            var country = this.countriesService.GetCountryById(model.CountryId);
+            var user = this.mapper.Map<User>(model);
+            var result = await this.userManager.CreateAsync(user, model.Password);
 
-            if (!isRegister)
+            if (result.Succeeded)
+            {
+                if (this.userManager.Users.Count() == 1)
+                {
+                    await this.userManager.AddToRoleAsync(user, Constants.AdministratorRole);
+                }
+                else
+                {
+                    await this.userManager.AddToRoleAsync(user, Constants.UserRole);
+                }
+
+                await this.signInManager.SignInAsync(user, false);
+            }
+            else
             {
                 this.ViewData["Error"] = Constants.UsernameAlreadyExists;
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
@@ -50,16 +79,16 @@
         }
 
         [HttpPost]
-        public IActionResult SignIn(SignInViewModel model)
+        public async Task<IActionResult> SignIn(SignInViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-            var isLogin = this.usersService.SignIn(model);
+            var signInResult = await this.signInManager.PasswordSignInAsync(model.Username, model.Password, true, true);
 
-            if (!isLogin)
+            if (!signInResult.Succeeded)
             {
                 this.ViewData["Error"] = Constants.UsernameOrPasswordAreInvalid;
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
@@ -70,45 +99,51 @@
         }
 
         [Authorize]
-        public IActionResult SignOut()
+        public async Task<IActionResult> SignOut()
         {
-            this.usersService.SignOut();
+            await this.signInManager.SignOutAsync();
             return this.RedirectToAction("Index", "Home");
         }
 
         [Authorize]
-        public IActionResult Profile()
+        public IActionResult UpdateProfile()
         {
-            var currentUsername = this.User.Identity.Name;
-            var model = this.usersService.GetCurrentUser(currentUsername);
+            var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
+            var model = this.mapper.Map<ProfileUserViewModel>(user);
             this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
             return this.View(model);
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult Profile(ProfileUserViewModel model)
+        public async Task<IActionResult> UpdateProfile(ProfileUserViewModel model)
         {
-            var currentUsername = this.User.Identity.Name;
             if (!this.ModelState.IsValid)
             {
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
 
-            var isUpdated = this.usersService.UpdateProfile(currentUsername, model);
-            if (isUpdated)
-            {
-                this.ViewData["Message"] = Constants.ProfileUpdated;
-                this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
-                return this.View(model);
-            }
-            else
+            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+            if (this.usersService.IsUsernameExist(model.Username))
             {
                 this.ViewData["Error"] = Constants.UsernameAlreadyExists;
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
+
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+            user.BirthDate = model.BirthDate;
+            user.CountryId = model.CountryId;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+
+            await this.userManager.UpdateAsync(user);
+
+            this.ViewData["Message"] = Constants.ProfileUpdated;
+            this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+            return this.View(model);
         }
 
         [Authorize]
@@ -126,18 +161,41 @@
                 return this.View(model);
             }
 
-            var currentUsername = this.User.Identity.Name;
-            var isChangePassword = this.usersService.ChangePassword(currentUsername, model);
-            if (isChangePassword)
-            {
-                this.ViewData["Message"] = Constants.PasswordWasChangedSuccessfully;
-                return this.View();
-            }
-            else
+            var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
+            var isChangedPassword = this.userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).GetAwaiter().GetResult();
+
+            if (!isChangedPassword.Succeeded)
             {
                 this.ViewData["Error"] = Constants.PasswordWasNotChanged;
                 return this.View(model);
             }
+
+            this.ViewData["Message"] = Constants.PasswordWasChangedSuccessfully;
+            return this.View();
+        }
+
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public IActionResult ChangeRole(UserIdViewModel model)
+        {
+            var user = this.userManager.Users.FirstOrDefault(u => u.Id == model.UserId);
+            var role = this.userManager.GetRolesAsync(user).GetAwaiter().GetResult();
+
+            if (role[0] == Constants.UserRole)
+            {
+                var userRole = this.context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
+                this.context.UserRoles.Remove(userRole);
+
+                this.userManager.AddToRoleAsync(user, Constants.EditorRole).GetAwaiter().GetResult();
+            }
+            else if (role[0] == Constants.EditorRole)
+            {
+                var userRole = this.context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
+                this.context.UserRoles.Remove(userRole);
+
+                this.userManager.AddToRoleAsync(user, Constants.UserRole).GetAwaiter().GetResult();
+            }
+
+            return this.RedirectToAction("AllMessages", "MessagesAdmin", new { area = Constants.AdministratorRole });
         }
     }
 }

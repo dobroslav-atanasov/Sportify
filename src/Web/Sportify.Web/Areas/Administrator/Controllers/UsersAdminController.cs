@@ -26,12 +26,5 @@
 
             return this.View(usersOnPage);
         }
-
-        [Authorize(Roles = "Administrator")]
-        public IActionResult ChangeRole(UserIdViewModel model)
-        {
-            this.usersService.ChangeRole(model);
-            return this.RedirectToAction("AllMessages", "MessagesAdmin", new {area = "Administrator"});
-        }
     }
 }
