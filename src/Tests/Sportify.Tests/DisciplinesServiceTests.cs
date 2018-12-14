@@ -32,18 +32,31 @@
         }
 
         [Fact]
-        public void AddDisciplineShould_ReturnCorrectCount()
+        public void AddDisciplineShould_ReturnCorrectDiscipline()
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
             var service = new DisciplinesService(context, this.Mapper, null, null);
 
             // Act
-            service.AddDiscipline(new AddDisciplineViewModel());
-            var result = context.Disciplines.Count();
+            var discipline = service.AddDiscipline(new AddDisciplineViewModel
+            {
+                Name = "Test",
+                Description = "Test Description",
+                SportId = 1
+            });
+
+            // Expected Discipline
+            var expectedDiscipline = new Discipline
+            {
+                Id = 1,
+                Name = "Test",
+                Description = "Test Description",
+                SportId = 1
+            };
 
             // Assert
-            Assert.Equal(1, result);
+            Assert.True(discipline.Equals(expectedDiscipline));
         }
     }
 }

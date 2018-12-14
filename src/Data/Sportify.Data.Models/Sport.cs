@@ -1,8 +1,9 @@
 ﻿namespace Sportify.Data.Models
 {
+    using System;
     using System.Collections.Generic;
 
-    public class Sport
+    public class Sport : IEquatable<Sport>
     {
         public Sport()
         {
@@ -18,5 +19,13 @@
         public string ImageSportUrl { get; set; }
 
         public virtual ICollection<Discipline> Disciplines { get; set; }
+
+        public bool Equals(Sport other)
+        {
+            return this.Id == other.Id
+                && this.Name == other.Name
+                && this.Description == other.Description
+                && this.ImageSportUrl == other.ImageSportUrl;
+        }
     }
 }

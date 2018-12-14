@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
     using Data.ViewModels.Organizations;
+    using Sportify.Data.Models;
 
     public interface IOrganizationsService
     {
-        void Create(CreateOrganizationViewModel model, string username);
+        Organization Create(CreateOrganizationViewModel model, string username);
 
         IEnumerable<OrganizationViewModel> GetAllOrganizations();
     }

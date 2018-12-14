@@ -21,11 +21,22 @@ namespace Sportify.Tests
             var service = new OrganizationsService(context, this.Mapper, userManager, null);
 
             // Act
-            service.Create(new CreateOrganizationViewModel(), "George");
-            var result = service.Context.Organizations.Count();
+            var organization = service.Create(new CreateOrganizationViewModel
+            {
+                Name = "Test",
+                Description = "Test Description"
+            }, "George");
+
+            // Expected Organization
+            var expectedOrganization = new Organization
+            {
+                Id = 1,
+                Name = "Test",
+                Description = "Test Description",
+            };
 
             // Assert
-            Assert.Equal(1, result);
+            Assert.True(organization.Equals(expectedOrganization));
         }
 
         [Fact]

@@ -38,11 +38,24 @@
             var service = new SportsService(context, this.Mapper, null, null);
 
             // Act
-            service.Add(new AddSportViewModel());
-            var result = context.Sports.Count();
+            var sport = service.Add(new AddSportViewModel
+            {
+                Name = "Test",
+                Description = "Test Description",
+                ImageSportUrl = "www.test.com"
+            });
+
+            // Expected Sport
+            var expectedSport = new Sport
+            {
+                Id = 1,
+                Name = "Test",
+                Description = "Test Description",
+                ImageSportUrl = "www.test.com"
+            };
 
             // Assert
-            Assert.Equal(1, result);
+            Assert.True(sport.Equals(expectedSport));
         }
     }
 }

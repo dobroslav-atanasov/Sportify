@@ -2,11 +2,12 @@
 {
     using System.Collections.Generic;
     using Data.ViewModels.Sports;
+    using Sportify.Data.Models;
 
     public interface ISportsService
     {
         IEnumerable<SportViewModel> GetAllSports();
 
-        void Add(AddSportViewModel model);
+        Sport Add(AddSportViewModel model);
     }
 }

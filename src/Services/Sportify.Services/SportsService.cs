@@ -28,12 +28,14 @@
             return sportsViewModel;
         }
 
-        public void Add(AddSportViewModel model)
+        public Sport Add(AddSportViewModel model)
         {
             var sport = this.Mapper.Map<Sport>(model);
 
             this.Context.Sports.Add(sport);
             this.Context.SaveChanges();
+
+            return sport;
         }
     }
 }

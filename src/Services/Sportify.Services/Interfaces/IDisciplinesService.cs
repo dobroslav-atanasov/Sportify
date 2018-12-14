@@ -2,11 +2,12 @@
 {
     using System.Collections.Generic;
     using Data.ViewModels.Disciplines;
+    using Sportify.Data.Models;
 
     public interface IDisciplinesService
     {
         IEnumerable<DisciplineViewModel> GetAllDisciplines();
 
-        void AddDiscipline(AddDisciplineViewModel model);
+        Discipline AddDiscipline(AddDisciplineViewModel model);
     }
 }

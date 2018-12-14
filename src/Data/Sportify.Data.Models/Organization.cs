@@ -1,8 +1,9 @@
 ﻿namespace Sportify.Data.Models
 {
+    using System;
     using System.Collections.Generic;
 
-    public class Organization
+    public class Organization : IEquatable<Organization>
     {
         public Organization()
         {
@@ -19,5 +20,12 @@
         public virtual User President { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
+
+        public bool Equals(Organization other)
+        {
+            return this.Id == other.Id
+                && this.Name == other.Name
+                && this.Description == other.Description;
+        }
     }
 }

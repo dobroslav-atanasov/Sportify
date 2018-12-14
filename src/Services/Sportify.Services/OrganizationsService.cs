@@ -16,7 +16,7 @@
         {
         }
 
-        public void Create(CreateOrganizationViewModel model, string username)
+        public Organization Create(CreateOrganizationViewModel model, string username)
         {
             var user = this.UserManager.FindByNameAsync(username).GetAwaiter().GetResult();
 
@@ -25,6 +25,8 @@
 
             this.Context.Organizations.Add(organization);
             this.Context.SaveChanges();
+
+            return organization;
         }
 
         public IEnumerable<OrganizationViewModel> GetAllOrganizations()

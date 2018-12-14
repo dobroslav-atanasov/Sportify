@@ -28,12 +28,14 @@
             return disciplinesViewModel;
         }
 
-        public void AddDiscipline(AddDisciplineViewModel model)
+        public Discipline AddDiscipline(AddDisciplineViewModel model)
         {
             var discipline = this.Mapper.Map<Discipline>(model);
 
             this.Context.Disciplines.Add(discipline);
             this.Context.SaveChanges();
+
+            return discipline;
         }
     }
 }
