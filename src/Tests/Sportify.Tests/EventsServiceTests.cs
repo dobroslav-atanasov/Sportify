@@ -30,6 +30,7 @@ namespace Sportify.Tests
                 NumberOfParticipants = 10
             });
 
+            // Expected Event
             var expectedEvent = new Event
             {
                 Id = 1,
