@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class Event
+    public class Event : IEquatable<Event>
     {
         public Event()
         {
@@ -28,5 +28,16 @@
         public int NumberOfParticipants { get; set; }
 
         public virtual ICollection<Participant> Participants { get; set; }
+
+        public bool Equals(Event other)
+        {
+            return this.Id == other.Id
+                && this.EventName == other.EventName 
+                && this.Date == other.Date
+                && this.OrganizationId == other.OrganizationId 
+                && this.DisciplineId == other.DisciplineId
+                && this.VenueId == other.VenueId 
+                && this.NumberOfParticipants == other.NumberOfParticipants;
+        }
     }
 }
