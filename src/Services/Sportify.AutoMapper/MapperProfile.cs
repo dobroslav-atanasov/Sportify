@@ -10,6 +10,7 @@
     using Data.ViewModels.Users;
     using Data.ViewModels.Venues;
     using global::AutoMapper;
+    using Sportify.Data.ViewModels.Events;
 
     public class MapperProfile : Profile
     {
@@ -22,6 +23,11 @@
             this.CreateMap<Discipline, DisciplineViewModel>().ReverseMap();
 
             this.CreateMap<Discipline, AddDisciplineViewModel>().ReverseMap();
+
+            // Events
+            this.CreateMap<Event, CreateEventViewModel>()
+                .ForMember(cevm => cevm.DisciplineId, e => e.MapFrom(x => x.DisciplineId))
+                .ReverseMap();
 
             // Messages
             this.CreateMap<Message, AddMessageViewModel>().ReverseMap();
