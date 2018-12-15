@@ -10,6 +10,8 @@ using Xunit;
 
 namespace Sportify.Tests
 {
+    using System.Linq;
+
     public class EventsServiceTests : BaseServiceTests
     {
         [Fact]
@@ -44,6 +46,24 @@ namespace Sportify.Tests
 
             // Assert
             Assert.True(@event.Equals(expectedEvent));
+        }
+
+        [Fact]
+        public void GetGetAllEvents_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null);
+            context.Add(new Event());
+            context.Add(new Event());
+            context.Add(new Event());
+            context.SaveChanges();
+
+            // Act
+            var result = service.GetAllEvents().Count();
+
+            // Assert
+            Assert.Equal(3, result);
         }
     }
 }
