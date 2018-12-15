@@ -1,8 +1,10 @@
 ﻿namespace Sportify.AutoMapper
 {
+    using System.Globalization;
     using Data.Models;
     using Data.ViewModels.Countries;
     using Data.ViewModels.Disciplines;
+    using Data.ViewModels.Events;
     using Data.ViewModels.Messages;
     using Data.ViewModels.Organizations;
     using Data.ViewModels.Sports;
@@ -10,7 +12,7 @@
     using Data.ViewModels.Users;
     using Data.ViewModels.Venues;
     using global::AutoMapper;
-    using Sportify.Data.ViewModels.Events;
+
 
     public class MapperProfile : Profile
     {
@@ -26,9 +28,16 @@
 
             // Events
             this.CreateMap<Event, CreateEventViewModel>()
-                .ForMember(cevm => cevm.DisciplineId, e => e.MapFrom(x => x.DisciplineId))
+                .ForMember(evm => evm.DisciplineId, e => e.MapFrom(x => x.DisciplineId))
                 .ReverseMap();
 
+            this.CreateMap<Event, EventViewModel>()
+                .ForMember(evm => evm.Date, e => e.MapFrom(x => x.Date.ToString("dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture)))
+                .ForMember(evm => evm.Organization, e => e.MapFrom(x => x.Organization.Name))
+                .ForMember(evm => evm.Discipline, e => e.MapFrom(x => x.Discipline.Name))
+                .ForMember(evm => evm.Venue, e => e.MapFrom(x => x.Venue.Name))
+                .ReverseMap();
+            
             // Messages
             this.CreateMap<Message, AddMessageViewModel>().ReverseMap();
             

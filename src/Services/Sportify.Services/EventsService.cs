@@ -1,12 +1,13 @@
 ﻿namespace Sportify.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Data;
+    using Data.Models;
+    using Data.ViewModels.Events;
     using global::AutoMapper;
     using Interfaces;
     using Microsoft.AspNetCore.Identity;
-    using Sportify.Data;
-    using Sportify.Data.Models;
-    using Sportify.Data.ViewModels.Events;
-    using System.Linq;
 
     public class EventsService : BaseService, IEventsService
     {
@@ -23,6 +24,18 @@
             this.Context.SaveChanges();
 
             return @event;
+        }
+
+        public IEnumerable<EventViewModel> GetAllEvents()
+        {
+            var events = this.Context
+                .Events
+                .OrderBy(e => e.Date)
+                .AsQueryable();
+
+            var eventsViewModel = this.Mapper.Map<IQueryable<Event>, IEnumerable<EventViewModel>>(events);
+
+            return eventsViewModel;
         }
     }
 }
