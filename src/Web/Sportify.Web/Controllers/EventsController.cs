@@ -1,6 +1,8 @@
 ﻿namespace Sportify.Web.Controllers
 {
+    using System.Collections.Generic;
     using Constants;
+    using Data.ViewModels.Countries;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
@@ -12,13 +14,15 @@
         private readonly IDisciplinesService disciplinesService;
         private readonly IVenuesService venuesService;
         private readonly IEventsService eventsService;
+        private readonly ICountriesService countriesService;
 
-        public EventsController(IOrganizationsService organizationsService, IDisciplinesService disciplinesService, IVenuesService venuesService, IEventsService eventsService)
+        public EventsController(IOrganizationsService organizationsService, IDisciplinesService disciplinesService, IVenuesService venuesService, IEventsService eventsService, ICountriesService countriesService)
         {
             this.organizationsService = organizationsService;
             this.disciplinesService = disciplinesService;
             this.venuesService = venuesService;
             this.eventsService = eventsService;
+            this.countriesService = countriesService;
         }
 
         [Authorize(Roles = Constants.EditorRole)]
@@ -47,6 +51,20 @@
         public IActionResult All()
         {
             var events = this.eventsService.GetAllEvents();
+            return this.View(events);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult SearchEvents(SearchCountryViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+                return this.RedirectToAction("Index", "Home");
+            }
+            var events = this.eventsService.GetAllEventsInCountry(model);
+            
             return this.View(events);
         }
     }
