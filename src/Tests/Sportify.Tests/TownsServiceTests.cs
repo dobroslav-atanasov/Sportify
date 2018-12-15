@@ -1,5 +1,6 @@
 ﻿namespace Sportify.Tests
 {
+    using System.Collections.Generic;
     using System.Linq;
     using AutoMapper;
     using Data;
@@ -103,6 +104,27 @@
 
             // Assert
             Assert.False(result);
+        }
+
+        [Fact]
+        public void GetAllTownIdsByCountryId_ShouldReturnCorrectIds()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new TownsService(context, this.Mapper, null, null);
+            context.Add(new Town { Name = "Sofia", CountryId = 1});
+            context.Add(new Town { Name = "Plovdiv", CountryId = 1 });
+            context.Add(new Town { Name = "Belgrad", CountryId = 2 });
+            context.SaveChanges();
+
+            // Act
+            var ids = service.GetAllTownIdsByCountryId(1);
+
+            // Expected Ids
+            var expectedIds = new List<int> {1, 2};
+
+            // Assert
+            Assert.Equal(expectedIds, ids);
         }
     }
 }

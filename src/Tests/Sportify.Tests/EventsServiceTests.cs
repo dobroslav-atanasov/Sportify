@@ -1,16 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Sportify.Data;
-using Sportify.Data.Models;
-using Sportify.Data.ViewModels.Events;
-using Sportify.Services;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using Xunit;
-
-namespace Sportify.Tests
+﻿namespace Sportify.Tests
 {
+    using System;
+    using System.Globalization;
     using System.Linq;
+    using Data;
+    using Data.Models;
+    using Data.ViewModels.Countries;
+    using Data.ViewModels.Events;
+    using Microsoft.Extensions.DependencyInjection;
+    using Services;
+    using Xunit;
 
     public class EventsServiceTests : BaseServiceTests
     {
@@ -19,7 +18,7 @@ namespace Sportify.Tests
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
-            var service = new EventsService(context, this.Mapper, null, null);
+            var service = new EventsService(context, this.Mapper, null, null, null, null);
 
             // Act
             var @event = service.Create(new CreateEventViewModel
@@ -53,7 +52,7 @@ namespace Sportify.Tests
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
-            var service = new EventsService(context, this.Mapper, null, null);
+            var service = new EventsService(context, this.Mapper, null, null, null, null);
             context.Add(new Event());
             context.Add(new Event());
             context.Add(new Event());
@@ -64,6 +63,36 @@ namespace Sportify.Tests
 
             // Assert
             Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void GetAllEventsInCountry_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var townsService = new TownsService(context, this.Mapper, null, null);
+            var service = new EventsService(context, this.Mapper, null, null, null, townsService);
+
+            context.Countries.Add(new Country{Name = "Bulgaria"});
+            context.Countries.Add(new Country { Name = "Germany" });
+
+            context.Towns.Add(new Town { Name = "Sofia", CountryId = 1});
+            context.Towns.Add(new Town { Name = "Berlin", CountryId = 2});
+
+            context.Venues.Add(new Venue {Name = "First Venue", TownId = 1});
+            context.Venues.Add(new Venue { Name = "Second Venue", TownId = 1 });
+            context.Venues.Add(new Venue { Name = "Third Venue", TownId = 2 });
+
+            context.Events.Add(new Event {EventName = "First test", VenueId = 1});
+            context.Events.Add(new Event { EventName = "Second test", VenueId = 2 });
+            context.Events.Add(new Event { EventName = "Third test", VenueId = 3 });
+            context.SaveChanges();
+
+            // Act
+            var result = service.GetAllEventsInCountry(new SearchCountryViewModel {CountryId = 1}).Count();
+            
+            // Assert
+            Assert.Equal(2, result);
         }
     }
 }
