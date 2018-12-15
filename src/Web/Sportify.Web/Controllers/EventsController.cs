@@ -1,5 +1,6 @@
 ﻿namespace Sportify.Web.Controllers
 {
+    using Constants;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
@@ -20,7 +21,7 @@
             this.eventsService = eventsService;
         }
 
-        [Authorize(Roles = Constants.Constants.EditorRole)]
+        [Authorize(Roles = Constants.EditorRole)]
         public IActionResult Create()
         {
             this.ViewData["Organizations"] = this.organizationsService.GetAllOrganizations();
@@ -30,7 +31,7 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = Constants.Constants.EditorRole)]
+        [Authorize(Roles = Constants.EditorRole)]
         public IActionResult Create(CreateEventViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -40,6 +41,13 @@
 
             this.eventsService.Create(model);
             return this.RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = Constants.AdminAndEditorRoles)]
+        public IActionResult All()
+        {
+            var events = this.eventsService.GetAllEvents();
+            return this.View(events);
         }
     }
 }
