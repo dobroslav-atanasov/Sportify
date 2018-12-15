@@ -67,6 +67,15 @@
             return false;
         }
 
+        public IList<int> GetAllTownIdsByCountryId(int id)
+        {
+            var towns = this.Context
+                .Towns
+                .Where(t => t.CountryId == id)
+                .Select(t => t.Id)
+                .ToList();
 
+            return towns;
+        }
     }
 }
