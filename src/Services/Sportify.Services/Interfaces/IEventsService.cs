@@ -1,11 +1,9 @@
-﻿using Sportify.Data.Models;
-using Sportify.Data.ViewModels.Events;
-
-namespace Sportify.Services.Interfaces
+﻿namespace Sportify.Services.Interfaces
 {
     using System.Collections.Generic;
-    using System.Linq;
+    using Data.Models;
     using Data.ViewModels.Countries;
+    using Data.ViewModels.Events;
 
     public interface IEventsService
     {
@@ -14,5 +12,7 @@ namespace Sportify.Services.Interfaces
         IEnumerable<EventViewModel> GetAllEvents();
 
         IEnumerable<EventViewModel> GetAllEventsInCountry(SearchCountryViewModel model);
+
+        EventViewModel GetEventById(int id);
     }
 }

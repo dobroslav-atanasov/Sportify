@@ -12,13 +12,11 @@
 
     public class EventsService : BaseService, IEventsService
     {
-        private readonly ICountriesService countriesService;
         private readonly ITownsService townsService;
 
-        public EventsService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ICountriesService countriesService, ITownsService townsService) 
+        public EventsService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ITownsService townsService) 
             : base(context, mapper, userManager, signInManager)
         {
-            this.countriesService = countriesService;
             this.townsService = townsService;
         }
 
@@ -56,6 +54,17 @@
             var eventsViewModel = this.Mapper.Map<IQueryable<Event>, IEnumerable<EventViewModel>>(events);
 
             return eventsViewModel;
+        }
+
+        public EventViewModel GetEventById(int id)
+        {
+            var @event = this.Context
+                .Events
+                .FirstOrDefault(e => e.Id == id);
+
+            var eventViewModel = this.Mapper.Map<EventViewModel>(@event);
+
+            return eventViewModel;
         }
     }
 }
