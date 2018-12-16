@@ -18,7 +18,7 @@
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
-            var service = new EventsService(context, this.Mapper, null, null, null, null);
+            var service = new EventsService(context, this.Mapper, null, null, null);
 
             // Act
             var @event = service.Create(new CreateEventViewModel
@@ -52,7 +52,7 @@
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
-            var service = new EventsService(context, this.Mapper, null, null, null, null);
+            var service = new EventsService(context, this.Mapper, null, null, null);
             context.Add(new Event());
             context.Add(new Event());
             context.Add(new Event());
@@ -71,7 +71,7 @@
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
             var townsService = new TownsService(context, this.Mapper, null, null);
-            var service = new EventsService(context, this.Mapper, null, null, null, townsService);
+            var service = new EventsService(context, this.Mapper, null, null, townsService);
 
             context.Countries.Add(new Country { Name = "Bulgaria" });
             context.Countries.Add(new Country { Name = "Germany" });
@@ -93,6 +93,40 @@
 
             // Assert
             Assert.Equal(2, result);
+        }
+
+        [Fact]
+        public void GetEventById_ShouldReturnCorrectViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            context.Events.Add(new Event
+            {
+                EventName = "Test",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 10
+            });
+            context.SaveChanges();
+
+            // Act
+            var @event = service.GetEventById(1);
+
+            // Expected EventViewModel
+            var expectedViewModel = new EventViewModel
+            {
+                EventName = "Test",
+                Date = "20 December 2018, Thursday",
+                Time = "10:00",
+                NumberOfParticipants = 10
+            };
+
+            // Assert
+            Assert.True(@event.Equals(expectedViewModel));
         }
     }
 }
