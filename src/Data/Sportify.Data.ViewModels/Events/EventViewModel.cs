@@ -1,6 +1,8 @@
 ﻿namespace Sportify.Data.ViewModels.Events
 {
-    public class EventViewModel
+    using System;
+
+    public class EventViewModel : IEquatable<EventViewModel>
     {
         public int Id { get; set; }
 
@@ -21,5 +23,13 @@
         public string Venue { get; set; }
 
         public int NumberOfParticipants { get; set; }
+
+        public bool Equals(EventViewModel other)
+        {
+            return this.EventName == other.EventName
+                   && this.Date == other.Date
+                   && this.Time == other.Time
+                   && this.NumberOfParticipants == other.NumberOfParticipants;
+        }
     }
 }
