@@ -73,24 +73,24 @@
             var townsService = new TownsService(context, this.Mapper, null, null);
             var service = new EventsService(context, this.Mapper, null, null, null, townsService);
 
-            context.Countries.Add(new Country{Name = "Bulgaria"});
+            context.Countries.Add(new Country { Name = "Bulgaria" });
             context.Countries.Add(new Country { Name = "Germany" });
 
-            context.Towns.Add(new Town { Name = "Sofia", CountryId = 1});
-            context.Towns.Add(new Town { Name = "Berlin", CountryId = 2});
+            context.Towns.Add(new Town { Name = "Sofia", CountryId = 1 });
+            context.Towns.Add(new Town { Name = "Berlin", CountryId = 2 });
 
-            context.Venues.Add(new Venue {Name = "First Venue", TownId = 1});
+            context.Venues.Add(new Venue { Name = "First Venue", TownId = 1 });
             context.Venues.Add(new Venue { Name = "Second Venue", TownId = 1 });
             context.Venues.Add(new Venue { Name = "Third Venue", TownId = 2 });
 
-            context.Events.Add(new Event {EventName = "First test", VenueId = 1});
+            context.Events.Add(new Event { EventName = "First test", VenueId = 1 });
             context.Events.Add(new Event { EventName = "Second test", VenueId = 2 });
             context.Events.Add(new Event { EventName = "Third test", VenueId = 3 });
             context.SaveChanges();
 
             // Act
-            var result = service.GetAllEventsInCountry(new SearchCountryViewModel {CountryId = 1}).Count();
-            
+            var result = service.GetAllEventsInCountry(new SearchCountryViewModel { CountryId = 1 }).Count();
+
             // Assert
             Assert.Equal(2, result);
         }
