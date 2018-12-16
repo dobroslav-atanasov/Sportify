@@ -52,9 +52,14 @@
 
             // Configure Identity
             services.AddIdentity<User, IdentityRole>()
-                .AddDefaultUI()
+                //.AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<SportifyDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Users/SignIn");
+            });
 
             // Configure AutoMapper
             var mapperConfig = new MapperConfiguration(m => m.AddProfile(new MapperProfile()));
@@ -71,8 +76,6 @@
                 options.Password.RequiredLength = 4;
                 options.Password.RequiredUniqueChars = 0;
             });
-
-            services.ConfigureApplicationCookie(options => options.LoginPath = "/Users/SignIn");
 
             // Configure AutoValidationAntiforgeryToken
             services.AddMvc(options =>

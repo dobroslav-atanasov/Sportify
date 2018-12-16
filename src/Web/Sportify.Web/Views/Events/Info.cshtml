@@ -1,0 +1,78 @@
+﻿@model Sportify.Data.ViewModels.Events.EventViewModel
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+<h2>Info</h2>
+
+<div>
+    <h4>EventViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EventName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Organization)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Organization)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sport)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sport)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Discipline)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Discipline)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Town)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Town)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Venue)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Venue)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfParticipants)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfParticipants)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

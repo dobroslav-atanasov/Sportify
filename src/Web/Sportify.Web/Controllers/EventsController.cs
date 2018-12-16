@@ -68,11 +68,12 @@
             return this.View(events);
         }
 
+        [Authorize]
         public IActionResult Info(int id)
         {
-            var asd = id;
+            var @event = this.eventsService.GetEventById(id);
 
-            return this.View();
+            return this.View(@event);
         }
     }
 }
