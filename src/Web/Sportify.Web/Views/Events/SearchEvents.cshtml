@@ -1,71 +1,103 @@
 ﻿@model IEnumerable<Sportify.Data.ViewModels.Events.EventViewModel>
 
 @{
-    ViewData["Title"] = "SearchEvents";
+    ViewData["Title"] = "Sport Events in ";
 }
 
-<h2>SearchEvents</h2>
+<br />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Organization)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discipline)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Venue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfParticipants)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Organization)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discipline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Venue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfParticipants)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+<h1 class="text-center">@this.ViewData["Title"] @this.ViewData["Country"]</h1>
+
+<br />
+
+@if (this.Model.Count() != 0)
+{
+    foreach (var item in Model)
+    {
+        <h4>@item.Date</h4>
+        <table class="table">
+            <tr class="row">
+                <td class="col-md-1 text-left"><strong>@item.Time</strong></td>
+                <td class="col-md-3 text-left">@item.EventName</td>
+                <td class="col-md-3 text-left">@item.Sport</td>
+                <td class="col-md-3 text-left">@item.Town, @item.Venue</td>
+                <td class="col-md-2 text-center"><a asp-controller="Events" asp-action="Info" asp-route-id="@item.Id" class="btn btn-primary">Info</a></td>
+            </tr>
+        </table>
+        <br />
+    }
 }
-    </tbody>
-</table>
+else
+{
+    <h2 class="text-center">There are not events!</h2>
+}
+
+<br/>
+
+<div class="text-center">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Back to home</a>
+</div>
+
+
+
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EventName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Organization)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discipline)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Venue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfParticipants)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discipline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfParticipants)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

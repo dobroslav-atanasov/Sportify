@@ -33,11 +33,11 @@
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
             // Configure DbContext
             services.AddDbContext<SportifyDbContext>(options =>
-                options.UseLazyLoadingProxies()
-                    .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseLazyLoadingProxies()
+                        .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
             // Configure Services
             services.AddTransient<ICountriesService, CountriesService>();
@@ -71,7 +71,9 @@
                 options.Password.RequiredLength = 4;
                 options.Password.RequiredUniqueChars = 0;
             });
-            
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Users/SignIn");
+
             // Configure AutoValidationAntiforgeryToken
             services.AddMvc(options =>
                 {
@@ -79,7 +81,7 @@
 
                 }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
-        
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())

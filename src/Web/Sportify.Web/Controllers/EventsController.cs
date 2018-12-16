@@ -1,12 +1,11 @@
 ﻿namespace Sportify.Web.Controllers
 {
-    using System.Collections.Generic;
     using Constants;
     using Data.ViewModels.Countries;
+    using Data.ViewModels.Events;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using Sportify.Data.ViewModels.Events;
 
     public class EventsController : Controller
     {
@@ -55,7 +54,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public IActionResult SearchEvents(SearchCountryViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -63,9 +61,18 @@
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
                 return this.RedirectToAction("Index", "Home");
             }
+
+            this.ViewData["Country"] = this.countriesService.GetCountryById(model.CountryId).Name;
             var events = this.eventsService.GetAllEventsInCountry(model);
             
             return this.View(events);
+        }
+
+        public IActionResult Info(int id)
+        {
+            var asd = id;
+
+            return this.View();
         }
     }
 }
