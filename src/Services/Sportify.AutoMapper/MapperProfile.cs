@@ -32,9 +32,12 @@
                 .ReverseMap();
 
             this.CreateMap<Event, EventViewModel>()
-                .ForMember(evm => evm.Date, e => e.MapFrom(x => x.Date.ToString("dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture)))
+                .ForMember(evm => evm.Date, e => e.MapFrom(x => x.Date.ToString($"dd MMMM yyyy, dddd", CultureInfo.InvariantCulture)))
+                .ForMember(evm => evm.Time, e => e.MapFrom(x => x.Date.ToString("HH:mm")))
                 .ForMember(evm => evm.Organization, e => e.MapFrom(x => x.Organization.Name))
+                .ForMember(evm => evm.Sport, e => e.MapFrom(x => x.Discipline.Sport.Name))
                 .ForMember(evm => evm.Discipline, e => e.MapFrom(x => x.Discipline.Name))
+                .ForMember(evm => evm.Town, e=> e.MapFrom(x => x.Venue.Town.Name))
                 .ForMember(evm => evm.Venue, e => e.MapFrom(x => x.Venue.Name))
                 .ReverseMap();
             
