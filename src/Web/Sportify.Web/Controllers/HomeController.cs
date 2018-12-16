@@ -52,5 +52,10 @@
                 return this.View(model);
             }
         }
+
+        public IActionResult Access()
+        {
+            return this.View();
+        }
     }
 }

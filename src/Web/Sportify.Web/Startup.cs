@@ -59,6 +59,7 @@
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = new PathString("/Users/SignIn");
+                options.AccessDeniedPath = new PathString("/Home/Access");
             });
 
             // Configure AutoMapper

@@ -1,14 +1,80 @@
-﻿@model Sportify.Data.ViewModels.Events.EventViewModel
+﻿@using Sportify.Data.ViewModels.Countries
+@model Sportify.Data.ViewModels.Events.EventViewModel
 
 @{
     ViewData["Title"] = "Info";
 }
 
-<h2>Info</h2>
+<br/>
 
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="text-right"><strong>Event:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.EventName</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="text-right"><strong>Date:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.Date</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="text-right"><strong>Time:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.Time</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="text-right"><strong>Venue:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.Venue</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="text-right"><strong>Town:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.Town</h4>
+    </div>
+</div>
+
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="text-right"><strong>Discipline:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.Discipline</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="text-right"><strong>Sport:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.Sport</h4>
+    </div>
+</div>
+
+@*<br/>
+<br/>
+<br/>
 <div>
-    <h4>EventViewModel</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Id)
@@ -75,4 +141,4 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@

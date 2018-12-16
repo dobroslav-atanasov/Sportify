@@ -1,5 +1,6 @@
 ﻿namespace Sportify.Web.Areas.Administrator.Controllers
 {
+    using Constants;
     using Data.ViewModels.Towns;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@
             this.townsService = townsService;
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult AllTowns(int? page)
         {
             var towns = this.townsService.GetAllTowns();
@@ -29,6 +30,7 @@
             return this.View(townsOnPage);
         }
 
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Add()
         {
             this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
@@ -36,6 +38,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Add(AddTownViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -48,6 +51,7 @@
             return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
         }
 
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Delete(int id)
         {
             var townViewModel = this.townsService.GetTownById(id);
@@ -55,6 +59,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Delete(TownViewModel model)
         {
             var isDelete = this.townsService.IsDeleteTown(model);
@@ -66,12 +71,14 @@
             return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
         }
 
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Edit(int id)
         {
             var townViewModel = this.townsService.GetTownById(id);
             return this.View(townViewModel);
         }
 
+        [Authorize(Roles = Constants.AdministratorRole)]
         public IActionResult Details(int id)
         {
             var townViewModel = this.townsService.GetTownById(id);
