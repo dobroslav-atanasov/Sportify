@@ -16,21 +16,18 @@
         {
         }
 
-        public bool IsSendMessage(AddMessageViewModel model)
+        public Message SendMessage(AddMessageViewModel model, User user)
         {
-            var user = this.UserManager.FindByNameAsync(model.Username).GetAwaiter().GetResult();
-            if (user == null)
-            {
-                return false;
-            }
-
             var message = this.Mapper.Map<Message>(model);
-            message.UserId = user.Id;
+            if (user != null)
+            {
+                message.UserId = user.Id;
+            }
 
             this.Context.Messages.Add(message);
             this.Context.SaveChanges();
 
-            return true;
+            return message;
         }
 
         public IEnumerable<MessageViewModel> GetAllMessages()
