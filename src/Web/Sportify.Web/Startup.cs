@@ -58,7 +58,7 @@
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = new PathString("/Users/SignIn");
+                options.LoginPath = new PathString("/Identity/Users/SignIn");
                 options.AccessDeniedPath = new PathString("/Home/Access");
             });
 

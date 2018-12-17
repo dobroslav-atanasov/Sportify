@@ -21,7 +21,7 @@
                 <td class="col-md-3 text-left">@item.EventName</td>
                 <td class="col-md-3 text-left">@item.Sport</td>
                 <td class="col-md-3 text-left">@item.Town, @item.Venue</td>
-                <td class="col-md-2 text-center"><a asp-controller="Events" asp-action="Info" asp-route-id="@item.Id" class="btn btn-primary">Info</a></td>
+                <td class="col-md-2 text-center"><a asp-area="" asp-controller="Events" asp-action="Info" asp-route-id="@item.Id" class="btn btn-primary">Info</a></td>
             </tr>
         </table>
         <br />
@@ -35,7 +35,7 @@ else
 <br/>
 
 <div class="text-center">
-    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Back to home</a>
+    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">Back to home</a>
 </div>
 
 
