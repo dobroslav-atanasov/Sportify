@@ -8,9 +8,9 @@
         [Required]
         [DataType(DataType.Text)]
         [MinLength(Constants.MinUsernameLength, ErrorMessage = Constants.UsernameLengthErrorMessage)]
-        [RegularExpression("[a-zA-z0-9-.*/_]+", ErrorMessage = Constants.UsernameInvalidSymbolsErrorMessage)]
-        [Display(Name = "Username")]
-        public string Username { get; set; }
+        [RegularExpression("[a-zA-z0-9-.*/_\\s]+", ErrorMessage = Constants.UsernameInvalidSymbolsErrorMessage)]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
