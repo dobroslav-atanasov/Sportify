@@ -1,4 +1,10 @@
-﻿@model Sportify.Data.ViewModels.Messages.AddMessageViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using Sportify.Data.Models
+
+@model Sportify.Data.ViewModels.Messages.AddMessageViewModel
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @{
     ViewData["Title"] = "Contact us";
@@ -27,14 +33,17 @@
     <div class="col-md-4">
         <form asp-controller="Home" asp-action="ContactUs" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
+            @if (!this.SignInManager.IsSignedIn(this.User))
+            {
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                <textarea asp-for="Content" class="form-control" rows="10"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">

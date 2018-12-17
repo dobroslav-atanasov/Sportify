@@ -2,18 +2,24 @@
 {
     using Constants;
     using Data.ViewModels.Messages;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
+    using Sportify.Data.Models;
 
     public class HomeController : Controller
     {
         private readonly ICountriesService countriesService;
         private readonly IMessagesService messagesService;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-        public HomeController(ICountriesService countriesService, IMessagesService messagesService)
+        public HomeController(ICountriesService countriesService, IMessagesService messagesService, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.countriesService = countriesService;
             this.messagesService = messagesService;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -40,17 +46,16 @@
         [HttpPost]
         public IActionResult ContactUs(AddMessageViewModel model)
         {
-            var isSendMessage = this.messagesService.IsSendMessage(model);
-            if (!isSendMessage)
+            User user = null;
+            if (this.signInManager.IsSignedIn(this.User))
             {
-                this.ViewData["Error"] = Constants.UserDoesNotExist;
-                return this.View(model);
+                user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
             }
-            else
-            {
-                this.ViewData["Message"] = Constants.MessageIsSentSuccessfully;
-                return this.View(model);
-            }
+
+            this.messagesService.SendMessage(model, user);
+
+            this.ViewData["Message"] = Constants.MessageIsSentSuccessfully;
+            return this.View(model);
         }
 
         public IActionResult Access()
