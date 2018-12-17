@@ -20,35 +20,24 @@
     public class MessagesServiceTest : BaseServiceTests
     {
         [Fact]
-        public void IsSendMessage_ShouldReturnTrue()
+        public void SendMessage_ShouldReturnCorrectMessage()
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
-            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
-            var result = userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
-            var service = new MessagesService(context, this.Mapper, userManager, null);
+            var service = new MessagesService(context, this.Mapper, null, null);
 
             // Act
-            var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "George", Content = "Text" });
+            var message = service.SendMessage(new AddMessageViewModel {Name = "George", Content = "Text" }, null);
+
+            // Expected Message
+            var expectedMessage = new Message
+            {
+                Name = "George",
+                Content = "Text"
+            };
 
             // Assert
-            Assert.True(isSendMessage);
-        }
-
-        [Fact]
-        public void IsSendMessage_ShouldReturnFalse()
-        {
-            // Arrange
-            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
-            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
-            var result = userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
-            var service = new MessagesService(context, this.Mapper, userManager, null);
-
-            // Act
-            var isSendMessage = service.IsSendMessage(new AddMessageViewModel { Username = "Peter", Content = "Text" });
-
-            // Assert
-            Assert.False(isSendMessage);
+            Assert.True(message.Equals(expectedMessage));
         }
 
         [Fact]
