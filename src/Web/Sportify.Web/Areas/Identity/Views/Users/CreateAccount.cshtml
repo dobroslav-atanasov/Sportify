@@ -6,7 +6,9 @@
     ViewData["Title"] = "CreateAccount";
 }
 
-<h2 class="text-center">Create Account</h2>
+<br/>
+
+<h1 class="text-center">Create Account</h1>
 
 @if (this.ViewData.ContainsKey("Error"))
 {
@@ -14,9 +16,11 @@
         <strong>@this.ViewData["Error"]</strong>
     </div>
 }
+
 <hr />
+
 <div class="row">
-    <div class="col-md-4 col-md-offset-4 text-center">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="CreateAccount" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -105,8 +109,8 @@
                 </div>
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create Account" class="btn btn-warning" />
+            <div class="form-group text-center">
+                <input type="submit" value="Create Account" class="btn btn-default" />
             </div>
         </form>
     </div>

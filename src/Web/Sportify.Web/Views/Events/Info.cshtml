@@ -4,7 +4,7 @@
     ViewData["Title"] = "Info";
 }
 
-<br/>
+<br />
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 
@@ -36,6 +36,22 @@
 </div>
 <div class="row">
     <div class="col-md-4">
+        <h4 class="text-right"><strong>Discipline:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.Discipline</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="text-right"><strong>Sport:</strong></h4>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.Sport</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
         <h4 class="text-right"><strong>Venue:</strong></h4>
     </div>
     <div class="col-md-8">
@@ -51,97 +67,78 @@
     </div>
 </div>
 
-<hr/>
-
-<div class="row">
-    <div class="col-md-4">
-        <h4 class="text-right"><strong>Discipline:</strong></h4>
-    </div>
-    <div class="col-md-8">
-        <h4>@Model.Discipline</h4>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h4 class="text-right"><strong>Sport:</strong></h4>
-    </div>
-    <div class="col-md-8">
-        <h4>@Model.Sport</h4>
-    </div>
-</div>
-
 <div class="text-center">
-    <a asp-area="" asp-controller="Events" asp-action="Participate" asp-route-id="@Model.Id" class="btn btn-primary">Participate</a>
+    <a asp-area="" asp-controller="Events" asp-action="Participate" asp-route-id="@Model.Id" class="btn btn-primary btn-lg">Join</a>
 </div>
 
 @*<br/>
-<br/>
-<br/>
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EventName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EventName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Organization)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Organization)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Sport)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sport)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Discipline)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Discipline)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Town)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Town)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Venue)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Venue)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NumberOfParticipants)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NumberOfParticipants)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>*@
+    <br/>
+    <br/>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EventName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EventName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Time)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Time)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Organization)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Organization)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Sport)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Sport)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Discipline)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Discipline)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Town)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Town)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Venue)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Venue)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NumberOfParticipants)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NumberOfParticipants)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>*@
