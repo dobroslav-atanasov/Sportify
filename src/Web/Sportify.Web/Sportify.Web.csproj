@@ -39,13 +39,16 @@
     <Content Update="Areas\Administrator\Views\_ViewStart.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Areas\Identity\Views\Shared\_NavbarAdministratorPartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Shared\_NavbarAdministratorPartial.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Areas\Identity1212\Services\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Sportify.Web.Controllers
+﻿namespace Sportify.Web.Areas.Identity.Controllers
 {
     using Constants;
     using Data.ViewModels.Users;
@@ -12,6 +12,7 @@
     using System.Linq;
     using Sportify.Data;
 
+    [Area("Identity")]
     public class UsersController : Controller
     {
         private readonly SportifyDbContext context;
@@ -70,7 +71,7 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
         public IActionResult SignIn()
@@ -97,14 +98,14 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [Authorize]
         public async Task<IActionResult> SignOut()
         {
             await this.signInManager.SignOutAsync();
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [Authorize]
