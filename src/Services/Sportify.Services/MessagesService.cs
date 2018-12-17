@@ -32,8 +32,10 @@
 
         public IEnumerable<MessageViewModel> GetAllMessages()
         {
+            // TODO: 
             var messages = this.Context
                 .Messages
+                .Where(m => m.User != null)
                 .OrderBy(m => m.PublishedOn)
                 .AsQueryable();
 
