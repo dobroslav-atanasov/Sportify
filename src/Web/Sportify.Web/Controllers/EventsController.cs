@@ -76,7 +76,7 @@
             return this.View(@event);
         }
 
-        public IActionResult Participate(int id)
+        public IActionResult Join(int id)
         {
             var asd = 1;
             return this.RedirectToAction("Info", "Events", new { id = id });

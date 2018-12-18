@@ -22,6 +22,8 @@
 
         public string Venue { get; set; }
 
+        public string ImageVenueUrl { get; set; }
+
         public int NumberOfParticipants { get; set; }
 
         public bool Equals(EventViewModel other)

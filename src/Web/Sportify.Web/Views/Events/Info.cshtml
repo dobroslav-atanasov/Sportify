@@ -58,6 +58,9 @@
         <h4>@Model.Venue</h4>
     </div>
 </div>
+<div>
+    <img src="@Model.ImageVenueUrl" class="rounded mx-auto d-block" alt="@Model.Venue" width="500">
+</div>
 <div class="row">
     <div class="col-md-4">
         <h4 class="text-right"><strong>Town:</strong></h4>
@@ -68,7 +71,7 @@
 </div>
 
 <div class="text-center">
-    <a asp-area="" asp-controller="Events" asp-action="Participate" asp-route-id="@Model.Id" class="btn btn-primary btn-lg">Join</a>
+    <a asp-area="" asp-controller="Events" asp-action="Join" asp-route-id="@Model.Id" class="btn btn-primary btn-lg">Join</a>
 </div>
 
 @*<br/>
