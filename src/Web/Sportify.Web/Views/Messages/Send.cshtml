@@ -1,0 +1,93 @@
+﻿@model Sportify.Data.ViewModels.Messages.SendMessageViewModel
+
+@{
+    ViewData["Title"] = "Contact us";
+}
+
+<br />
+
+<h1 class="text-center">Contact us</h1>
+
+@if (this.ViewData.ContainsKey("Message"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
+        <strong>@this.ViewData["Message"]</strong>
+    </div>
+}
+
+<hr />
+
+<div class="row text-center">
+    <div class="col-md-4 offset-md-4">
+        <form asp-area="" asp-controller="Messages" asp-action="Send" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (this.ViewData["Username"] != null)
+            {
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input asp-for="Username" value="@this.ViewData["Username"]" class="form-control" placeholder="Username" readonly />
+                    </div>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-user"></i></span>
+                    </div>
+                    <input asp-for="FullName" class="form-control" placeholder="Full Name" />
+                </div>
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                    @if (this.ViewData["Email"] != null)
+                    {
+                        <input asp-for="Email" value="@this.ViewData["Email"]" class="form-control" placeholder="Email" readonly />
+                    }
+                    else
+                    {
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                    }
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope-open"></i></span>
+                    </div>
+                    <input asp-for="Subject" class="form-control" placeholder="Subject" />
+                </div>
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope-open"></i></span>
+                    </div>
+                    <textarea asp-for="Content" class="form-control" rows="10"></textarea>
+                </div>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
+</div>
