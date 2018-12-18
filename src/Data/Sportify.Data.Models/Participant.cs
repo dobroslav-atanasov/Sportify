@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class Participant
+    public class Participant : IEquatable<Participant>
     {
         public int Id { get; set; }
 
@@ -13,5 +13,10 @@
         public virtual User User { get; set; }
 
         public DateTime UserResult { get; set; }
+
+        public bool Equals(Participant other)
+        {
+            return this.EventId == other.EventId && this.UserId == other.UserId;
+        }
     }
 }
