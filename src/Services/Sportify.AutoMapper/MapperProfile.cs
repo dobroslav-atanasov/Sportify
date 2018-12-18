@@ -42,7 +42,7 @@
                 .ReverseMap();
             
             // Messages
-            this.CreateMap<Message, AddMessageViewModel>().ReverseMap();
+            this.CreateMap<Message, SendMessageViewModel>().ReverseMap();
             
             this.CreateMap<Message, MessageViewModel>()
                 .ForMember(mvm => mvm.Username, m => m.MapFrom(x => x.User.UserName))

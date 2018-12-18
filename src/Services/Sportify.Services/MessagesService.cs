@@ -30,6 +30,20 @@
             return message;
         }
 
+        public Message Send(SendMessageViewModel model, User user)
+        {
+            var message = this.Mapper.Map<Message>(model);
+            if (user != null)
+            {
+                message.UserId = user.Id;
+            }
+
+            this.Context.Messages.Add(message);
+            this.Context.SaveChanges();
+
+            return message;
+        }
+
         public IEnumerable<MessageViewModel> GetAllMessages()
         {
             // TODO: 

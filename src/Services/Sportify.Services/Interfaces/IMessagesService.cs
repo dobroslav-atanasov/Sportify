@@ -1,12 +1,12 @@
 ﻿namespace Sportify.Services.Interfaces
 {
-    using Data.ViewModels.Messages;
-    using Sportify.Data.Models;
     using System.Collections.Generic;
+    using Data.Models;
+    using Data.ViewModels.Messages;
 
     public interface IMessagesService
     {
-        Message SendMessage(AddMessageViewModel model, User user);
+        Message Send(SendMessageViewModel model, User user);
 
         IEnumerable<MessageViewModel> GetAllMessages();
     }
