@@ -21,7 +21,7 @@
 
         public bool Equals(Message other)
         {
-            return this.FullName == other.FullName && this.Subject == other.Subject && this.Content == other.Content;
+            return this.FullName == other.FullName && this.Subject == other.Subject && this.Content == other.Content && this.UserId == other.UserId;
         }
     }
 }
