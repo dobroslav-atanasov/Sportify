@@ -66,5 +66,24 @@
 
             return eventViewModel;
         }
+
+        public bool IsUserParticipate(string userId, int eventId)
+        {
+            var isUserParticipate = this.Context.Participants.Any(p => p.UserId == userId && p.EventId == eventId);
+
+            return isUserParticipate;
+        }
+
+        public void JoinUserToEvent(string userId, int eventId)
+        {
+            var participant = new Participant
+            {
+                UserId = userId,
+                EventId = eventId
+            };
+
+            this.Context.Participants.Add(participant);
+            this.Context.SaveChanges();
+        }
     }
 }

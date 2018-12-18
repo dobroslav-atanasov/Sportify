@@ -14,5 +14,9 @@
         IEnumerable<EventViewModel> GetAllEventsInCountry(SearchCountryViewModel model);
 
         EventViewModel GetEventById(int id);
+
+        void JoinUserToEvent(string userId, int eventId);
+
+        bool IsUserParticipate(string userId, int eventId);
     }
 }
