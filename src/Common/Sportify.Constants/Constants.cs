@@ -63,5 +63,10 @@
         public const string OrganizationDescriptionInvalidSymbolsErrorMessage = "Organization description contains invalid symbols!";
 
         public const string EventNameInvalidSymbolsErrorMessage = "Event name contains invalid symbols!";
+
+        public const string MessageFullNameLength = "The {0} must be at least {1} characters long.";
+
+        public const string MessageFullNameContainsInvalidSymbols = "Full name contains invalid symbols!";
+
     }
 }
