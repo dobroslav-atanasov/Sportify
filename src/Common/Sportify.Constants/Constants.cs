@@ -2,6 +2,8 @@
 {
     public class Constants
     {
+        public const string Error = "Error";
+
         // number constants
         public const int MinUsernameLength = 3;
 

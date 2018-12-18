@@ -73,11 +73,11 @@
 <div class="text-center">
     @if ((bool)this.ViewData["Participate"] == false)
     {
-        <a asp-area="" asp-controller="Events" asp-action="Join" asp-route-id="@Model.Id" class="btn btn-primary btn-lg">Join</a>
+        <a asp-area="" asp-controller="Events" asp-action="Join" asp-route-id="@Model.Id" class="btn btn-success btn-lg">Join</a>
     }
     else
     {
-        <a asp-area="" asp-controller="Events" asp-action="Leave" asp-route-id="@Model.Id" class="btn btn-primary btn-lg">Leave</a>
+        <a asp-area="" asp-controller="Events" asp-action="Leave" asp-route-id="@Model.Id" class="btn btn-danger btn-lg">Leave</a>
     }
 </div>
 

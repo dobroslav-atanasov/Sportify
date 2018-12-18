@@ -85,5 +85,15 @@
             this.Context.Participants.Add(participant);
             this.Context.SaveChanges();
         }
+
+        public void LeaveUserFromEvent(string userId, int eventId)
+        {
+            var participant = this.Context
+                .Participants
+                .FirstOrDefault(p => p.UserId == userId && p.EventId == eventId);
+
+            this.Context.Remove(participant);
+            this.Context.SaveChanges();
+        }
     }
 }

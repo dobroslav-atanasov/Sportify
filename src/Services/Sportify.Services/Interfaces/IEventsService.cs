@@ -18,5 +18,7 @@
         void JoinUserToEvent(string userId, int eventId);
 
         bool IsUserParticipate(string userId, int eventId);
+
+        void LeaveUserFromEvent(string userId, int eventId);
     }
 }

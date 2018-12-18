@@ -19,7 +19,7 @@
         private readonly IEventsService eventsService;
         private readonly ICountriesService countriesService;
 
-        public EventsController(UserManager<User> userManager, SignInManager<User> signInManager, IOrganizationsService organizationsService, IDisciplinesService disciplinesService, 
+        public EventsController(UserManager<User> userManager, SignInManager<User> signInManager, IOrganizationsService organizationsService, IDisciplinesService disciplinesService,
             IVenuesService venuesService, IEventsService eventsService, ICountriesService countriesService)
         {
             this.userManager = userManager;
@@ -71,7 +71,7 @@
 
             this.ViewData["Country"] = this.countriesService.GetCountryById(model.CountryId).Name;
             var events = this.eventsService.GetAllEventsInCountry(model);
-            
+
             return this.View(events);
         }
 
@@ -100,7 +100,22 @@
             var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
             var @event = this.eventsService.GetEventById(id);
 
+            if (user == null || @event == null)
+            {
+                return this.RedirectToAction("Index", "Home", new { area = "" });
+            }
+
             this.eventsService.JoinUserToEvent(user.Id, @event.Id);
+            return this.RedirectToAction("Info", "Events", new { id = id });
+        }
+
+        [Authorize]
+        public IActionResult Leave(int id)
+        {
+            var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
+            var @event = this.eventsService.GetEventById(id);
+
+            this.eventsService.LeaveUserFromEvent(user.Id, @event.Id);
             return this.RedirectToAction("Info", "Events", new { id = id });
         }
     }

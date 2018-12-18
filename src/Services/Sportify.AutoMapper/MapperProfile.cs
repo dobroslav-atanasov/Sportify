@@ -13,7 +13,6 @@
     using Data.ViewModels.Venues;
     using global::AutoMapper;
 
-
     public class MapperProfile : Profile
     {
         public MapperProfile()
@@ -57,7 +56,7 @@
             this.CreateMap<Organization, OrganizationViewModel>()
                 .ForMember(ovm => ovm.President, o => o.MapFrom(x => x.President.UserName))
                 .ReverseMap();
-
+            
             // Sports
             this.CreateMap<Sport, SportViewModel>().ReverseMap();
 
