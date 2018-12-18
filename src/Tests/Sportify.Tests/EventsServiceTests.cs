@@ -128,5 +128,98 @@
             // Assert
             Assert.True(@event.Equals(expectedViewModel));
         }
+
+        [Fact]
+        public void IsUserParticipate_ShouldReturnTrue()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            context.Users.Add(new User { Id = "test1", UserName = "George" });
+            context.SaveChanges();
+
+            context.Participants.Add(new Participant
+            {
+                UserId = "test1",
+                EventId = 1
+            });
+            context.SaveChanges();
+
+            // Act
+            var result = service.IsUserParticipate("test1", 1);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void IsUserParticipate_ShouldReturnFalse()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            context.Users.Add(new User { Id = "test1", UserName = "George" });
+            context.SaveChanges();
+
+            context.Participants.Add(new Participant
+            {
+                UserId = "test1",
+                EventId = 1
+            });
+            context.SaveChanges();
+
+            // Act
+            var result = service.IsUserParticipate("test2", 2);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void JoinUserToEvent_ShouldReturnCorrectParticipant()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            context.Users.Add(new User { Id = "test1", UserName = "George" });
+            context.Events.Add(new Event { EventName = "Test Event" });
+            context.SaveChanges();
+
+            // Act
+            var participant = service.JoinUserToEvent("test1", 1);
+
+            // Expected Participant
+            var expectedParticipant = new Participant
+            {
+                UserId = "test1",
+                EventId = 1
+            };
+
+            // Assert
+            Assert.True(participant.Equals(expectedParticipant));
+        }
+
+        [Fact]
+        public void LeaveUserFromEvent_ShouldReturnCorrectParticipant()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            context.Users.Add(new User { Id = "test1", UserName = "George" });
+            context.Events.Add(new Event { EventName = "Test Event" });
+            context.SaveChanges();
+            service.JoinUserToEvent("test1", 1);
+
+            // Act
+            service.LeaveUserFromEvent("test1", 1);
+            var result = context.Participants.Count();
+            
+            // Assert
+            Assert.Equal(0, result);
+        }
     }
 }
