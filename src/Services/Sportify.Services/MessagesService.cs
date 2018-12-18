@@ -16,20 +16,6 @@
         {
         }
 
-        public Message SendMessage(AddMessageViewModel model, User user)
-        {
-            var message = this.Mapper.Map<Message>(model);
-            if (user != null)
-            {
-                message.UserId = user.Id;
-            }
-
-            this.Context.Messages.Add(message);
-            this.Context.SaveChanges();
-
-            return message;
-        }
-
         public Message Send(SendMessageViewModel model, User user)
         {
             var message = this.Mapper.Map<Message>(model);
@@ -46,10 +32,8 @@
 
         public IEnumerable<MessageViewModel> GetAllMessages()
         {
-            // TODO: 
             var messages = this.Context
                 .Messages
-                .Where(m => m.User != null)
                 .OrderBy(m => m.PublishedOn)
                 .AsQueryable();
 

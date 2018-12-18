@@ -46,8 +46,7 @@
             
             this.CreateMap<Message, MessageViewModel>()
                 .ForMember(mvm => mvm.Username, m => m.MapFrom(x => x.User.UserName))
-                .ForMember(mvm => mvm.PublishedOn, m => m.MapFrom(x => x.PublishedOn.ToString("dd-MM-yyyy")))
-                .ForMember(mvm => mvm.UserId, m => m.MapFrom(x => x.User.Id))
+                .ForMember(mvm => mvm.PublishedOn, m => m.MapFrom(x => x.PublishedOn.ToString("dd-MM-yyyy HH:mm:ss")))
                 .ReverseMap();
 
             // Organizations
