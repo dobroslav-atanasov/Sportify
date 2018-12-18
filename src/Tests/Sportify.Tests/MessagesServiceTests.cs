@@ -1,19 +1,10 @@
 ﻿namespace Sportify.Tests
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using AutoMapper;
     using Data;
     using Data.Models;
     using Data.ViewModels.Messages;
-    using global::AutoMapper;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Moq;
     using Services;
     using Xunit;
 
@@ -26,14 +17,24 @@
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
             var service = new MessagesService(context, this.Mapper, null, null);
 
+            context.Users.Add(new User {Id = "testId", UserName = "George"});
+            context.SaveChanges();
+
             // Act
-            var message = service.SendMessage(new AddMessageViewModel {Name = "George", Content = "Text" }, null);
+            var message = service.Send(new SendMessageViewModel
+            {
+                FullName = "George",
+                Subject = "Subject",
+                Content = "Text"
+            }, context.Users.FirstOrDefault());
 
             // Expected Message
             var expectedMessage = new Message
             {
-                Name = "George",
-                Content = "Text"
+                FullName = "George",
+                Subject = "Subject",
+                Content = "Text",
+                UserId = "testId"
             };
 
             // Assert
@@ -46,7 +47,7 @@
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
             var service = new MessagesService(context, this.Mapper, null, null);
-                                 
+
             context.Add(new Message());
             context.Add(new Message());
             context.SaveChanges();
