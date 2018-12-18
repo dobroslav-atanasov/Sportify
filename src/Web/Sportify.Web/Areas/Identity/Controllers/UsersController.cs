@@ -11,6 +11,7 @@
     using Microsoft.AspNetCore.Identity;
     using System.Linq;
     using Sportify.Data;
+    using X.PagedList;
 
     [Area("Identity")]
     public class UsersController : Controller
@@ -178,7 +179,20 @@
         }
 
         [Authorize(Roles = Constants.AdministratorRole)]
-        public IActionResult ChangeRole(UserIdViewModel model)
+        public IActionResult All(int? page)
+        {
+            var users = this.usersService.GetAllUsers();
+
+            var pageNumber = page ?? 1;
+            var usersOnPage = users.ToPagedList(pageNumber, 10);
+
+            this.ViewData["Users"] = usersOnPage;
+
+            return this.View();
+        }
+
+        [Authorize(Roles = Constants.AdministratorRole)]
+        public IActionResult ChangeRole(ChangeRoleUserViewModel model)
         {
             var user = this.userManager.Users.FirstOrDefault(u => u.Id == model.UserId);
             var role = this.userManager.GetRolesAsync(user).GetAwaiter().GetResult();
@@ -198,7 +212,7 @@
                 this.userManager.AddToRoleAsync(user, Constants.UserRole).GetAwaiter().GetResult();
             }
 
-            return this.RedirectToAction("AllMessages", "MessagesAdmin", new { area = Constants.AdministratorRole });
+            return this.RedirectToAction("All", "Users", new { area = "Identity" });
         }
     }
 }

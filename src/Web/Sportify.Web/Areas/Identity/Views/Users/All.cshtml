@@ -1,64 +1,59 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Sportify.Data.ViewModels.Users
 @using X.PagedList.Mvc.Core
 @using X.PagedList
 @using X.PagedList.Mvc.Common
-@using Sportify.Data.ViewModels.Messages
 
-@model Sportify.Data.ViewModels.Users.UserIdViewModel
+@model Sportify.Data.ViewModels.Users.ChangeRoleUserViewModel
 
 @inject UserManager<User> UserManager
 
 @{
-    ViewData["Title"] = "AllMessages";
+    ViewData["Title"] = "Users";
 }
 
-<h2>AllMessages</h2>
+<br />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<h1 class="text-center">Users</h1>
+
+<br />
+
+<table class="table mx-auto table-hover">
     <thead>
         <tr>
-            <th>
+            <th class="text-center">
                 Username
             </th>
-            <th>
-                Content
+            <th class="text-center">
+                Email
             </th>
-            <th>
-                PublishedOn
-            </th>
-            <th>
-                Role
+            <th class="text-center">
+                Actions
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in this.ViewData["Messages"] as IEnumerable<MessageViewModel>)
+        @foreach (var item in this.ViewData["Users"] as IEnumerable<UserAdminViewModel>)
         {
             <tr>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.Username)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublishedOn)
-                </td>
-                <td>
+                <td class="text-center">
                     @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), "User"))
                     {
-                        <form asp-area="" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
-                            <input type="hidden" asp-for="UserId" value="@item.UserId" />
+                        <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                            <input type="hidden" asp-for="UserId" value="@item.Id" />
                             <button type="submit" class="btn btn-primary" value="User">User</button>
                         </form>
                     }
                     else
                     {
-                        <form asp-area="" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
-                            <input type="hidden" asp-for="UserId" value="@item.UserId" />
+                        <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                            <input type="hidden" asp-for="UserId" value="@item.Id" />
                             <button type="submit" class="btn btn-primary" value="Editor">Editor</button>
                         </form>
                     }
@@ -68,7 +63,7 @@
     </tbody>
 </table>
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)this.ViewData["Messages"], page => Url.Action("AllMessages", new { page = page }),
+    @Html.PagedListPager((IPagedList)this.ViewData["Users"], page => Url.Action("All", new { page = page }),
     new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,
