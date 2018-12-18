@@ -74,7 +74,7 @@
             return isUserParticipate;
         }
 
-        public void JoinUserToEvent(string userId, int eventId)
+        public Participant JoinUserToEvent(string userId, int eventId)
         {
             var participant = new Participant
             {
@@ -84,6 +84,8 @@
 
             this.Context.Participants.Add(participant);
             this.Context.SaveChanges();
+
+            return participant;
         }
 
         public void LeaveUserFromEvent(string userId, int eventId)
