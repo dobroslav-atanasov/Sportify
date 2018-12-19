@@ -12,6 +12,7 @@
     using System.Linq;
     using Sportify.Data;
     using X.PagedList;
+    using Sportify.Web.Contants;
 
     [Area("Identity")]
     public class UsersController : Controller
@@ -56,18 +57,18 @@
             {
                 if (this.userManager.Users.Count() == 1)
                 {
-                    await this.userManager.AddToRoleAsync(user, Constants.AdministratorRole);
+                    await this.userManager.AddToRoleAsync(user, Role.Administrator);
                 }
                 else
                 {
-                    await this.userManager.AddToRoleAsync(user, Constants.UserRole);
+                    await this.userManager.AddToRoleAsync(user, Role.User);
                 }
 
                 await this.signInManager.SignInAsync(user, false);
             }
             else
             {
-                this.ViewData["Error"] = Constants.UsernameAlreadyExists;
+                this.ViewData["Error"] = Global.UsernameAlreadyExists;
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
@@ -96,7 +97,7 @@
 
             if (!signInResult.Succeeded)
             {
-                this.ViewData["Error"] = Constants.UsernameOrPasswordAreInvalid;
+                this.ViewData["Error"] = Global.UsernameOrPasswordAreInvalid;
                 this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
@@ -148,7 +149,7 @@
 
             await this.userManager.UpdateAsync(user);
 
-            this.ViewData["Message"] = Constants.ProfileUpdated;
+            this.ViewData["Message"] = Global.ProfileUpdated;
             this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
             return this.View(model);
         }
@@ -173,15 +174,15 @@
 
             if (!isChangedPassword.Succeeded)
             {
-                this.ViewData["Error"] = Constants.PasswordWasNotChanged;
+                this.ViewData["Error"] = Global.PasswordWasNotChanged;
                 return this.View(model);
             }
 
-            this.ViewData["Message"] = Constants.PasswordWasChangedSuccessfully;
+            this.ViewData["Message"] = Global.PasswordWasChangedSuccessfully;
             return this.View();
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult All(int? page)
         {
             var users = this.usersService.GetAllUsers();
@@ -194,25 +195,25 @@
             return this.View();
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult ChangeRole(ChangeRoleUserViewModel model)
         {
             var user = this.userManager.Users.FirstOrDefault(u => u.Id == model.UserId);
             var role = this.userManager.GetRolesAsync(user).GetAwaiter().GetResult();
 
-            if (role[0] == Constants.UserRole)
+            if (role[0] == Role.User)
             {
                 var userRole = this.context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
                 this.context.UserRoles.Remove(userRole);
 
-                this.userManager.AddToRoleAsync(user, Constants.EditorRole).GetAwaiter().GetResult();
+                this.userManager.AddToRoleAsync(user, Role.Editor).GetAwaiter().GetResult();
             }
-            else if (role[0] == Constants.EditorRole)
+            else if (role[0] == Role.Editor)
             {
                 var userRole = this.context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
                 this.context.UserRoles.Remove(userRole);
 
-                this.userManager.AddToRoleAsync(user, Constants.UserRole).GetAwaiter().GetResult();
+                this.userManager.AddToRoleAsync(user, Role.User).GetAwaiter().GetResult();
             }
 
             return this.RedirectToAction("All", "Users", new { area = "Identity" });

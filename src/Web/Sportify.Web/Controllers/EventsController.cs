@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
     using Sportify.Data.Models;
+    using Sportify.Web.Contants;
 
     public class EventsController : Controller
     {
@@ -31,7 +32,7 @@
             this.countriesService = countriesService;
         }
 
-        [Authorize(Roles = Constants.EditorRole)]
+        [Authorize(Roles = Role.Editor)]
         public IActionResult Create()
         {
             this.ViewData["Organizations"] = this.organizationsService.GetAllOrganizations();
@@ -41,7 +42,7 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = Constants.EditorRole)]
+        [Authorize(Roles = Role.Editor)]
         public IActionResult Create(CreateEventViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -53,7 +54,7 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles = Constants.AdminAndEditorRoles)]
+        [Authorize(Roles = Role.AdministratorAndEditor)]
         public IActionResult All()
         {
             var events = this.eventsService.GetAllEvents();

@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
+    using Sportify.Web.Contants;
     using X.PagedList;
 
     [Area("Administrator")]
@@ -19,7 +20,7 @@
             this.townsService = townsService;
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult AllTowns(int? page)
         {
             var towns = this.townsService.GetAllTowns();
@@ -30,7 +31,7 @@
             return this.View(townsOnPage);
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Add()
         {
             this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
@@ -38,7 +39,7 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Add(AddTownViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -51,7 +52,7 @@
             return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(int id)
         {
             var townViewModel = this.townsService.GetTownById(id);
@@ -59,7 +60,7 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(TownViewModel model)
         {
             var isDelete = this.townsService.IsDeleteTown(model);
@@ -71,14 +72,14 @@
             return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(int id)
         {
             var townViewModel = this.townsService.GetTownById(id);
             return this.View(townViewModel);
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Details(int id)
         {
             var townViewModel = this.townsService.GetTownById(id);

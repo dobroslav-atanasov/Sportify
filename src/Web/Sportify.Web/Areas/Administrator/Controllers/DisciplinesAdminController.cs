@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
+    using Sportify.Web.Contants;
     using X.PagedList;
 
     [Area("Administrator")]
@@ -19,7 +20,7 @@
             this.sportsService = sportsService;
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult All(int? page)
         {
             var disciplines = this.disciplinesService.GetAllDisciplines();
@@ -31,7 +32,7 @@
         }
 
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Add()
         {
             this.ViewData["Sports"] = this.sportsService.GetAllSports();
@@ -39,7 +40,7 @@
         }
 
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         [HttpPost]
         public IActionResult Add(AddDisciplineViewModel model)
         {

@@ -1,12 +1,12 @@
 ﻿namespace Sportify.Web.Controllers
 {
-    using Constants;
     using Data.Models;
     using Data.ViewModels.Messages;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
+    using Sportify.Web.Contants;
     using X.PagedList;
 
     public class MessagesController : Controller
@@ -52,7 +52,7 @@
             return this.View("Thankyou", "Messages");
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult All(int? page)
         {
             var messages = this.messagesService.GetAllMessages();

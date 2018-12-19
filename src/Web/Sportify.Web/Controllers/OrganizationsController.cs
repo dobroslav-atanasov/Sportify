@@ -6,6 +6,7 @@
     using Services.Interfaces;
     using Constants;
     using X.PagedList;
+    using Sportify.Web.Contants;
 
     public class OrganizationsController : Controller
     {
@@ -16,14 +17,14 @@
             this.organizationsService = organizationsService;
         }
 
-        [Authorize(Roles = Constants.EditorRole)]
+        [Authorize(Roles = Role.Editor)]
         public IActionResult Create()
         {
             return this.View();
         }
 
         [HttpPost]
-        [Authorize(Roles = Constants.EditorRole)]
+        [Authorize(Roles = Role.Editor)]
         public IActionResult Create(CreateOrganizationViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -35,7 +36,7 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles = Constants.AdministratorRole)]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult All(int? page)
         {
             var organizations = this.organizationsService.GetAllOrganizations();
