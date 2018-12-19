@@ -8,18 +8,18 @@
         [Required]
         [DataType(DataType.Text)]
         [MinLength(Constants.MinSportNameLength, ErrorMessage = Constants.SportNameLengthErrorMessage)]
-        [RegularExpression("[a-zA-z0-9-.*/_]+", ErrorMessage = Constants.NameInvalidSymbolsErrorMessage)]
-        [Display(Name = "Name")]
+        [RegularExpression(Constants.AddSport_Regex_Name, ErrorMessage = Constants.SportNameInvalidSymbolsErrorMessage)]
+        [Display(Name = Constants.AddSport_Display_Name)]
         public string Name { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Description")]
+        [Display(Name = Constants.AddSport_Display_Description)]
         public string Description { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Image Url")]
+        [Display(Name = Constants.AddSport_Display_ImageUrl)]
         public string ImageSportUrl { get; set; }
     }
 }

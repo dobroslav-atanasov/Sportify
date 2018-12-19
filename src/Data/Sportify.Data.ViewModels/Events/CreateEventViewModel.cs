@@ -8,30 +8,30 @@
     {
         [Required]
         [DataType(DataType.Text)]
-        [RegularExpression("[a-zA-z0-9-.*/_\\s]+", ErrorMessage = Constants.EventNameInvalidSymbolsErrorMessage)]
-        [Display(Name = "Event Name")]
+        [RegularExpression(Constants.CreateEvent_Regex_EventName, ErrorMessage = Constants.EventNameInvalidSymbolsErrorMessage)]
+        [Display(Name = Constants.CreateEvent_Display_EventName)]
         public string EventName { get; set; }
         
         [Required]
         [DataType(DataType.DateTime)]
-        [Display(Name = "Date and Time of Events")]
+        [Display(Name = Constants.CreateEvent_Display_Date)]
         public DateTime Date { get; set; }
 
         [Required]
-        [Display(Name = "Organization")]
+        [Display(Name = Constants.CreateEvent_Display_Oraganization)]
         public int OrganizationId { get; set; }
 
         [Required]
-        [Display(Name = "Discipline")]
+        [Display(Name = Constants.CreateEvent_Display_Discipline)]
         public int DisciplineId { get; set; }
 
         [Required]
-        [Display(Name = "Venue")]
+        [Display(Name = Constants.CreateEvent_Display_Venue)]
         public int VenueId { get; set; }
 
         [Required]
         [Range(Constants.MinNumberOfParticipants, Constants.MaxNumberOfParticipants)]
-        [Display(Name = "Number of Participants")]
+        [Display(Name = Constants.CreateEvent_Display_NumberOfParticipants)]
         public int NumberOfParticipants { get; set; }
     }
 }

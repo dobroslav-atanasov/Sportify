@@ -7,12 +7,13 @@
     {
         [Required]
         [DataType(DataType.Text)]
-        [RegularExpression(@"[a-zA-z\s]+", ErrorMessage = Constants.TownInvalidSymbolsErrorMessage)]
-        [Display(Name = "Name")]
+        [MinLength(Constants.MinTownNameLength, ErrorMessage = Constants.TownNameLengthErrorMessage)]
+        [RegularExpression(Constants.AddTown_Regex_Name, ErrorMessage = Constants.TownInvalidSymbolsErrorMessage)]
+        [Display(Name = Constants.AddTown_Display_Name)]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = Constants.AddTown_Display_Country)]
         public int CountryId { get; set; }
     }
 }

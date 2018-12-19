@@ -5,29 +5,29 @@
 
     public class SendMessageViewModel
     {
-        [Display(Name = "Username")]
+        [Display(Name = Constants.SendMessage_Display_Username)]
         public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [MinLength(Constants.MinUsernameLength, ErrorMessage = Constants.MessageFullNameLength)]
-        [RegularExpression("[a-zA-z0-9-.*/_\\s]+", ErrorMessage = Constants.MessageFullNameContainsInvalidSymbols)]
-        [Display(Name = "Full Name")]
+        [RegularExpression(Constants.SendMessage_Regex_FullName, ErrorMessage = Constants.MessageFullNameContainsInvalidSymbols)]
+        [Display(Name = Constants.SendMessage_Display_FullName)]
         public string FullName { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = Constants.SendMessage_Display_Email)]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Subject")]
+        [Display(Name = Constants.SendMessage_Display_Subject)]
         public string Subject { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Content")]
+        [Display(Name = Constants.SendMessage_Display_Content)]
         public string Content { get; set; }
     }
 }
