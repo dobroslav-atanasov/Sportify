@@ -1,16 +1,16 @@
 ﻿namespace Sportify.Web.Areas.Identity.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
     using Constants;
+    using Data;
+    using Data.Models;
     using Data.ViewModels.Users;
+    using global::AutoMapper;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using System.Threading.Tasks;
-    using global::AutoMapper;
-    using Sportify.Data.Models;
-    using Microsoft.AspNetCore.Identity;
-    using System.Linq;
-    using Sportify.Data;
     using X.PagedList;
 
     [Area(Area.Identity)]
@@ -48,7 +48,7 @@
                 return this.View(model);
             }
 
-            var country = this.countriesService.GetCountryById(model.CountryId);
+            //var country = this.countriesService.GetCountryById(model.CountryId);
             var user = this.mapper.Map<User>(model);
             var result = await this.userManager.CreateAsync(user, model.Password);
 
@@ -85,8 +85,6 @@
         [HttpPost]
         public async Task<IActionResult> SignIn(SignInViewModel model)
         {
-            // TODO:  Continue with same page!!!
-
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);

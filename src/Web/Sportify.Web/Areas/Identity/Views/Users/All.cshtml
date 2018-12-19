@@ -46,14 +46,14 @@
                 <td class="text-center">
                     @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), Role.User))
                     {
-                        <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                        <form asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.ChangeRole" method="post" class="form-horizontal text-center">
                             <input type="hidden" asp-for="UserId" value="@item.Id" />
                             <button type="submit" class="btn btn-primary" value="User">User</button>
                         </form>
                     }
                     else
                     {
-                        <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                        <form asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.ChangeRole" method="post" class="form-horizontal text-center">
                             <input type="hidden" asp-for="UserId" value="@item.Id" />
                             <button type="submit" class="btn btn-primary" value="Editor">Editor</button>
                         </form>

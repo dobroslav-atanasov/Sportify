@@ -39,5 +39,7 @@
         public const string SignInTitle = "Sign In";
 
         public const string UpdateAccountTitle = "Update Account";
+
+        public const string AccessDeniedTitle = "Access Denied";
     }
 }
