@@ -1,12 +1,9 @@
 ﻿namespace Sportify.Tests
 {
     using System.Linq;
-    using AutoMapper;
     using Data;
     using Data.Models;
     using Data.ViewModels.Sports;
-    using global::AutoMapper;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Services;
     using Xunit;
@@ -31,7 +28,7 @@
         }
 
         [Fact]
-        public void AddSportShould_ReturnCorrectSport()
+        public void AddSportShould_ShouldReturnCorrectSport()
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
@@ -47,6 +44,55 @@
 
             // Expected Sport
             var expectedSport = new Sport
+            {
+                Id = 1,
+                Name = "Test",
+                Description = "Test Description",
+                ImageSportUrl = "www.test.com"
+            };
+
+            // Assert
+            Assert.True(sport.Equals(expectedSport));
+        }
+
+        [Fact]
+        public void GetAllSportsInfo_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new SportsService(context, this.Mapper, null, null);
+            context.Add(new Sport());
+            context.Add(new Sport());
+            context.Add(new Sport());
+            context.Add(new Sport());
+            context.SaveChanges();
+
+            // Act
+            var result = service.GetAllSportsInfo().Count();
+
+            // Assert
+            Assert.Equal(4, result);
+        }
+
+        [Fact]
+        public void GetSportById_ShouldReturnCorrectSportViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new SportsService(context, this.Mapper, null, null);
+
+            service.Add(new AddSportViewModel
+            {
+                Name = "Test",
+                Description = "Test Description",
+                ImageSportUrl = "www.test.com"
+            });
+
+            // Act
+            var sport = service.GetSportById(1);
+
+            // Expected Sport
+            var expectedSport = new SportViewModel
             {
                 Id = 1,
                 Name = "Test",

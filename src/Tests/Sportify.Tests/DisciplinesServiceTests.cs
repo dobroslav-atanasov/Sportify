@@ -1,12 +1,9 @@
 ﻿namespace Sportify.Tests
 {
     using System.Linq;
-    using AutoMapper;
     using Data;
     using Data.Models;
     using Data.ViewModels.Disciplines;
-    using global::AutoMapper;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Services;
     using Xunit;
@@ -32,7 +29,7 @@
         }
 
         [Fact]
-        public void AddDisciplineShould_ReturnCorrectDiscipline()
+        public void AddDisciplineShould_ShouldReturnCorrectDiscipline()
         {
             // Arrange
             var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
@@ -57,6 +54,41 @@
 
             // Assert
             Assert.True(discipline.Equals(expectedDiscipline));
+        }
+
+        [Fact]
+        public void GetDisciplinesBySportId_ShouldReturnCorrectDiscipline()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new DisciplinesService(context, this.Mapper, null, null);
+
+            service.AddDiscipline(new AddDisciplineViewModel
+            {
+                Name = "Test 1",
+                Description = "Test Description 1",
+                SportId = 1
+            });
+
+            service.AddDiscipline(new AddDisciplineViewModel
+            {
+                Name = "Test 2",
+                Description = "Test Description 2",
+                SportId = 1
+            });
+
+            service.AddDiscipline(new AddDisciplineViewModel
+            {
+                Name = "Test 3",
+                Description = "Test Description 3",
+                SportId = 2
+            });
+
+            // Act
+            var result = service.GetDisciplinesBySportId(1).Count();
+
+            // Assert
+            Assert.Equal(2, result);
         }
     }
 }
