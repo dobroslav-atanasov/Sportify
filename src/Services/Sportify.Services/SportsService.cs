@@ -37,5 +37,28 @@
 
             return sport;
         }
+
+        public IList<SportViewModel> GetAllSportsInfo()
+        {
+            var sports = this.Context
+                .Sports
+                .OrderBy(s => s.Name)
+                .AsQueryable();
+
+            var sportsViewModel = this.Mapper.Map<IQueryable<Sport>, IList<SportViewModel>>(sports);
+
+            return sportsViewModel;
+        }
+
+        public SportViewModel GetSportById(int id)
+        {
+            var sport = this.Context
+                .Sports
+                .FirstOrDefault(s => s.Id == id);
+
+            var sportViewModel = this.Mapper.Map<SportViewModel>(sport);
+
+            return sportViewModel;
+        }
     }
 }

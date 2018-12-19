@@ -37,5 +37,18 @@
 
             return discipline;
         }
+
+        public IEnumerable<DisciplineViewModel> GetDisciplinesBySportId(int id)
+        {
+            var disciplines = this.Context
+                .Disciplines
+                .Where(d => d.SportId == id)
+                .OrderBy(d => d.Name)
+                .AsQueryable();
+
+            var disciplineViewModels = this.Mapper.Map<IQueryable<Discipline>, IEnumerable<DisciplineViewModel>>(disciplines);
+
+            return disciplineViewModels;
+        }
     }
 }

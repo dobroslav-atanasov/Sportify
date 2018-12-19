@@ -9,5 +9,9 @@
         IEnumerable<SportViewModel> GetAllSports();
 
         Sport Add(AddSportViewModel model);
+
+        IList<SportViewModel> GetAllSportsInfo();
+
+        SportViewModel GetSportById(int id);
     }
 }
