@@ -80,7 +80,7 @@
                 .ForMember(uvm => uvm.Username, u => u.MapFrom(x => x.UserName))
                 .ReverseMap();
 
-            this.CreateMap<ProfileUserViewModel, User>()
+            this.CreateMap<UpdateAccountViewModel, User>()
                 .ForMember(u => u.UserName, pvm => pvm.MapFrom(x => x.Username))
                 .ReverseMap();
 

@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Constants;
 
-    public class ProfileUserViewModel
+    public class UpdateAccountViewModel
     {
         [Display(Name = Constants.CreateAccount_Display_Username)]
         public string Username { get; set; }
