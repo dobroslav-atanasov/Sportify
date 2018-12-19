@@ -54,4 +54,9 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Sport\Views\Disciplines\" />
+    <Folder Include="Areas\Sport\Views\Shared\" />
+  </ItemGroup>
+
 </Project>

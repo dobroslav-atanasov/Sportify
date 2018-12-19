@@ -1,0 +1,47 @@
+﻿@using Sportify.Data.ViewModels.Disciplines
+@using Sportify.Web.Constants
+
+@model Sportify.Data.ViewModels.Sports.SportViewModel
+
+@{
+    ViewData["Title"] = Global.SportsDetailsTitle;
+}
+
+<br />
+
+<h1>@Model.Name</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <img class="card-img-top" src="@Model.ImageSportUrl" alt="@Model.Name">
+    </div>
+    <div class="col-md-8">
+        <h4>Description</h4>
+        <p>@Model.Description</p>
+    </div>
+</div>
+
+<h4>Disciplines</h4>
+@if (this.ViewData[Global.Disciplines] != null)
+{
+     foreach (var discipline in this.ViewData[Global.Disciplines] as IEnumerable<DisciplineViewModel>)
+     {
+         <hr/>
+         <div class="row">
+             <div class="col-md-5">
+                 @discipline.Name
+             </div>
+             <div class="col-md-7">
+                 @discipline.Description
+             </div>
+         </div>
+     }
+}
+
+<br />
+
+<div class="text-center">
+    <a asp-area="@Area.Sport" asp-controller="@Controllers.Sports" asp-action="@Actions.SportsAllSports">Back to sports</a>
+</div>

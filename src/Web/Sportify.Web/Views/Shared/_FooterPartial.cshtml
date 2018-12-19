@@ -1,16 +1,18 @@
-﻿<footer>
+﻿@using Sportify.Web.Constants
+
+<footer>
     <div class="row">
         <div class="col-md-4 text-center">
-            <a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+            <a asp-area="@Area.Base" asp-controller="@Controllers.Home" asp-action="@Actions.HomeAboutUs">About Us</a>
         </div>
         <div class="col-md-4 text-center">
-            <a asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 30px;">SPORTify</a>
+            <a asp-area="@Area.Base" asp-controller="@Controllers.Home" asp-action="@Actions.HomeIndex" style="font-size: 30px;">SPORTify</a>
         </div>
         <div class="col-md-4 text-center">
-            <a asp-area="" asp-controller="Messages" asp-action="Send">Contact Us</a>
+            <a asp-area="@Area.Base" asp-controller="@Controllers.Messages" asp-action="@Actions.MessagesSend">Contact Us</a>
         </div>
     </div>
-    <br/>
+    <br />
     <div class="text-center">
         <p>&copy; Copyright @DateTime.UtcNow.Year - SPORTify</p>
     </div>

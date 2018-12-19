@@ -12,6 +12,8 @@
 
         public const string DefaultUrl = "~/";
 
+        public const string Disciplines = "Disciplines";
+
 
 
 
@@ -41,5 +43,9 @@
         public const string UpdateAccountTitle = "Update Account";
 
         public const string AccessDeniedTitle = "Access Denied";
+
+        public const string SportsTitle = "Sports";
+
+        public const string SportsDetailsTitle = "Details";
     }
 }

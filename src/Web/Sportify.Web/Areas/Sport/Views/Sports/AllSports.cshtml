@@ -1,0 +1,51 @@
+﻿@using Sportify.Web.Constants
+
+@model IList<Sportify.Data.ViewModels.Sports.SportViewModel>
+
+@{
+    ViewData["Title"] = Global.SportsTitle;
+    var rows = @Model.Count % 3;
+    int temp = 0;
+}
+
+<br />
+
+<h1 class="text-center">Sports</h1>
+
+@for (int row = 0; row <= rows; row++)
+{
+    <div class="row">
+        @for (int col = temp; col < @Model.Count; col++)
+        {
+            <div class="col-md-4">
+                <div class="card text-center" style="width: 20rem;">
+                    <img class="card-img-top" src="@Model[col].ImageSportUrl" alt="@Model[col].Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model[col].Name</h5>
+                        @if (Model[col].Description.Length >= 50)
+                        {
+                            <p class="card-text">@Model[col].Description.Substring(0, 50)...</p>
+                        }
+                        else
+                        {
+                            <p class="card-text">@Model[col].Description</p>
+                        }
+                        <a asp-area="@Area.Sport" asp-controller="@Controllers.Sports" asp-action="@Actions.SportsDetails" asp-route-id="@Model[col].Id" class="btn btn-primary">Go to @Model[col].Name</a>
+                    </div>
+                </div>
+            </div>
+
+             if (col == 2)
+             {
+                 temp += 3;
+                 break;
+             }
+        }
+    </div>
+
+    <br/>
+}
+
+<div class="text-center">
+    <a asp-area="@Area.Base" asp-controller="@Controllers.Home" asp-action="@Actions.HomeIndex">Back to home</a>
+</div>

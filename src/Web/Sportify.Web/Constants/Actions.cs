@@ -10,6 +10,16 @@
         // Messages
         public const string MessagesSend = "Send";
 
+        // Sports
+        public const string SportsAll = "All";
+
+        public const string SportsAdd = "Add";
+
+        public const string SportsAllSports = "AllSports";
+
+        public const string SportsDetails = "Details";
+
+
         // Users
         public const string UsersAll = "All";
 
