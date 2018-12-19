@@ -77,6 +77,10 @@
 
         public IActionResult SignIn(string returnUrl = null)
         {
+            if (returnUrl == null)
+            {
+                returnUrl = "/";
+            }
             var model = new SignInViewModel { ReturnUrl = returnUrl };
             return this.View(model);
         }
