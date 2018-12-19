@@ -1,6 +1,6 @@
 ﻿namespace Sportify.Web.Constants
 {
-    internal static class Controllers
+    public static class Controllers
     {
         public const string Countries = "Countries";
 

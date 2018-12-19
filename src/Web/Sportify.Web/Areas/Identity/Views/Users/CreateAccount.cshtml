@@ -1,19 +1,20 @@
 ﻿@using Sportify.Data.ViewModels.Countries
+@using Sportify.Web.Constants
 
 @model Sportify.Data.ViewModels.Users.CreateAccountViewModel
 
 @{
-    ViewData["Title"] = "Create Account";
+    ViewData["Title"] = Global.CreateAccountTitle;
 }
 
 <br/>
 
 <h1 class="text-center">Create Account</h1>
 
-@if (this.ViewData.ContainsKey("Error"))
+@if (this.ViewData.ContainsKey(Global.Error))
 {
     <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
-        <strong>@this.ViewData["Error"]</strong>
+        <strong>@this.ViewData[Global.Error]</strong>
     </div>
 }
 
@@ -101,7 +102,7 @@
                     </div>
                     <select asp-for="CountryId" class="form-control">
                         <option selected>Select Country</option>
-                        @foreach (var name in this.ViewData["Countries"] as IEnumerable<CountrySelectViewModel>)
+                        @foreach (var name in this.ViewData[Global.Countries] as IEnumerable<CountrySelectViewModel>)
                         {
                             <option value="@name.Id">@name.Name</option>
                         }

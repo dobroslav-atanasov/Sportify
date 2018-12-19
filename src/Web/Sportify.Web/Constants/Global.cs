@@ -1,6 +1,6 @@
 ﻿namespace Sportify.Web.Constants
 {
-    internal static class Global
+    public static class Global
     {
         public const string Users = "Users";
 
@@ -11,6 +11,8 @@
         public const string Countries = "Countries";
 
         public const string DefaultUrl = "~/";
+
+
 
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
@@ -28,5 +30,14 @@
         public const string PasswordWasChangedSuccessfully = "Password was changed successfully!";
 
         public const string PasswordWasNotChanged = "Password was not changed!";
+
+        // Titles
+        public const string ChangePasswordTitle = "Change Password";
+
+        public const string CreateAccountTitle = "Create Account";
+
+        public const string SignInTitle = "Sign In";
+
+        public const string UpdateAccountTitle = "Update Account";
     }
 }

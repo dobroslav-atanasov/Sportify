@@ -72,7 +72,7 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction(Action.HomeIndex, Controllers.Home, new { area = Area.Base });
+            return this.RedirectToAction(Actions.HomeIndex, Controllers.Home, new { area = Area.Base });
         }
 
         public IActionResult SignIn(string returnUrl = null)
@@ -109,7 +109,7 @@
         public async Task<IActionResult> SignOut()
         {
             await this.signInManager.SignOutAsync();
-            return this.RedirectToAction(Action.HomeIndex, Controllers.Home, new { area = Area.Base });
+            return this.RedirectToAction(Actions.HomeIndex, Controllers.Home, new { area = Area.Base });
         }
 
         [Authorize]
@@ -215,7 +215,7 @@
                 this.userManager.AddToRoleAsync(user, Role.User).GetAwaiter().GetResult();
             }
 
-            return this.RedirectToAction(Action.UsersAll, Controllers.Users, new { area = Area.Identity });
+            return this.RedirectToAction(Actions.UsersAll, Controllers.Users, new { area = Area.Identity });
         }
     }
 }

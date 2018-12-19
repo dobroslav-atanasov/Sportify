@@ -1,6 +1,6 @@
 ﻿namespace Sportify.Web.Constants
 {
-    internal static class Role
+    public static class Role
     {
         public const string Administrator = "Administrator";
 

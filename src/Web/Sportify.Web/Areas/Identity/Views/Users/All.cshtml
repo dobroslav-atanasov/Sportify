@@ -3,13 +3,14 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList
 @using X.PagedList.Mvc.Common
+@using Sportify.Web.Constants
 
 @model Sportify.Data.ViewModels.Users.ChangeRoleUserViewModel
 
 @inject UserManager<User> UserManager
 
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = Global.Users;
 }
 
 <br />
@@ -33,7 +34,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in this.ViewData["Users"] as IEnumerable<UserAdminViewModel>)
+        @foreach (var item in this.ViewData[Global.Countries] as IEnumerable<UserAdminViewModel>)
         {
             <tr>
                 <td class="text-center">
@@ -43,7 +44,7 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td class="text-center">
-                    @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), "User"))
+                    @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), Role.User))
                     {
                         <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
                             <input type="hidden" asp-for="UserId" value="@item.Id" />
@@ -64,7 +65,7 @@
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)this.ViewData["Users"], page => Url.Action("All", new { page = page }),
+    @Html.PagedListPager((IPagedList)this.ViewData[Global.Users], page => Url.Action(Actions.UsersAll, new { page = page }),
     new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,

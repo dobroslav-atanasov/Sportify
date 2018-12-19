@@ -1,17 +1,19 @@
-﻿@model Sportify.Data.ViewModels.Users.SignInViewModel
+﻿@using Sportify.Web.Constants
+
+@model Sportify.Data.ViewModels.Users.SignInViewModel
 
 @{
-    ViewData["Title"] = "Sign In";
+    ViewData["Title"] = Global.SignInTitle;
 }
 
 <br/>
 
 <h1 class="text-center">Sign In</h1>
 
-@if (this.ViewData.ContainsKey("Error"))
+@if (this.ViewData.ContainsKey(Global.Error))
 {
     <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
-        <strong>@this.ViewData["Error"]</strong>
+        <strong>@this.ViewData[Global.Error]</strong>
     </div>
 }
 

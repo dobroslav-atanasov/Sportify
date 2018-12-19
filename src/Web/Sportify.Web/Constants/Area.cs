@@ -1,6 +1,6 @@
 ﻿namespace Sportify.Web.Constants
 {
-    internal static class Area
+    public static class Area
     {
         public const string Base = "";
 
