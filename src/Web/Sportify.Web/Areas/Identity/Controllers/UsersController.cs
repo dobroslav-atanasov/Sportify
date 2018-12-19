@@ -75,9 +75,10 @@
             return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
-        public IActionResult SignIn()
+        public IActionResult SignIn(string returnUrl = null)
         {
-            return this.View();
+            var model = new SignInViewModel { ReturnUrl = returnUrl };
+            return this.View(model);
         }
 
         [HttpPost]
@@ -99,7 +100,8 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            return this.LocalRedirect(model.ReturnUrl);
+            //return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [Authorize]

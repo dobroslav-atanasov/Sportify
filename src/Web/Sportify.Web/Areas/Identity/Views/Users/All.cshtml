@@ -62,6 +62,7 @@
         }
     </tbody>
 </table>
+
 <div class="text-center">
     @Html.PagedListPager((IPagedList)this.ViewData["Users"], page => Url.Action("All", new { page = page }),
     new PagedListRenderOptions
