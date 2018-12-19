@@ -6,10 +6,10 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using Sportify.Web.Contants;
+    using Sportify.Web.Constants;
     using X.PagedList;
 
-    public class MessagesController : Controller
+    public class MessagesController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;

@@ -5,11 +5,11 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using Sportify.Web.Contants;
+    using Sportify.Web.Constants;
     using X.PagedList;
 
     [Area("Administrator")]
-    public class DisciplinesAdminController : Controller
+    public class DisciplinesAdminController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly IDisciplinesService disciplinesService;
         private readonly ISportsService sportsService;

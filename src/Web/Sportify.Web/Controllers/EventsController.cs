@@ -8,9 +8,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
     using Sportify.Data.Models;
-    using Sportify.Web.Contants;
 
-    public class EventsController : Controller
+    public class EventsController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;

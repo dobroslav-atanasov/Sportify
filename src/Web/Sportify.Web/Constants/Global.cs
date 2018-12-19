@@ -1,8 +1,17 @@
-﻿namespace Sportify.Web.Contants
+﻿namespace Sportify.Web.Constants
 {
     internal static class Global
     {
+        public const string Users = "Users";
+
         public const string Error = "Error";
+
+        public const string Message = "Message";
+
+        public const string Countries = "Countries";
+
+        public const string DefaultUrl = "~/";
+
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
 

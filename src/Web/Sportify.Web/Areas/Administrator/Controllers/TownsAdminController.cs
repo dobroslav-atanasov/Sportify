@@ -5,11 +5,11 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using Sportify.Web.Contants;
+    using Sportify.Web.Constants;
     using X.PagedList;
 
     [Area("Administrator")]
-    public class TownsAdminController : Controller
+    public class TownsAdminController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly ICountriesService countriesService;
         private readonly ITownsService townsService;
