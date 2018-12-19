@@ -77,10 +77,7 @@
 
         public IActionResult SignIn(string returnUrl = null)
         {
-            if (returnUrl == null)
-            {
-                returnUrl = "/";
-            }
+            returnUrl = returnUrl ?? Url.Content("~/");
             var model = new SignInViewModel { ReturnUrl = returnUrl };
             return this.View(model);
         }
@@ -116,17 +113,17 @@
         }
 
         [Authorize]
-        public IActionResult UpdateProfile()
+        public IActionResult UpdateAccount()
         {
             var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
-            var model = this.mapper.Map<ProfileUserViewModel>(user);
+            var model = this.mapper.Map<UpdateAccountViewModel>(user);
             this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
             return this.View(model);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> UpdateProfile(ProfileUserViewModel model)
+        public async Task<IActionResult> UpdateAccount(UpdateAccountViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -135,12 +132,12 @@
             }
 
             var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
-            if (this.usersService.IsUsernameExist(model.Username))
-            {
-                this.ViewData["Error"] = Constants.UsernameAlreadyExists;
-                this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
-                return this.View(model);
-            }
+            //if (this.usersService.IsUsernameExist(model.Username))
+            //{
+            //    this.ViewData["Error"] = Constants.UsernameAlreadyExists;
+            //    this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+            //    return this.View(model);
+            //}
 
             user.Email = model.Email;
             user.PhoneNumber = model.PhoneNumber;
