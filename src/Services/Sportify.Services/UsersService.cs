@@ -1,9 +1,7 @@
 ﻿namespace Sportify.Services
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Linq;
-    using Constants;
     using Data;
     using Data.Models;
     using Data.ViewModels.Users;
