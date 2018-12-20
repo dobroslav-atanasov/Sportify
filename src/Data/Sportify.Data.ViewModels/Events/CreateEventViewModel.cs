@@ -8,30 +8,30 @@
     {
         [Required]
         [DataType(DataType.Text)]
-        [RegularExpression(Constants.CreateEvent_Regex_EventName, ErrorMessage = Constants.EventNameInvalidSymbolsErrorMessage)]
-        [Display(Name = Constants.CreateEvent_Display_EventName)]
+        [RegularExpression(ModelConstants.CreateEvent_Regex_EventName, ErrorMessage = ModelConstants.EventNameInvalidSymbolsErrorMessage)]
+        [Display(Name = ModelConstants.CreateEvent_Display_EventName)]
         public string EventName { get; set; }
         
         [Required]
         [DataType(DataType.DateTime)]
-        [Display(Name = Constants.CreateEvent_Display_Date)]
+        [Display(Name = ModelConstants.CreateEvent_Display_Date)]
         public DateTime Date { get; set; }
 
         [Required]
-        [Display(Name = Constants.CreateEvent_Display_Oraganization)]
+        [Display(Name = ModelConstants.CreateEvent_Display_Oraganization)]
         public int OrganizationId { get; set; }
 
         [Required]
-        [Display(Name = Constants.CreateEvent_Display_Discipline)]
+        [Display(Name = ModelConstants.CreateEvent_Display_Discipline)]
         public int DisciplineId { get; set; }
 
         [Required]
-        [Display(Name = Constants.CreateEvent_Display_Venue)]
+        [Display(Name = ModelConstants.CreateEvent_Display_Venue)]
         public int VenueId { get; set; }
 
         [Required]
-        [Range(Constants.MinNumberOfParticipants, Constants.MaxNumberOfParticipants)]
-        [Display(Name = Constants.CreateEvent_Display_NumberOfParticipants)]
+        [Range(ModelConstants.MinNumberOfParticipants, ModelConstants.MaxNumberOfParticipants)]
+        [Display(Name = ModelConstants.CreateEvent_Display_NumberOfParticipants)]
         public int NumberOfParticipants { get; set; }
     }
 }

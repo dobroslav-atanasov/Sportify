@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Identity
-@using Sportify.Web.Constants;
+@using Sportify.Constants;
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -9,7 +9,7 @@
         <a class="nav-link" asp-area="Administrator" asp-controller="DisciplinesAdmin" asp-action="All"><i class="fas fa-table-tennis"></i> Disciplines</a>
     </li>
     <li>
-        <a class="nav-link" asp-area="@Area.Sport" asp-controller="@Controllers.Sports" asp-action="@Actions.SportsAll"><i class="fas fa-futbol"></i> Sports</a>
+        <a class="nav-link" asp-area="Sport" asp-controller="Sports" asp-action="All"><i class="fas fa-futbol"></i> Sports</a>
     </li>
     <li>
         <a class="nav-link" asp-area="Administrator" asp-controller="TownsAdmin" asp-action="AllTowns"><i class="fas fa-city"></i> Towns</a>

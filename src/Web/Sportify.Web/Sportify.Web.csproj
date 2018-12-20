@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Sportify.Constants\Sportify.Constants.csproj" />
     <ProjectReference Include="..\..\Data\Sportify.Data.Models\Sportify.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\Sportify.Data\Sportify.Data.csproj" />
     <ProjectReference Include="..\..\Services\Sportify.AutoMapper\Sportify.AutoMapper.csproj" />

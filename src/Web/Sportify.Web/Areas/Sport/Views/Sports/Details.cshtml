@@ -1,10 +1,10 @@
 ﻿@using Sportify.Data.ViewModels.Disciplines
-@using Sportify.Web.Constants
+@using Sportify.Constants
 
 @model Sportify.Data.ViewModels.Sports.SportViewModel
 
 @{
-    ViewData["Title"] = Global.SportsDetailsTitle;
+    ViewData["Title"] = "Details";
 }
 
 <br />
@@ -24,9 +24,9 @@
 </div>
 
 <h4>Disciplines</h4>
-@if (this.ViewData[Global.Disciplines] != null)
+@if (this.ViewData[GlobalConstants.Disciplines] != null)
 {
-     foreach (var discipline in this.ViewData[Global.Disciplines] as IEnumerable<DisciplineViewModel>)
+     foreach (var discipline in this.ViewData[GlobalConstants.Disciplines] as IEnumerable<DisciplineViewModel>)
      {
          <hr/>
          <div class="row">
@@ -43,5 +43,5 @@
 <br />
 
 <div class="text-center">
-    <a asp-area="@Area.Sport" asp-controller="@Controllers.Sports" asp-action="@Actions.SportsAllSports">Back to sports</a>
+    <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports">Back to sports</a>
 </div>

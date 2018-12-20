@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
     using Sportify.Data.Models;
+    using Constants;
 
     public class HomeController : Controller
     {
@@ -22,12 +23,12 @@
 
         public IActionResult Index()
         {
-            if (this.User.IsInRole("Administrator"))
+            if (this.User.IsInRole(Role.Administrator))
             {
-                return this.RedirectToAction("Index", "HomeAdmin", new {area = "Administrator"});
+                return this.RedirectToAction("Index", "HomeAdmin", new {area = AreaConstants.Administrator});
             }
 
-            this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
             return this.View();
         }
 

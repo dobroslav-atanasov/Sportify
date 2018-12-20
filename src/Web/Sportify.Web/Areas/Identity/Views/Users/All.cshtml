@@ -3,14 +3,14 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList
 @using X.PagedList.Mvc.Common
-@using Sportify.Web.Constants
+@using Sportify.Constants
 
 @model Sportify.Data.ViewModels.Users.ChangeRoleUserViewModel
 
 @inject UserManager<User> UserManager
 
 @{
-    ViewData["Title"] = Global.Users;
+    ViewData["Title"] = GlobalConstants.Users;
 }
 
 <br />
@@ -34,7 +34,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in this.ViewData[Global.Countries] as IEnumerable<UserAdminViewModel>)
+        @foreach (var item in this.ViewData[GlobalConstants.Countries] as IEnumerable<UserAdminViewModel>)
         {
             <tr>
                 <td class="text-center">
@@ -46,14 +46,14 @@
                 <td class="text-center">
                     @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), Role.User))
                     {
-                        <form asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.ChangeRole" method="post" class="form-horizontal text-center">
+                        <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
                             <input type="hidden" asp-for="UserId" value="@item.Id" />
                             <button type="submit" class="btn btn-primary" value="User">User</button>
                         </form>
                     }
                     else
                     {
-                        <form asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.ChangeRole" method="post" class="form-horizontal text-center">
+                        <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
                             <input type="hidden" asp-for="UserId" value="@item.Id" />
                             <button type="submit" class="btn btn-primary" value="Editor">Editor</button>
                         </form>
@@ -65,7 +65,7 @@
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)this.ViewData[Global.Users], page => Url.Action(Actions.UsersAll, new { page = page }),
+    @Html.PagedListPager((IPagedList)this.ViewData[GlobalConstants.Users], page => Url.Action("All", new { page = page }),
     new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,

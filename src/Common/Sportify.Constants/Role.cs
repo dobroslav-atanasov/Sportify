@@ -1,4 +1,4 @@
-﻿namespace Sportify.Web.Constants
+﻿namespace Sportify.Constants
 {
     public static class Role
     {

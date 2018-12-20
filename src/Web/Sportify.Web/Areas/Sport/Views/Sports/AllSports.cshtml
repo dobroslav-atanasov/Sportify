@@ -1,9 +1,9 @@
-﻿@using Sportify.Web.Constants
+﻿@using Sportify.Constants
 
 @model IList<Sportify.Data.ViewModels.Sports.SportViewModel>
 
 @{
-    ViewData["Title"] = Global.SportsTitle;
+    ViewData["Title"] = "Sports";
     var rows = @Model.Count % 3;
     int temp = 0;
 }
@@ -30,7 +30,7 @@
                         {
                             <p class="card-text">@Model[col].Description</p>
                         }
-                        <a asp-area="@Area.Sport" asp-controller="@Controllers.Sports" asp-action="@Actions.SportsDetails" asp-route-id="@Model[col].Id" class="btn btn-primary">Go to @Model[col].Name</a>
+                        <a asp-area="Sport" asp-controller="Sports" asp-action="Details" asp-route-id="@Model[col].Id" class="btn btn-primary">Go to @Model[col].Name</a>
                     </div>
                 </div>
             </div>
@@ -47,5 +47,5 @@
 }
 
 <div class="text-center">
-    <a asp-area="@Area.Base" asp-controller="@Controllers.Home" asp-action="@Actions.HomeIndex">Back to home</a>
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
 </div>

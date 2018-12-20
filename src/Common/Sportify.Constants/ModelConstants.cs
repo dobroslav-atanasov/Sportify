@@ -1,6 +1,6 @@
-﻿namespace Sportify.Data.ViewModels.Constants
+﻿namespace Sportify.Constants
 {
-    internal static class Constants
+    public static class ModelConstants
     {
         // Disciplines
         public const string AddDiscipline_Display_Name = "Name";

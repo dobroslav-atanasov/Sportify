@@ -7,15 +7,15 @@
     {
         [Required]
         [DataType(DataType.Text)]
-        [MinLength(Constants.MinOrganizationNameLength, ErrorMessage = Constants.OrganizationNameLengthErrorMessage)]
-        [RegularExpression(Constants.CreateOrganization_Regex_Name, ErrorMessage = Constants.OrganizationNameInvalidSymbolsErrorMessage)]
-        [Display(Name = Constants.CreateOrganization_Display_Name)]
+        [MinLength(ModelConstants.MinOrganizationNameLength, ErrorMessage = ModelConstants.OrganizationNameLengthErrorMessage)]
+        [RegularExpression(ModelConstants.CreateOrganization_Regex_Name, ErrorMessage = ModelConstants.OrganizationNameInvalidSymbolsErrorMessage)]
+        [Display(Name = ModelConstants.CreateOrganization_Display_Name)]
         public string Name { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [RegularExpression(Constants.CreateOrganization_Regex_Description, ErrorMessage = Constants.OrganizationDescriptionInvalidSymbolsErrorMessage)]
-        [Display(Name = Constants.CreateOrganization_Display_Description)]
+        [RegularExpression(ModelConstants.CreateOrganization_Regex_Description, ErrorMessage = ModelConstants.OrganizationDescriptionInvalidSymbolsErrorMessage)]
+        [Display(Name = ModelConstants.CreateOrganization_Display_Description)]
         public string Description { get; set; }
     }
 }

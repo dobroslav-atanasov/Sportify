@@ -1,26 +1,26 @@
 ﻿@using Sportify.Data.ViewModels.Countries
-@using Sportify.Web.Constants
+@using Sportify.Constants
 
 @model Sportify.Data.ViewModels.Users.UpdateAccountViewModel
 
 @{
-    ViewData["Title"] = Global.UpdateAccountTitle;
+    ViewData["Title"] = "Update Account";
 }
 
 <br/>
 
 <h1 class="text-center">Update Profile</h1>
 
-@if (this.ViewData.ContainsKey(Global.Error))
+@if (this.ViewData.ContainsKey(GlobalConstants.Error))
 {
     <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
-        <strong>@this.ViewData[Global.Error]</strong>
+        <strong>@this.ViewData[GlobalConstants.Error]</strong>
     </div>
 }
-@if (this.ViewData.ContainsKey(Global.Message))
+@if (this.ViewData.ContainsKey(GlobalConstants.Message))
 {
     <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
-        <strong>@this.ViewData[Global.Message]</strong>
+        <strong>@this.ViewData[GlobalConstants.Message]</strong>
     </div>
 }
 
@@ -28,7 +28,7 @@
 
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <form asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.UpdateAccount" method="post">
+        <form asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
@@ -78,7 +78,7 @@
                     </div>
                     <select asp-for="CountryId" class="form-control">
                         <option selected>Select Country</option>
-                        @foreach (var name in this.ViewData[Global.Countries] as IEnumerable<CountrySelectViewModel>)
+                        @foreach (var name in this.ViewData[GlobalConstants.Countries] as IEnumerable<CountrySelectViewModel>)
                         {
                         <option value="@name.Id">@name.Name</option>
                         }
@@ -114,11 +114,11 @@
 </div>
 
 <div class="text-center">
-    <a asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.ChangePassword" class="btn btn-warning">Change Password</a>
+    <a asp-area="Identity" asp-controller="Users" asp-action="ChangePassword" class="btn btn-warning">Change Password</a>
 </div>
 
 <br/>
 
 <div class="text-center">
-    <a asp-area="@Area.Base" asp-controller="@Controllers.Home" asp-action="@Actions.HomeIndex">Back to home</a>
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
 </div>

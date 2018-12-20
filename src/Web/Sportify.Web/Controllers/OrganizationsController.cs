@@ -6,7 +6,6 @@
     using Services.Interfaces;
     using Constants;
     using X.PagedList;
-    using Sportify.Web.Constants;
 
     public class OrganizationsController : Microsoft.AspNetCore.Mvc.Controller
     {

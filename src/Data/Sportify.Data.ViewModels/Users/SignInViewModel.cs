@@ -7,12 +7,12 @@
     {
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = Constants.CreateAccount_Display_Username)]
+        [Display(Name = ModelConstants.CreateAccount_Display_Username)]
         public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = Constants.CreateAccount_Display_Password)]
+        [Display(Name = ModelConstants.CreateAccount_Display_Password)]
         public string Password { get; set; }
 
         public string ReturnUrl { get; set; }

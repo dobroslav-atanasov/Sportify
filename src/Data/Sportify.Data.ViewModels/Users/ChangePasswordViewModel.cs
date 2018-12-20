@@ -7,18 +7,18 @@
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = Constants.ChangePassword_Display_CurrentPassword)]
+        [Display(Name = ModelConstants.ChangePassword_Display_CurrentPassword)]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(Constants.MaxPasswordLength, ErrorMessage = Constants.PasswordLengthErrorMessage, MinimumLength = Constants.MinPasswordLength)]
+        [StringLength(ModelConstants.MaxPasswordLength, ErrorMessage = ModelConstants.PasswordLengthErrorMessage, MinimumLength = ModelConstants.MinPasswordLength)]
         [DataType(DataType.Password)]
-        [Display(Name = Constants.ChangePassword_Display_NewPassword)]
+        [Display(Name = ModelConstants.ChangePassword_Display_NewPassword)]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare(Constants.ChangePassword_Compare, ErrorMessage = Constants.ConfirmPasswordErrorMessage)]
-        [Display(Name = Constants.ChangePassword_Display_ConfirmNewPassword)]
+        [Compare(ModelConstants.ChangePassword_Compare, ErrorMessage = ModelConstants.ConfirmPasswordErrorMessage)]
+        [Display(Name = ModelConstants.ChangePassword_Display_ConfirmNewPassword)]
         public string ConfirmPassword { get; set; }
     }
 }

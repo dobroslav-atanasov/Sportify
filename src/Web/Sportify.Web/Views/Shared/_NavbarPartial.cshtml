@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Sportify.Web.Constants
+@using Sportify.Constants
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -10,7 +10,7 @@
             <i class="fas fa-futbol"></i> Sports
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a asp-area="@Area.Sport" asp-controller="@Controllers.Sports" asp-action="@Actions.SportsAllSports" class="dropdown-item">All Sports</a>
+            <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports" class="dropdown-item">All Sports</a>
         </div>
     </div>
     
@@ -29,10 +29,10 @@
         {
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.UpdateAccount"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)!</a>
+                    <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)!</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>
+                    <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>
                 </li>
             </ul>
         }
@@ -41,10 +41,10 @@
     {
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.CreateAccount"><i class="fas fa-user-plus"></i> Create Account</a>
+                <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="CreateAccount"><i class="fas fa-user-plus"></i> Create Account</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-area="@Area.Identity" asp-controller="@Controllers.Users" asp-action="@Actions.SignIn"><i class="fas fa-user"></i> Sign In</a>
+                <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="SignIn"><i class="fas fa-user"></i> Sign In</a>
             </li>
         </ul>
     }

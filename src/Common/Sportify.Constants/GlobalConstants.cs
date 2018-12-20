@@ -1,6 +1,6 @@
-﻿namespace Sportify.Web.Constants
+﻿namespace Sportify.Constants
 {
-    public static class Global
+    public static class GlobalConstants
     {
         public const string Users = "Users";
 
@@ -13,6 +13,10 @@
         public const string DefaultUrl = "~/";
 
         public const string Disciplines = "Disciplines";
+
+        public const string Username = "Username";
+
+        public const string Email = "Email";
 
 
 
@@ -32,20 +36,5 @@
         public const string PasswordWasChangedSuccessfully = "Password was changed successfully!";
 
         public const string PasswordWasNotChanged = "Password was not changed!";
-
-        // Titles
-        public const string ChangePasswordTitle = "Change Password";
-
-        public const string CreateAccountTitle = "Create Account";
-
-        public const string SignInTitle = "Sign In";
-
-        public const string UpdateAccountTitle = "Update Account";
-
-        public const string AccessDeniedTitle = "Access Denied";
-
-        public const string SportsTitle = "Sports";
-
-        public const string SportsDetailsTitle = "Details";
     }
 }

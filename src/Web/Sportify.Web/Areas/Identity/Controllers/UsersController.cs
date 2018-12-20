@@ -13,7 +13,7 @@
     using Services.Interfaces;
     using X.PagedList;
 
-    [Area(Area.Identity)]
+    [Area(AreaConstants.Identity)]
     public class UsersController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly SportifyDbContext context;
@@ -35,7 +35,7 @@
 
         public IActionResult CreateAccount()
         {
-            this.ViewData[Global.Countries] = this.countriesService.GetAllCountryNames();
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
             return this.View();
         }
 
@@ -44,7 +44,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.ViewData[Global.Countries] = this.countriesService.GetAllCountryNames();
+                this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
 
@@ -67,17 +67,17 @@
             }
             else
             {
-                this.ViewData[Global.Error] = Global.UsernameAlreadyExists;
-                this.ViewData[Global.Countries] = this.countriesService.GetAllCountryNames();
+                this.ViewData[GlobalConstants.Error] = GlobalConstants.UsernameAlreadyExists;
+                this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
 
-            return this.RedirectToAction(Actions.HomeIndex, Controllers.Home, new { area = Area.Base });
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
         public IActionResult SignIn(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? this.Url.Content(Global.DefaultUrl);
+            returnUrl = returnUrl ?? this.Url.Content(GlobalConstants.DefaultUrl);
             var model = new SignInViewModel { ReturnUrl = returnUrl };
             return this.View(model);
         }
@@ -94,8 +94,8 @@
 
             if (!signInResult.Succeeded)
             {
-                this.ViewData[Global.Error] = Global.UsernameOrPasswordAreInvalid;
-                this.ViewData[Global.Countries] = this.countriesService.GetAllCountryNames();
+                this.ViewData[GlobalConstants.Error] = GlobalConstants.UsernameOrPasswordAreInvalid;
+                this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
 
@@ -107,7 +107,7 @@
         public async Task<IActionResult> SignOut()
         {
             await this.signInManager.SignOutAsync();
-            return this.RedirectToAction(Actions.HomeIndex, Controllers.Home, new { area = Area.Base });
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [Authorize]
@@ -115,7 +115,7 @@
         {
             var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
             var model = this.mapper.Map<UpdateAccountViewModel>(user);
-            this.ViewData[Global.Countries] = this.countriesService.GetAllCountryNames();
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
             return this.View(model);
         }
 
@@ -125,7 +125,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.ViewData[Global.Countries] = this.countriesService.GetAllCountryNames();
+                this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
 
@@ -146,8 +146,8 @@
 
             await this.userManager.UpdateAsync(user);
 
-            this.ViewData[Global.Message] = Global.ProfileUpdated;
-            this.ViewData[Global.Countries] = this.countriesService.GetAllCountryNames();
+            this.ViewData[GlobalConstants.Message] = GlobalConstants.ProfileUpdated;
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
             return this.View(model);
         }
 
@@ -171,11 +171,11 @@
 
             if (!isChangedPassword.Succeeded)
             {
-                this.ViewData[Global.Error] = Global.PasswordWasNotChanged;
+                this.ViewData[GlobalConstants.Error] = GlobalConstants.PasswordWasNotChanged;
                 return this.View(model);
             }
 
-            this.ViewData[Global.Message] = Global.PasswordWasChangedSuccessfully;
+            this.ViewData[GlobalConstants.Message] = GlobalConstants.PasswordWasChangedSuccessfully;
             return this.View();
         }
 
@@ -187,7 +187,7 @@
             var pageNumber = page ?? 1;
             var usersOnPage = users.ToPagedList(pageNumber, 10);
 
-            this.ViewData[Global.Users] = usersOnPage;
+            this.ViewData[GlobalConstants.Users] = usersOnPage;
 
             return this.View();
         }
@@ -213,7 +213,7 @@
                 this.userManager.AddToRoleAsync(user, Role.User).GetAwaiter().GetResult();
             }
 
-            return this.RedirectToAction(Actions.UsersAll, Controllers.Users, new { area = Area.Identity });
+            return this.RedirectToAction("All", "Users", new { area = AreaConstants.Identity });
         }
     }
 }

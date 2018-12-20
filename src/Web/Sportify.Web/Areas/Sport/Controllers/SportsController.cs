@@ -7,7 +7,7 @@
     using Services.Interfaces;
     using X.PagedList;
 
-    [Area(Area.Sport)]
+    [Area(AreaConstants.Sport)]
     public class SportsController : Controller
     {
         private readonly ISportsService sportsService;
@@ -47,7 +47,7 @@
 
             this.sportsService.Add(model);
 
-            return this.RedirectToAction(Actions.SportsAll, Controllers.Sports, new { area = Area.Sport });
+            return this.RedirectToAction("All", "Sports", new { area = AreaConstants.Sport });
         }
 
         public IActionResult AllSports()
@@ -59,7 +59,7 @@
         public IActionResult Details(int id)
         {
             var sport = this.sportsService.GetSportById(id);
-            this.ViewData[Global.Disciplines] = this.disciplinesService.GetDisciplinesBySportId(id);
+            this.ViewData[GlobalConstants.Disciplines] = this.disciplinesService.GetDisciplinesBySportId(id);
             return this.View(sport);
         }
     }

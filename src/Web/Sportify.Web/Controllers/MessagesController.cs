@@ -6,8 +6,8 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using Sportify.Web.Constants;
     using X.PagedList;
+    using Constants;
 
     public class MessagesController : Microsoft.AspNetCore.Mvc.Controller
     {
@@ -27,8 +27,8 @@
             if (this.signInManager.IsSignedIn(this.User))
             {
                 var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
-                this.ViewData["Username"] = user.UserName;
-                this.ViewData["Email"] = user.Email;
+                this.ViewData[GlobalConstants.Username] = user.UserName;
+                this.ViewData[GlobalConstants.Email] = user.Email;
             }
             return this.View();
         }
