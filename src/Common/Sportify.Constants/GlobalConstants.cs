@@ -20,6 +20,14 @@
 
         public const string Sports = "Sports";
 
+        public const string Organizations = "Organizations";
+
+        public const string Venues = "Venues";
+
+        public const string Country = "Country";
+
+        public const string Participate = "Participate";
+
 
 
 

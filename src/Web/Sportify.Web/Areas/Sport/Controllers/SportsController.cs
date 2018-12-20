@@ -52,7 +52,7 @@
 
         public IActionResult AllSports()
         {
-            var sports = this.sportsService.GetAllSportsInfo();
+            var sports = this.sportsService.GetAllSports();
             return this.View(sports);
         }
 

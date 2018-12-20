@@ -56,25 +56,6 @@
         }
 
         [Fact]
-        public void GetAllSportsInfo_ShouldReturnCorrectCount()
-        {
-            // Arrange
-            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
-            var service = new SportsService(context, this.Mapper, null, null);
-            context.Add(new Sport());
-            context.Add(new Sport());
-            context.Add(new Sport());
-            context.Add(new Sport());
-            context.SaveChanges();
-
-            // Act
-            var result = service.GetAllSportsInfo().Count();
-
-            // Assert
-            Assert.Equal(4, result);
-        }
-
-        [Fact]
         public void GetSportById_ShouldReturnCorrectSportViewModel()
         {
             // Arrange

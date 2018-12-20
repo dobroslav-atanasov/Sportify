@@ -16,14 +16,14 @@
         {
         }
 
-        public IEnumerable<SportViewModel> GetAllSports()
+        public IList<SportViewModel> GetAllSports()
         {
             var sports = this.Context
                 .Sports
                 .OrderBy(s => s.Name)
                 .AsQueryable();
 
-            var sportsViewModel = this.Mapper.Map<IQueryable<Sport>, IEnumerable<SportViewModel>>(sports);
+            var sportsViewModel = this.Mapper.Map<IQueryable<Sport>, IList<SportViewModel>>(sports);
 
             return sportsViewModel;
         }
@@ -36,18 +36,6 @@
             this.Context.SaveChanges();
 
             return sport;
-        }
-
-        public IList<SportViewModel> GetAllSportsInfo()
-        {
-            var sports = this.Context
-                .Sports
-                .OrderBy(s => s.Name)
-                .AsQueryable();
-
-            var sportsViewModel = this.Mapper.Map<IQueryable<Sport>, IList<SportViewModel>>(sports);
-
-            return sportsViewModel;
         }
 
         public SportViewModel GetSportById(int id)
