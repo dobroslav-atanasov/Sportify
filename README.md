@@ -1,2 +1,2 @@
 # Sportify
-Sportify is app for sport events. 
+SPORTify is a web application for sports events around the world.
