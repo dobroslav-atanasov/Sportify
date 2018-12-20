@@ -5,25 +5,27 @@
 @inject UserManager<User> UserManager
 
 <div class="collapse navbar-collapse" id="navbarResponsive">
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-futbol"></i> Sports
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports" class="dropdown-item">All Sports</a>
+    @if (!this.User.IsInRole(Role.Administrator))
+    {
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-futbol"></i> Sports
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports" class="dropdown-item">All Sports</a>
+            </div>
         </div>
-    </div>
-    
+    }
 
     @if (SignInManager.IsSignedIn(User))
     {
         if (this.User.IsInRole(Role.Administrator))
         {
-            <partial name="_NavbarAdministratorPartial"/>
+            <partial name="_NavbarAdministratorPartial" />
         }
         else if (this.User.IsInRole(@Role.Editor))
         {
-            <partial name="_NavbarEditorPartial"/>
+            <partial name="_NavbarEditorPartial" />
         }
         else
         {

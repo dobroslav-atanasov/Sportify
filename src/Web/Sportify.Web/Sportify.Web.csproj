@@ -33,18 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Areas\Administrator\Views\Shared\_AdministratorLayout.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Areas\Administrator\Views\Shared\_FooterAdministratorPartial.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Areas\Administrator\Views\Shared\_NavbarAdministratorPartial.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Areas\Administrator\Views\Shared\_ValidationScriptsPartial.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="Areas\Administrator\Views\_ViewImports.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

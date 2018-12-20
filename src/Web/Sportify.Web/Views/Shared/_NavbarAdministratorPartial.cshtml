@@ -4,7 +4,7 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-<ul class="navbar-nav">
+@*<ul class="navbar-nav">
     <li>
         <a class="nav-link" asp-area="Administrator" asp-controller="Disciplines" asp-action="All"><i class="fas fa-table-tennis"></i> Disciplines</a>
     </li>
@@ -20,7 +20,7 @@
     <li>
         <a class="nav-link" asp-area="" asp-controller="Messages" asp-action="All"><i class="fas fa-envelope"></i> Messages</a>
     </li>
-</ul>
+</ul>*@
 <ul class="nav navbar-nav ml-auto">
     <li class="nav-item">
         <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount"><i class="fas fa-user-edit"></i> Administrator - @UserManager.GetUserName(User)!</a>

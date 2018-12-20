@@ -1,6 +1,7 @@
 ﻿@using X.PagedList
 @using X.PagedList.Mvc.Common
 @using X.PagedList.Mvc.Core
+
 @model IEnumerable<Sportify.Data.ViewModels.Towns.TownViewModel>
 
 @{
@@ -14,21 +15,21 @@
 <br />
 
 <p class="text-center">
-    <a asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Add" class="btn btn-primary btn-lg">Add Town</a>
+    <a asp-area="Administrator" asp-controller="Towns" asp-action="Add" class="btn btn-primary btn-lg">Add Town</a>
 </p>
 
 <br />
 
-<table class="table">
+<table class="table mx-auto table-hover">
     <thead>
-        <tr>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Name)
+        <tr class="row table-primary">
+            <th class="col-md-4 text-center">
+                Town Name
             </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.CountryName)
+            <th class="col-md-4 text-center">
+                Country
             </th>
-            <th class="text-center">
+            <th class="col-md-4 text-center">
                 Actions
             </th>
         </tr>
@@ -36,17 +37,17 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="text-center">
+            <tr class="row table-dark">
+                <td class="col-md-4 text-center">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td class="text-center">
+                <td class="col-md-4 text-center">
                     @Html.DisplayFor(modelItem => item.CountryName)
                 </td>
-                <td class="text-center">
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <td class="col-md-4 text-center">
+                    <a class="btn btn-primary">Edit</a> 
+                    <a class="btn btn-success">Details</a> 
+                    <a class="btn btn-danger">Delete</a> 
                 </td>
             </tr>
         }
@@ -54,7 +55,7 @@
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("AllTowns", new { page = page }),
+    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("All", new { page = page }),
         new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,
@@ -65,4 +66,10 @@
             LiElementClasses = new string[] { "page-item" },
             PageClasses = new string[] { "page-link" },
         })
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="Administrator" asp-controller="Home" asp-action="Index">Back to home</a>
 </div>

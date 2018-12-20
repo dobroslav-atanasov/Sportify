@@ -2,17 +2,114 @@
     ViewData["Title"] = "Home Administrator";
 }
 
-<br/>
+<br />
 
-<div class="jumbotron">
-    <h1 class="text-center">SPORTify</h1>
+<h1 class="text-center">SPORTify</h1>
 
-    <h2 class="text-center">Welcome Administrator - @this.User.Identity.Name</h2>
-</div>
+<h2 class="text-center">Welcome Administrator - @this.User.Identity.Name</h2>
 
 <hr />
 
-<div class="row">
+<div class="row text-center">
+    <div class="col-md-3">
+        <div class="card text-center" style="width: 15rem;">
+            <div class="text-center">
+                <i class="fas fa-users fa-10x"></i>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title text-center">Users</h2>
+                <a asp-area="Identity" asp-controller="Users" asp-action="All" class="btn btn-primary">All Users</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center" style="width: 15rem;">
+            <div class="text-center">
+                <i class="fas fa-city fa-10x"></i>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title text-center">Towns</h2>
+                <a asp-area="Administrator" asp-controller="Towns" asp-action="All" class="btn btn-primary">All Towns</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center" style="width: 15rem;">
+            <div class="text-center">
+                <i class="fas fa-futbol fa-10x"></i>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title text-center">Sports</h2>
+                <a href="#" class="btn btn-primary">All Sports</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center" style="width: 15rem;">
+            <div class="text-center">
+                <i class="fas fa-table-tennis fa-10x"></i>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title text-center">Disciplines</h2>
+                <a href="#" class="btn btn-primary">All Disciplines</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="row text-center">
+    <div class="col-md-3">
+        <div class="card text-center" style="width: 15rem;">
+            <div class="text-center">
+                <i class="fas fa-envelope fa-10x"></i>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title text-center">Messages</h2>
+                <a href="#" class="btn btn-primary">All Messages</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center" style="width: 15rem;">
+            <div class="text-center">
+                <i class="fas fa-landmark fa-10x"></i>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title text-center">Venues</h2>
+                <a href="#" class="btn btn-primary">All Venues</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center" style="width: 15rem;">
+            <div class="text-center">
+                <i class="fas fa-briefcase fa-10x"></i>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title text-center">Organizations</h2>
+                <a href="#" class="btn btn-primary">All Organizations</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center" style="width: 15rem;">
+            <div class="text-center">
+                <i class="fas fa-calendar fa-10x"></i>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title text-center">Events</h2>
+                <a href="#" class="btn btn-primary">All Events</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+
+@*<div class="row">
     <div class="col-md-4">
         <a asp-area="Identity" asp-controller="Users" asp-action="All">
             <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
@@ -80,4 +177,4 @@
             </div>
         </a>
     </div>
-</div>
+</div>*@

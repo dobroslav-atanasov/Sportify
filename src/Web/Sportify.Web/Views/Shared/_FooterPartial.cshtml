@@ -2,15 +2,24 @@
 
 <footer>
     <div class="row">
-        <div class="col-md-4 text-center">
-            <a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
-        </div>
-        <div class="col-md-4 text-center">
-            <a asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 30px;">SPORTify</a>
-        </div>
-        <div class="col-md-4 text-center">
-            <a asp-area="" asp-controller="Messages" asp-action="Send">Contact Us</a>
-        </div>
+        @if (this.User.IsInRole(Role.Administrator))
+        {
+            <div class="col-md-4 offset-md-4 text-center">
+                <a asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 30px;"><i class="fab fa-stripe-s"></i>   SPORTify</a>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4 text-center">
+                <a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 30px;"><i class="fab fa-stripe-s"></i>   SPORTify</a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a asp-area="" asp-controller="Messages" asp-action="Send">Contact Us</a>
+            </div>
+        }
     </div>
     <br />
     <div class="text-center">

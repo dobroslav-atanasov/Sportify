@@ -21,52 +21,52 @@
 
 <table class="table mx-auto table-hover">
     <thead>
-        <tr>
-            <th class="text-center">
-                Username
-            </th>
-            <th class="text-center">
-                Email
-            </th>
-            <th class="text-center">
-                Actions
-            </th>
-        </tr>
+    <tr class="table-primary">
+        <th class="text-center">
+            Username
+        </th>
+        <th class="text-center">
+            Email
+        </th>
+        <th class="text-center">
+            Actions
+        </th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in this.ViewData[GlobalConstants.Countries] as IEnumerable<UserAdminViewModel>)
-        {
-            <tr>
-                <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.Username)
-                </td>
-                <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td class="text-center">
-                    @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), Role.User))
-                    {
-                        <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
-                            <input type="hidden" asp-for="UserId" value="@item.Id" />
-                            <button type="submit" class="btn btn-primary" value="User">User</button>
-                        </form>
-                    }
-                    else
-                    {
-                        <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
-                            <input type="hidden" asp-for="UserId" value="@item.Id" />
-                            <button type="submit" class="btn btn-primary" value="Editor">Editor</button>
-                        </form>
-                    }
-                </td>
-            </tr>
-        }
+    @foreach (var item in this.ViewData[GlobalConstants.Users] as IEnumerable<UserAdminViewModel>)
+    {
+        <tr class="table-dark">
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td class="text-center">
+                @if (await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), Role.User))
+                {
+                    <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                        <input type="hidden" asp-for="UserId" value="@item.Id" />
+                        <button type="submit" class="btn btn-success" value="User">User</button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                        <input type="hidden" asp-for="UserId" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger" value="Editor">Editor</button>
+                    </form>
+                }
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
 
 <div class="text-center">
     @Html.PagedListPager((IPagedList)this.ViewData[GlobalConstants.Users], page => Url.Action("All", new { page = page }),
-    new PagedListRenderOptions
+        new PagedListRenderOptions
         {
             DisplayLinkToFirstPage = PagedListDisplayMode.Always,
             DisplayLinkToLastPage = PagedListDisplayMode.Always,
@@ -76,4 +76,10 @@
             LiElementClasses = new string[] { "page-item" },
             PageClasses = new string[] { "page-link" },
         })
+</div>
+
+<br/>
+
+<div class="text-center">
+    <a asp-area="Administrator" asp-controller="Home" asp-action="Index">Back to home</a>
 </div>

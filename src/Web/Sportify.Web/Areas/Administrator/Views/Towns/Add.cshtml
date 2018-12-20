@@ -1,4 +1,5 @@
 ﻿@using Sportify.Data.ViewModels.Countries
+@using Sportify.Constants
 
 @model Sportify.Data.ViewModels.Towns.AddTownViewModel
 
@@ -6,41 +7,51 @@
     ViewData["Title"] = "Add";
 }
 
-<h2>Add</h2>
+<br/>
 
-<h4>AddTownViewModel</h4>
+<h1 class="text-center">Add Town</h1>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-area="Administrator" asp-controller="TownsAdmin" asp-action="Add">
+
+<div class="row text-center">
+    <div class="col-md-4 offset-md-4 text-center">
+        <form asp-area="Administrator" asp-controller="Towns" asp-action="Add" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-city"></i></span>
+                    </div>
+                    <input asp-for="Name" class="form-control" placeholder="Town Name" />
+                </div>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CountryId" class="control-label"></label>
-                <select asp-for="CountryId" class="form-control">
-                    <option selected>Select Country</option>
-                    @foreach (var name in this.ViewData["Countries"] as IEnumerable<CountrySelectViewModel>)
-                    {
-                        <option value="@name.Id">@name.Name</option>
-                    }
-                </select>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                    </div>
+                    <select asp-for="CountryId" class="form-control">
+                        <option selected>Select Country</option>
+                        @foreach (var name in this.ViewData[GlobalConstants.Countries] as IEnumerable<CountrySelectViewModel>)
+                        {
+                            <option value="@name.Id">@name.Name</option>
+                        }
+                    </select>
+                </div>
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-default" />
+                <input type="submit" value="Add Town" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<br/>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<div class="text-center">
+    <a asp-area="Administrator" asp-controller="Towns" asp-action="All">Back to all</a>
+</div>

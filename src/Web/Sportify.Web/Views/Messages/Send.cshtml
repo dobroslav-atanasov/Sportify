@@ -31,7 +31,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input asp-for="Username" value="@this.ViewData[GlobalConstants.Username]" class="form-control" placeholder="Username" readonly />
+                        <input asp-for="Username" value="@this.ViewData[GlobalConstants.Username]" class="form-control" placeholder="Username" readonly style="background-color: gray"/>
                     </div>
                     <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
@@ -54,7 +54,7 @@
                     </div>
                     @if (this.ViewData["Email"] != null)
                     {
-                        <input asp-for="Email" value="@this.ViewData[GlobalConstants.Email]" class="form-control" placeholder="Email" readonly />
+                        <input asp-for="Email" value="@this.ViewData[GlobalConstants.Email]" class="form-control" placeholder="Email" readonly style="background-color: gray"/>
                     }
                     else
                     {
