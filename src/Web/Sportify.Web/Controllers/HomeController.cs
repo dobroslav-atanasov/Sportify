@@ -25,7 +25,7 @@
         {
             if (this.User.IsInRole(Role.Administrator))
             {
-                return this.RedirectToAction("Index", "HomeAdmin", new {area = AreaConstants.Administrator});
+                return this.RedirectToAction("Index", "Home", new {area = AreaConstants.Administrator});
             }
 
             this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
