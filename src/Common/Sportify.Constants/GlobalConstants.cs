@@ -18,6 +18,8 @@
 
         public const string Email = "Email";
 
+        public const string Sports = "Sports";
+
 
 
 
