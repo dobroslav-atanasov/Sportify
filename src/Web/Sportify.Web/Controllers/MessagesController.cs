@@ -9,7 +9,7 @@
     using X.PagedList;
     using Constants;
 
-    public class MessagesController : Microsoft.AspNetCore.Mvc.Controller
+    public class MessagesController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;

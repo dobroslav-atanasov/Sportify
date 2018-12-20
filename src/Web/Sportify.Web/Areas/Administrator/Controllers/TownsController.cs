@@ -7,20 +7,20 @@
     using Services.Interfaces;
     using X.PagedList;
 
-    [Area("Administrator")]
-    public class TownsAdminController : Microsoft.AspNetCore.Mvc.Controller
+    [Area(AreaConstants.Administrator)]
+    public class TownsController : Controller
     {
         private readonly ICountriesService countriesService;
         private readonly ITownsService townsService;
 
-        public TownsAdminController(ICountriesService countriesService, ITownsService townsService)
+        public TownsController(ICountriesService countriesService, ITownsService townsService)
         {
             this.countriesService = countriesService;
             this.townsService = townsService;
         }
 
         [Authorize(Roles = Role.Administrator)]
-        public IActionResult AllTowns(int? page)
+        public IActionResult All(int? page)
         {
             var towns = this.townsService.GetAllTowns();
 
@@ -33,7 +33,7 @@
         [Authorize(Roles = Role.Administrator)]
         public IActionResult Add()
         {
-            this.ViewData["Countries"] = this.countriesService.GetAllCountryNames();
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
             return this.View();
         }
 
@@ -48,7 +48,7 @@
 
             this.townsService.AddTown(model);
 
-            return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
+            return this.RedirectToAction("All", "Towns", new {area = AreaConstants.Administrator});
         }
 
         [Authorize(Roles = Role.Administrator)]
@@ -68,7 +68,7 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction("AllTowns", "TownsAdmin", new {area = "Administrator"});
+            return this.RedirectToAction("All", "Towns", new {area = AreaConstants.Administrator});
         }
 
         [Authorize(Roles = Role.Administrator)]
