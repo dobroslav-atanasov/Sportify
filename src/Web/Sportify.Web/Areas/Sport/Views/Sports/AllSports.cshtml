@@ -1,10 +1,11 @@
 ﻿@using Sportify.Constants
+@using System
 
 @model IList<Sportify.Data.ViewModels.Sports.SportViewModel>
 
 @{
     ViewData["Title"] = "Sports";
-    var rows = @Model.Count % 3;
+    var rows = Math.Floor(Model.Count / 3.0);
     int temp = 0;
 }
 

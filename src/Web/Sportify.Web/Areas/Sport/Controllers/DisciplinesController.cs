@@ -1,19 +1,19 @@
-﻿namespace Sportify.Web.Areas.Administrator.Controllers
-{
-    using Constants;
-    using Data.ViewModels.Disciplines;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using Services.Interfaces;
-    using X.PagedList;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Sportify.Constants;
+using Sportify.Data.ViewModels.Disciplines;
+using Sportify.Services.Interfaces;
+using X.PagedList;
 
-    [Area("Administrator")]
-    public class DisciplinesAdminController : Microsoft.AspNetCore.Mvc.Controller
+namespace Sportify.Web.Areas.Sport.Controllers
+{
+    [Area(AreaConstants.Sport)]
+    public class DisciplinesController : Controller
     {
         private readonly IDisciplinesService disciplinesService;
         private readonly ISportsService sportsService;
 
-        public DisciplinesAdminController(IDisciplinesService disciplinesService, ISportsService sportsService)
+        public DisciplinesController(IDisciplinesService disciplinesService, ISportsService sportsService)
         {
             this.disciplinesService = disciplinesService;
             this.sportsService = sportsService;
@@ -30,14 +30,12 @@
             return this.View(disciplinesOnPage);
         }
 
-
         [Authorize(Roles = Role.Administrator)]
         public IActionResult Add()
         {
-            this.ViewData["Sports"] = this.sportsService.GetAllSports();
+            this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
             return this.View();
         }
-
 
         [Authorize(Roles = Role.Administrator)]
         [HttpPost]
@@ -45,13 +43,13 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.ViewData["Sports"] = this.sportsService.GetAllSports();
+                this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
                 return this.View(model);
             }
 
             this.disciplinesService.AddDiscipline(model);
 
-            return this.RedirectToAction("All", "DisciplinesAdmin", new { area = "Administrator" });
+            return this.RedirectToAction("All", "Disciplines", new { area = AreaConstants.Sport });
         }
     }
 }
