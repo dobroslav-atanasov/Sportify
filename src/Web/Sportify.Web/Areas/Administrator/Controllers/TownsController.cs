@@ -75,6 +75,8 @@
         public IActionResult Edit(int id)
         {
             var townViewModel = this.townsService.GetTownById(id);
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
+
             return this.View(townViewModel);
         }
 

@@ -35,17 +35,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var town in Model)
         {
             <tr class="row table-dark">
                 <td class="col-md-4 text-center">
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @town.Name
                 </td>
                 <td class="col-md-4 text-center">
-                    @Html.DisplayFor(modelItem => item.CountryName)
+                    @town.CountryName
                 </td>
                 <td class="col-md-4 text-center">
-                    <a class="btn btn-primary">Edit</a> 
+                    <a asp-area="Administrator" asp-controller="Towns" asp-action="Edit" asp-route-id="@town.Id" class="btn btn-primary">Edit</a> 
                     <a class="btn btn-success">Details</a> 
                     <a class="btn btn-danger">Delete</a> 
                 </td>
