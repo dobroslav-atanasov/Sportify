@@ -77,5 +77,24 @@
 
             return towns;
         }
+
+        public TownViewModel UpdateTown(TownViewModel model)
+        {
+            var town = this.Context
+                .Towns
+                .FirstOrDefault(t => t.Id == model.Id);
+
+            if (town == null)
+            {
+                return null;
+            }
+
+            town.Name = model.Name;
+            town.CountryId = model.CountryId;
+
+            this.Context.SaveChanges();
+            var townViewModel = this.Mapper.Map<TownViewModel>(town);
+            return townViewModel;
+        }
     }
 }

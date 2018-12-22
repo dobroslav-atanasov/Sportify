@@ -48,5 +48,26 @@
 
             return sportViewModel;
         }
+
+        public SportViewModel UpdateSport(SportViewModel model)
+        {
+            var sport = this.Context
+                .Sports
+                .FirstOrDefault(s => s.Id == model.Id);
+
+            if (sport == null)
+            {
+                return null;
+            }
+
+            sport.Name = model.Name;
+            sport.Description = model.Description;
+            sport.ImageSportUrl = model.ImageSportUrl;
+            this.Context.SaveChanges();
+
+            var sportViewModel = this.Mapper.Map<SportViewModel>(sport);
+
+            return sportViewModel;
+        }
     }
 }

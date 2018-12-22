@@ -16,5 +16,7 @@
         bool IsDeleteTown(TownViewModel model);
 
         IList<int> GetAllTownIdsByCountryId(int id);
+
+        TownViewModel UpdateTown(TownViewModel model);
     }
 }

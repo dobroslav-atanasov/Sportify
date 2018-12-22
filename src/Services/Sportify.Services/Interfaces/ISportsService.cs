@@ -11,5 +11,7 @@
         Sport Add(AddSportViewModel model);
 
         SportViewModel GetSportById(int id);
+
+        SportViewModel UpdateSport(SportViewModel model);
     }
 }
