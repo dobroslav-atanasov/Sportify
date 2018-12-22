@@ -1,29 +1,28 @@
-﻿@using Sportify.Constants
-@using Sportify.Data.ViewModels.Sports
-
-@model Sportify.Data.ViewModels.Disciplines.AddDisciplineViewModel
+﻿@model Sportify.Data.ViewModels.Disciplines.DisciplineViewModel
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Delete";
 }
 
 <br />
 
-<h1 class="text-center">Add Discipline</h1>
+<h1 class="text-center">Delete</h1>
+
+<h2 class="text-danger text-center">Are you sure you want to delete @Model.Name?</h2>
 
 <hr />
 
 <div class="row text-center">
-    <div class="col-md-4 offset-md-4">
-        <form asp-action="Add">
+    <div class="col-md-4 offset-md-4 text-center">
+        <form asp-area="Sport" asp-controller="Disciplines" asp-action="Delete" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-table-tennis"></i></span>
+                        <span class="input-group-text"><i class="fas fa-city"></i></span>
                     </div>
-                    <input asp-for="Name" class="form-control" placeholder="Discipline Name" />
+                    <input asp-for="Name" class="form-control" readonly style="background-color: gray" />
                 </div>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
@@ -33,29 +32,22 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-font"></i></span>
                     </div>
-                    <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                    <textarea asp-for="Description" class="form-control" rows="10" readonly style="background-color: gray"></textarea>
                 </div>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SportId" class="control-label"></label>
+                <label asp-for="Sport" class="control-label"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-futbol"></i></span>
                     </div>
-                    <select asp-for="SportId" class="form-control">
-                        <option selected>Select Sport</option>
-                        @foreach (var name in this.ViewData[GlobalConstants.Sports] as IEnumerable<SportViewModel>)
-                        {
-                            <option value="@name.Id">@name.Name</option>
-                        }
-                    </select>
+                    <input asp-for="Sport" class="form-control" readonly style="background-color: gray" />
                 </div>
-                <span asp-validation-for="SportId" class="text-danger"></span>
+                <span asp-validation-for="Sport" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Add Discipline" class="btn btn-default" />
-            </div>
+            <input type="submit" value="Delete Town" class="btn btn-danger" />
         </form>
     </div>
 </div>

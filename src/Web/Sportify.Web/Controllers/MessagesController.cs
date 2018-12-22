@@ -58,7 +58,7 @@
             var messages = this.messagesService.GetAllMessages();
 
             var pageNumber = page ?? 1;
-            var messagesOnPage = messages.ToPagedList(pageNumber, 5);
+            var messagesOnPage = messages.ToPagedList(pageNumber, 10);
 
             return this.View(messagesOnPage);
         }

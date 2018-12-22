@@ -1,0 +1,29 @@
+﻿@model Sportify.Data.ViewModels.Disciplines.DisciplineViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+
+<h1 class="text-center">@Model.Name</h1>
+
+<hr />
+
+<div>
+    <h4>Sport</h4>
+    <p>@Model.Sport</p>
+</div>
+
+<br/>
+
+<div>
+    <h4>Description</h4>
+    <p>@Model.Description</p>
+</div>
+
+<br/>
+
+<div class="text-center">
+    <a asp-area="Sport" asp-controller="Disciplines" asp-action="All">Back to all</a>
+</div>

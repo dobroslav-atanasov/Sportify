@@ -1,21 +1,34 @@
 ﻿@using Sportify.Constants
 @using Sportify.Data.ViewModels.Sports
 
-@model Sportify.Data.ViewModels.Disciplines.AddDisciplineViewModel
+@model Sportify.Data.ViewModels.Disciplines.DisciplineViewModel
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Edit";
 }
 
 <br />
 
-<h1 class="text-center">Add Discipline</h1>
+<h1 class="text-center">Edit</h1>
+
+@if (this.ViewData.ContainsKey(GlobalConstants.Error))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+        <strong>@this.ViewData[GlobalConstants.Error]</strong>
+    </div>
+}
+@if (this.ViewData.ContainsKey(GlobalConstants.Message))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
+        <strong>@this.ViewData[GlobalConstants.Message]</strong>
+    </div>
+}
 
 <hr />
 
 <div class="row text-center">
-    <div class="col-md-4 offset-md-4">
-        <form asp-action="Add">
+    <div class="col-md-4 offset-md-4 text-center">
+        <form asp-area="Sport" asp-controller="Disciplines" asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -54,7 +67,7 @@
                 <span asp-validation-for="SportId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add Discipline" class="btn btn-default" />
+                <input type="submit" value="Update Discipline" class="btn btn-default" />
             </div>
         </form>
     </div>

@@ -8,60 +8,62 @@
     ViewData["Title"] = "All";
 }
 
-<br/>
+<br />
 
 <h1 class="text-center">Messages</h1>
 
-<br/>
+<br />
 
-<table class="table">
+<table class="table mx-auto table-hover">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Username)
+        <tr class="row table-primary">
+            <th class="col-md-2 text-center">
+                Username
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
+            <th class="col-md-2 text-center">
+                Full Name
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
+            <th class="col-md-2 text-center">
+                Email
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
+            <th class="col-md-2 text-center">
+                Subject
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
+            <th class="col-md-2 text-center">
+                Content
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublishedOn)
+            <th class="col-md-2 text-center">
+                Published On
             </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublishedOn)
-            </td>
-        </tr>
-}
+        @foreach (var message in Model)
+        {
+            <tr class="row table-dark">
+                <td class="col-md-2 text-center">
+                    @message.Username
+                </td>
+                <td class="col-md-2 text-center">
+                    @message.FullName
+                </td>
+                <td class="col-md-2 text-center">
+                    @message.Email
+                </td>
+                <td class="col-md-2 text-center">
+                    @message.Subject
+                </td>
+                <td class="col-md-2 text-center">
+                    @message.Content
+                </td>
+                <td class="col-md-2 text-center">
+                    @message.PublishedOn
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
 <div class="text-center">
     @Html.PagedListPager((IPagedList)@Model, page => Url.Action("All", new { page = page }),
         new PagedListRenderOptions
@@ -74,4 +76,10 @@
             LiElementClasses = new string[] { "page-item" },
             PageClasses = new string[] { "page-link" },
         })
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
 </div>

@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Sportify.Constants;
-using Sportify.Data.ViewModels.Disciplines;
-using Sportify.Services.Interfaces;
-using X.PagedList;
-
-namespace Sportify.Web.Areas.Sport.Controllers
+﻿namespace Sportify.Web.Areas.Sport.Controllers
 {
+    using Constants;
+    using Data.ViewModels.Disciplines;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Services.Interfaces;
+    using X.PagedList;
+
     [Area(AreaConstants.Sport)]
     public class DisciplinesController : Controller
     {
@@ -37,8 +37,8 @@ namespace Sportify.Web.Areas.Sport.Controllers
             return this.View();
         }
 
-        [Authorize(Roles = Role.Administrator)]
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Add(AddDisciplineViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -49,6 +49,59 @@ namespace Sportify.Web.Areas.Sport.Controllers
 
             this.disciplinesService.AddDiscipline(model);
 
+            return this.RedirectToAction("All", "Disciplines", new { area = AreaConstants.Sport });
+        }
+
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Edit(int id)
+        {
+            this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
+            var discipline = this.disciplinesService.GetDisciplineById(id);
+            return this.View(discipline);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Edit(DisciplineViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
+                return this.View(model);
+            }
+
+            var discipline = this.disciplinesService.UpdateDiscipline(model);
+            if (discipline == null)
+            {
+                this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
+                this.ViewData[GlobalConstants.Error] = GlobalConstants.DisciplineWasNotUpdated;
+                return this.View(model);
+            }
+
+            this.ViewData[GlobalConstants.Message] = GlobalConstants.DisciplineWasUpdated;
+            this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
+            return this.View();
+        }
+
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Details(int id)
+        {
+            var discipline = this.disciplinesService.GetDisciplineById(id);
+            return this.View(discipline);
+        }
+
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Delete(int id)
+        {
+            var discipline = this.disciplinesService.GetDisciplineById(id);
+            return this.View(discipline);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Delete(DisciplineViewModel model)
+        {
+            this.disciplinesService.DeleteDiscipline(model);
             return this.RedirectToAction("All", "Disciplines", new { area = AreaConstants.Sport });
         }
     }
