@@ -37,6 +37,10 @@
 
         public const string SportWasNotUpdated = "Sport was not updated";
 
+        public const string DisciplineWasUpdated = "Discipline was updated successfully!";
+
+        public const string DisciplineWasNotUpdated = "Discipline was not updated";
+
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
 
