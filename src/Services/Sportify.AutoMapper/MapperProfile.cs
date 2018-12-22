@@ -21,7 +21,8 @@
             this.CreateMap<Country, CountrySelectViewModel>().ReverseMap();
 
             // Disciplines
-            this.CreateMap<Discipline, DisciplineViewModel>().ReverseMap();
+            this.CreateMap<Discipline, DisciplineViewModel>()
+                .ForMember(dvm => dvm.Sport, d => d.MapFrom(x => x.Sport.Name)).ReverseMap();
 
             this.CreateMap<Discipline, AddDisciplineViewModel>().ReverseMap();
 

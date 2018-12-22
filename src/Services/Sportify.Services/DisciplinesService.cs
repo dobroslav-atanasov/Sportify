@@ -50,5 +50,50 @@
 
             return disciplineViewModels;
         }
+
+        public DisciplineViewModel GetDisciplineById(int id)
+        {
+            var discipline = this.Context
+                .Disciplines
+                .FirstOrDefault(d => d.Id == id);
+
+            var disciplineViewModel = this.Mapper.Map<DisciplineViewModel>(discipline);
+
+            return disciplineViewModel;
+        }
+
+        public DisciplineViewModel UpdateDiscipline(DisciplineViewModel model)
+        {
+            var discipline = this.Context
+                .Disciplines
+                .FirstOrDefault(s => s.Id == model.Id);
+
+            if (discipline == null)
+            {
+                return null;
+            }
+
+            discipline.Name = model.Name;
+            discipline.Description = model.Description;
+            discipline.SportId = model.SportId;
+            this.Context.SaveChanges();
+
+            var disciplineViewModel = this.Mapper.Map<DisciplineViewModel>(discipline);
+
+            return disciplineViewModel;
+        }
+
+        public void DeleteDiscipline(DisciplineViewModel model)
+        {
+            var discipline = this.Context
+                .Disciplines
+                .FirstOrDefault(d => d.Id == model.Id);
+
+            if (discipline != null)
+            {
+                this.Context.Disciplines.Remove(discipline);
+                this.Context.SaveChanges();
+            }
+        }
     }
 }
