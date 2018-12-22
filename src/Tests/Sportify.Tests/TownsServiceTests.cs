@@ -126,5 +126,24 @@
             // Assert
             Assert.Equal(expectedIds, ids);
         }
+
+        [Fact]
+        public void UpdateTown_ShouldReturnCorrectTownViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new TownsService(context, this.Mapper, null, null);
+            context.Add(new Town { Name = "Sofia", CountryId = 1 });
+            context.SaveChanges();
+
+            // Act
+            var town = service.UpdateTown(new TownViewModel {Id = 1, Name = "Sofia-Grad", CountryId = 1});
+
+            // Expected Ids
+            var expectedTown = new TownViewModel {Id = 1, Name = "Sofia-Grad", CountryId = 1};
+
+            // Assert
+            Assert.True(town.Equals(expectedTown));
+        }
     }
 }

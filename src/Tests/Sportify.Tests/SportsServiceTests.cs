@@ -84,5 +84,29 @@
             // Assert
             Assert.True(sport.Equals(expectedSport));
         }
+
+        [Fact]
+        public void UpdateSport_ShouldReturnCorrectSportViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new SportsService(context, this.Mapper, null, null);
+
+            service.Add(new AddSportViewModel
+            {
+                Name = "Test",
+                Description = "Test Description",
+                ImageSportUrl = "www.test.com"
+            });
+
+            // Act
+            var sport = service.UpdateSport(new SportViewModel{Id = 1, Name = "New Sport", Description = "New Description"});
+
+            // Expected Sport
+            var expectedSport = new SportViewModel {Id = 1, Name = "New Sport", Description = "New Description"};
+
+            // Assert
+            Assert.True(sport.Equals(expectedSport));
+        }
     }
 }
