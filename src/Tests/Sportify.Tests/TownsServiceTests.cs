@@ -2,12 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using AutoMapper;
     using Data;
     using Data.Models;
     using Data.ViewModels.Towns;
-    using global::AutoMapper;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Services;
     using Xunit;
@@ -144,6 +141,22 @@
 
             // Assert
             Assert.True(town.Equals(expectedTown));
+        }
+
+        [Fact]
+        public void UpdateTown_ShouldReturnNull()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new TownsService(context, this.Mapper, null, null);
+            context.Add(new Town { Name = "Sofia", CountryId = 1 });
+            context.SaveChanges();
+
+            // Act
+            var town = service.UpdateTown(new TownViewModel { Id = 5, Name = "Sofia-Grad", CountryId = 1 });
+            
+            // Assert
+            Assert.Null(town);
         }
     }
 }

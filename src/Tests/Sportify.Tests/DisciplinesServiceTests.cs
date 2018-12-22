@@ -90,5 +90,127 @@
             // Assert
             Assert.Equal(2, result);
         }
+
+        [Fact]
+        public void GetDisciplineById_ShouldReturnCorrectDisciplineViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new DisciplinesService(context, this.Mapper, null, null);
+
+            service.AddDiscipline(new AddDisciplineViewModel()
+            {
+                Name = "Test",
+                Description = "Test Description",
+                SportId = 1
+            });
+
+            // Act
+            var discipline = service.GetDisciplineById(1);
+
+            // Expected Sport
+            var expectedDiscipline = new DisciplineViewModel()
+            {
+                Id = 1,
+                Name = "Test",
+                Description = "Test Description",
+                SportId = 1
+            };
+
+            // Assert
+            Assert.True(discipline.Equals(expectedDiscipline));
+        }
+
+        [Fact]
+        public void UpdateDiscipline_ShouldReturnCorrectDisciplineViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new DisciplinesService(context, this.Mapper, null, null);
+
+            service.AddDiscipline(new AddDisciplineViewModel()
+            {
+                Name = "Test",
+                Description = "Test Description",
+                SportId = 1
+            });
+
+            // Act
+            var discipline = service.UpdateDiscipline(new DisciplineViewModel
+            {
+                Id = 1,
+                Name = "New Discipline",
+                Description = "New Description",
+                SportId = 5
+            });
+
+            // Expected Sport
+            var expectedDiscipline = new DisciplineViewModel
+            {
+                Id = 1,
+                Name = "New Discipline",
+                Description = "New Description",
+                SportId = 5
+            };
+
+            // Assert
+            Assert.True(discipline.Equals(expectedDiscipline));
+        }
+
+        [Fact]
+        public void UpdateDiscipline_ShouldReturnNull()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new DisciplinesService(context, this.Mapper, null, null);
+
+            service.AddDiscipline(new AddDisciplineViewModel()
+            {
+                Name = "Test",
+                Description = "Test Description",
+                SportId = 1
+            });
+
+            // Act
+            var discipline = service.UpdateDiscipline(new DisciplineViewModel
+            {
+                Id = 5,
+                Name = "New Discipline",
+                Description = "New Description",
+                SportId = 5
+            });
+
+            // Assert
+            Assert.Null(discipline);
+        }
+
+        [Fact]
+        public void DeleteDiscipline_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new DisciplinesService(context, this.Mapper, null, null);
+
+            service.AddDiscipline(new AddDisciplineViewModel()
+            {
+                Name = "Test",
+                Description = "Test Description",
+                SportId = 1
+            });
+
+            service.AddDiscipline(new AddDisciplineViewModel()
+            {
+                Name = "Test Discipline",
+                Description = "Test Description",
+                SportId = 2
+            });
+
+            // Act
+            service.DeleteDiscipline(new DisciplineViewModel { Id = 1 });
+            var result = context.Disciplines.Count();
+
+            // Assert
+            Assert.Equal(1, result);
+        }
     }
 }
