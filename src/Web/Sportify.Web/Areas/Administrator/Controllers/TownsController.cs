@@ -52,6 +52,38 @@
         }
 
         [Authorize(Roles = Role.Administrator)]
+        public IActionResult Edit(int id)
+        {
+            var townViewModel = this.townsService.GetTownById(id);
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
+
+            return this.View(townViewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Edit(TownViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
+                return this.View(model);
+            }
+
+            var town = this.townsService.UpdateTown(model);
+            if (town == null)
+            {
+                this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
+                this.ViewData[GlobalConstants.Error] = GlobalConstants.TownWasNotUpdated;
+                return this.View(model);
+            }
+
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
+            this.ViewData[GlobalConstants.Message] = GlobalConstants.TownWasUpdated;
+            return this.View();
+        }
+
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(int id)
         {
             var townViewModel = this.townsService.GetTownById(id);
@@ -68,23 +100,7 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction("All", "Towns", new {area = AreaConstants.Administrator});
-        }
-
-        [Authorize(Roles = Role.Administrator)]
-        public IActionResult Edit(int id)
-        {
-            var townViewModel = this.townsService.GetTownById(id);
-            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
-
-            return this.View(townViewModel);
-        }
-
-        [Authorize(Roles = Role.Administrator)]
-        public IActionResult Details(int id)
-        {
-            var townViewModel = this.townsService.GetTownById(id);
-            return this.View(townViewModel);
+            return this.RedirectToAction("All", "Towns", new { area = AreaConstants.Administrator });
         }
     }
 }

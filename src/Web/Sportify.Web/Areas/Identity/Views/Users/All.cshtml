@@ -51,11 +51,18 @@
                         <button type="submit" class="btn btn-success" value="User">User</button>
                     </form>
                 }
+                else if(await this.UserManager.IsInRoleAsync(this.UserManager.Users.FirstOrDefault(u => u.UserName == item.Username), Role.Editor))
+                {
+                    <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
+                        <input type="hidden" asp-for="UserId" value="@item.Id" />
+                        <button type="submit" class="btn btn-warning" value="Editor">Editor</button>
+                    </form>
+                }
                 else
                 {
                     <form asp-area="Identity" asp-controller="Users" asp-action="ChangeRole" method="post" class="form-horizontal text-center">
                         <input type="hidden" asp-for="UserId" value="@item.Id" />
-                        <button type="submit" class="btn btn-danger" value="Editor">Editor</button>
+                        <button type="submit" class="btn btn-danger" value="Administrator">Administrator</button>
                     </form>
                 }
             </td>

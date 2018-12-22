@@ -46,8 +46,7 @@
                 </td>
                 <td class="col-md-4 text-center">
                     <a asp-area="Administrator" asp-controller="Towns" asp-action="Edit" asp-route-id="@town.Id" class="btn btn-primary">Edit</a> 
-                    <a class="btn btn-success">Details</a> 
-                    <a class="btn btn-danger">Delete</a> 
+                    <a asp-area="Administrator" asp-controller="Towns" asp-action="Delete" asp-route-id="@town.Id" class="btn btn-danger">Delete</a> 
                 </td>
             </tr>
         }

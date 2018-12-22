@@ -44,6 +44,15 @@
 
 <br />
 
-<div class="text-center">
-    <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports">Back to sports</a>
-</div>
+@if (this.User.IsInRole(Role.Administrator))
+{
+    <div class="text-center">
+        <a asp-area="Sport" asp-controller="Sports" asp-action="All">Back to all</a>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports">Back to sports</a>
+    </div>
+}

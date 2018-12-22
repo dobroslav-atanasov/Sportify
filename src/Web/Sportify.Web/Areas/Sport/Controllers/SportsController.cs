@@ -36,8 +36,8 @@
             return this.View();
         }
 
-        [Authorize(Roles = Role.Administrator)]
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Add(AddSportViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -54,6 +54,33 @@
         {
             var sports = this.sportsService.GetAllSports();
             return this.View(sports);
+        }
+
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Edit(int id)
+        {
+            var sport = this.sportsService.GetSportById(id);
+            return this.View(sport);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Edit(SportViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var sport = this.sportsService.UpdateSport(model);
+            if (sport == null)
+            {
+                this.ViewData[GlobalConstants.Error] = GlobalConstants.SportWasNotUpdated;
+                return this.View(model);
+            }
+
+            this.ViewData[GlobalConstants.Message] = GlobalConstants.SportWasUpdated;
+            return this.View();
         }
 
         public IActionResult Details(int id)
