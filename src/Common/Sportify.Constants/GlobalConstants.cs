@@ -28,7 +28,14 @@
 
         public const string Participate = "Participate";
 
+        // Messages
+        public const string TownWasUpdated = "Town was updated successfully!";
 
+        public const string TownWasNotUpdated = "Town was not updated";
+
+        public const string SportWasUpdated = "Sport was updated successfully!";
+
+        public const string SportWasNotUpdated = "Sport was not updated";
 
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
