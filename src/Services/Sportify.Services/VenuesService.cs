@@ -36,5 +36,52 @@
 
             return venue;
         }
+
+        public VenueViewModel GetVenueById(int id)
+        {
+            var venue = this.Context
+                .Venues
+                .FirstOrDefault(v => v.Id == id);
+
+            var venueViewModel = this.Mapper.Map<VenueViewModel>(venue);
+
+            return venueViewModel;
+        }
+
+        public VenueViewModel UpdateVenue(VenueViewModel model)
+        {
+            var venue = this.Context
+                .Venues
+                .FirstOrDefault(s => s.Id == model.Id);
+
+            if (venue == null)
+            {
+                return null;
+            }
+
+            venue.Name = model.Name;
+            venue.Address = model.Address;
+            venue.Capacity = model.Capacity;
+            venue.ImageVenueUrl = model.ImageVenueUrl;
+            venue.TownId = model.TownId;
+            this.Context.SaveChanges();
+
+            var disciplineViewModel = this.Mapper.Map<VenueViewModel>(venue);
+
+            return disciplineViewModel;
+        }
+
+        public void DeleteVenue(VenueViewModel model)
+        {
+            var venue = this.Context
+                .Venues
+                .FirstOrDefault(d => d.Id == model.Id);
+
+            if (venue != null)
+            {
+                this.Context.Venues.Remove(venue);
+                this.Context.SaveChanges();
+            }
+        }
     }
 }

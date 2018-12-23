@@ -1,14 +1,19 @@
-﻿using Sportify.Data.ViewModels.Venues;
-
-namespace Sportify.Services.Interfaces
+﻿namespace Sportify.Services.Interfaces
 {
-    using Sportify.Data.Models;
     using System.Collections.Generic;
+    using Data.Models;
+    using Data.ViewModels.Venues;
 
     public interface IVenuesService
     {
         IEnumerable<VenueViewModel> GetAllVenues();
 
         Venue AddVenue(AddVenueViewModel model);
+
+        VenueViewModel GetVenueById(int id);
+
+        VenueViewModel UpdateVenue(VenueViewModel model);
+
+        void DeleteVenue(VenueViewModel model);
     }
 }

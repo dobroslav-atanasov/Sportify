@@ -90,6 +90,7 @@
 
             this.CreateMap<Venue, VenueViewModel>()
                 .ForMember(vvm => vvm.Town, v => v.MapFrom(x => x.Town.Name))
+                .ForMember(vvm => vvm.Country, v => v.MapFrom(x => x.Town.Country.Name))
                 .ReverseMap();
         }
     }
