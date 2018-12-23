@@ -1,30 +1,33 @@
 ﻿namespace Sportify.Data.ViewModels.Venues
 {
     using System.ComponentModel.DataAnnotations;
+    using Constants;
 
     public class AddVenueViewModel
     {
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Name")]
+        [MinLength(ModelConstants.MinVenueNameLength, ErrorMessage = ModelConstants.VenueNameLengthErrorMessage)]
+        [RegularExpression(ModelConstants.AddVenue_Regex_Name, ErrorMessage = ModelConstants.VenueNameInvalidSymbolsErrorMessage)]
+        [Display(Name = ModelConstants.AddVenue_Display_Name)]
         public string Name { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Address")]
+        [Display(Name = ModelConstants.AddVenue_Display_Address)]
         public string Address { get; set; }
 
         [Required]
-        [Range(1, 100000)]
-        [Display(Name = "Capacity")]
+        [Range(ModelConstants.MinVenueCapacity, ModelConstants.MaxVenueCapacity)]
+        [Display(Name = ModelConstants.AddVenue_Display_Capacity)]
         public int Capacity { get; set; }
 
         [Required]
         [DataType(DataType.Url)]
-        [Display(Name = "Image Venue")]
+        [Display(Name = ModelConstants.AddVenue_Display_ImageUrl)]
         public string ImageVenueUrl { get; set; }
 
-        [Required] [Display(Name = "Town")]
+        [Required]
+        [Display(Name = ModelConstants.AddVenue_Display_Town)]
         public int TownId { get; set; }
     }
 }

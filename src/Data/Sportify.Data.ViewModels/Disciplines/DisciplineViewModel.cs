@@ -23,6 +23,7 @@
         public int SportId { get; set; }
 
         public string Sport { get; set; }
+
         public bool Equals(DisciplineViewModel other)
         {
             return this.Id == other.Id && this.Name == other.Name
