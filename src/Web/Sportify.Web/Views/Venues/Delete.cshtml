@@ -1,0 +1,78 @@
+﻿@model Sportify.Data.ViewModels.Venues.VenueViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<br />
+
+<h1 class="text-center">Delete</h1>
+
+<h2 class="text-danger text-center">Are you sure you want to delete @Model.Name?</h2>
+
+<hr />
+
+<div class="row text-center">
+    <div class="col-md-4 offset-md-4 text-center">
+        <form asp-area="" asp-controller="Venues" asp-action="Delete" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-landmark"></i></span>
+                    </div>
+                    <input asp-for="Name" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                    </div>
+                    <input asp-for="Address" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-users"></i></span>
+                    </div>
+                    <input asp-for="Capacity" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageVenueUrl" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-image"></i></span>
+                    </div>
+                    <input asp-for="ImageVenueUrl" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="ImageVenueUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Town" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-city"></i></span>
+                    </div>
+                    <input asp-for="Town" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="Town" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Delete Venue" class="btn btn-danger" />
+        </form>
+    </div>
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Venues" asp-action="All">Back to all</a>
+</div>

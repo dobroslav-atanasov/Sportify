@@ -1,0 +1,43 @@
+﻿@model Sportify.Data.ViewModels.Venues.VenueViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+
+<h1 class="text-center">@Model.Name</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <h4>Address</h4>
+            <p>@Model.Address</p>
+        </div>
+        <div>
+            <h4>Capacity</h4>
+            <p>@Model.Capacity</p>
+        </div>
+        <div>
+            <h4>Town</h4>
+            <p>@Model.Town</p>
+        </div>
+        <div>
+            <h4>Country</h4>
+            <p>@Model.Country</p>
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+        <div>
+            <img src="@Model.ImageVenueUrl" alt="@Model.Name" width="600"/>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Venues" asp-action="All">Back to all</a>
+</div>

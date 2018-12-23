@@ -7,14 +7,18 @@
 <div class="collapse navbar-collapse" id="navbarResponsive">
     @if (!this.User.IsInRole(Role.Administrator))
     {
-        <div class="dropdown">
+        <ul class="nav navbar-nav text-right">
+            <li class="nav-link">
+                <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports" class="nav-link"><i class="fas fa-futbol"></i> Sports</a>
+            </li>
+        </ul>
+        @*<div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-futbol"></i> Sports
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports" class="dropdown-item">All Sports</a>
             </div>
-        </div>
+        </div>*@
     }
 
     @if (SignInManager.IsSignedIn(User))

@@ -1,0 +1,87 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Common
+@using X.PagedList.Mvc.Core
+
+@model IEnumerable<Sportify.Data.ViewModels.Venues.VenueViewModel>
+
+@{
+    ViewData["Title"] = "All Venues";
+}
+
+<br />
+
+<h1 class="text-center">Venues</h1>
+
+<br />
+
+<p class="text-center">
+    <a asp-area="" asp-controller="Venues" asp-action="Add" class="btn btn-primary btn-lg">Add Venue</a>
+</p>
+
+<br />
+
+<table class="table mx-auto table-hover">
+    <thead>
+    <tr class="row table-primary">
+        <th class="col-md-2 text-center">
+            Venue Name
+        </th>
+        <th class="col-md-3 text-center">
+            Address
+        </th>
+        <th class="col-md-2 text-center">
+            Town
+        </th>
+        <th class="col-md-2 text-center">
+            Country
+        </th>
+        <th class="col-md-3 text-center">
+            Action
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var venue in Model)
+    {
+        <tr class="row table-dark">
+            <td class="col-md-2 text-center">
+                @venue.Name
+            </td>
+            <td class="col-md-3 text-center">
+                @venue.Address
+            </td>
+            <td class="col-md-2 text-center">
+                @venue.Town
+            </td>
+            <td class="col-md-2 text-center">
+                @venue.Country
+            </td>
+            <td class="col-md-3 text-center">
+                <a asp-area="" asp-controller="Venues" asp-action="Edit" asp-route-id="@venue.Id" class="btn btn-primary">Edit</a>
+                <a asp-area="" asp-controller="Venues" asp-action="Details" asp-route-id="@venue.Id" class="btn btn-success">Details</a>
+                <a asp-area="" asp-controller="Venues" asp-action="Delete" asp-route-id="@venue.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div class="text-center">
+    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("All", new { page = page }),
+        new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Never,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+            UlElementClasses = new string[] { "pagination", "justify-content-center" },
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+        })
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
+</div>

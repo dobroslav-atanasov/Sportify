@@ -1,0 +1,86 @@
+﻿@using Sportify.Constants
+@using Sportify.Data.ViewModels.Towns
+@model Sportify.Data.ViewModels.Venues.AddVenueViewModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<br />
+
+<h1 class="text-center">Add Venue</h1>
+
+<hr />
+
+<div class="row text-center">
+    <div class="col-md-4 offset-md-4">
+        <form asp-area="" asp-controller="Venues" asp-action="Add" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-landmark"></i></span>
+                    </div>
+                    <input asp-for="Name" class="form-control" placeholder="Venue Name" />
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                    </div>
+                    <input asp-for="Address" class="form-control" placeholder="Address" />
+                </div>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-users"></i></span>
+                    </div>
+                    <input asp-for="Capacity" class="form-control" placeholder="Capacity" />
+                </div>
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageVenueUrl" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-image"></i></span>
+                    </div>
+                    <input asp-for="ImageVenueUrl" class="form-control" placeholder="Venue Image Url" />
+                </div>
+                <span asp-validation-for="ImageVenueUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TownId" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-city"></i></span>
+                    </div>
+                    <select asp-for="TownId" class="form-control">
+                        <option selected>Select Town</option>
+                        @foreach (var name in this.ViewData[GlobalConstants.Towns] as IEnumerable<TownViewModel>)
+                        {
+                            <option value="@name.Id">@name.Name</option>
+                        }
+                    </select>
+                </div>
+                <span asp-validation-for="TownId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add Venue" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Venues" asp-action="All">Back to all</a>
+</div>
