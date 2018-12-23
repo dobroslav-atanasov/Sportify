@@ -47,7 +47,7 @@
 
         public const string SendMessage_Display_Content = "Content";
 
-        // Oraganizations
+        // Organizations
         public const int MinOrganizationNameLength = 3;
 
         public const string OrganizationNameLengthErrorMessage = "The {0} must be at least {1} characters long!";
@@ -136,5 +136,28 @@
         public const string CreateAccount_Display_Country = "Country";
 
         public const string UpdateAccount_Display_PhoneNumber = "Phone Number";
+
+        // Venues
+        public const int MinVenueNameLength = 3;
+
+        public const int MinVenueCapacity = 1;
+
+        public const int MaxVenueCapacity = 100000;
+
+        public const string VenueNameLengthErrorMessage = "The {0} must be at least {1} characters long!";
+
+        public const string AddVenue_Regex_Name = "[a-zA-z0-9-\\s]+";
+
+        public const string VenueNameInvalidSymbolsErrorMessage = "Venue name contains invalid symbols!";
+
+        public const string AddVenue_Display_Name = "Name";
+
+        public const string AddVenue_Display_Address = "Address";
+
+        public const string AddVenue_Display_Capacity = "Capacity";
+
+        public const string AddVenue_Display_ImageUrl = "Image Url";
+
+        public const string AddVenue_Display_Town = "Town";
     }
 }

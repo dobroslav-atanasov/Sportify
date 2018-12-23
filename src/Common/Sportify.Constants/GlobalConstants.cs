@@ -28,6 +28,10 @@
 
         public const string Participate = "Participate";
 
+        public const string Towns = "Towns";
+
+
+
         // Messages
         public const string TownWasUpdated = "Town was updated successfully!";
 
@@ -40,6 +44,10 @@
         public const string DisciplineWasUpdated = "Discipline was updated successfully!";
 
         public const string DisciplineWasNotUpdated = "Discipline was not updated";
+
+        public const string VenueWasUpdated = "Venue was updated successfully!";
+
+        public const string VenueWasNotUpdated = "Venue was not updated";
 
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
