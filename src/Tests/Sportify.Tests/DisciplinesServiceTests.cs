@@ -108,7 +108,7 @@
             // Act
             var discipline = service.GetDisciplineById(1);
 
-            // Expected Sport
+            // Expected Discipline
             var expectedDiscipline = new DisciplineViewModel()
             {
                 Id = 1,
@@ -144,7 +144,7 @@
                 SportId = 5
             });
 
-            // Expected Sport
+            // Expected Discipline
             var expectedDiscipline = new DisciplineViewModel
             {
                 Id = 1,
