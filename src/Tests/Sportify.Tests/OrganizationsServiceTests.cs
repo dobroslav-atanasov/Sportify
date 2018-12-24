@@ -23,6 +23,7 @@ namespace Sportify.Tests
             // Act
             var organization = service.Create(new CreateOrganizationViewModel
             {
+                Abbreviation = "AAA",
                 Name = "Test",
                 Description = "Test Description"
             }, "George");
@@ -31,6 +32,7 @@ namespace Sportify.Tests
             var expectedOrganization = new Organization
             {
                 Id = 1,
+                Abbreviation = "AAA",
                 Name = "Test",
                 Description = "Test Description",
             };
