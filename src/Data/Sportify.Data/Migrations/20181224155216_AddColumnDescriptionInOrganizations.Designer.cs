@@ -10,8 +10,8 @@ using Sportify.Data;
 namespace Sportify.Data.Migrations
 {
     [DbContext(typeof(SportifyDbContext))]
-    [Migration("20181217073707_AddColumnNameInMessages")]
-    partial class AddColumnNameInMessages
+    [Migration("20181224155216_AddColumnDescriptionInOrganizations")]
+    partial class AddColumnDescriptionInOrganizations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -202,9 +202,13 @@ namespace Sportify.Data.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
 
                     b.Property<DateTime>("PublishedOn");
+
+                    b.Property<string>("Subject");
 
                     b.Property<string>("UserId");
 
@@ -220,6 +224,8 @@ namespace Sportify.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abbreviation");
 
                     b.Property<string>("Description");
 

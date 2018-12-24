@@ -223,6 +223,8 @@ namespace Sportify.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Abbreviation");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");

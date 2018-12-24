@@ -1,22 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Sportify.Data.Migrations
+﻿namespace Sportify.Data.Migrations
 {
-    public partial class AddColumnNameInMessages : Migration
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    public partial class AddColumnDescriptionInOrganizations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Name",
-                table: "Messages",
+                "Description",
+                "Organizations",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Name",
-                table: "Messages");
+                "Description",
+                "Organizations");
         }
     }
 }

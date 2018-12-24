@@ -12,6 +12,8 @@
 
         public int Id { get; set; }
 
+        public string Abbreviation { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -23,9 +25,8 @@
 
         public bool Equals(Organization other)
         {
-            return this.Id == other.Id
-                && this.Name == other.Name
-                && this.Description == other.Description;
+            return this.Id == other.Id && this.Abbreviation == other.Abbreviation && 
+                   this.Name == other.Name && this.Description == other.Description;
         }
     }
 }

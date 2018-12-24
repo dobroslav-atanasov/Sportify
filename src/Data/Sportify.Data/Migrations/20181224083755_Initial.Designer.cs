@@ -10,7 +10,7 @@ using Sportify.Data;
 namespace Sportify.Data.Migrations
 {
     [DbContext(typeof(SportifyDbContext))]
-    [Migration("20181213084259_Initial")]
+    [Migration("20181224083755_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,7 +202,13 @@ namespace Sportify.Data.Migrations
 
                     b.Property<string>("Content");
 
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
+
                     b.Property<DateTime>("PublishedOn");
+
+                    b.Property<string>("Subject");
 
                     b.Property<string>("UserId");
 
@@ -219,7 +225,7 @@ namespace Sportify.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Abbreviation");
 
                     b.Property<string>("Name");
 

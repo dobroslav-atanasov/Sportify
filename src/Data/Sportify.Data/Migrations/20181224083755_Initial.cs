@@ -239,6 +239,9 @@
                         .Annotation("SqlServer:ValueGenerationStrategy",
                             SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Subject = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     PublishedOn = table.Column<DateTime>(nullable: false)
                 },
@@ -260,8 +263,8 @@
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy",
                             SqlServerValueGenerationStrategy.IdentityColumn),
+                    Abbreviation = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
                     PresidentId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
