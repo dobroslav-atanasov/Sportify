@@ -1,13 +1,13 @@
 ﻿namespace Sportify.Web.Controllers
 {
+    using Constants;
     using Data.ViewModels.Organizations;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using Constants;
     using X.PagedList;
 
-    public class OrganizationsController : Microsoft.AspNetCore.Mvc.Controller
+    public class OrganizationsController : Controller
     {
         private readonly IOrganizationsService organizationsService;
 

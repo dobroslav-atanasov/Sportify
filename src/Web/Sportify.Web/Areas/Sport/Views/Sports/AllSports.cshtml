@@ -6,7 +6,7 @@
 @{
     ViewData["Title"] = "Sports";
     var rows = Math.Floor(Model.Count / 3.0);
-    int temp = 0;
+    int temp = 1;
 }
 
 <br />
@@ -16,35 +16,35 @@
 @for (int row = 0; row <= rows; row++)
 {
     <div class="row">
-        @for (int col = temp; col < @Model.Count; col++)
+        @for (int col = temp; col <= @Model.Count; col++)
         {
             <div class="col-md-4">
                 <div class="card text-center" style="width: 20rem;">
-                    <img class="card-img-top" src="@Model[col].ImageSportUrl" alt="@Model[col].Name">
+                    <img class="card-img-top" src="@Model[col - 1].ImageSportUrl" alt="@Model[col - 1].Name">
                     <div class="card-body">
-                        <h5 class="card-title">@Model[col].Name</h5>
-                        @if (Model[col].Description.Length >= 50)
+                        <h5 class="card-title">@Model[col - 1].Name</h5>
+                        @if (Model[col - 1].Description.Length >= 50)
                         {
-                            <p class="card-text">@Model[col].Description.Substring(0, 50)...</p>
+                            <p class="card-text">@Model[col - 1].Description.Substring(0, 50)...</p>
                         }
                         else
                         {
-                            <p class="card-text">@Model[col].Description</p>
+                            <p class="card-text">@Model[col - 1].Description</p>
                         }
-                        <a asp-area="Sport" asp-controller="Sports" asp-action="Details" asp-route-id="@Model[col].Id" class="btn btn-primary">Go to @Model[col].Name</a>
+                        <a asp-area="Sport" asp-controller="Sports" asp-action="Details" asp-route-id="@Model[col - 1].Id" class="btn btn-primary">Go to @Model[col - 1].Name</a>
                     </div>
                 </div>
             </div>
 
-             if (col == 2)
-             {
-                 temp += 3;
-                 break;
-             }
+            if (col % 3 == 0)
+            {
+                temp += 3;
+                break;
+            }
         }
     </div>
 
-    <br/>
+    <br />
 }
 
 <div class="text-center">

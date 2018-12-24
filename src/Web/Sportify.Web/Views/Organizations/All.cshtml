@@ -1,42 +1,55 @@
 ﻿@using X.PagedList
 @using X.PagedList.Mvc.Common
 @using X.PagedList.Mvc.Core
+
 @model IEnumerable<Sportify.Data.ViewModels.Organizations.OrganizationViewModel>
 
 @{
     ViewData["Title"] = "All";
 }
 
-<h2>All</h2>
+<br />
 
-<table class="table">
+<h1 class="text-center">Organizations</h1>
+
+<br />
+
+<table class="table mx-auto table-hover">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
+        <tr class="row table-primary">
+            <th class="col-md-3 text-center">
+                Abbreviation
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.President)
+            <th class="col-md-3 text-center">
+                Organization Name
             </th>
-            <th></th>
+            <th class="col-md-3 text-center">
+                President
+            </th>
+            <th class="col-md-3 text-center">
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.President)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var organization in Model)
+        {
+            <tr class="row table-dark">
+                <td class="col-md-3 text-center">
+                    @organization.Abbreviation
+                </td>
+                <td class="col-md-3 text-center">
+                    @organization.Name
+                </td>
+                <td class="col-md-3 text-center">
+                    @organization.President
+                </td>
+                <td class="col-md-3 text-center">
+                    <a asp-area="" asp-controller="Organizations" asp-action="Details" asp-route-id="@organization.Id" class="btn btn-success">Details</a>
+                    <a asp-area="" asp-controller="Organizations" asp-action="Delete" asp-route-id="@organization.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
