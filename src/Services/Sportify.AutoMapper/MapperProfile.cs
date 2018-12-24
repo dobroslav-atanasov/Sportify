@@ -54,7 +54,7 @@
             this.CreateMap<Organization, CreateOrganizationViewModel>().ReverseMap();
 
             this.CreateMap<Organization, OrganizationViewModel>()
-                .ForMember(ovm => ovm.President, o => o.MapFrom(x => x.President.UserName))
+                .ForMember(ovm => ovm.President, o => o.MapFrom(x => $"{x.President.FirstName} {x.President.LastName}"))
                 .ReverseMap();
             
             // Sports
