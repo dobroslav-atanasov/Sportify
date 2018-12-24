@@ -58,11 +58,17 @@
 
         public const string CreateOrganization_Display_Name = "Name";
 
-        public const string CreateOrganization_Regex_Description = "[a-zA-z0-9-.\\s]+";
+        public const int MinOrganizationAbbreviationLength = 2;
+
+        public const string OrganizationAbbreviationLengthErrorMessage = "The {0} must be at least {1} characters long!";
+
+        public const string OrganizationAbbreviationInvalidSymbolsErrorMessage = "Organization abbreviation contains invalid symbols!";
+        
+        public const string CreateOrganization_Regex_Abbreviation = "[A-Z]+";
+
+        public const string CreateOrganization_Display_Abbreviation = "Abbreviation";
 
         public const string CreateOrganization_Display_Description = "Description";
-
-        public const string OrganizationDescriptionInvalidSymbolsErrorMessage = "Organization description contains invalid symbols!";
 
         // Sports
         public const int MinSportNameLength = 3;
