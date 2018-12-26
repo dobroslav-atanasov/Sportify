@@ -15,5 +15,9 @@
         OrganizationViewModel UpdateOrganization(OrganizationViewModel model);
 
         bool CheckUserHasOrganization(string username);
+
+        OrganizationViewModel GetOrganizationById(int id);
+
+        void DeleteOrganization(OrganizationViewModel model);
     }
 }

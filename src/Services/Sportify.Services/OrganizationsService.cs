@@ -82,5 +82,29 @@
         {
             return this.Context.Organizations.Any(o => o.President.UserName == username);
         }
+
+        public OrganizationViewModel GetOrganizationById(int id)
+        {
+            var organization = this.Context
+                .Organizations
+                .FirstOrDefault(o => o.Id == id);
+
+            var organizationViewModel = this.Mapper.Map<OrganizationViewModel>(organization);
+
+            return organizationViewModel;
+        }
+
+        public void DeleteOrganization(OrganizationViewModel model)
+        {
+            var organization = this.Context
+                .Organizations
+                .FirstOrDefault(d => d.Id == model.Id);
+
+            if (organization != null)
+            {
+                this.Context.Organizations.Remove(organization);
+                this.Context.SaveChanges();
+            }
+        }
     }
 }
