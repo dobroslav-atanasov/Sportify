@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Web.Controllers
 {
     using Constants;
+    using Data.ViewModels.Countries;
     using Data.ViewModels.Venues;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@
     {
         private readonly IVenuesService venuesService;
         private readonly ITownsService townsService;
+        private readonly ICountriesService countriesService;
 
-        public VenuesController(IVenuesService venuesService, ITownsService townsService)
+        public VenuesController(IVenuesService venuesService, ITownsService townsService, ICountriesService countriesService)
         {
             this.venuesService = venuesService;
             this.townsService = townsService;
+            this.countriesService = countriesService;
         }
 
         [Authorize(Roles = Role.AdministratorAndEditor)]
@@ -96,6 +99,20 @@
         {
             this.venuesService.DeleteVenue(model);
             return this.RedirectToAction("All", "Venues", new { area = AreaConstants.Base });
+        }
+
+        public IActionResult AllVenues()
+        {
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult AllVenues(SearchCountryViewModel model)
+        {
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
+            this.ViewData[GlobalConstants.Venues] = this.venuesService.GetAllVenuesByCountryId(model.CountryId);
+            return this.View();
         }
     }
 }

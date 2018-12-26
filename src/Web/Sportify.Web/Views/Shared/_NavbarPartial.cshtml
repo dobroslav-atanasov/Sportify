@@ -5,23 +5,16 @@
 @inject UserManager<User> UserManager
 
 <div class="collapse navbar-collapse" id="navbarResponsive">
-    @if (!this.User.IsInRole(Role.Administrator))
+    @if (!this.User.IsInRole(Role.Administrator) && !this.User.IsInRole(Role.Editor))
     {
         <ul class="nav navbar-nav text-right">
             <li class="nav-link">
                 <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports" class="nav-link"><i class="fas fa-futbol"></i> Sports</a>
             </li>
-            @*<li class="nav-link">
-                <a asp-area="" asp-controller="Venues" asp-action="All" class="nav-link"><i class="fas fa-landmark"></i> Venues</a>
-            </li>*@
+            <li class="nav-link">
+                <a asp-area="" asp-controller="Venues" asp-action="AllVenues" class="nav-link"><i class="fas fa-landmark"></i> Venues</a>
+            </li>
         </ul>
-        @*<div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-futbol"></i> Sports
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            </div>
-        </div>*@
     }
 
     @if (SignInManager.IsSignedIn(User))
@@ -38,7 +31,7 @@
         {
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)!</a>
+                    <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>

@@ -1,0 +1,68 @@
+﻿@using Sportify.Constants
+@using Sportify.Data.ViewModels.Countries
+@using Sportify.Data.ViewModels.Venues
+
+@model Sportify.Data.ViewModels.Countries.SearchCountryViewModel
+
+@{
+    ViewData["Title"] = "AllVenues";
+}
+
+<br />
+
+<h1 class="text-center text-primary">Select Country</h1>
+
+<br />
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-area="" asp-controller="Venues" asp-action="AllVenues" class="form-inline" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <select asp-for="CountryId" class="form-control">
+                    <option selected>Select Country</option>
+                    @foreach (var name in this.ViewData[GlobalConstants.Countries] as IEnumerable<CountrySelectViewModel>)
+                    {
+                        <option value="@name.Id">@name.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+
+@if (this.ViewData.ContainsKey(GlobalConstants.Venues))
+{
+    foreach (var venue in this.ViewData[GlobalConstants.Venues] as IEnumerable<VenueViewModel>)
+    {
+        <hr style="height: 0.5px; background-color:#DF691A" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Venue:</h4>
+                <p> @venue.Name</p>
+                <h4>Address:</h4>
+                <p>@venue.Address</p>
+                <h4>Capacity:</h4>
+                <p>@venue.Capacity</p>
+                <h4>Town:</h4>
+                <p>@venue.Town</p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="@venue.ImageVenueUrl" alt="@venue.Name" width="500" />
+            </div>
+        </div>
+    }
+}
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
+</div>

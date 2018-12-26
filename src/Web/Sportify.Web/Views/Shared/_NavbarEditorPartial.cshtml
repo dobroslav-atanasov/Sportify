@@ -8,7 +8,7 @@
         <a asp-area="Sport" asp-controller="Sports" asp-action="AllSports" class="nav-link"><i class="fas fa-futbol"></i> Sports</a>
     </li>
     <li class="nav-link">
-        <a asp-area="" asp-controller="Venues" asp-action="All" class="nav-link"><i class="fas fa-landmark"></i> Venues</a>
+        <a asp-area="" asp-controller="Venues" asp-action="AllVenues" class="nav-link"><i class="fas fa-landmark"></i> Venues</a>
     </li>
     <li class="nav-link">
         <a asp-area="" asp-controller="Organizations" asp-action="Create" class="nav-link"><i class="fas fa-briefcase"></i> Organizations</a>
@@ -27,7 +27,10 @@
     </ul>*@
 <ul class="nav navbar-nav ml-auto">
     <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount"><i class="fas fa-user-edit"></i> Editor - @UserManager.GetUserName(User)!</a>
+        <a class="nav-link" asp-area="" asp-controller="Organizations" asp-action="Edit"><i class="fas fa-business-time"></i> My Organization</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount"><i class="fas fa-user-edit"></i> Editor - @UserManager.GetUserName(User)</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>

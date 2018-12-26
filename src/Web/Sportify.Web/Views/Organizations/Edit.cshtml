@@ -1,0 +1,74 @@
+﻿@using Sportify.Constants
+
+@model Sportify.Data.ViewModels.Organizations.OrganizationViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+
+<h1 class="text-center">Edit</h1>
+
+@if (this.ViewData.ContainsKey(GlobalConstants.Error))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+        <strong>@this.ViewData[GlobalConstants.Error]</strong>
+    </div>
+}
+@if (this.ViewData.ContainsKey(GlobalConstants.Message))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
+        <strong>@this.ViewData[GlobalConstants.Message]</strong>
+    </div>
+}
+
+<hr />
+
+<div class="row text-center">
+    <div class="col-md-4 offset-md-4">
+        <form asp-area="" asp-controller="Organizations" asp-action="Edit" method="post">
+            <input asp-for="Id" class="form-control" hidden/>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Abbreviation" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-autoprefixer"></i></span>
+                    </div>
+                    <input asp-for="Abbreviation" class="form-control" placeholder="Abbreviation"/>
+                </div>
+                <span asp-validation-for="Abbreviation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                    </div>
+                    <input asp-for="Name" class="form-control" placeholder="Organization Name"/>
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-font"></i></span>
+                    </div>
+                    <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                </div>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update Organization" class="btn btn-default"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
+</div>
