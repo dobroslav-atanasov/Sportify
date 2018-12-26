@@ -58,5 +58,173 @@ namespace Sportify.Tests
             // Assert
             Assert.Equal(3, result);
         }
+
+        [Fact]
+        public void GetOrganizationByUser_ShouldReturnCorrectOrganizationViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new OrganizationsService(context, this.Mapper, userManager, null);
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description",
+            }, "George");
+
+            // Act
+            var organization = service.GetOrganizationByUser("George");
+
+            // Expected Sport
+            var expectedOrganization = new OrganizationViewModel()
+            {
+                Id = 1,
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description"
+            };
+
+            // Assert
+            Assert.True(organization.Equals(expectedOrganization));
+        }
+
+        [Fact]
+        public void GetOrganizationByUser_ShouldReturnNull()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new OrganizationsService(context, this.Mapper, userManager, null);
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description",
+            }, "George");
+
+            // Act
+            var organization = service.GetOrganizationByUser("Peter");
+
+            // Assert
+            Assert.Null(organization);
+        }
+
+        [Fact]
+        public void UpdateOrganization_ShouldReturnCorrectOrganizationViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new OrganizationsService(context, this.Mapper, userManager, null);
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description",
+            }, "George");
+
+            // Act
+            var organization = service.UpdateOrganization(new OrganizationViewModel()
+            {
+                Id = 1,
+                Abbreviation = "FIS New",
+                Name = "First Test",
+                Description = "Test Description New",
+            });
+
+            // Expected Venue
+            var expectedOrganization = new OrganizationViewModel()
+            {
+                Id = 1,
+                Abbreviation = "FIS New",
+                Name = "First Test",
+                Description = "Test Description New",
+            };
+
+            // Assert
+            Assert.True(organization.Equals(expectedOrganization));
+        }
+
+        [Fact]
+        public void UpdateOrganization_ShouldReturnNull()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new OrganizationsService(context, this.Mapper, userManager, null);
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description",
+            }, "George");
+
+            // Act
+            var organization = service.UpdateOrganization(new OrganizationViewModel()
+            {
+                Id = 5,
+                Abbreviation = "FIS New",
+                Name = "First Test",
+                Description = "Test Description New",
+            });
+
+            // Assert
+            Assert.Null(organization);
+        }
+
+        [Fact]
+        public void CheckUserHasOrganization_ShouldReturnTrue()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new OrganizationsService(context, this.Mapper, userManager, null);
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description",
+            }, "George");
+
+            // Act
+            var result = service.CheckUserHasOrganization("George");
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void CheckUserHasOrganization_ShouldReturnFalse()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new OrganizationsService(context, this.Mapper, userManager, null);
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description",
+            }, "George");
+
+            // Act
+            var result = service.CheckUserHasOrganization("Peter");
+
+            // Assert
+            Assert.False(result);
+        }
     }
 }

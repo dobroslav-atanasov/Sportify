@@ -196,5 +196,45 @@
             // Assert
             Assert.Equal(2, result);
         }
+
+        [Fact]
+        public void GetAllVenuesByCountryId_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new VenuesService(context, this.Mapper, null, null);
+            context.Towns.Add(new Town { CountryId = 1 });
+            context.SaveChanges();
+
+            service.AddVenue(new AddVenueViewModel()
+            {
+                Name = "Venue Test",
+                Capacity = 5000,
+                ImageVenueUrl = "Venue Image Url",
+                TownId = 1
+            });
+
+            service.AddVenue(new AddVenueViewModel()
+            {
+                Name = "Second Venue Test",
+                Capacity = 1000,
+                ImageVenueUrl = "Venue Image Url",
+                TownId = 2
+            });
+
+            service.AddVenue(new AddVenueViewModel()
+            {
+                Name = "Third Venue Test",
+                Capacity = 200,
+                ImageVenueUrl = "Venue Image Url",
+                TownId = 1
+            });
+
+            // Act
+            var result = service.GetAllVenuesByCountryId(1).Count();
+
+            // Assert
+            Assert.Equal(2, result);
+        }
     }
 }
