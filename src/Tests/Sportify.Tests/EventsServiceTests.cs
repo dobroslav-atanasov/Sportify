@@ -217,9 +217,226 @@
             // Act
             service.LeaveUserFromEvent("test1", 1);
             var result = context.Participants.Count();
-            
+
             // Assert
             Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void GetEventsByUser_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+            context.Users.Add(new User
+            {
+                Id = "test1",
+                UserName = "George"
+            });
+
+            context.Organizations.Add(new Organization
+            {
+                Name = "FIS",
+                PresidentId = "test1"
+            });
+            context.SaveChanges();
+
+            service.Create(new CreateEventViewModel
+            {
+                EventName = "First Event",
+                Date = DateTime.ParseExact("25-05-2019 10:00", "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                VenueId = 1,
+                DisciplineId = 1,
+                NumberOfParticipants = 10
+            });
+
+            service.Create(new CreateEventViewModel
+            {
+                EventName = "Second Event",
+                Date = DateTime.ParseExact("05-10-2019 11:00", "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 2,
+                VenueId = 2,
+                DisciplineId = 2,
+                NumberOfParticipants = 20
+            });
+
+            service.Create(new CreateEventViewModel
+            {
+                EventName = "Third Event",
+                Date = DateTime.ParseExact("10-01-2019 09:00", "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                VenueId = 2,
+                DisciplineId = 2,
+                NumberOfParticipants = 50
+            });
+
+            // Act
+            var result = service.GetEventsByUser("George").Count();
+
+            // Assert
+            Assert.Equal(2, result);
+        }
+
+        [Fact]
+        public void GetEventForUpdateById_ShouldReturnCorrectUpdateEventViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            context.Events.Add(new Event
+            {
+                EventName = "Test",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 10
+            });
+            context.SaveChanges();
+
+            // Act
+            var @event = service.GetEventForUpdateById(1);
+
+            // Expected UpdateEventViewModel
+            var expectedViewModel = new UpdateEventViewModel()
+            {
+                Id = 1,
+                EventName = "Test",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 10
+            };
+
+            // Assert
+            Assert.True(@event.Equals(expectedViewModel));
+        }
+
+        [Fact]
+        public void UpdateEvent_ShouldReturnCorrectUpdateEventViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            context.Events.Add(new Event
+            {
+                EventName = "Test",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 10
+            });
+            context.SaveChanges();
+
+            // Act
+            var @event = service.UpdateEvent(new UpdateEventViewModel()
+            {
+                Id = 1,
+                EventName = "New Name",
+                Date = DateTime.ParseExact("30-12-2018 11:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 12,
+                DisciplineId = 2,
+                VenueId = 12,
+                NumberOfParticipants = 20
+            });
+
+            // Expected UpdateEventViewModel
+            var expectedEvent = new UpdateEventViewModel()
+            {
+                Id = 1,
+                EventName = "New Name",
+                Date = DateTime.ParseExact("30-12-2018 11:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 12,
+                DisciplineId = 2,
+                VenueId = 12,
+                NumberOfParticipants = 20
+            };
+
+            // Assert
+            Assert.True(@event.Equals(expectedEvent));
+        }
+
+        [Fact]
+        public void UpdateEvent_ShouldReturnNull()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            context.Events.Add(new Event
+            {
+                EventName = "Test",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 10
+            });
+            context.SaveChanges();
+
+            // Act
+            var @event = service.UpdateEvent(new UpdateEventViewModel()
+            {
+                EventName = "Test",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 10
+            });
+
+            // Assert
+            Assert.Null(@event);
+        }
+
+        [Fact]
+        public void DeleteEvent_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            service.Create(new CreateEventViewModel
+            {
+                EventName = "First Event",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 10
+            });
+
+            service.Create(new CreateEventViewModel
+            {
+                EventName = "Second Event",
+                Date = DateTime.ParseExact("20-05-2018 12:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 2,
+                DisciplineId = 2,
+                VenueId = 3,
+                NumberOfParticipants = 20
+            });
+
+            service.Create(new CreateEventViewModel
+            {
+                EventName = "Third Event",
+                Date = DateTime.ParseExact("02-12-2019 12:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 2,
+                DisciplineId = 2,
+                VenueId = 2,
+                NumberOfParticipants = 10
+            });
+
+            // Act
+            service.DeleteEvent(new EventViewModel { Id = 1 });
+            var result = context.Events.Count();
+
+            // Assert
+            Assert.Equal(2, result);
         }
     }
 }
