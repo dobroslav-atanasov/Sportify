@@ -49,6 +49,12 @@
 
         public const string VenueWasNotUpdated = "Venue was not updated";
 
+        public const string OrganizationWasUpdated = "Organization was updated successfully!";
+
+        public const string OrganizationWasNotUpdated = "Organization was not updated";
+
+
+
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
 
