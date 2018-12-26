@@ -40,5 +40,47 @@
 
             return organizationsViewModel;
         }
+
+        public OrganizationViewModel GetOrganizationByUser(string username)
+        {
+            var organization = this.Context
+                .Organizations
+                .FirstOrDefault(o => o.President.UserName == username);
+
+            if (organization == null)
+            {
+                return null;
+            }
+
+            var organizationViewModel = this.Mapper.Map<OrganizationViewModel>(organization);
+
+            return organizationViewModel;
+        }
+
+        public OrganizationViewModel UpdateOrganization(OrganizationViewModel model)
+        {
+            var organization = this.Context
+                .Organizations
+                .FirstOrDefault(o => o.Id == model.Id);
+
+            if (organization == null)
+            {
+                return null;
+            }
+
+            organization.Abbreviation = model.Abbreviation;
+            organization.Name = model.Name;
+            organization.Description = model.Description;
+            this.Context.SaveChanges();
+
+            var organizationViewModel = this.Mapper.Map<OrganizationViewModel>(organization);
+
+            return organizationViewModel;
+        }
+
+        public bool CheckUserHasOrganization(string username)
+        {
+            return this.Context.Organizations.Any(o => o.President.UserName == username);
+        }
     }
 }

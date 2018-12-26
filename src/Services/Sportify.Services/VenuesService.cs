@@ -8,6 +8,7 @@
     using global::AutoMapper;
     using Interfaces;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
 
     public class VenuesService : BaseService, IVenuesService
     {
@@ -52,7 +53,7 @@
         {
             var venue = this.Context
                 .Venues
-                .FirstOrDefault(s => s.Id == model.Id);
+                .FirstOrDefault(v => v.Id == model.Id);
 
             if (venue == null)
             {
@@ -66,9 +67,9 @@
             venue.TownId = model.TownId;
             this.Context.SaveChanges();
 
-            var disciplineViewModel = this.Mapper.Map<VenueViewModel>(venue);
+            var venueViewModel = this.Mapper.Map<VenueViewModel>(venue);
 
-            return disciplineViewModel;
+            return venueViewModel;
         }
 
         public void DeleteVenue(VenueViewModel model)
@@ -82,6 +83,19 @@
                 this.Context.Venues.Remove(venue);
                 this.Context.SaveChanges();
             }
+        }
+
+        public IEnumerable<VenueViewModel> GetAllVenuesByCountryId(int countryId)
+        {
+            var venues = this.Context
+                .Venues
+                .Where(v => v.Town.CountryId == countryId)
+                .OrderBy(v => v.Name)
+                .AsQueryable();
+
+            var venueViewModel = this.Mapper.Map<IQueryable<Venue>, IEnumerable<VenueViewModel>>(venues);
+
+            return venueViewModel;
         }
     }
 }

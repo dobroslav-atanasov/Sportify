@@ -15,5 +15,7 @@
         VenueViewModel UpdateVenue(VenueViewModel model);
 
         void DeleteVenue(VenueViewModel model);
+
+        IEnumerable<VenueViewModel> GetAllVenuesByCountryId(int countryId);
     }
 }
