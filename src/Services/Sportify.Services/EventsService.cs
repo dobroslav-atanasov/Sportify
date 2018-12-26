@@ -97,5 +97,66 @@
             this.Context.Remove(participant);
             this.Context.SaveChanges();
         }
+
+        public IEnumerable<EventViewModel> GetEventsByUser(string username)
+        {
+            var events = this.Context
+                .Events
+                .Where(e => e.Organization.President.UserName == username)
+                .OrderBy(e => e.Date)
+                .AsQueryable();
+
+            var eventViewModels = this.Mapper.Map<IQueryable<Event>, IEnumerable<EventViewModel>>(events);
+
+            return eventViewModels;
+        }
+
+        public UpdateEventViewModel GetEventForUpdateById(int id)
+        {
+            var @event = this.Context
+                .Events
+                .FirstOrDefault(e => e.Id == id);
+
+            var eventViewModel = this.Mapper.Map<UpdateEventViewModel>(@event);
+
+            return eventViewModel;
+        }
+
+        public UpdateEventViewModel UpdateEvent(UpdateEventViewModel model)
+        {
+            var @event = this.Context
+                .Events
+                .FirstOrDefault(e => e.Id == model.Id);
+
+            if (@event == null)
+            {
+                return null;
+            }
+
+            @event.EventName = model.EventName;
+            @event.Date = model.Date;
+            @event.OrganizationId = model.OrganizationId;
+            @event.DisciplineId = model.DisciplineId;
+            @event.VenueId = model.VenueId;
+            @event.NumberOfParticipants = model.NumberOfParticipants;
+            this.Context.SaveChanges();
+
+            var eventViewModel = this.Mapper.Map<UpdateEventViewModel>(@event);
+
+            return eventViewModel;
+        }
+
+        public void DeleteEvent(EventViewModel model)
+        {
+            var @event = this.Context
+                .Events
+                .FirstOrDefault(d => d.Id == model.Id);
+
+            if (@event != null)
+            {
+                this.Context.Events.Remove(@event);
+                this.Context.SaveChanges();
+            }
+        }
     }
 }

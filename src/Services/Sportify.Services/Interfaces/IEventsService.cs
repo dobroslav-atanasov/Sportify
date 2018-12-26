@@ -20,5 +20,13 @@
         Participant JoinUserToEvent(string userId, int eventId);
 
         void LeaveUserFromEvent(string userId, int eventId);
+
+        IEnumerable<EventViewModel> GetEventsByUser(string username);
+
+        UpdateEventViewModel GetEventForUpdateById(int id);
+
+        UpdateEventViewModel UpdateEvent(UpdateEventViewModel model);
+
+        void DeleteEvent(EventViewModel model);
     }
 }

@@ -1,6 +1,8 @@
 ﻿namespace Sportify.AutoMapper
 {
     using System.Globalization;
+
+    using Constants;
     using Data.Models;
     using Data.ViewModels.Countries;
     using Data.ViewModels.Disciplines;
@@ -31,9 +33,11 @@
                 .ForMember(evm => evm.DisciplineId, e => e.MapFrom(x => x.DisciplineId))
                 .ReverseMap();
 
+            this.CreateMap<Event, UpdateEventViewModel>().ReverseMap();
+
             this.CreateMap<Event, EventViewModel>()
-                .ForMember(evm => evm.Date, e => e.MapFrom(x => x.Date.ToString($"dd MMMM yyyy, dddd", CultureInfo.InvariantCulture)))
-                .ForMember(evm => evm.Time, e => e.MapFrom(x => x.Date.ToString("HH:mm")))
+                .ForMember(evm => evm.Date, e => e.MapFrom(x => x.Date.ToString(GlobalConstants.DateToString, CultureInfo.InvariantCulture)))
+                .ForMember(evm => evm.Time, e => e.MapFrom(x => x.Date.ToString(GlobalConstants.TimeToString)))
                 .ForMember(evm => evm.ImageVenueUrl, e => e.MapFrom(x => x.Venue.ImageVenueUrl))
                 .ForMember(evm => evm.Organization, e => e.MapFrom(x => x.Organization.Name))
                 .ForMember(evm => evm.Sport, e => e.MapFrom(x => x.Discipline.Sport.Name))
@@ -47,7 +51,7 @@
             
             this.CreateMap<Message, MessageViewModel>()
                 .ForMember(mvm => mvm.Username, m => m.MapFrom(x => x.User.UserName))
-                .ForMember(mvm => mvm.PublishedOn, m => m.MapFrom(x => x.PublishedOn.ToString("dd-MM-yyyy HH:mm:ss")))
+                .ForMember(mvm => mvm.PublishedOn, m => m.MapFrom(x => x.PublishedOn.ToString(GlobalConstants.PublishedOn)))
                 .ReverseMap();
 
             // Organizations
