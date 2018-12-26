@@ -1,20 +1,13 @@
 ﻿namespace Sportify.Web.Areas.Administrator.Controllers
 {
+    using Constants;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Services.Interfaces;
 
-    [Area("Administrator")]
+    [Area(AreaConstants.Administrator)]
     public class HomeController : Controller
     {
-        private readonly IUsersService usersService;
-
-        public HomeController(IUsersService usersService)
-        {
-            this.usersService = usersService;
-        }
-
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Index()
         {
             return this.View();

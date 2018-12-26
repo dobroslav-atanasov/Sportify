@@ -4,11 +4,11 @@
 
 <br />
 
-<h1 class="text-center">SPORTify</h1>
+<h1 class="text-center text-primary">SPORTify</h1>
 
-<h2 class="text-center">Welcome Administrator - @this.User.Identity.Name</h2>
+<h2 class="text-center text-primary">Welcome Administrator - @this.User.Identity.Name</h2>
 
-<hr />
+<hr style="height: 0.5px; background-color:#DF691A" />
 
 <div class="row text-center">
     <div class="col-md-3">
@@ -96,85 +96,14 @@
     <div class="col-md-3">
         <div class="card text-center" style="width: 15rem;">
             <div class="text-center">
-                <i class="fas fa-calendar fa-10x"></i>
+                <i class="fas fa-calendar-alt fa-10x"></i>
             </div>
             <div class="card-body">
                 <h2 class="card-title text-center">Events</h2>
-                <a href="#" class="btn btn-primary">All Events</a>
+                <a asp-area="" asp-controller="Events" asp-action="All" class="btn btn-primary">All Events</a>
             </div>
         </div>
     </div>
 </div>
 
 <br />
-
-
-@*<div class="row">
-    <div class="col-md-4">
-        <a asp-area="Identity" asp-controller="Users" asp-action="All">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title text-center"><i class="fas fa-users"></i> Users</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4">
-        <a asp-area="Administrator" asp-controller="Towns" asp-action="All">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title text-center"><i class="fas fa-city"></i> Towns</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4">
-        <a asp-area="Sport" asp-controller="Sports" asp-action="All">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title text-center"><i class="fas fa-futbol"></i> Sports</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <a asp-area="Sport" asp-controller="Disciplines" asp-action="All">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title text-center"><i class="fas fa-table-tennis"></i> Disciplines</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4">
-        <a asp-area="" asp-controller="Organizations" asp-action="All">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title text-center"><i class="fas fa-briefcase"></i> Organizations</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4">
-        <a asp-area="" asp-controller="Venues" asp-action="AllVenues">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title text-center"><i class="fas fa-landmark"></i> Venues</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <a asp-area="" asp-controller="Events" asp-action="All">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title text-center"><i class="fas fa-calendar"></i> Events</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>*@

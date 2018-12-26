@@ -9,11 +9,11 @@
 
 <br/>
 
-<h1 class="text-center">Create Account</h1>
+<h1 class="text-center text-primary">Create Account</h1>
 
 @if (this.ViewData.ContainsKey(GlobalConstants.Error))
 {
-    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+    <div class="col-md-6 offset-3 alert alert-danger text-center">
         <strong>@this.ViewData[GlobalConstants.Error]</strong>
     </div>
 }

@@ -44,7 +44,7 @@
             }
 
             this.organizationsService.Create(model, this.User.Identity.Name);
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home", new { area = AreaConstants.Base });
         }
 
         [Authorize(Roles = Role.Administrator)]
@@ -91,6 +91,25 @@
 
             this.ViewData[GlobalConstants.Message] = GlobalConstants.OrganizationWasUpdated;
             return this.View();
+        }
+
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Delete(int id)
+        {
+            var organization = this.organizationsService.GetOrganizationById(id);
+            if (organization == null)
+            {
+                return this.View("InvalidPage", "Organizations");
+            }
+            return this.View(organization);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        public IActionResult Delete(OrganizationViewModel model)
+        {
+            this.organizationsService.DeleteOrganization(model);
+            return this.RedirectToAction("All", "Organizations", new { area = AreaConstants.Base });
         }
     }
 }
