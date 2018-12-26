@@ -1,0 +1,55 @@
+﻿@model Sportify.Data.ViewModels.Events.EventViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+
+<h1 class="text-center text-primary">@Model.EventName</h1>
+
+<hr style="height: 1px; background-color:#DF691A" />
+
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <h5>Date</h5>
+            <p>@Model.Date</p>
+        </div>
+        <div>
+            <h5>Time</h5>
+            <p>@Model.Time</p>
+        </div>
+        <div>
+            <h5>Sport</h5>
+            <p>@Model.Sport</p>
+        </div>
+        <div>
+            <h5>Discipline</h5>
+            <p>@Model.Discipline</p>
+        </div>
+        <div>
+            <h5>Town</h5>
+            <p>@Model.Town</p>
+        </div>
+        <div>
+            <h5>Venue</h5>
+            <p>@Model.Venue</p>
+        </div>
+        <div>
+            <h5>Number of Participants</h5>
+            <p>@Model.NumberOfParticipants</p>
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+        <div>
+            <img src="@Model.ImageVenueUrl" alt="@Model.EventName" width="500" />
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Events" asp-action="MyEvents">Back to events</a>
+</div>

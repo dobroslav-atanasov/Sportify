@@ -99,7 +99,7 @@
             var organization = this.organizationsService.GetOrganizationById(id);
             if (organization == null)
             {
-                return this.View("InvalidPage", "Organizations");
+                return this.RedirectToPage("InvalidPage", "Home");
             }
             return this.View(organization);
         }

@@ -19,8 +19,9 @@
             <tr class="row">
                 <td class="col-md-1 text-left"><strong>@item.Time</strong></td>
                 <td class="col-md-3 text-left">@item.EventName</td>
-                <td class="col-md-3 text-left">@item.Sport</td>
-                <td class="col-md-3 text-left">@item.Town, @item.Venue</td>
+                <td class="col-md-2 text-left">@item.Sport</td>
+                <td class="col-md-2 text-left">@item.Discipline</td>
+                <td class="col-md-2 text-left">@item.Town, @item.Venue</td>
                 <td class="col-md-2 text-center"><a asp-area="" asp-controller="Events" asp-action="Info" asp-route-id="@item.Id" class="btn btn-primary">Info</a></td>
             </tr>
         </table>
@@ -35,69 +36,5 @@ else
 <br/>
 
 <div class="text-center">
-    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">Back to home</a>
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
 </div>
-
-
-
-
-@*<table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EventName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Organization)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Discipline)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Venue)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NumberOfParticipants)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EventName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Organization)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Discipline)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Venue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfParticipants)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-    }
-        </tbody>
-    </table>*@

@@ -1,0 +1,88 @@
+﻿@model Sportify.Data.ViewModels.Events.EventViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<br />
+
+<h1 class="text-center text-primary">Delete</h1>
+
+<h2 class="text-danger text-center">Are you sure you want to delete @Model.EventName?</h2>
+
+<hr style="height: 1px; background-color:#DF691A" />
+
+<div class="row text-center">
+    <div class="col-md-4 offset-md-4 text-center">
+        <form asp-area="" asp-controller="Events" asp-action="Delete" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EventName" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                    <input asp-for="EventName" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                    </div>
+                    <input asp-for="Date" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Organization" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                    </div>
+                    <input asp-for="Organization" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="Organization" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discipline" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-table-tennis"></i></span>
+                    </div>
+                    <input asp-for="Discipline" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="Discipline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venue" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-landmark"></i></span>
+                    </div>
+                    <input asp-for="Venue" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="Venue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfParticipants" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-users"></i></span>
+                    </div>
+                    <input asp-for="NumberOfParticipants" class="form-control" readonly style="background-color: gray" />
+                </div>
+                <span asp-validation-for="NumberOfParticipants" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Delete Venue" class="btn btn-danger" />
+        </form>
+    </div>
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Events" asp-action="MyEvents">Back to events</a>
+</div>

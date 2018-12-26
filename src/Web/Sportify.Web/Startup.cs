@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Web
 {
     using System;
+
     using AutoMapper;
     using Data;
     using Data.Models;
