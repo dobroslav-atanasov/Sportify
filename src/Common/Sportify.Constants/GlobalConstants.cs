@@ -35,24 +35,35 @@
         // Messages
         public const string TownWasUpdated = "Town was updated successfully!";
 
-        public const string TownWasNotUpdated = "Town was not updated";
+        public const string TownWasNotUpdated = "Town was not updated!";
 
         public const string SportWasUpdated = "Sport was updated successfully!";
 
-        public const string SportWasNotUpdated = "Sport was not updated";
+        public const string SportWasNotUpdated = "Sport was not updated!";
 
         public const string DisciplineWasUpdated = "Discipline was updated successfully!";
 
-        public const string DisciplineWasNotUpdated = "Discipline was not updated";
+        public const string DisciplineWasNotUpdated = "Discipline was not updated!";
 
         public const string VenueWasUpdated = "Venue was updated successfully!";
 
-        public const string VenueWasNotUpdated = "Venue was not updated";
+        public const string VenueWasNotUpdated = "Venue was not updated!";
 
         public const string OrganizationWasUpdated = "Organization was updated successfully!";
 
-        public const string OrganizationWasNotUpdated = "Organization was not updated";
+        public const string OrganizationWasNotUpdated = "Organization was not updated!";
 
+        public const string EventWasUpdated = "Event was updated successfully!";
+
+        public const string EventWasNotUpdated = "Event was not updated!";
+
+
+        // Mapper Profile
+        public const string DateToString = "dd MMMM yyyy, dddd";
+
+        public const string TimeToString = "HH:mm";
+
+        public const string PublishedOn = "dd-MM-yyyy HH:mm:ss";
 
 
 
