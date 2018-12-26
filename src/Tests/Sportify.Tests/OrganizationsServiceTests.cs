@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using Sportify.Data;
-using Sportify.Data.Models;
-using Sportify.Data.ViewModels.Organizations;
-using Sportify.Services;
-using System.Linq;
-using Xunit;
-
-namespace Sportify.Tests
+﻿namespace Sportify.Tests
 {
+    using System.Linq;
+    using Data;
+    using Data.Models;
+    using Data.ViewModels.Organizations;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+    using Services;
+    using Xunit;
+
     public class OrganizationsServiceTests : BaseServiceTests
     {
         [Fact]
@@ -225,6 +225,70 @@ namespace Sportify.Tests
 
             // Assert
             Assert.False(result);
+        }
+
+        [Fact]
+        public void GetOrganizationById_ShouldReturnCorrectOrganizationViewModel()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            var service = new OrganizationsService(context, this.Mapper, userManager, null);
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description",
+            }, "George");
+
+            // Act
+            var organization = service.GetOrganizationById(1);
+
+            // Expected Organization
+            var expectedOrganization = new OrganizationViewModel()
+            {
+                Id = 1,
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description"
+            };
+
+            // Assert
+            Assert.True(organization.Equals(expectedOrganization));
+        }
+
+        [Fact]
+        public void DeleteOrganization_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var userManager = this.ServiceProvider.GetRequiredService<UserManager<User>>();
+            userManager.CreateAsync(new User { UserName = "George" }, "1234").GetAwaiter().GetResult();
+            userManager.CreateAsync(new User { UserName = "Peter" }, "1234").GetAwaiter().GetResult();
+            var service = new OrganizationsService(context, this.Mapper, userManager, null);
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIS",
+                Name = "First Test",
+                Description = "Test Description",
+            }, "George");
+
+            service.Create(new CreateOrganizationViewModel()
+            {
+                Abbreviation = "FIFA",
+                Name = "FIFA Test",
+                Description = "Test Description",
+            }, "Peter");
+
+            // Act
+            service.DeleteOrganization(new OrganizationViewModel() { Id = 1 });
+            var result = context.Organizations.Count();
+
+            // Assert
+            Assert.Equal(1, result);
         }
     }
 }
