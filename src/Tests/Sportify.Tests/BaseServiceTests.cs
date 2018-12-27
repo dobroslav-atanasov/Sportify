@@ -1,18 +1,19 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Sportify.AutoMapper;
-using Sportify.Data;
-using Sportify.Data.Models;
-using Sportify.Services;
-using Sportify.Services.Interfaces;
-using System;
-
-namespace Sportify.Tests
+﻿namespace Sportify.Tests
 {
+    using System;
+
+    using AutoMapper;
+    using Data;
+    using Data.Models;
+    using global::AutoMapper;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Services;
+    using Services.Interfaces;
+
     public class BaseServiceTests
     {
         protected BaseServiceTests()
