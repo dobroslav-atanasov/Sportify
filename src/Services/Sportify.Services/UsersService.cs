@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Data;
     using Data.Models;
     using Data.ViewModels.Users;
@@ -11,12 +12,9 @@
 
     public class UsersService : BaseService, IUsersService
     {
-        private readonly ICountriesService countriesService;
-
-        public UsersService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ICountriesService countriesService)
+        public UsersService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
             : base(context, mapper, userManager, signInManager)
         {
-            this.countriesService = countriesService;
         }
 
         public IEnumerable<UserAdminViewModel> GetAllUsers()

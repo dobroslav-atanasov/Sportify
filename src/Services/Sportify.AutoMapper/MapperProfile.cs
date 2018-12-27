@@ -9,6 +9,7 @@
     using Data.ViewModels.Events;
     using Data.ViewModels.Messages;
     using Data.ViewModels.Organizations;
+    using Data.ViewModels.Participants;
     using Data.ViewModels.Sports;
     using Data.ViewModels.Towns;
     using Data.ViewModels.Users;
@@ -60,6 +61,9 @@
             this.CreateMap<Organization, OrganizationViewModel>()
                 .ForMember(ovm => ovm.President, o => o.MapFrom(x => $"{x.President.FirstName} {x.President.LastName}"))
                 .ReverseMap();
+
+            // Participants
+            this.CreateMap<Participant, ParticipantViewModel>().ReverseMap();
             
             // Sports
             this.CreateMap<Sport, SportViewModel>().ReverseMap();
