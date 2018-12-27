@@ -1,0 +1,82 @@
+﻿@using Sportify.Constants
+@using Sportify.Data.ViewModels.Participants
+
+@model IList<ParticipantViewModel>
+
+@{
+    ViewData["Title"] = "Results";
+    var count = 1;
+}
+
+<br />
+
+<h1 class="text-center text-primary">Set up Results</h1>
+<h2 class="text-center text-primary">@this.ViewData[GlobalConstants.Event]</h2>
+
+@if (this.ViewData.ContainsKey(GlobalConstants.Message))
+{
+    <div class="col-md-6 offset-3 alert alert-success text-center">
+        <strong>@this.ViewData[GlobalConstants.Message]</strong>
+    </div>
+}
+
+<br />
+
+<form asp-area="" asp-controller="Events" asp-action="Results" method="post">
+    <table class="table mx-auto table-hover">
+        <thead>
+            <tr class="row table-primary">
+                <th class="col-md-1 text-center">
+                    #
+                </th>
+                <th class="col-md-3 text-center">
+                    Username
+                </th>
+                <th class="col-md-3 text-center">
+                    Full Name
+                </th>
+                <th class="col-md-5 text-center">
+                    Result
+                </th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr class="row table-dark">
+                <td class="col-md-1 text-center">
+                    @count
+                </td>
+                <td class="col-md-3 text-center">
+                    @Model[i].User.UserName
+                </td>
+                <td class="col-md-3 text-center">
+                    @Model[i].User.FirstName @Model[i].User.LastName
+                </td>
+                <td class="col-md-5 text-center">
+                    <input asp-for="@Model[i].UserId" hidden />
+                    <input asp-for="@Model[i].EventId" hidden />
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                            </div>
+                            <input asp-for="@Model[i].Result" step="0.1" class="form-control" />
+                        </div>
+                        <span asp-validation-for="@Model[i].Result" class="text-danger"></span>
+                    </div>
+                </td>
+            </tr>
+
+            count++;
+        }
+    </table>
+    <div class="form-group text-center">
+        <input type="submit" value="Set Up Results" class="btn btn-primary" />
+    </div>
+</form>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Events" asp-action="MyEvents">Back to events</a>
+</div>

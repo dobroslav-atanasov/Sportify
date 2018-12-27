@@ -50,6 +50,7 @@
             services.AddTransient<IVenuesService, VenuesService>();
             services.AddTransient<IOrganizationsService, OrganizationsService>();
             services.AddTransient<IEventsService, EventsService>();
+            services.AddTransient<IParticipantsService, ParticipantsService>();
 
             // Configure Identity
             services.AddIdentity<User, IdentityRole>()

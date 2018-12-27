@@ -1,9 +1,12 @@
 ﻿namespace Sportify.Web.Controllers
 {
+    using System.Collections.Generic;
+
     using Constants;
     using Data.Models;
     using Data.ViewModels.Countries;
     using Data.ViewModels.Events;
+    using Data.ViewModels.Participants;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -18,9 +21,10 @@
         private readonly IVenuesService venuesService;
         private readonly IEventsService eventsService;
         private readonly ICountriesService countriesService;
+        private readonly IParticipantsService participantsService;
 
         public EventsController(UserManager<User> userManager, IOrganizationsService organizationsService, IDisciplinesService disciplinesService,
-            IVenuesService venuesService, IEventsService eventsService, ICountriesService countriesService)
+            IVenuesService venuesService, IEventsService eventsService, ICountriesService countriesService, IParticipantsService participantsService)
         {
             this.userManager = userManager;
             this.organizationsService = organizationsService;
@@ -28,6 +32,7 @@
             this.venuesService = venuesService;
             this.eventsService = eventsService;
             this.countriesService = countriesService;
+            this.participantsService = participantsService;
         }
 
         [Authorize(Roles = Role.Editor)]
@@ -200,6 +205,37 @@
         {
             this.eventsService.DeleteEvent(model);
             return this.RedirectToAction("MyEvents", "Events", new { area = AreaConstants.Base });
+        }
+
+        [Authorize(Roles = Role.Editor)]
+        public IActionResult Results(int id)
+        {
+            var @event = this.eventsService.GetEventById(id);
+            if (@event == null)
+            {
+                return this.View("InvalidPage");
+            }
+
+            this.ViewData[GlobalConstants.Event] = @event.EventName;
+            var participants = this.participantsService.GetParticipantsInEventId(id);
+            return this.View(participants);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Role.Editor)]
+        public IActionResult Results(int id, IList<ParticipantViewModel> models)
+        {
+            var @event = this.eventsService.GetEventById(id);
+            this.ViewData[GlobalConstants.Event] = @event.EventName;
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(models);
+            }
+
+            var participants = this.participantsService.SetUpResults(id, models);
+            this.ViewData[GlobalConstants.Message] = GlobalConstants.ResultsWereUpdated;
+            return this.View(participants);
         }
     }
 }
