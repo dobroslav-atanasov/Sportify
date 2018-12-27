@@ -12,7 +12,7 @@
         public string UserId { get; set; }
         public virtual User User { get; set; }
 
-        public DateTime UserResult { get; set; }
+        public DateTime? Result { get; set; }
 
         public bool Equals(Participant other)
         {
