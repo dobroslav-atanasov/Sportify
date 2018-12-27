@@ -30,6 +30,8 @@
 
         public const string Towns = "Towns";
 
+        public const string Event = "Event";
+
 
 
         // Messages
@@ -56,6 +58,8 @@
         public const string EventWasUpdated = "Event was updated successfully!";
 
         public const string EventWasNotUpdated = "Event was not updated!";
+
+        public const string ResultsWereUpdated = "The results were updated";
 
 
         // Mapper Profile
