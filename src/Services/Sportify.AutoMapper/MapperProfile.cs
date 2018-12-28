@@ -1,5 +1,6 @@
 ﻿namespace Sportify.AutoMapper
 {
+    using System;
     using System.Globalization;
 
     using Constants;
@@ -10,6 +11,7 @@
     using Data.ViewModels.Messages;
     using Data.ViewModels.Organizations;
     using Data.ViewModels.Participants;
+    using Data.ViewModels.Results;
     using Data.ViewModels.Sports;
     using Data.ViewModels.Towns;
     using Data.ViewModels.Users;
@@ -64,7 +66,29 @@
 
             // Participants
             this.CreateMap<Participant, ParticipantViewModel>().ReverseMap();
-            
+
+            this.CreateMap<Participant, MyEventViewModel>()
+                .ForMember(evm => evm.EventName, p => p.MapFrom(x => x.Event.EventName))
+                .ForMember(evm => evm.Date, p => p.MapFrom(x => x.Event.Date.ToString(GlobalConstants.ShortDateToString, CultureInfo.InvariantCulture)))
+                .ForMember(evm => evm.Time, p => p.MapFrom(x => x.Event.Date.ToString(GlobalConstants.TimeToString)))
+                .ForMember(evm => evm.Sport, p => p.MapFrom(x => x.Event.Discipline.Sport.Name))
+                .ForMember(evm => evm.Discipline, p => p.MapFrom(x => x.Event.Discipline.Name))
+                .ForMember(evm => evm.Town, p => p.MapFrom(x => x.Event.Venue.Town.Name))
+                .ForMember(evm => evm.Venue, p => p.MapFrom(x => x.Event.Venue.Name))
+                .ForMember(evm => evm.RemainingTime, p => p.MapFrom(x => $"{Math.Ceiling((x.Event.Date - DateTime.UtcNow).TotalDays)}{GlobalConstants.RemainingDays}"))
+                .ReverseMap();
+
+            // Results
+            this.CreateMap<Participant, MyResultViewModel>()
+                .ForMember(rvm => rvm.EventName, p => p.MapFrom(x => x.Event.EventName))
+                .ForMember(rvm => rvm.Date, p => p.MapFrom(x => x.Event.Date.ToString(GlobalConstants.ShortDateToString, CultureInfo.InvariantCulture)))
+                .ForMember(rvm => rvm.Time, p => p.MapFrom(x => x.Event.Date.ToString(GlobalConstants.TimeToString)))
+                .ForMember(rvm => rvm.Sport, p => p.MapFrom(x => x.Event.Discipline.Sport.Name))
+                .ForMember(rvm => rvm.Discipline, p => p.MapFrom(x => x.Event.Discipline.Name))
+                .ForMember(rvm => rvm.Result, p => p.MapFrom(x => x.Result.Value.ToString(GlobalConstants.Result, CultureInfo.InvariantCulture)))
+                .ForMember(rvm => rvm.Venue, p => p.MapFrom(x => x.Event.Venue.Name))
+                .ReverseMap();
+
             // Sports
             this.CreateMap<Sport, SportViewModel>().ReverseMap();
 
