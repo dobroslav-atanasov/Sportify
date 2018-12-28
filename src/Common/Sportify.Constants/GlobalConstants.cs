@@ -61,6 +61,8 @@
 
         public const string ResultsWereUpdated = "The results were updated";
 
+        public const string RecoveryEmail = "Account recovery email sent!";
+
 
         // Mapper Profile
         public const string DateToString = "dd MMMM yyyy, dddd";
@@ -69,6 +71,11 @@
 
         public const string PublishedOn = "dd-MM-yyyy HH:mm:ss";
 
+        public const string ShortDateToString = "dd.MM.yyyy";
+
+        public const string Result = "HH:mm:ss.ff";
+
+        public const string RemainingDays = " days";
 
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
