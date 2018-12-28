@@ -9,24 +9,24 @@
 
 <br/>
 
-<h1 class="text-center">Update Profile</h1>
+<h1 class="text-center text-primary">Update Account</h1>
 
 @if (this.ViewData.ContainsKey(GlobalConstants.Error))
 {
-    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+    <div class="col-md-6 offset-3 alert alert-danger text-center">
         <strong>@this.ViewData[GlobalConstants.Error]</strong>
     </div>
 }
 @if (this.ViewData.ContainsKey(GlobalConstants.Message))
 {
-    <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
+    <div class="col-md-6 offset-3 alert alert-success text-center">
         <strong>@this.ViewData[GlobalConstants.Message]</strong>
     </div>
 }
 
-<hr style="height: 1px; background-color:#DF691A" />
+<br/>
 
-<div class="row">
+<div class="row text-center">
     <div class="col-md-4 offset-md-4">
         <form asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -118,7 +118,3 @@
 </div>
 
 <br/>
-
-<div class="text-center">
-    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
-</div>

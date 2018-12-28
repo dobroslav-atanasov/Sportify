@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Sportify.Data.ViewModels.Results.MyResultViewModel>
+
+@{
+    ViewData["Title"] = "MyResults";
+}
+
+<br />
+
+<h1 class="text-center text-primary">My Results</h1>
+
+<br />
+
+<table class="table mx-auto table-hover">
+    <thead>
+        <tr class="row table-primary">
+            <th class="col-md-1 text-center">
+                Date
+            </th>
+            <th class="col-md-3 text-center">
+                Event Name
+            </th>
+            <th class="col-md-2 text-center">
+                Venue
+            </th>
+            <th class="col-md-2 text-center">
+                Sport
+            </th>
+            <th class="col-md-2 text-center">
+                Discipline
+            </th>
+            <th class="col-md-2 text-center">
+                Result
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var result in Model)
+        {
+            <tr class="row table-dark">
+                <td class="col-md-1 text-center">@result.Date</td>
+                <td class="col-md-3 text-center">@result.EventName</td>
+                <td class="col-md-2 text-center">@result.Venue</td>
+                <td class="col-md-2 text-center">@result.Sport</td>
+                <td class="col-md-2 text-center">@result.Discipline</td>
+                <td class="col-md-2 text-center text-danger"><h5>@result.Result</h5></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
+</div>

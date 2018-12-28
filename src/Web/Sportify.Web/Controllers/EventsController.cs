@@ -128,7 +128,7 @@
         }
 
         [Authorize(Roles = Role.Editor)]
-        public IActionResult MyEvents(int? page)
+        public IActionResult Events(int? page)
         {
             var events = this.eventsService.GetEventsByUser(this.User.Identity.Name);
 
@@ -204,38 +204,15 @@
         public IActionResult Delete(EventViewModel model)
         {
             this.eventsService.DeleteEvent(model);
-            return this.RedirectToAction("MyEvents", "Events", new { area = AreaConstants.Base });
+            return this.RedirectToAction("Events", "Events", new { area = AreaConstants.Base });
         }
 
-        [Authorize(Roles = Role.Editor)]
-        public IActionResult Results(int id)
+        [Authorize]
+        public IActionResult MyEvents()
         {
-            var @event = this.eventsService.GetEventById(id);
-            if (@event == null)
-            {
-                return this.View("InvalidPage");
-            }
-
-            this.ViewData[GlobalConstants.Event] = @event.EventName;
-            var participants = this.participantsService.GetParticipantsInEventId(id);
-            return this.View(participants);
-        }
-
-        [HttpPost]
-        [Authorize(Roles = Role.Editor)]
-        public IActionResult Results(int id, IList<ParticipantViewModel> models)
-        {
-            var @event = this.eventsService.GetEventById(id);
-            this.ViewData[GlobalConstants.Event] = @event.EventName;
-
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(models);
-            }
-
-            var participants = this.participantsService.SetUpResults(id, models);
-            this.ViewData[GlobalConstants.Message] = GlobalConstants.ResultsWereUpdated;
-            return this.View(participants);
+            var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
+            var events = this.participantsService.GetEventsWithMyParticipation(user.UserName);
+            return this.View(events);
         }
     }
 }

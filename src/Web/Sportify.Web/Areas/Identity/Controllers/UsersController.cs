@@ -1,6 +1,8 @@
 ﻿namespace Sportify.Web.Areas.Identity.Controllers
 {
     using System.Linq;
+    using System.Net.Mail;
+    using System.Text;
     using System.Threading.Tasks;
     using Constants;
     using Data;
@@ -48,7 +50,6 @@
                 return this.View(model);
             }
 
-            //var country = this.countriesService.GetCountryById(model.CountryId);
             var user = this.mapper.Map<User>(model);
             var result = await this.userManager.CreateAsync(user, model.Password);
 
@@ -214,6 +215,59 @@
             }
 
             return this.RedirectToAction("All", "Users", new { area = AreaConstants.Identity });
+        }
+
+        public IActionResult AccountRecovery()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult AccountRecovery(AccountRecoveryViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+
+
+            //var user = this.userManager.FindByEmailAsync(model.Email).GetAwaiter().GetResult();
+            //this.userManager.RemovePasswordAsync(user).GetAwaiter().GetResult();
+            //this.userManager.AddPasswordAsync(user, "AA1234").GetAwaiter().GetResult();
+
+            SmtpClient smtpClient = new SmtpClient("smtp.abv.bg", 465);
+
+            smtpClient.Credentials = new System.Net.NetworkCredential("sportify_da@abv.bg", "da123456");
+            smtpClient.UseDefaultCredentials = true;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = true;
+            MailMessage mail = new MailMessage();
+
+            //Setting From , To and CC
+            mail.From = new MailAddress("sportify_da@abv.bg", "MyWeb Site");
+            mail.To.Add(new MailAddress("dobroslav_atanasov@abv.bg"));
+            mail.Body = "Test";
+
+            smtpClient.Send(mail);
+
+            //SmtpClient client = new SmtpClient();
+            //client.Port = 995;
+            //client.Host = "pop3.abv.bg";
+            //client.EnableSsl = true;
+            //client.Timeout = 10000;
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //client.UseDefaultCredentials = false;
+            //client.Credentials = new System.Net.NetworkCredential("sportify_da@abv.bg", "da123456");
+
+            //MailMessage mm = new MailMessage("sportify_da@abv.bg", "dobroslav_atanasov@abv.bg", "Test", "New test");
+            //mm.BodyEncoding = UTF8Encoding.UTF8;
+            //mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+            //client.Send(mm);
+
+            this.ViewData[GlobalConstants.Message] = GlobalConstants.RecoveryEmail;
+            return this.View();
         }
     }
 }

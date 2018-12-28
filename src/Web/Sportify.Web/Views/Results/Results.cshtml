@@ -10,7 +10,7 @@
 
 <br />
 
-<h1 class="text-center text-primary">Set up Results</h1>
+<h1 class="text-center text-primary">Set Results</h1>
 <h2 class="text-center text-primary">@this.ViewData[GlobalConstants.Event]</h2>
 
 @if (this.ViewData.ContainsKey(GlobalConstants.Message))
@@ -22,7 +22,7 @@
 
 <br />
 
-<form asp-area="" asp-controller="Events" asp-action="Results" method="post">
+<form asp-area="" asp-controller="Results" asp-action="Results" method="post">
     <table class="table mx-auto table-hover">
         <thead>
             <tr class="row table-primary">
@@ -71,12 +71,12 @@
         }
     </table>
     <div class="form-group text-center">
-        <input type="submit" value="Set Up Results" class="btn btn-primary" />
+        <input type="submit" value="Set Results" class="btn btn-primary" />
     </div>
 </form>
 
 <br />
 
 <div class="text-center">
-    <a asp-area="" asp-controller="Events" asp-action="MyEvents">Back to events</a>
+    <a asp-area="" asp-controller="Events" asp-action="Events">Back to events</a>
 </div>

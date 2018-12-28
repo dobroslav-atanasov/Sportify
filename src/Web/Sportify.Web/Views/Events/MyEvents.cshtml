@@ -1,7 +1,4 @@
-﻿@using X.PagedList
-@using X.PagedList.Mvc.Common
-@using X.PagedList.Mvc.Core
-@model IEnumerable<Sportify.Data.ViewModels.Events.EventViewModel>
+﻿@model IEnumerable<Sportify.Data.ViewModels.Events.MyEventViewModel>
 
 @{
     ViewData["Title"] = "MyEvents";
@@ -16,69 +13,48 @@
 <table class="table mx-auto table-hover">
     <thead>
         <tr class="row table-primary">
-            <th class="col-md-2 text-center">
-                Event Name
-            </th>
-            <th class="col-md-2 text-center">
+            <th class="col-md-1 text-center">
                 Date
             </th>
             <th class="col-md-1 text-center">
                 Time
             </th>
             <th class="col-md-2 text-center">
-                Venue
+                Event Name
             </th>
             <th class="col-md-1 text-center">
                 Town
             </th>
-            <th class="col-md-4 text-center">
-                Actions
+            <th class="col-md-2 text-center">
+                Venue
+            </th>
+            <th class="col-md-2 text-center">
+                Sport
+            </th>
+            <th class="col-md-2 text-center">
+                Discipline
+            </th>
+            <th class="col-md-1 text-center">
+                Remaining Days
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var ev in Model)
         {
             <tr class="row table-dark">
-                <td class="col-md-2 text-center">
-                    @item.EventName
-                </td>
-                <td class="col-md-2 text-center">
-                    @item.Date
-                </td>
-                <td class="col-md-1 text-center">
-                    @item.Time
-                </td>
-                <td class="col-md-2 text-center">
-                    @item.Venue
-                </td>
-                <td class="col-md-1 text-center">
-                    @item.Town
-                </td>
-                <td class="col-md-4 text-center">
-                    <a asp-area="" asp-controller="Events" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                    <a asp-area="" asp-controller="Events" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a>
-                    <a asp-area="" asp-controller="Events" asp-action="Results" asp-route-id="@item.Id" class="btn btn-info">Results</a>
-                    <a asp-area="" asp-controller="Events" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                </td>
+                <td class="col-md-1 text-center">@ev.Date</td>
+                <td class="col-md-1 text-center">@ev.Time</td>
+                <td class="col-md-2 text-center">@ev.EventName</td>
+                <td class="col-md-1 text-center">@ev.Town</td>
+                <td class="col-md-2 text-center">@ev.Venue</td>
+                <td class="col-md-2 text-center">@ev.Sport</td>
+                <td class="col-md-2 text-center">@ev.Discipline</td>
+                <td class="col-md-1 text-center text-success"><h6>@ev.RemainingTime</h6></td>
             </tr>
         }
     </tbody>
 </table>
-
-<div class="text-center">
-    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("MyEvents", new { page = page }),
-        new PagedListRenderOptions
-        {
-            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-            DisplayLinkToLastPage = PagedListDisplayMode.Always,
-            DisplayLinkToNextPage = PagedListDisplayMode.Never,
-            DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
-            UlElementClasses = new string[] { "pagination", "justify-content-center" },
-            LiElementClasses = new string[] { "page-item" },
-            PageClasses = new string[] { "page-link" },
-        })
-</div>
 
 <br />
 

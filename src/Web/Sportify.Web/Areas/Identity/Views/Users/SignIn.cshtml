@@ -6,7 +6,7 @@
     ViewData["Title"] = "Sign In";
 }
 
-<br/>
+<br />
 
 <h1 class="text-center text-primary">Sign In</h1>
 
@@ -17,7 +17,9 @@
     </div>
 }
 
-<hr style="height: 1px; background-color:#DF691A" />
+<br/>
+
+@*<hr style="height: 1px; background-color:#DF691A" />*@
 
 <div class="row text-center">
     <div class="col-md-4 offset-md-4">
@@ -50,6 +52,11 @@
     </div>
 </div>
 
+<br/>
+
 <div class="text-center">
-    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
+    <h6>Don't have an account? <a asp-area="Identity" asp-controller="Users" asp-action="CreateAccount">Create Account</a></h6>
+</div>
+<div class="text-center">
+    <a asp-area="Identity" asp-controller="Users" asp-action="AccountRecovery">Forgot your password?</a>
 </div>

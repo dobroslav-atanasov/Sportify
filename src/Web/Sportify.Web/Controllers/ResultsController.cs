@@ -1,0 +1,64 @@
+﻿namespace Sportify.Web.Controllers
+{
+    using System.Collections.Generic;
+    using Constants;
+    using Data.Models;
+    using Data.ViewModels.Participants;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Services.Interfaces;
+
+    public class ResultsController : Controller
+    {
+        private readonly UserManager<User> userManager;
+        private readonly IParticipantsService participantsService;
+        private readonly IEventsService eventsService;
+
+        public ResultsController(UserManager<User> userManager, IParticipantsService participantsService, IEventsService eventsService)
+        {
+            this.userManager = userManager;
+            this.participantsService = participantsService;
+            this.eventsService = eventsService;
+        }
+
+        [Authorize(Roles = Role.Editor)]
+        public IActionResult Results(int id)
+        {
+            var @event = this.eventsService.GetEventById(id);
+            if (@event == null)
+            {
+                return this.View("InvalidPage");
+            }
+
+            this.ViewData[GlobalConstants.Event] = @event.EventName;
+            var participants = this.participantsService.GetParticipantsInEventId(id);
+            return this.View(participants);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Role.Editor)]
+        public IActionResult Results(int id, IList<ParticipantViewModel> models)
+        {
+            var @event = this.eventsService.GetEventById(id);
+            this.ViewData[GlobalConstants.Event] = @event.EventName;
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(models);
+            }
+
+            var participants = this.participantsService.SetResults(id, models);
+            this.ViewData[GlobalConstants.Message] = GlobalConstants.ResultsWereUpdated;
+            return this.View(participants);
+        }
+
+        [Authorize]
+        public IActionResult MyResults()
+        {
+            var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
+            var results = this.participantsService.GetResultByUser(user.UserName);
+            return this.View(results);
+        }
+    }
+}

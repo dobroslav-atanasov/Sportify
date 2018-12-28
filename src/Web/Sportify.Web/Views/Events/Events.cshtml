@@ -1,0 +1,87 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Common
+@using X.PagedList.Mvc.Core
+@model IEnumerable<Sportify.Data.ViewModels.Events.EventViewModel>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<br />
+
+<h1 class="text-center text-primary">My Events</h1>
+
+<br />
+
+<table class="table mx-auto table-hover">
+    <thead>
+        <tr class="row table-primary">
+            <th class="col-md-2 text-center">
+                Event Name
+            </th>
+            <th class="col-md-2 text-center">
+                Date
+            </th>
+            <th class="col-md-1 text-center">
+                Time
+            </th>
+            <th class="col-md-2 text-center">
+                Venue
+            </th>
+            <th class="col-md-1 text-center">
+                Town
+            </th>
+            <th class="col-md-4 text-center">
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="row table-dark">
+                <td class="col-md-2 text-center">
+                    @item.EventName
+                </td>
+                <td class="col-md-2 text-center">
+                    @item.Date
+                </td>
+                <td class="col-md-1 text-center">
+                    @item.Time
+                </td>
+                <td class="col-md-2 text-center">
+                    @item.Venue
+                </td>
+                <td class="col-md-1 text-center">
+                    @item.Town
+                </td>
+                <td class="col-md-4 text-center">
+                    <a asp-area="" asp-controller="Events" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-area="" asp-controller="Events" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a>
+                    <a asp-area="" asp-controller="Results" asp-action="Results" asp-route-id="@item.Id" class="btn btn-info">Results</a>
+                    <a asp-area="" asp-controller="Events" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    @Html.PagedListPager((IPagedList)@Model, page => Url.Action("MyEvents", new { page = page }),
+        new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Never,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+            UlElementClasses = new string[] { "pagination", "justify-content-center" },
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+        })
+</div>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
+</div>

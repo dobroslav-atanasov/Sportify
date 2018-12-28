@@ -1,5 +1,6 @@
 ﻿namespace Sportify.Web.Controllers
 {
+    using Constants;
     using Data.Models;
     using Data.ViewModels.Messages;
     using Microsoft.AspNetCore.Authorization;
@@ -7,7 +8,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
     using X.PagedList;
-    using Constants;
 
     public class MessagesController : Controller
     {

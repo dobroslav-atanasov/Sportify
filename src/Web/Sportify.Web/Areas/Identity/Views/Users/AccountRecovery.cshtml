@@ -1,0 +1,40 @@
+﻿@using Sportify.Constants
+
+@model Sportify.Data.ViewModels.Users.AccountRecoveryViewModel
+
+@{
+    ViewData["Title"] = "Account Recovery";
+}
+
+<br />
+
+<h1 class="text-center text-primary">Account Recovery</h1>
+
+@if (this.ViewData.ContainsKey(GlobalConstants.Message))
+{
+    <div class="col-md-6 offset-3 alert alert-success text-center">
+        <strong>@this.ViewData[GlobalConstants.Message]</strong>
+    </div>
+}
+
+<p class="text-center">Forgot your account's password? Enter your email address and we'll send you a recovery link.</p>
+
+<div class="row text-center">
+    <div class="col-md-4 offset-md-4">
+        <form asp-area="Identity" asp-controller="Users" asp-action="AccountRecovery" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Send Email" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
