@@ -18,6 +18,8 @@
 
         public string Organization { get; set; }
 
+        public string Abbreviation { get; set; }
+
         public string Sport { get; set; }
 
         public string Discipline { get; set; }
@@ -27,6 +29,8 @@
         public string Venue { get; set; }
 
         public string ImageVenueUrl { get; set; }
+
+        public DateTime RealDate { get; set; }
 
         [Display(Name = ModelConstants.CreateEvent_Display_NumberOfParticipants)]
         public int NumberOfParticipants { get; set; }
