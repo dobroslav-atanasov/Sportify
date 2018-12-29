@@ -1,9 +1,9 @@
 ﻿namespace Sportify.Services.Interfaces
 {
     using System.Collections.Generic;
-    using System.Linq;
+
+    using Data.Models;
     using Data.ViewModels.Towns;
-    using Sportify.Data.Models;
 
     public interface ITownsService
     {

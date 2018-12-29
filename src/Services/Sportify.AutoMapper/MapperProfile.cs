@@ -42,11 +42,13 @@
                 .ForMember(evm => evm.Date, e => e.MapFrom(x => x.Date.ToString(GlobalConstants.DateToString, CultureInfo.InvariantCulture)))
                 .ForMember(evm => evm.Time, e => e.MapFrom(x => x.Date.ToString(GlobalConstants.TimeToString)))
                 .ForMember(evm => evm.ImageVenueUrl, e => e.MapFrom(x => x.Venue.ImageVenueUrl))
+                .ForMember(evm => evm.Abbreviation, e => e.MapFrom(x => x.Organization.Abbreviation))
                 .ForMember(evm => evm.Organization, e => e.MapFrom(x => x.Organization.Name))
                 .ForMember(evm => evm.Sport, e => e.MapFrom(x => x.Discipline.Sport.Name))
                 .ForMember(evm => evm.Discipline, e => e.MapFrom(x => x.Discipline.Name))
                 .ForMember(evm => evm.Town, e=> e.MapFrom(x => x.Venue.Town.Name))
                 .ForMember(evm => evm.Venue, e => e.MapFrom(x => x.Venue.Name))
+                .ForMember(evm => evm.RealDate, e => e.MapFrom(x => x.Date))
                 .ReverseMap();
             
             // Messages
