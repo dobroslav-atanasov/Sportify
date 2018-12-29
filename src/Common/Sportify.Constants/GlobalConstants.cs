@@ -32,6 +32,8 @@
 
         public const string Event = "Event";
 
+        public const string Discipline = "Discipline";
+
 
 
         // Messages
