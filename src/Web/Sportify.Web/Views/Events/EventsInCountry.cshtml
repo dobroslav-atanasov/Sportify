@@ -1,0 +1,43 @@
+﻿@using Sportify.Constants
+
+@model IEnumerable<Sportify.Data.ViewModels.Events.EventViewModel>
+
+@{
+    ViewData["Title"] = "Sport Events in ";
+}
+
+<br />
+
+<h1 class="text-center text-primary">@this.ViewData["Title"] @this.ViewData[GlobalConstants.Country]</h1>
+
+<br />
+
+@if (this.Model.Count() != 0)
+{
+    foreach (var ev in Model)
+    {
+        <h4>@ev.Date</h4>
+        <table class="table">
+            <tr class="row">
+                <td class="col-md-1 text-left"><strong>@ev.Time</strong></td>
+                <td class="col-md-3 text-left">@ev.EventName</td>
+                <td class="col-md-2 text-left">@ev.Sport</td>
+                <td class="col-md-2 text-left">@ev.Discipline</td>
+                <td class="col-md-2 text-left">@ev.Town, @ev.Venue</td>
+                @if (@ev.RealDate < DateTime.UtcNow)
+                {
+                    <td class="col-md-2 text-center"><a asp-area="" asp-controller="Events" asp-action="UpcomingEvent" asp-route-id="@ev.Id" class="btn btn-danger disabled">Past Event</a></td>
+                }
+                else
+                {
+                    <td class="col-md-2 text-center"><a asp-area="" asp-controller="Events" asp-action="UpcomingEvent" asp-route-id="@ev.Id" class="btn btn-success">Upcoming Event</a></td>
+                }
+            </tr>
+        </table>
+        <br />
+    }
+}
+else
+{
+    <h2 class="text-center">There are not events!</h2>
+}

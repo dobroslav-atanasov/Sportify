@@ -69,7 +69,7 @@
         }
 
         [HttpPost]
-        public IActionResult SearchEvents(SearchCountryViewModel model)
+        public IActionResult EventsInCountry(SearchCountryViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -84,7 +84,7 @@
         }
 
         [Authorize]
-        public IActionResult Info(int id)
+        public IActionResult UpcomingEvent(int id)
         {
             var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
             var @event = this.eventsService.GetEventById(id);
@@ -114,7 +114,7 @@
             }
 
             this.eventsService.JoinUserToEvent(user.Id, @event.Id);
-            return this.RedirectToAction("Info", "Events", new { id = id });
+            return this.RedirectToAction("UpcomingEvent", "Events", new { id = id });
         }
 
         [Authorize]
@@ -124,7 +124,7 @@
             var @event = this.eventsService.GetEventById(id);
 
             this.eventsService.LeaveUserFromEvent(user.Id, @event.Id);
-            return this.RedirectToAction("Info", "Events", new { id = id });
+            return this.RedirectToAction("UpcomingEvent", "Events", new { id = id });
         }
 
         [Authorize(Roles = Role.Editor)]
@@ -145,6 +145,7 @@
             this.ViewData[GlobalConstants.Disciplines] = this.disciplinesService.GetAllDisciplines();
             this.ViewData[GlobalConstants.Venues] = this.venuesService.GetAllVenues();
             var @event = this.eventsService.GetEventForUpdateById(id);
+
             return this.View(@event);
         }
 
@@ -152,28 +153,23 @@
         [Authorize(Roles = Role.Editor)]
         public IActionResult Edit(UpdateEventViewModel model)
         {
+            this.ViewData[GlobalConstants.Organizations] = this.organizationsService.GetAllOrganizations();
+            this.ViewData[GlobalConstants.Disciplines] = this.disciplinesService.GetAllDisciplines();
+            this.ViewData[GlobalConstants.Venues] = this.venuesService.GetAllVenues();
+
             if (!this.ModelState.IsValid)
             {
-                this.ViewData[GlobalConstants.Organizations] = this.organizationsService.GetAllOrganizations();
-                this.ViewData[GlobalConstants.Disciplines] = this.disciplinesService.GetAllDisciplines();
-                this.ViewData[GlobalConstants.Venues] = this.venuesService.GetAllVenues();
                 return this.View(model);
             }
 
             var @event = this.eventsService.UpdateEvent(model);
             if (@event == null)
             {
-                this.ViewData[GlobalConstants.Organizations] = this.organizationsService.GetAllOrganizations();
-                this.ViewData[GlobalConstants.Disciplines] = this.disciplinesService.GetAllDisciplines();
-                this.ViewData[GlobalConstants.Venues] = this.venuesService.GetAllVenues();
                 this.ViewData[GlobalConstants.Error] = GlobalConstants.EventWasNotUpdated;
                 return this.View(model);
             }
 
             this.ViewData[GlobalConstants.Message] = GlobalConstants.EventWasUpdated;
-            this.ViewData[GlobalConstants.Organizations] = this.organizationsService.GetAllOrganizations();
-            this.ViewData[GlobalConstants.Disciplines] = this.disciplinesService.GetAllDisciplines();
-            this.ViewData[GlobalConstants.Venues] = this.venuesService.GetAllVenues();
             return this.View();
         }
 
