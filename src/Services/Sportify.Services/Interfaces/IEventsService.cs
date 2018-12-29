@@ -29,5 +29,7 @@
         UpdateEventViewModel UpdateEvent(UpdateEventViewModel model);
 
         void DeleteEvent(EventViewModel model);
+
+        bool CheckForFreeSpace(int eventId);
     }
 }

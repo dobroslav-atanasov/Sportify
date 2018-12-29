@@ -1,8 +1,5 @@
 ﻿namespace Sportify.Services
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     using Data;
     using Data.Models;
     using Data.ViewModels.Countries;
@@ -10,6 +7,8 @@
     using global::AutoMapper;
     using Interfaces;
     using Microsoft.AspNetCore.Identity;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class EventsService : BaseService, IEventsService
     {
@@ -158,6 +157,20 @@
                 this.Context.Events.Remove(@event);
                 this.Context.SaveChanges();
             }
+        }
+
+        public bool CheckForFreeSpace(int eventId)
+        {
+            var @event = this.Context
+                .Events
+                .FirstOrDefault(e => e.Id == eventId);
+
+            var participants = this.Context
+                .Participants
+                .Where(e => e.EventId == eventId)
+                .Count();
+
+            return @event.NumberOfParticipants > participants;
         }
     }
 }
