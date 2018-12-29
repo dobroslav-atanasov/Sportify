@@ -32,6 +32,7 @@
             }
 
             this.ViewData[GlobalConstants.Event] = @event.EventName;
+            this.ViewData[GlobalConstants.Discipline] = @event.Discipline;
             var participants = this.participantsService.GetParticipantsInEventId(id);
             return this.View(participants);
         }
