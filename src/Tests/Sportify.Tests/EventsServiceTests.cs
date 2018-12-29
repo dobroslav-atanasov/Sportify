@@ -82,18 +82,43 @@
 
             context.Venues.Add(new Venue { Name = "First Venue", TownId = 1 });
             context.Venues.Add(new Venue { Name = "Second Venue", TownId = 1 });
-            context.Venues.Add(new Venue { Name = "Third Venue", TownId = 2 });
+            context.Venues.Add(new Venue { Name = "Third Venue", TownId = 1 });
+            context.Venues.Add(new Venue { Name = "Fourth Venue", TownId = 2 });
 
-            context.Events.Add(new Event { EventName = "First test", VenueId = 1 });
-            context.Events.Add(new Event { EventName = "Second test", VenueId = 2 });
-            context.Events.Add(new Event { EventName = "Third test", VenueId = 3 });
+            context.Events.Add(new Event
+            {
+                EventName = "First test",
+                VenueId = 1,
+                Date = DateTime.ParseExact("25-01-2019 08:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture)
+            });
+
+            context.Events.Add(new Event
+            {
+                EventName = "Second test",
+                VenueId = 2,
+                Date = DateTime.ParseExact("20-01-2019 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture)
+            });
+
+            context.Events.Add(new Event
+            {
+                EventName = "Third test",
+                VenueId = 3,
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture)
+            });
+
+            context.Events.Add(new Event
+            {
+                EventName = "Fourth test",
+                VenueId = 4,
+                Date = DateTime.ParseExact("28-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture)
+            });
             context.SaveChanges();
 
             // Act
             var result = service.GetAllEventsInCountry(new SearchCountryViewModel { CountryId = 1 }).Count();
 
             // Assert
-            Assert.Equal(2, result);
+            Assert.Equal(3, result);
         }
 
         [Fact]
