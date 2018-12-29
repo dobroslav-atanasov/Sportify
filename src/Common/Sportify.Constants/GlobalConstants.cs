@@ -65,6 +65,8 @@
 
         public const string RecoveryEmail = "Account recovery email sent!";
 
+        public const string NoFreeSeats = "There are not free seats!";
+
 
         // Mapper Profile
         public const string DateToString = "dd MMMM yyyy, dddd";
