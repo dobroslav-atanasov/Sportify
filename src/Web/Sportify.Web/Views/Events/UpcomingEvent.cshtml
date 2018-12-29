@@ -1,4 +1,6 @@
-﻿@model Sportify.Data.ViewModels.Events.EventViewModel
+﻿@using Sportify.Constants
+
+@model Sportify.Data.ViewModels.Events.EventViewModel
 
 @{
     ViewData["Title"] = "Upcoming Event";
@@ -8,7 +10,7 @@
 
 <h1 class="text-center text-primary">@Model.EventName</h1>
 
-<br/>
+<br />
 
 <div class="row">
     <div class="col-md-6">
@@ -84,17 +86,24 @@
     </div>
 </div>
 
-<br/>
+<br />
 
 <div class="text-center">
-    @if ((bool)this.ViewData["Participate"] == false)
+    @if (this.ViewData.ContainsKey(GlobalConstants.Error))
     {
-        <a asp-area="" asp-controller="Events" asp-action="Join" asp-route-id="@Model.Id" class="btn btn-success btn-lg">Join</a>
+        <a asp-area="" asp-controller="Events" asp-action="Join" asp-route-id="@Model.Id" class="btn btn-warning btn-lg disabled">@this.ViewData[GlobalConstants.Error]</a>
     }
     else
     {
-        <a asp-area="" asp-controller="Events" asp-action="Leave" asp-route-id="@Model.Id" class="btn btn-danger btn-lg">Leave</a>
+        if ((bool)this.ViewData[GlobalConstants.Participate] == false)
+        {
+            <a asp-area="" asp-controller="Events" asp-action="Join" asp-route-id="@Model.Id" class="btn btn-success btn-lg">Join</a>
+        }
+        else
+        {
+            <a asp-area="" asp-controller="Events" asp-action="Leave" asp-route-id="@Model.Id" class="btn btn-danger btn-lg">Leave</a>
+        }
     }
 </div>
 
-<br/>
+<br />

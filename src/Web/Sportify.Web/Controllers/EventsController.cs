@@ -6,7 +6,6 @@
     using Data.Models;
     using Data.ViewModels.Countries;
     using Data.ViewModels.Events;
-    using Data.ViewModels.Participants;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -89,6 +88,12 @@
             var user = this.userManager.FindByNameAsync(this.User.Identity.Name).GetAwaiter().GetResult();
             var @event = this.eventsService.GetEventById(id);
             var isUserParticipate = this.eventsService.IsUserParticipate(user.Id, @event.Id);
+            var hasFreeSeats = this.eventsService.CheckForFreeSpace(id);
+
+            if (!hasFreeSeats)
+            {
+                this.ViewData[GlobalConstants.Error] = GlobalConstants.NoFreeSeats;
+            }
 
             if (isUserParticipate)
             {
@@ -112,7 +117,7 @@
             {
                 return this.RedirectToAction("Index", "Home", new { area = AreaConstants.Base });
             }
-
+            
             this.eventsService.JoinUserToEvent(user.Id, @event.Id);
             return this.RedirectToAction("UpcomingEvent", "Events", new { id = id });
         }
