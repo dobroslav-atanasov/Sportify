@@ -464,5 +464,87 @@
             // Assert
             Assert.Equal(2, result);
         }
+
+        [Fact]
+        public void CheckForFreeSpace_ShouldReturnCorrectTrue()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            service.Create(new CreateEventViewModel
+            {
+                EventName = "First Event",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 3
+            });
+
+            context.Users.Add(new User { Id = "test1", UserName = "George" });
+            context.Users.Add(new User { Id = "test2", UserName = "Peter" });
+
+            context.Participants.Add(new Participant
+            {
+                EventId = 1,
+                UserId = "test1"
+            });
+
+            context.Participants.Add(new Participant
+            {
+                EventId = 1,
+                UserId = "test2"
+            });
+
+            context.SaveChanges();
+
+            // Act
+            var result = service.CheckForFreeSpace(1);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void CheckForFreeSpace_ShouldReturnCorrectFalse()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new EventsService(context, this.Mapper, null, null, null);
+
+            service.Create(new CreateEventViewModel
+            {
+                EventName = "First Event",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 2
+            });
+
+            context.Users.Add(new User { Id = "test1", UserName = "George" });
+            context.Users.Add(new User { Id = "test2", UserName = "Peter" });
+
+            context.Participants.Add(new Participant
+            {
+                EventId = 1,
+                UserId = "test1"
+            });
+
+            context.Participants.Add(new Participant
+            {
+                EventId = 1,
+                UserId = "test2"
+            });
+
+            context.SaveChanges();
+
+            // Act
+            var result = service.CheckForFreeSpace(1);
+
+            // Assert
+            Assert.False(result);
+        }
     }
 }
