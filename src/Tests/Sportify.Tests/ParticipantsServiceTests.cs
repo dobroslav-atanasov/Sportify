@@ -319,5 +319,67 @@
             // Assert
             Assert.Equal(2, result);
         }
+
+        [Fact]
+        public void GetEventResultsByEventId_ShouldReturnCorrectCount()
+        {
+            // Arrange
+            var context = this.ServiceProvider.GetRequiredService<SportifyDbContext>();
+            var service = new ParticipantsService(context, this.Mapper, null, null);
+            var eventService = new EventsService(context, this.Mapper, null, null, null);
+            
+            context.Countries.Add(new Country
+            {
+                Name = "Bulgaria"
+            });
+
+            context.Users.Add(new User
+            {
+                Id = "test1",
+                UserName = "Peter",
+                CountryId = 1
+            });
+
+            context.Users.Add(new User
+            {
+                Id = "test2",
+                UserName = "George"
+            });
+            context.SaveChanges();
+
+            context.SaveChanges();
+
+            eventService.Create(new CreateEventViewModel
+            {
+                EventName = "First Event",
+                Date = DateTime.ParseExact("20-12-2018 10:00", "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                OrganizationId = 1,
+                DisciplineId = 1,
+                VenueId = 1,
+                NumberOfParticipants = 10
+            });
+
+            context.Participants.Add(new Participant
+            {
+                UserId = "test1",
+                EventId = 1,
+                Result = DateTime.ParseExact("25-12-2018 00:10:10.000", "dd-MM-yyyy hh:mm:ss.fff", CultureInfo.InvariantCulture)
+            });
+
+            context.Participants.Add(new Participant
+            {
+                UserId = "test2",
+                EventId = 1,
+                Result = DateTime.ParseExact("25-12-2018 00:15:10.000", "dd-MM-yyyy hh:mm:ss.fff", CultureInfo.InvariantCulture)
+            });
+
+            context.SaveChanges();
+
+            // Act
+            var result = service.GetEventResultsByEventId(1).Count();
+
+            // Assert
+            Assert.Equal(2, result);
+        }
     }
 }
