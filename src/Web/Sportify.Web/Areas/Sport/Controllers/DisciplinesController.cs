@@ -57,6 +57,12 @@
         {
             this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
             var discipline = this.disciplinesService.GetDisciplineById(id);
+            if (discipline == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.DisciplineDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             return this.View(discipline);
         }
 
@@ -64,22 +70,22 @@
         [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(DisciplineViewModel model)
         {
+            this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
+
             if (!this.ModelState.IsValid)
             {
-                this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
                 return this.View(model);
             }
 
             var discipline = this.disciplinesService.UpdateDiscipline(model);
             if (discipline == null)
             {
-                this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
                 this.ViewData[GlobalConstants.Error] = GlobalConstants.DisciplineWasNotUpdated;
                 return this.View(model);
             }
 
             this.ViewData[GlobalConstants.Message] = GlobalConstants.DisciplineWasUpdated;
-            this.ViewData[GlobalConstants.Sports] = this.sportsService.GetAllSports();
+
             return this.View();
         }
 
@@ -87,6 +93,12 @@
         public IActionResult Details(int id)
         {
             var discipline = this.disciplinesService.GetDisciplineById(id);
+            if (discipline == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.DisciplineDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             return this.View(discipline);
         }
 
@@ -94,6 +106,12 @@
         public IActionResult Delete(int id)
         {
             var discipline = this.disciplinesService.GetDisciplineById(id);
+            if (discipline == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.DisciplineDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             return this.View(discipline);
         }
 

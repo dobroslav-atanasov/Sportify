@@ -99,7 +99,8 @@
             var organization = this.organizationsService.GetOrganizationById(id);
             if (organization == null)
             {
-                return this.RedirectToPage("InvalidPage", "Home");
+                this.TempData[GlobalConstants.Message] = GlobalConstants.OrganizationDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
             }
             return this.View(organization);
         }

@@ -1,7 +1,5 @@
 ﻿namespace Sportify.Web.Controllers
 {
-    using System.Collections.Generic;
-
     using Constants;
     using Data.Models;
     using Data.ViewModels.Countries;
@@ -12,7 +10,7 @@
     using Services.Interfaces;
     using X.PagedList;
 
-    public class EventsController : Microsoft.AspNetCore.Mvc.Controller
+    public class EventsController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly IOrganizationsService organizationsService;
@@ -117,7 +115,7 @@
             {
                 return this.RedirectToAction("Index", "Home", new { area = AreaConstants.Base });
             }
-            
+
             this.eventsService.JoinUserToEvent(user.Id, @event.Id);
             return this.RedirectToAction("UpcomingEvent", "Events", new { id = id });
         }
@@ -150,6 +148,11 @@
             this.ViewData[GlobalConstants.Disciplines] = this.disciplinesService.GetAllDisciplines();
             this.ViewData[GlobalConstants.Venues] = this.venuesService.GetAllVenues();
             var @event = this.eventsService.GetEventForUpdateById(id);
+            if (@event == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.EventDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { AreaConstants.Base });
+            }
 
             return this.View(@event);
         }
@@ -184,7 +187,8 @@
             var @event = this.eventsService.GetEventById(id);
             if (@event == null)
             {
-                return this.View("InvalidPage");
+                this.TempData[GlobalConstants.Message] = GlobalConstants.EventDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { AreaConstants.Base });
             }
             return this.View(@event);
         }
@@ -195,7 +199,8 @@
             var @event = this.eventsService.GetEventById(id);
             if (@event == null)
             {
-                return this.View("InvalidPage");
+                this.TempData[GlobalConstants.Message] = GlobalConstants.EventDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
             }
             return this.View(@event);
         }

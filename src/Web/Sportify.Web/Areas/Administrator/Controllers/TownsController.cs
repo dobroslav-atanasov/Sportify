@@ -54,40 +54,52 @@
         [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(int id)
         {
-            var townViewModel = this.townsService.GetTownById(id);
+            var town = this.townsService.GetTownById(id);
+            if (town == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.TownDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
 
-            return this.View(townViewModel);
+            return this.View(town);
         }
 
         [HttpPost]
         [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(TownViewModel model)
         {
+            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
+
             if (!this.ModelState.IsValid)
             {
-                this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
                 return this.View(model);
             }
 
             var town = this.townsService.UpdateTown(model);
             if (town == null)
             {
-                this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
                 this.ViewData[GlobalConstants.Error] = GlobalConstants.TownWasNotUpdated;
                 return this.View(model);
             }
 
-            this.ViewData[GlobalConstants.Countries] = this.countriesService.GetAllCountryNames();
             this.ViewData[GlobalConstants.Message] = GlobalConstants.TownWasUpdated;
+
             return this.View();
         }
 
         [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(int id)
         {
-            var townViewModel = this.townsService.GetTownById(id);
-            return this.View(townViewModel);
+            var town = this.townsService.GetTownById(id);
+            if (town == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.TownDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
+            return this.View(town);
         }
 
         [HttpPost]

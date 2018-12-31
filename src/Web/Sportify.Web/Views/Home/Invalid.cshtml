@@ -1,0 +1,17 @@
+﻿@using Sportify.Constants
+
+@{
+    ViewData["Title"] = "Invalid";
+}
+
+<br />
+
+<h1 class="text-danger">Invalid Page</h1>
+
+<h3>@ViewData[GlobalConstants.Message]</h3>
+
+<br />
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
+</div>

@@ -1,24 +1,16 @@
 ﻿namespace Sportify.Web.Controllers
 {
-    using Microsoft.AspNetCore.Identity;
+    using Constants;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
-    using Sportify.Data.Models;
-    using Constants;
 
     public class HomeController : Controller
     {
         private readonly ICountriesService countriesService;
-        private readonly IMessagesService messagesService;
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
 
-        public HomeController(ICountriesService countriesService, IMessagesService messagesService, UserManager<User> userManager, SignInManager<User> signInManager)
+        public HomeController(ICountriesService countriesService)
         {
             this.countriesService = countriesService;
-            this.messagesService = messagesService;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -39,6 +31,12 @@
 
         public IActionResult Access()
         {
+            return this.View();
+        }
+
+        public IActionResult Invalid()
+        {
+            this.ViewData[GlobalConstants.Message] = this.TempData[GlobalConstants.Message].ToString();
             return this.View();
         }
     }

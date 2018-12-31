@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Web.Controllers
 {
     using System.Collections.Generic;
+
     using Constants;
     using Data.Models;
     using Data.ViewModels.Participants;
@@ -28,7 +29,8 @@
             var @event = this.eventsService.GetEventById(id);
             if (@event == null)
             {
-                return this.View("InvalidPage");
+                this.TempData[GlobalConstants.Message] = GlobalConstants.EventDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { AreaConstants.Base });
             }
 
             this.ViewData[GlobalConstants.Event] = @event.EventName;

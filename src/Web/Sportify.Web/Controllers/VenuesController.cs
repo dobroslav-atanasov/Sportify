@@ -53,6 +53,12 @@
         {
             this.ViewData[GlobalConstants.Towns] = this.townsService.GetAllTowns();
             var venue = this.venuesService.GetVenueById(id);
+            if (venue == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.VenueDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             return this.View(venue);
         }
 
@@ -60,22 +66,21 @@
         [Authorize(Roles = Role.AdministratorAndEditor)]
         public IActionResult Edit(VenueViewModel model)
         {
+            this.ViewData[GlobalConstants.Towns] = this.townsService.GetAllTowns();
+
             if (!this.ModelState.IsValid)
             {
-                this.ViewData[GlobalConstants.Towns] = this.townsService.GetAllTowns();
                 return this.View(model);
             }
 
             var venue = this.venuesService.UpdateVenue(model);
             if (venue == null)
             {
-                this.ViewData[GlobalConstants.Towns] = this.townsService.GetAllTowns();
                 this.ViewData[GlobalConstants.Error] = GlobalConstants.VenueWasNotUpdated;
                 return this.View(model);
             }
 
             this.ViewData[GlobalConstants.Message] = GlobalConstants.VenueWasUpdated;
-            this.ViewData[GlobalConstants.Towns] = this.townsService.GetAllTowns();
             return this.View();
         }
 
@@ -83,6 +88,12 @@
         public IActionResult Details(int id)
         {
             var venue = this.venuesService.GetVenueById(id);
+            if (venue == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.VenueDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             return this.View(venue);
         }
 
@@ -90,6 +101,12 @@
         public IActionResult Delete(int id)
         {
             var venue = this.venuesService.GetVenueById(id);
+            if (venue == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.VenueDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             return this.View(venue);
         }
 

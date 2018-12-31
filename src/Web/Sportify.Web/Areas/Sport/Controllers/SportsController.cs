@@ -60,6 +60,12 @@
         public IActionResult Edit(int id)
         {
             var sport = this.sportsService.GetSportById(id);
+            if (sport == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.SportDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             return this.View(sport);
         }
 
@@ -86,6 +92,12 @@
         public IActionResult Details(int id)
         {
             var sport = this.sportsService.GetSportById(id);
+            if (sport == null)
+            {
+                this.TempData[GlobalConstants.Message] = GlobalConstants.SportDoesNotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = AreaConstants.Base });
+            }
+
             this.ViewData[GlobalConstants.Disciplines] = this.disciplinesService.GetDisciplinesBySportId(id);
             return this.View(sport);
         }
