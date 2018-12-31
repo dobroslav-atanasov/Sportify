@@ -20,17 +20,20 @@
         <table class="table">
             <tr class="row">
                 <td class="col-md-1 text-left"><strong>@ev.Time</strong></td>
-                <td class="col-md-3 text-left">@ev.EventName</td>
+                <td class="col-md-2 text-left">@ev.EventName</td>
                 <td class="col-md-2 text-left">@ev.Sport</td>
                 <td class="col-md-2 text-left">@ev.Discipline</td>
-                <td class="col-md-2 text-left">@ev.Town, @ev.Venue</td>
+                <td class="col-md-2 text-left">@ev.Venue, @ev.Town</td>
                 @if (@ev.RealDate < DateTime.UtcNow)
                 {
-                    <td class="col-md-2 text-center"><a asp-area="" asp-controller="Events" asp-action="UpcomingEvent" asp-route-id="@ev.Id" class="btn btn-danger disabled">Past Event</a></td>
+                    <td class="col-md-3 text-center">
+                        <a asp-area="" asp-controller="Events" asp-action="UpcomingEvent" asp-route-id="@ev.Id" class="btn btn-danger disabled">Past Event</a>
+                        <a asp-area="" asp-controller="Results" asp-action="EventResults" asp-route-id="@ev.Id" class="btn btn-primary">Results</a>
+                    </td>
                 }
                 else
                 {
-                    <td class="col-md-2 text-center"><a asp-area="" asp-controller="Events" asp-action="UpcomingEvent" asp-route-id="@ev.Id" class="btn btn-success">Upcoming Event</a></td>
+                    <td class="col-md-3 text-center"><a asp-area="" asp-controller="Events" asp-action="UpcomingEvent" asp-route-id="@ev.Id" class="btn btn-success">Upcoming Event</a></td>
                 }
             </tr>
         </table>

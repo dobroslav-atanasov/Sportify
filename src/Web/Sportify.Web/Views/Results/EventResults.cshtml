@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Sportify.Data.ViewModels.Results.EventResultViewModel>
+
+@{
+    ViewData["Title"] = "Event Results";
+    var rank = 1;
+}
+
+<br />
+
+<h1 class="text-center text-primary">Results</h1>
+
+<br />
+
+<table class="table mx-auto table-hover">
+    <thead>
+    <tr class="row table-primary">
+        <th class="col-md-1 text-center">
+            Rank
+        </th>
+        <th class="col-md-2 text-center">
+            Username
+        </th>
+        <th class="col-md-3 text-center">
+            Full Name
+        </th>
+        <th class="col-md-3 text-center">
+            Country
+        </th>
+        <th class="col-md-3 text-center">
+            Result
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var result in Model)
+    {
+        <tr class="row table-dark">
+            <td class="col-md-1 text-center">@rank</td>
+            <td class="col-md-2 text-center">@result.Username</td>
+            <td class="col-md-3 text-center">@result.FullName</td>
+            <td class="col-md-3 text-center">@result.Country</td>
+            <td class="col-md-3 text-center text-success"><h5>@result.Result</h5></td>
+        </tr>
+
+        rank++;
+    }
+    </tbody>
+</table>
+
+<br />

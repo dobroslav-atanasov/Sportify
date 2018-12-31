@@ -61,5 +61,11 @@
             var results = this.participantsService.GetResultByUser(user.UserName);
             return this.View(results);
         }
+
+        public IActionResult EventResults(int id)
+        {
+            var results = this.participantsService.GetEventResultsByEventId(id);
+            return this.View(results);
+        }
     }
 }
