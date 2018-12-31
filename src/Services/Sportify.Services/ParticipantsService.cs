@@ -78,5 +78,18 @@
 
             return events;
         }
+
+        public IEnumerable<EventResultViewModel> GetEventResultsByEventId(int id)
+        {
+            var participant = this.Context
+                .Participants
+                .Where(p => p.EventId == id)
+                .OrderBy(p => p.Result)
+                .AsQueryable();
+
+            var results = this.Mapper.Map<IQueryable<Participant>, IEnumerable<EventResultViewModel>>(participant);
+
+            return results;
+        }
     }
 }

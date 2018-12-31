@@ -15,5 +15,7 @@
         IEnumerable<MyResultViewModel> GetResultByUser(string username);
 
         IEnumerable<MyEventViewModel> GetEventsWithMyParticipation(string username);
+
+        IEnumerable<EventResultViewModel> GetEventResultsByEventId(int id);
     }
 }

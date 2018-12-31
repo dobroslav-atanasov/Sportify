@@ -91,6 +91,14 @@
                 .ForMember(rvm => rvm.Venue, p => p.MapFrom(x => x.Event.Venue.Name))
                 .ReverseMap();
 
+            this.CreateMap<Participant, EventResultViewModel>()
+                .ForMember(evm => evm.Username, p => p.MapFrom(x => x.User.UserName))
+                .ForMember(evm => evm.FullName, p => p.MapFrom(x => $"{x.User.FirstName} {x.User.LastName}"))
+                .ForMember(evm => evm.Country, p => p.MapFrom(x => x.User.Country.Name))
+                .ForMember(evm => evm.Result, p => p.MapFrom(x => x.Result.Value.ToString(GlobalConstants.Result, CultureInfo.InvariantCulture)))
+                .ReverseMap();
+
+
             // Sports
             this.CreateMap<Sport, SportViewModel>().ReverseMap();
 
