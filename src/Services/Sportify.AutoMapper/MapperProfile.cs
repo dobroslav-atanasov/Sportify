@@ -98,7 +98,6 @@
                 .ForMember(evm => evm.Result, p => p.MapFrom(x => x.Result.Value.ToString(GlobalConstants.Result, CultureInfo.InvariantCulture)))
                 .ReverseMap();
 
-
             // Sports
             this.CreateMap<Sport, SportViewModel>().ReverseMap();
 
