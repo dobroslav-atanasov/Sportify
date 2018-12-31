@@ -34,8 +34,6 @@
 
         public const string Discipline = "Discipline";
 
-
-
         // Messages
         public const string TownWasUpdated = "Town was updated successfully!";
 
@@ -67,6 +65,17 @@
 
         public const string NoFreeSeats = "There are not free seats!";
 
+        public const string EventDoesNotExist = "Event does not exist!";
+
+        public const string OrganizationDoesNotExist = "Organization does not exist!";
+
+        public const string VenueDoesNotExist = "Venue does not exist!";
+
+        public const string SportDoesNotExist = "Sport does not exist!";
+
+        public const string DisciplineDoesNotExist = "Discipline does not exist!";
+
+        public const string TownDoesNotExist = "Town does not exist!";
 
         // Mapper Profile
         public const string DateToString = "dd MMMM yyyy, dddd";
@@ -80,6 +89,7 @@
         public const string Result = "HH:mm:ss.ff";
 
         public const string RemainingDays = " days";
+
 
 
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
