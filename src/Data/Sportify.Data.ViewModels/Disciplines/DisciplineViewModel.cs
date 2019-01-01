@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using Constants;
 
     public class DisciplineViewModel : IEquatable<DisciplineViewModel>
@@ -26,8 +27,8 @@
 
         public bool Equals(DisciplineViewModel other)
         {
-            return this.Id == other.Id && this.Name == other.Name
-                    && this.Description == other.Description && this.SportId == other.SportId;
+            return this.Id == other.Id && this.Name == other.Name && 
+                   this.Description == other.Description && this.SportId == other.SportId;
         }
     }
 }

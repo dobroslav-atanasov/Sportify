@@ -2,13 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Data;
     using Data.Models;
     using Data.ViewModels.Venues;
     using global::AutoMapper;
     using Interfaces;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
 
     public class VenuesService : BaseService, IVenuesService
     {

@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Data.ViewModels.Venues
 {
     using System.ComponentModel.DataAnnotations;
+
     using Constants;
 
     public class AddVenueViewModel

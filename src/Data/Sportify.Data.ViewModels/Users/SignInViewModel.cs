@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Data.ViewModels.Users
 {
     using System.ComponentModel.DataAnnotations;
+
     using Constants;
 
     public class SignInViewModel

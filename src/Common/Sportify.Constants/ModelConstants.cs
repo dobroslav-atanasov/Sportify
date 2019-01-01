@@ -10,6 +10,10 @@
         public const string AddDiscipline_Display_Sport = "Sport";
 
         // Events
+        public const int MinNumberOfParticipants = 5;
+
+        public const int MaxNumberOfParticipants = 100;
+
         public const string CreateEvent_Display_EventName = "Event Name";
 
         public const string CreateEvent_Regex_EventName = "[a-zA-z0-9-.*/_\\s]+";
@@ -25,10 +29,6 @@
         public const string CreateEvent_Display_Venue = "Venue";
 
         public const string CreateEvent_Display_NumberOfParticipants = "Number of Participants";
-
-        public const int MinNumberOfParticipants = 5;
-
-        public const int MaxNumberOfParticipants = 100;
 
         // Messages
         public const string SendMessage_Display_Username = "Username";
@@ -50,6 +50,8 @@
         // Organizations
         public const int MinOrganizationNameLength = 3;
 
+        public const int MinOrganizationAbbreviationLength = 2;
+        
         public const string OrganizationNameLengthErrorMessage = "The {0} must be at least {1} characters long!";
 
         public const string OrganizationNameInvalidSymbolsErrorMessage = "Organization name contains invalid symbols!";
@@ -57,8 +59,6 @@
         public const string CreateOrganization_Regex_Name = "[a-zA-z0-9-.*/_\\s]+";
 
         public const string CreateOrganization_Display_Name = "Name";
-
-        public const int MinOrganizationAbbreviationLength = 2;
 
         public const string OrganizationAbbreviationLengthErrorMessage = "The {0} must be at least {1} characters long!";
 
@@ -103,6 +103,8 @@
 
         public const int MaxPasswordLength = 20;
 
+        public const int MinUsernameLength = 3;
+        
         public const string PasswordLengthErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
 
         public const string ChangePassword_Display_CurrentPassword = "Current Password";
@@ -112,8 +114,6 @@
         public const string ChangePassword_Display_ConfirmNewPassword = "Confirm new password";
 
         public const string ChangePassword_Compare = "NewPassword";
-
-        public const int MinUsernameLength = 3;
 
         public const string UsernameLengthErrorMessage = "The {0} must be at least {1} characters long!";
 

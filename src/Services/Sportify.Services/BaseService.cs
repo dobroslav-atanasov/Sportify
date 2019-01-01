@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Sportify.Data;
-using Sportify.Data.Models;
-
-namespace Sportify.Services
+﻿namespace Sportify.Services
 {
+    using Data;
+    using Data.Models;
+    using global::AutoMapper;
+    using Microsoft.AspNetCore.Identity;
+
     public abstract class BaseService
     {
         protected BaseService(SportifyDbContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)

@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using Constants;
     using Data;
     using Data.Models;
     using Microsoft.AspNetCore.Http;
@@ -32,9 +34,9 @@
 
         private async Task SeedRoles(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            await roleManager.CreateAsync(new IdentityRole("Administrator"));
-            await roleManager.CreateAsync(new IdentityRole("Editor"));
-            await roleManager.CreateAsync(new IdentityRole("User"));
+            await roleManager.CreateAsync(new IdentityRole(Role.Administrator));
+            await roleManager.CreateAsync(new IdentityRole(Role.Editor));
+            await roleManager.CreateAsync(new IdentityRole(Role.User));
         }
     }
 }

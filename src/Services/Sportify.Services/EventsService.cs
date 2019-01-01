@@ -1,5 +1,8 @@
 ﻿namespace Sportify.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Data;
     using Data.Models;
     using Data.ViewModels.Countries;
@@ -7,8 +10,6 @@
     using global::AutoMapper;
     using Interfaces;
     using Microsoft.AspNetCore.Identity;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class EventsService : BaseService, IEventsService
     {

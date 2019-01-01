@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Data.ViewModels.Disciplines
 {
     using System.ComponentModel.DataAnnotations;
+
     using Constants;
 
     public class AddDisciplineViewModel

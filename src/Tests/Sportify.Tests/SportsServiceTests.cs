@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Tests
 {
     using System.Linq;
+
     using Data;
     using Data.Models;
     using Data.ViewModels.Sports;

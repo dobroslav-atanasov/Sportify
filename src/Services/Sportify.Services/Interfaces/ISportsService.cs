@@ -1,8 +1,9 @@
 ﻿namespace Sportify.Services.Interfaces
 {
     using System.Collections.Generic;
+
+    using Data.Models;
     using Data.ViewModels.Sports;
-    using Sportify.Data.Models;
 
     public interface ISportsService
     {

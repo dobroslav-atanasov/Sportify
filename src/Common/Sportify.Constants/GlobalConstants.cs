@@ -90,8 +90,7 @@
 
         public const string RemainingDays = " days";
 
-
-
+        // Other
         public const string NameInvalidSymbolsErrorMessage = "Name contains invalid symbols!";
 
         public const string UsernameAlreadyExists = "Username already exists! Please try with another one.";

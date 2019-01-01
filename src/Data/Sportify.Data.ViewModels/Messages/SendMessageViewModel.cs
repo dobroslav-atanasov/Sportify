@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Data.ViewModels.Messages
 {
     using System.ComponentModel.DataAnnotations;
+
     using Constants;
 
     public class SendMessageViewModel

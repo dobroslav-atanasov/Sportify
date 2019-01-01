@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using Constants;
 
     public class SportViewModel : IEquatable<SportViewModel>
@@ -27,10 +28,8 @@
 
         public bool Equals(SportViewModel other)
         {
-            return this.Id == other.Id 
-                   && this.Name == other.Name 
-                   && this.Description == other.Description 
-                   && this.ImageSportUrl == other.ImageSportUrl;
+            return this.Id == other.Id && this.Name == other.Name && 
+                   this.Description == other.Description && this.ImageSportUrl == other.ImageSportUrl;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Data.ViewModels.Participants
 {
     using System;
+
     using Models;
 
     public class ParticipantViewModel

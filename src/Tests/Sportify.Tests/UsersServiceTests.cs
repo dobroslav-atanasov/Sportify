@@ -1,12 +1,9 @@
 ﻿namespace Sportify.Tests
 {
-    using System;
-    using System.Globalization;
     using System.Linq;
 
     using Data;
     using Data.Models;
-    using Data.ViewModels.Events;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
     using Services;

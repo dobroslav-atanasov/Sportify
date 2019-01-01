@@ -1,12 +1,9 @@
 ﻿namespace Sportify.Tests
 {
     using System.Linq;
-    using AutoMapper;
+
     using Data;
     using Data.Models;
-    using global::AutoMapper;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Services;
     using Xunit;

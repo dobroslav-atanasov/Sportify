@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using Constants;
 
     public class OrganizationViewModel : IEquatable<OrganizationViewModel>
@@ -31,8 +32,8 @@
 
         public bool Equals(OrganizationViewModel other)
         {
-            return this.Id == other.Id && this.Abbreviation == other.Abbreviation && this.Name == other.Name &&
-                   this.Description == other.Description;
+            return this.Id == other.Id && this.Abbreviation == other.Abbreviation && 
+                   this.Name == other.Name && this.Description == other.Description;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Data.ViewModels.Organizations
 {
     using System.ComponentModel.DataAnnotations;
+
     using Constants;
 
     public class CreateOrganizationViewModel

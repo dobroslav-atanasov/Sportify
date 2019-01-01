@@ -1,6 +1,7 @@
 ﻿namespace Sportify.Services.Interfaces
 {
     using System.Collections.Generic;
+
     using Data.Models;
     using Data.ViewModels.Countries;
 

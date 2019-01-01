@@ -22,10 +22,8 @@
 
         public bool Equals(Sport other)
         {
-            return this.Id == other.Id
-                && this.Name == other.Name
-                && this.Description == other.Description
-                && this.ImageSportUrl == other.ImageSportUrl;
+            return this.Id == other.Id && this.Name == other.Name && 
+                   this.Description == other.Description && this.ImageSportUrl == other.ImageSportUrl;
         }
     }
 }

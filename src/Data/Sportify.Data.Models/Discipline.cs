@@ -23,10 +23,8 @@
 
         public bool Equals(Discipline other)
         {
-            return this.Id == other.Id
-                && this.Name == other.Name
-                && this.Description == other.Description
-                && this.SportId == other.SportId;
+            return this.Id == other.Id && this.Name == other.Name && 
+                   this.Description == other.Description && this.SportId == other.SportId;
         }
     }
 }

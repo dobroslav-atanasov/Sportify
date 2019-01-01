@@ -2,8 +2,8 @@
 {
     using System.Linq;
     using System.Net.Mail;
-    using System.Text;
     using System.Threading.Tasks;
+
     using Constants;
     using Data;
     using Data.Models;
@@ -73,7 +73,7 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            return this.RedirectToAction("Index", "Home", new { area = AreaConstants.Base });
         }
 
         public IActionResult SignIn(string returnUrl = null)
@@ -101,14 +101,13 @@
             }
 
             return this.LocalRedirect(model.ReturnUrl);
-            //return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [Authorize]
         public async Task<IActionResult> SignOut()
         {
             await this.signInManager.SignOutAsync();
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            return this.RedirectToAction("Index", "Home", new { area = AreaConstants.Base });
         }
 
         [Authorize]
