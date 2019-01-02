@@ -1,9 +1,9 @@
 ﻿@using Sportify.Constants
 
-<footer class="text-center container-fluid">
-    <hr style="height: 1px; background-color:#DF691A" />
-    <br />
-    <div class="row">
+<footer class="text-center container-fluid fixed-bottom" style="background-color: #DF691A">
+    @*<hr style="height: 1px; background-color:#DF691A" />*@
+    
+    @*<div class="row">
         @if (this.User.IsInRole(Role.Administrator))
         {
             <div class="col-md-4 offset-md-4 text-center">
@@ -18,13 +18,12 @@
             <div class="col-md-4 text-center">
                 <a asp-area="" asp-controller="Home" asp-action="Index"style="font-size: 30px;"><i class="fab fa-stripe-s"></i> SPORTify</a>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-md-2 offset-md-8 text-center">
                 <a asp-area="" asp-controller="Messages" asp-action="Send">Contact Us</a>
             </div>
         }
-    </div>
-    <br />
-    <div class="text-center">
-        <p>&copy; Copyright @DateTime.UtcNow.Year - SPORTify</p>
+    </div>*@
+    <div class="text-center text-white">
+        <span class="align-middle">&copy; Copyright @DateTime.UtcNow.Year - SPORTify</span>
     </div>
 </footer>
