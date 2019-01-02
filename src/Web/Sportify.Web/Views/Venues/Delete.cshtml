@@ -1,7 +1,7 @@
 ﻿@model Sportify.Data.ViewModels.Venues.VenueViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Venue";
 }
 
 <br />
@@ -10,7 +10,7 @@
 
 <h2 class="text-danger text-center">Are you sure you want to delete @Model.Name?</h2>
 
-<hr style="height: 1px; background-color:#DF691A" />
+<br/>
 
 <div class="row text-center">
     <div class="col-md-4 offset-md-4 text-center">
@@ -66,6 +66,7 @@
                 </div>
                 <span asp-validation-for="Town" class="text-danger"></span>
             </div>
+            <br/>
             <input type="submit" value="Delete Venue" class="btn btn-danger" />
         </form>
     </div>

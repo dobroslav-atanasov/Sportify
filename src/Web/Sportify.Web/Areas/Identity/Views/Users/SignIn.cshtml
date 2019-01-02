@@ -19,8 +19,6 @@
 
 <br/>
 
-@*<hr style="height: 1px; background-color:#DF691A" />*@
-
 <div class="row text-center">
     <div class="col-md-4 offset-md-4">
         <form asp-area="Identity" asp-controller="Users" asp-action="SignIn" asp-route-returnurl="@Model.ReturnUrl" method="post">
@@ -45,6 +43,7 @@
                 </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group text-center">
                 <input type="submit" value="Sign In" class="btn btn-primary" />
             </div>
@@ -56,7 +55,4 @@
 
 <div class="text-center">
     <h6>Don't have an account? <a asp-area="Identity" asp-controller="Users" asp-action="CreateAccount">Create Account</a></h6>
-</div>
-<div class="text-center">
-    <a asp-area="Identity" asp-controller="Users" asp-action="AccountRecovery">Forgot your password?</a>
 </div>

@@ -8,7 +8,7 @@
 
 <br />
 
-<h1 class="text-center">Edit</h1>
+<h1 class="text-center text-primary">Edit</h1>
 
 @if (this.ViewData.ContainsKey(GlobalConstants.Error))
 {
@@ -23,7 +23,7 @@
     </div>
 }
 
-<hr />
+<br/>
 
 <div class="row text-center">
     <div class="col-md-4 offset-md-4">
@@ -60,15 +60,10 @@
                 </div>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Update Organization" class="btn btn-default"/>
+                <input type="submit" value="Update Organization" class="btn btn-primary"/>
             </div>
         </form>
     </div>
-</div>
-
-<br />
-
-<div class="text-center">
-    <a asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
 </div>

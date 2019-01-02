@@ -4,14 +4,14 @@
 @model Sportify.Data.ViewModels.Venues.AddVenueViewModel
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Add Venue";
 }
 
 <br />
 
-<h1 class="text-center">Add Venue</h1>
+<h1 class="text-center text-primary">Add Venue</h1>
 
-<hr />
+<br/>
 
 <div class="row text-center">
     <div class="col-md-4 offset-md-4">
@@ -73,8 +73,9 @@
                 </div>
                 <span asp-validation-for="TownId" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Add Venue" class="btn btn-default" />
+                <input type="submit" value="Add Venue" class="btn btn-primary" />
             </div>
         </form>
     </div>

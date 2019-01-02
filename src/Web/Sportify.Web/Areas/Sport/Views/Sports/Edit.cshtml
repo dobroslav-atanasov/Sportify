@@ -3,27 +3,27 @@
 @model Sportify.Data.ViewModels.Sports.SportViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Sport";
 }
 
 <br />
 
-<h1 class="text-center">Edit</h1>
+<h1 class="text-center text-primary">Edit</h1>
 
 @if (this.ViewData.ContainsKey(GlobalConstants.Error))
 {
-    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+    <div class="col-md-6 offset-3 alert  alert-danger text-center">
         <strong>@this.ViewData[GlobalConstants.Error]</strong>
     </div>
 }
 @if (this.ViewData.ContainsKey(GlobalConstants.Message))
 {
-    <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
+    <div class="col-md-6 offset-3 alert  alert-success text-center">
         <strong>@this.ViewData[GlobalConstants.Message]</strong>
     </div>
 }
 
-<hr />
+<br/>
 
 <div class="row text-center">
     <div class="col-md-4 offset-md-4 text-center">
@@ -59,8 +59,9 @@
                 </div>
                 <span asp-validation-for="ImageSportUrl" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Update Sport" class="btn btn-default" />
+                <input type="submit" value="Update Sport" class="btn btn-primary" />
             </div>
         </form>
     </div>

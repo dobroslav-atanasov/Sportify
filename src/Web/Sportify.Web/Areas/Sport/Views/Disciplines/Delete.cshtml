@@ -1,16 +1,16 @@
 ﻿@model Sportify.Data.ViewModels.Disciplines.DisciplineViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Discipline";
 }
 
 <br />
 
-<h1 class="text-center">Delete</h1>
+<h1 class="text-center text-primary">Delete</h1>
 
 <h2 class="text-danger text-center">Are you sure you want to delete @Model.Name?</h2>
 
-<hr />
+<br/>
 
 <div class="row text-center">
     <div class="col-md-4 offset-md-4 text-center">
@@ -46,6 +46,7 @@
                 </div>
                 <span asp-validation-for="Sport" class="text-danger"></span>
             </div>
+            <br/>
             <input type="submit" value="Delete Town" class="btn btn-danger" />
         </form>
     </div>
