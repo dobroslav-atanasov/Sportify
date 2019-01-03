@@ -23,7 +23,18 @@
             </div>
         }
     </div>*@
-    <div class="text-center text-white">
-        <span class="align-middle">&copy; Copyright @DateTime.UtcNow.Year - SPORTify</span>
+    <div class="row">
+        <div class="col-md-2 offset-md-2 text-right">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AboutUs"><i class="fas fa-question"></i> About Us</a>
+        </div>
+        <div class="col-md-4 text-center text-white">
+            <a class="nav-link">&copy; Copyright @DateTime.UtcNow.Year - SPORTify</a>
+        </div>
+        <div class="col-md-2 text-left">
+            <a class="nav-link text-white" asp-area="" asp-controller="Messages" asp-action="Send"><i class="fas fa-comment"></i> Contact Us</a>
+        </div>
     </div>
+    @*<div class="text-center text-white">
+        <span class="align-middle">&copy; Copyright @DateTime.UtcNow.Year - SPORTify</span>
+    </div>*@
 </footer>
