@@ -26,93 +26,97 @@
 
 <br/>
 
-<div class="row text-center">
-    <div class="col-md-4 offset-md-4">
-        <form asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input asp-for="Username" class="form-control" placeholder="Username" readonly style="background-color: gray"/>
+<form asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row text-center">
+        <div class="col-md-4 offset-md-2 form-group">
+            <label asp-for="Username" class="control-label"></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <input asp-for="Username" class="form-control" placeholder="Username" readonly style="background-color: gray"/>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                    </div>
-                    <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                 </div>
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Email" class="form-control" placeholder="Email" />
             </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
-                    </div>
-                    <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
-                </div>
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
-                    </div>
-                    <input asp-for="BirthDate" class="form-control" placeholder="Birth Date" />
-                </div>
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-globe"></i></span>
-                    </div>
-                    <select asp-for="CountryId" class="form-control">
-                        <option selected>Select Country</option>
-                        @foreach (var name in this.ViewData[GlobalConstants.Countries] as IEnumerable<CountrySelectViewModel>)
-                        {
-                        <option value="@name.Id">@name.Name</option>
-                        }
-                    </select>
-                </div>
-                <span asp-validation-for="CountryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-user"></i></span>
-                    </div>
-                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                </div>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-user"></i></span>
-                    </div>
-                    <input asp-for="LastName" class="form-control" placeholder="Last Name" />
-                </div>
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <br/>
-            <div class="form-group text-center">
-                <input type="submit" value="Update Profile" class="btn btn-primary" />
-            </div>
-        </form>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
     </div>
-</div>
+    <div class="row text-center">
+        <div class="col-md-4 offset-md-2 form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                </div>
+                <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+            </div>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                </div>
+                <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+            </div>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-4 offset-md-2 form-group">
+            <label asp-for="PhoneNumber" class="control-label"></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                </div>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+            </div>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label asp-for="BirthDate" class="control-label"></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                </div>
+                <input asp-for="BirthDate" class="form-control" placeholder="Birth Date" />
+            </div>
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-4 offset-md-4 form-group">
+            <label asp-for="CountryId" class="control-label"></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                </div>
+                <select asp-for="CountryId" class="form-control">
+                    <option selected>Select Country</option>
+                    @foreach (var name in this.ViewData[GlobalConstants.Countries] as IEnumerable<CountrySelectViewModel>)
+                    {
+                        <option value="@name.Id">@name.Name</option>
+                    }
+                </select>
+            </div>
+            <span asp-validation-for="CountryId" class="text-danger"></span>
+        </div>
+    </div>
+    <br />
+    <div class="form-group text-center">
+        <input type="submit" value="Update Profile" class="btn btn-primary" />
+    </div>
+</form>
 
 <div class="text-center">
     <a asp-area="Identity" asp-controller="Users" asp-action="ChangePassword" class="btn btn-warning">Change Password</a>
